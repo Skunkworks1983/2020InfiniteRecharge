@@ -1,0 +1,11 @@
+build/
+.gradle/
+out/
+.idea/
+classes/
+.vim/
+*.iws
+*.iml
+*.ipr
+*.ods
+*.swp
