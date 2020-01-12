@@ -1,4 +1,4 @@
-package frc.team1983.subsystems;
+package frc.team1983.util.motors;
 
 public class Motor extends com.revrobotics.CANSparkMax
 {

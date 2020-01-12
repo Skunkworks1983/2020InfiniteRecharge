@@ -2,6 +2,7 @@ package frc.team1983.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.OI;
+import frc.team1983.Robot;
 import frc.team1983.subsystems.Drivebase;
 
 public class RunTankDrive extends CommandBase
@@ -13,6 +14,11 @@ public class RunTankDrive extends CommandBase
     {
         this.drivebase = drivebase;
         this.oi = oi;
+    }
+
+    public RunTankDrive()
+    {
+        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getOi());
     }
 
     @Override
