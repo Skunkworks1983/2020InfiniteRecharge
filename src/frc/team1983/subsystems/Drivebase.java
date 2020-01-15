@@ -1,7 +1,9 @@
 package frc.team1983.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.Constants;
+import frc.team1983.constants.RobotMap;
+import frc.team1983.util.motors.Motor;
+
 
 public class Drivebase extends SubsystemBase
 {
@@ -9,13 +11,13 @@ public class Drivebase extends SubsystemBase
 
     public Drivebase()
     {
-        leftMotor1 = new Motor(Constants.Motor.LEFT1.getPort(), Constants.Motor.LEFT1.isReversed());
-        leftMotor2 = new Motor(Constants.Motor.LEFT2.getPort(), Constants.Motor.LEFT2.isReversed());
-        leftMotor3 = new Motor(Constants.Motor.LEFT3.getPort(), Constants.Motor.LEFT3.isReversed());
+        leftMotor1 = new Motor(RobotMap.Motor.LEFT1.getPort(), RobotMap.Motor.LEFT1.isReversed());
+        leftMotor2 = new Motor(RobotMap.Motor.LEFT2.getPort(), RobotMap.Motor.LEFT2.isReversed());
+        leftMotor3 = new Motor(RobotMap.Motor.LEFT3.getPort(), RobotMap.Motor.LEFT3.isReversed());
 
-        rightMotor1 = new Motor(Constants.Motor.RIGHT1.getPort(), Constants.Motor.RIGHT1.isReversed());
-        rightMotor2 = new Motor(Constants.Motor.RIGHT2.getPort(), Constants.Motor.RIGHT2.isReversed());
-        rightMotor3 = new Motor(Constants.Motor.RIGHT3.getPort(), Constants.Motor.RIGHT3.isReversed());
+        rightMotor1 = new Motor(RobotMap.Motor.RIGHT1.getPort(), RobotMap.Motor.RIGHT1.isReversed());
+        rightMotor2 = new Motor(RobotMap.Motor.RIGHT2.getPort(), RobotMap.Motor.RIGHT2.isReversed());
+        rightMotor3 = new Motor(RobotMap.Motor.RIGHT3.getPort(), RobotMap.Motor.RIGHT3.isReversed());
 
     }
 

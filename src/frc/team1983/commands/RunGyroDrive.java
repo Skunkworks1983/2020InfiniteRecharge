@@ -1,0 +1,52 @@
+package frc.team1983.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.team1983.Robot;
+import frc.team1983.services.OI;
+import frc.team1983.subsystems.Drivebase;
+
+public class RunGyroDrive extends CommandBase
+{
+    private Drivebase drivebase;
+    private OI oi;
+
+    private double targetHeading = 0;
+
+    public RunGyroDrive(Drivebase drivebase, OI oi)
+    {
+        this.drivebase = drivebase;
+        this.oi = oi;
+    }
+
+    @Override
+    public void initialize()
+    {
+        targetHeading = Robot.getInstance().getNavX().getHeading();
+    }
+
+    @Override
+    public void execute()
+    {
+        boolean slow = !oi.getButton(OI.Joysticks.LEFT, 1).get();
+
+        double currentHeading = Robot.getInstance().getNavX().getHeading();
+        double turnThrottle = 0.02 * (currentHeading - targetHeading);
+        double driveThrottle = oi.getRightY() * (slow ? 0.65 : 1);
+
+        if(Math.abs(oi.getLeftX()) > 0.05)
+        {
+            turnThrottle = oi.getLeftX() * (slow ? 0.2 : 0.4);
+            targetHeading = Robot.getInstance().getNavX().getHeading();
+        }
+
+        drivebase.setLeft( driveThrottle + turnThrottle);
+        drivebase.setRight(driveThrottle - turnThrottle);
+    }
+
+    @Override
+    public boolean isFinished()
+    {
+        return false;
+    }
+
+}
