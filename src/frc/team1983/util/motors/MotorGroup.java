@@ -1,5 +1,6 @@
 package frc.team1983.util.motors;
 
+import frc.team1983.util.sensors.DigitalInputEncoder;
 import frc.team1983.util.sensors.Encoder;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class MotorGroup
      * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
      * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
      */
-    public MotorGroup(Encoder encoder, Motor master, Motor... slaves)
+    protected MotorGroup(Encoder encoder, Motor master, Motor... slaves)
     {
         this.encoder = encoder;
         this.master = master;
@@ -40,8 +41,8 @@ public class MotorGroup
     }
 
     /**
-     * Constructor for a motorGroup with a name, master, encoder, and other motors, regardless
-     * of whether or not the motor controllers are Talons or Sparks.
+     * Constructor for a motorGroup where the master motor is also the encoder
+     * Either a Talon with an encoder plugged in or a NEO with the built-in encoder
      *
      * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
      * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
@@ -52,12 +53,23 @@ public class MotorGroup
     }
 
     /**
+     * Constructor for a motorGroup with an external encoder
+     *
+     * @param digitalInputEncoder An external digital input encoder
+     * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
+     * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
+     */
+    public MotorGroup(DigitalInputEncoder digitalInputEncoder, Motor master, Motor... slaves)
+    {
+        this((Encoder) digitalInputEncoder, master, slaves);
+    }
+
+    /**
      * Reset the encoder offset so that it reads zero at its current position
      */
     public void zero()
     {
-        for (Motor motor : motors)
-            motor.zero();
+        encoder.zero();
     }
 
     /**
@@ -111,13 +123,17 @@ public class MotorGroup
 
     public double getConversionRatio()
     {
-        return master.getConversionRatio();
+        return encoder.getConversionRatio();
     }
 
     public void setConversionRatio(double conversionRatio)
     {
-        for (Motor motor : motors)
-            motor.setConversionRatio(conversionRatio);
+        encoder.setConversionRatio(conversionRatio);
+    }
+
+    public Encoder getEncoder()
+    {
+        return encoder;
     }
 
     public Motor getMaster()

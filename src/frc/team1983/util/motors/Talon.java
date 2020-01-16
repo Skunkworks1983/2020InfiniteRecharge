@@ -45,7 +45,7 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
      */
     public void zero()
     {
-        encoderOffset = getSelectedSensorPosition();
+        encoderOffset = -getSelectedSensorPosition();
     }
 
     /**
@@ -81,7 +81,7 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
     }
 
     /**
-     * @return Current encoder velocity
+     * @return Current encoder velocity in encoder ticks
      */
     public double getVelocityTicks()
     {
@@ -96,7 +96,6 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
         return getVelocityTicks() * conversionRatio;
     }
 
-    @Override
     public void follow(Motor leader)
     {
         super.follow((TalonSRX) leader);

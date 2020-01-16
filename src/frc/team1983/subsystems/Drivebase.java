@@ -3,7 +3,6 @@ package frc.team1983.subsystems;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
-import frc.team1983.util.motors.Motor;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
 
@@ -17,13 +16,13 @@ public class Drivebase extends SubsystemBase
     public Drivebase()
     {
         left = new MotorGroup(
-            (Motor) new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
             new Spark(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED),
             new Spark(RobotMap.Drivebase.LEFT_3, RobotMap.Drivebase.LEFT_3_REVERSED)
         );
 
         right = new MotorGroup(
-            (Motor) new Spark(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
             new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
             new Spark(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
         );
