@@ -2,6 +2,7 @@ package frc.team1983.constants;
 
 public class Constants
 {
+    //Todo Tune for 2020
     public static final int LEFT_JOYSTICK_PORT = 0;
     public static final int RIGHT_JOYSTICK_PORT = 1;
 

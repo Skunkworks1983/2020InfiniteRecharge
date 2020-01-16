@@ -3,7 +3,8 @@ package frc.team1983.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
 import frc.team1983.services.OI;
-import frc.team1983.subsystems.Drivebase;
+import frc.team1983.subsystems.drivebase.Drivebase;
+import frc.team1983.util.motors.ControlMode;
 
 public class RunGyroDrive extends CommandBase
 {
@@ -39,8 +40,8 @@ public class RunGyroDrive extends CommandBase
             targetHeading = Robot.getInstance().getNavX().getHeading();
         }
 
-        drivebase.setLeft( driveThrottle + turnThrottle);
-        drivebase.setRight(driveThrottle - turnThrottle);
+        drivebase.setLeft(ControlMode.Throttle, driveThrottle + turnThrottle);
+        drivebase.setRight(ControlMode.Throttle,driveThrottle - turnThrottle);
     }
 
     @Override

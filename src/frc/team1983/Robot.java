@@ -1,12 +1,13 @@
 package frc.team1983;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.team1983.commands.RunTankDrive;
+import frc.team1983.commands.RunGyroDrive;
+import frc.team1983.constants.RobotMap;
 import frc.team1983.services.OI;
-import frc.team1983.subsystems.Drivebase;
+import frc.team1983.subsystems.climber.Elevator;
+import frc.team1983.subsystems.drivebase.Drivebase;
 import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
@@ -14,6 +15,9 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private Elevator elevator;
+
+	private Compressor compressor;
 	private NavX navX;
 	private OI oi;
 
@@ -22,14 +26,23 @@ public class Robot extends TimedRobot
 		instance = this;
 
 		drivebase = new Drivebase();
+		drivebase.zero();
+
+		elevator = new Elevator();
+		elevator.zero();
+
+		compressor = new Compressor(RobotMap.COMPRESSOR);
+
 		navX = new NavX();
+		navX.reset();
+
 		oi = new OI();
 	}
 
 	@Override
 	public void robotInit()
 	{
-
+		compressor.start();
 	}
 
 	@Override
@@ -54,7 +67,7 @@ public class Robot extends TimedRobot
 	public void teleopInit()
 	{
 		CommandScheduler.getInstance().cancelAll();
-		new RunTankDrive(drivebase, oi).schedule();
+		new RunGyroDrive(drivebase, oi).schedule();
 	}
 
 	@Override
@@ -64,9 +77,9 @@ public class Robot extends TimedRobot
 	}
 
 	@Override
-	public void testPeriodic()
+	public void disabledInit()
 	{
-
+		compressor.stop();
 	}
 
 	public static Robot getInstance()
@@ -79,6 +92,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public Elevator getElevator()
+	{
+		return elevator;
 	}
 
 	public NavX getNavX()

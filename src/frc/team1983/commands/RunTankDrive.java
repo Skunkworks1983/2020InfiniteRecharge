@@ -2,7 +2,8 @@ package frc.team1983.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.services.OI;
-import frc.team1983.subsystems.Drivebase;
+import frc.team1983.subsystems.drivebase.Drivebase;
+import frc.team1983.util.motors.ControlMode;
 
 public class RunTankDrive extends CommandBase
 {
@@ -24,16 +25,13 @@ public class RunTankDrive extends CommandBase
     @Override
     public void execute()
     {
-        double left = oi.getLeftY();
-        double right = oi.getRightY();
-        System.out.println(left + ", " + right);
-        drivebase.set(left, right);
+        drivebase.set(ControlMode.Throttle, oi.getLeftY(), oi.getRightY());
     }
 
     @Override
     public void end(boolean interrupted)
     {
-        drivebase.set(0.0, 0.0);
+        drivebase.set(ControlMode.Throttle,0.0, 0.0);
     }
 
     @Override

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 
 public class NavX extends AHRS
 {
+    //ToDo tune for 202 Robot
     public static final int NAVX_HEADING_SIGN = -1;
 
     private double offsetHeading = 0;
