@@ -1,59 +1,31 @@
 package frc.team1983.subsystems;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.Robot;
-import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.Motor;
 import frc.team1983.util.motors.MotorGroup;
+import frc.team1983.util.motors.Spark;
 
 public class Drivebase extends SubsystemBase
 {
 	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
 	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
-    public static final double kS = 0.0, kV = 0.0, kA = 0.0; // TODO: calculate
-    public static final double kP = 0.0, kI = 0.0, kD = 0.0; // TODO: calculate
 
     private MotorGroup left, right;
-
-    private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.feetToMeters(Constants.TRACK_WIDTH));
-    private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(Robot.getInstance().getNavX().getHeading());
-
-    private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kV, kA);
-
-    private PIDController leftPIDController = new PIDController(kP, kI, kD);
-    private PIDController rightPIDController = new PIDController(kP, kI, kD);
-
-    private Pose2d pose;
 
     public Drivebase()
     {
         left = new MotorGroup(
-            new Motor(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
-            new Motor(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED),
-            new Motor(RobotMap.Drivebase.LEFT_3, RobotMap.Drivebase.LEFT_3_REVERSED)
+            (Motor) new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED),
+            new Spark(RobotMap.Drivebase.LEFT_3, RobotMap.Drivebase.LEFT_3_REVERSED)
         );
 
         right = new MotorGroup(
-            new Motor(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
-            new Motor(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
-            new Motor(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
-        );
-    }
-
-    public void periodic()
-    {
-        pose = odometry.update(
-        	Robot.getInstance().getNavX().getHeading(),
-	        getLeftMeters(),
-	        getRightMeters()
+            (Motor) new Spark(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
+            new Spark(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
         );
     }
 
@@ -212,38 +184,5 @@ public class Drivebase extends SubsystemBase
     {
         setLeftVolts(leftVolts);
         setRightVolts(rightVolts);
-    }
-
-    public DifferentialDriveWheelSpeeds getSpeeds()
-    {
-        return new DifferentialDriveWheelSpeeds(
-            getLeftMetersPerSecond(),
-            getRightMetersPerSecond()
-        );
-    }
-
-    public SimpleMotorFeedforward getFeedforward()
-    {
-        return feedforward;
-    }
-
-    public DifferentialDriveKinematics getKinematics()
-    {
-        return kinematics;
-    }
-
-    public PIDController getLeftPIDController()
-    {
-        return leftPIDController;
-    }
-
-    public PIDController getRightPIDController()
-    {
-        return rightPIDController;
-    }
-
-    public Pose2d getPose()
-    {
-        return pose;
     }
 }

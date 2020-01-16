@@ -1,10 +1,12 @@
 package frc.team1983.util.motors;
 
+import frc.team1983.util.sensors.Encoder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This class represents a system of motors
+ * This class represents a system of motors and an encoder
  */
 public class MotorGroup
 {
@@ -13,24 +15,40 @@ public class MotorGroup
 
     private ArrayList<Motor> motors;
 
+    private Encoder encoder;
+
+    /**
+     * Constructor for a motorGroup with a name, master, encoder, and other motors, regardless
+     * of whether or not the motor controllers are Talons or Sparks.
+     *
+     * @param encoder The encoder of the system
+     * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
+     * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
+     */
+    public MotorGroup(Encoder encoder, Motor master, Motor... slaves)
+    {
+        this.encoder = encoder;
+        this.master = master;
+        this.slaves = new ArrayList<>();
+        this.slaves.addAll(Arrays.asList(slaves));
+        for (Motor slave : this.slaves)
+            slave.follow(master);
+
+        this.motors = new ArrayList<>();
+        this.motors.add(master);
+        this.motors.addAll(Arrays.asList(slaves));
+    }
+
     /**
      * Constructor for a motorGroup with a name, master, encoder, and other motors, regardless
      * of whether or not the motor controllers are Talons or Sparks.
      *
      * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
-     * @param motors An array of the other motors in this system. Can be left out if there is only one motor.
+     * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
      */
-    public MotorGroup(Motor master, Motor... motors)
+    public MotorGroup(Motor master, Motor... slaves)
     {
-        this.master = master;
-        this.slaves = new ArrayList<>();
-        this.slaves.addAll(Arrays.asList(motors));
-        for (Motor slave : slaves)
-            slave.follow(master);
-
-        this.motors = new ArrayList<>();
-        this.motors.add(master);
-        this.motors.addAll(Arrays.asList(motors));
+        this((Encoder) master, master, slaves);
     }
 
     /**
@@ -64,7 +82,7 @@ public class MotorGroup
      */
     public double getPositionTicks()
     {
-        return master.getPositionTicks();
+        return encoder.getPositionTicks();
     }
 
     /**
@@ -72,7 +90,7 @@ public class MotorGroup
      */
     public double getPosition()
     {
-        return master.getPosition();
+        return encoder.getPosition();
     }
 
     /**
@@ -80,7 +98,7 @@ public class MotorGroup
      */
     public double getVelocityTicks()
     {
-        return master.getVelocityTicks();
+        return encoder.getVelocityTicks();
     }
 
     /**
@@ -88,7 +106,7 @@ public class MotorGroup
      */
     public double getVelocity()
     {
-        return master.getVelocity();
+        return encoder.getVelocity();
     }
 
     public double getConversionRatio()

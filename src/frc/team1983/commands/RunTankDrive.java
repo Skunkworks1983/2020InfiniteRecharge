@@ -30,8 +30,8 @@ public class RunTankDrive extends CommandBase
     @Override
     public void execute()
     {
-        double left = oi.getLeft();
-        double right = oi.getRight();
+        double left = oi.getLeftY();
+        double right = oi.getRightY();
         System.out.println(left + ", " + right);
         drivebase.set(left, right);
     }
