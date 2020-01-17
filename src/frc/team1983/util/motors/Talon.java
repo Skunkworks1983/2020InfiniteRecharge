@@ -49,11 +49,22 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
     }
 
     /**
-     * @param throttle Sets the percent output of the motor
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void set(double throttle)
+    public void set(frc.team1983.util.motors.ControlMode controlMode, double value)
     {
-        super.set(ControlMode.PercentOutput, reversed ? -throttle : throttle);
+        switch (controlMode)
+        {
+            case Throttle:
+                super.set(ControlMode.PercentOutput, reversed ? -value : value);
+            case Position:
+                super.set(ControlMode.Position, value);
+            case Velocity:
+                super.set(ControlMode.Velocity, value);
+        }
     }
 
     /**

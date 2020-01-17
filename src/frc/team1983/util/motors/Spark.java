@@ -1,6 +1,7 @@
 package frc.team1983.util.motors;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import frc.team1983.util.sensors.Encoder;
 
 /**
@@ -31,11 +32,22 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
     }
 
     /**
-     * @param throttle Sets the percent output of the motor
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void set(double throttle)
+    public void set(ControlMode controlMode, double value)
     {
-        super.set(reversed ? -throttle : throttle);
+        switch (controlMode)
+        {
+            case Throttle:
+                super.set(reversed ? -value : value);
+            case Position:
+                super.getPIDController().setReference(value, ControlType.kPosition);
+            case Velocity:
+                super.getPIDController().setReference(value, ControlType.kVelocity);
+        }
     }
 
     /**

@@ -73,11 +73,14 @@ public class MotorGroup
     }
 
     /**
-     * @param throttle Sets the percent output of the motors, slaves follow the master motor throttle
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void set(double throttle)
+    public void set(ControlMode controlMode, double value)
     {
-        master.set(throttle);
+        master.set(controlMode, value);
     }
 
     /**
