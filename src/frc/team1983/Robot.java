@@ -21,8 +21,9 @@ public class Robot extends TimedRobot
 	{
 		instance = this;
 
-		drivebase = new Drivebase();
 		navX = new NavX();
+		drivebase = new Drivebase();
+
 		oi = new OI();
 	}
 
