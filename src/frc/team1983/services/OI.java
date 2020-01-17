@@ -1,4 +1,4 @@
-package frc.team1983;
+package frc.team1983.services;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -24,45 +24,6 @@ public class OI
             return port;
         }
     }
-
-    public static final int JOYSTICK_TRIGGER = 1;
-    public static final int JOYSTICK_BOTTOM_BUTTON = 2;
-    public static final int JOYSTICK_TOP_BUTTON = 3;
-    public static final int JOYSTICK_LEFT_BUTTON = 4;
-    public static final int JOYSTICK_RIGHT_BUTTON = 5;
-
-    // TODO: update button names for 2020 OI
-    public static final int HATCH_MODE_ENABLED = 14;
-
-    public static final int ELEVATOR_1 = 16;
-    public static final int ELEVATOR_2 = 15;
-    public static final int ELEVATOR_3 = 12;
-    public static final int ELEVATOR_4 = 11;
-    public static final int ELEVATOR_5 = 10;
-    public static final int ELEVATOR_6 = 9;
-
-    public static final int TOGGLE_COLLECTOR_CLOSED = 8;
-    public static final int TOGGLE_COLLECTOR_FOLDED = 7;
-
-    public static final int EXTEND_MANIPULATOR = 23;
-    public static final int RETRACT_MANIPULATOR = 20;
-
-    public static final int EXPEL_PANEL = 21;
-    public static final int INTAKE_PANEL = 22;
-
-    public static final int EXPEL_BALL = 22;
-    public static final int INTAKE_BALL = 21;
-
-    public static final int MANUAL_ENABLED = 24;
-    public static final int MANUAL_ELEVATOR_UP = 2;
-    public static final int MANUAL_ELEVATOR_DOWN = 1;
-    public static final int MANUAL_CLIMB_ELEVATOR_UP = 4;
-    public static final int MANUAL_CLIMB_ELEVATOR_DOWN = 3;
-    public static final int MANUAL_COLLECTOR_OUT = 5;
-    public static final int MANUAL_COLLECTOR_IN = 6;
-
-    public static final int LEVEL_TWO_CLIMB_ENABLED = 25;
-    public static final int CLIMB = 13;
 
     public static final double JOYSTICK_DEADZONE = 0.15;
 

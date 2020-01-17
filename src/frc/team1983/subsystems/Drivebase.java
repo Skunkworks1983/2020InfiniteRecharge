@@ -3,6 +3,7 @@ package frc.team1983.subsystems;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
+import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
 
@@ -136,27 +137,27 @@ public class Drivebase extends SubsystemBase
     /**
      * @param throttle Sets the percent output of the left motors
      */
-    public void setLeft(double throttle)
+    public void setLeft(ControlMode controlMode, double throttle)
     {
-        left.set(throttle);
+        left.set(controlMode, throttle);
     }
 
     /**
      * @param throttle Sets the percent output of the right motors
      */
-    public void setRight(double throttle)
+    public void setRight(ControlMode controlMode, double throttle)
     {
-        right.set(throttle);
+        right.set(controlMode, throttle);
     }
 
     /**
      * @param leftThrottle Sets the percent output of the left motors
      * @param rightThrottle Sets the percent output of the right motors
      */
-    public void set(double leftThrottle, double rightThrottle)
+    public void set(ControlMode controlMode, double leftThrottle, double rightThrottle)
     {
-        setLeft(leftThrottle);
-        setRight(rightThrottle);
+        setLeft(controlMode, leftThrottle);
+        setRight(controlMode, rightThrottle);
     }
 
     /**
@@ -164,7 +165,7 @@ public class Drivebase extends SubsystemBase
      */
     public void setLeftVolts(double volts)
     {
-        setLeft(volts / 12.0);
+        setLeft(ControlMode.Throttle, volts / 12.0);
     }
 
     /**
@@ -172,7 +173,7 @@ public class Drivebase extends SubsystemBase
      */
     public void setRightVolts(double volts)
     {
-        setRight(volts / 12.0);
+        setRight(ControlMode.Throttle, volts / 12.0);
     }
 
     /**
