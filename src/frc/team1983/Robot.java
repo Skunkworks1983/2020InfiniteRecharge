@@ -25,6 +25,7 @@ public class Robot extends TimedRobot
 
 		navX = new NavX();
 		drivebase = new Drivebase();
+		drivebase.zero();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -33,7 +34,8 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-
+		drivebase.zero();
+		navX.reset();
 	}
 
 	@Override
@@ -45,11 +47,16 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
+		drivebase.zero();
+
 		CommandScheduler.getInstance().cancelAll();
 		new FollowTrajectory(
 			new Pose2d(),
 			new Pose2d(1.0, 0.0, new Rotation2d())
 		).schedule();
+
+		System.out.println("NavX: " + navX.getHeading().getDegrees());
+		System.out.println("Drivebase: " + drivebase.getLeftFeet() + ", " + drivebase.getRightFeet());
 	}
 
 	@Override
@@ -61,6 +68,8 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopInit()
 	{
+		drivebase.zero();
+
 		CommandScheduler.getInstance().cancelAll();
 		new RunTankDrive().schedule();
 	}

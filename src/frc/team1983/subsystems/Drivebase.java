@@ -67,6 +67,8 @@ public class Drivebase extends SubsystemBase
     {
         left.zero();
         right.zero();
+
+        pose = new Pose2d();
     }
 
     /**
