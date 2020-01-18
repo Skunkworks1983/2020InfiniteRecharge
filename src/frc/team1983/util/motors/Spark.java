@@ -1,5 +1,6 @@
 package frc.team1983.util.motors;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import frc.team1983.util.sensors.Encoder;
@@ -11,6 +12,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
 {
     private double conversionRatio = 1;
     private double encoderOffset;
+    private CANEncoder encoder;
 
     /**
      * @param port The deviceID
@@ -20,6 +22,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
     {
         super(port, MotorType.kBrushless);
         setInverted(reversed);
+	    encoder = getEncoder();
     }
 
     /**
@@ -65,7 +68,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
      */
     public double getPositionTicks()
     {
-        return encoderOffset + getEncoder().getPosition();
+        return encoderOffset + encoder.getPosition();
     }
 
     /**
@@ -81,7 +84,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
      */
     public double getVelocityTicks()
     {
-        return getEncoder().getVelocity();
+        return encoder.getVelocity();
     }
 
     /**
