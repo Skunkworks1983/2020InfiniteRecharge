@@ -1,10 +1,13 @@
 package frc.team1983.util.motors;
 
+import frc.team1983.util.sensors.DigitalInputEncoder;
+import frc.team1983.util.sensors.Encoder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This class represents a system of motors
+ * This class represents a system of motors and an encoder
  */
 public class MotorGroup
 {
@@ -13,24 +16,52 @@ public class MotorGroup
 
     private ArrayList<Motor> motors;
 
+    private Encoder encoder;
+
     /**
      * Constructor for a motorGroup with a name, master, encoder, and other motors, regardless
      * of whether or not the motor controllers are Talons or Sparks.
      *
+     * @param encoder The encoder of the system
      * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
-     * @param motors An array of the other motors in this system. Can be left out if there is only one motor.
+     * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
      */
-    public MotorGroup(Motor master, Motor... motors)
+    protected MotorGroup(Encoder encoder, Motor master, Motor... slaves)
     {
+        this.encoder = encoder;
         this.master = master;
         this.slaves = new ArrayList<>();
-        this.slaves.addAll(Arrays.asList(motors));
-        for (Motor slave : slaves)
+        this.slaves.addAll(Arrays.asList(slaves));
+        for (Motor slave : this.slaves)
             slave.follow(master);
 
         this.motors = new ArrayList<>();
         this.motors.add(master);
-        this.motors.addAll(Arrays.asList(motors));
+        this.motors.addAll(Arrays.asList(slaves));
+    }
+
+    /**
+     * Constructor for a motorGroup where the master motor is also the encoder
+     * Either a Talon with an encoder plugged in or a NEO with the built-in encoder
+     *
+     * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
+     * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
+     */
+    public MotorGroup(Motor master, Motor... slaves)
+    {
+        this((Encoder) master, master, slaves);
+    }
+
+    /**
+     * Constructor for a motorGroup with an external encoder
+     *
+     * @param digitalInputEncoder An external digital input encoder
+     * @param master The master motor. Ensures that there is at least one motor, all other motors will follow the master
+     * @param slaves An array of the other motors in this system. Can be left out if there is only one motor.
+     */
+    public MotorGroup(DigitalInputEncoder digitalInputEncoder, Motor master, Motor... slaves)
+    {
+        this((Encoder) digitalInputEncoder, master, slaves);
     }
 
     /**
@@ -38,16 +69,18 @@ public class MotorGroup
      */
     public void zero()
     {
-        for (Motor motor : motors)
-            motor.zero();
+        encoder.zero();
     }
 
     /**
-     * @param throttle Sets the percent output of the motors, slaves follow the master motor throttle
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void set(double throttle)
+    public void set(ControlMode controlMode, double value)
     {
-        master.set(throttle);
+        master.set(controlMode, value);
     }
 
     /**
@@ -64,7 +97,7 @@ public class MotorGroup
      */
     public double getPositionTicks()
     {
-        return master.getPositionTicks();
+        return encoder.getPositionTicks();
     }
 
     /**
@@ -72,7 +105,7 @@ public class MotorGroup
      */
     public double getPosition()
     {
-        return master.getPosition();
+        return encoder.getPosition();
     }
 
     /**
@@ -80,7 +113,7 @@ public class MotorGroup
      */
     public double getVelocityTicks()
     {
-        return master.getVelocityTicks();
+        return encoder.getVelocityTicks();
     }
 
     /**
@@ -88,18 +121,22 @@ public class MotorGroup
      */
     public double getVelocity()
     {
-        return master.getVelocity();
+        return encoder.getVelocity();
     }
 
     public double getConversionRatio()
     {
-        return master.getConversionRatio();
+        return encoder.getConversionRatio();
     }
 
     public void setConversionRatio(double conversionRatio)
     {
-        for (Motor motor : motors)
-            motor.setConversionRatio(conversionRatio);
+        encoder.setConversionRatio(conversionRatio);
+    }
+
+    public Encoder getEncoder()
+    {
+        return encoder;
     }
 
     public Motor getMaster()

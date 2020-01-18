@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.FollowTrajectory;
+import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
+import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.NavX;
 
@@ -25,6 +27,7 @@ public class Robot extends TimedRobot
 		drivebase = new Drivebase();
 
 		oi = new OI();
+		oi.initializeBindings();
 	}
 
 	@Override
@@ -91,7 +94,7 @@ public class Robot extends TimedRobot
 		return navX;
 	}
 
-	public OI getOi()
+	public OI getOI()
 	{
 		return oi;
 	}

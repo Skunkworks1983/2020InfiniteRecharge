@@ -11,13 +11,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.Robot;
 import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
-import frc.team1983.util.motors.Motor;
+import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
+import frc.team1983.util.motors.Spark;
 
 public class Drivebase extends SubsystemBase
 {
-	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
-	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
+    public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
+    public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
+
     public static final double kS = 0.15, kV = 0.618, kA = 0.125;
     public static final double kP = 5.75, kI = 0.0, kD = 0.0; // TODO: calculate
 
@@ -36,24 +38,24 @@ public class Drivebase extends SubsystemBase
     public Drivebase()
     {
         left = new MotorGroup(
-            new Motor(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
-            new Motor(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED),
-            new Motor(RobotMap.Drivebase.LEFT_3, RobotMap.Drivebase.LEFT_3_REVERSED)
+            new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED),
+            new Spark(RobotMap.Drivebase.LEFT_3, RobotMap.Drivebase.LEFT_3_REVERSED)
         );
 
         right = new MotorGroup(
-            new Motor(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
-            new Motor(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
-            new Motor(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
+            new Spark(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
+            new Spark(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
         );
     }
 
     public void periodic()
     {
         pose = odometry.update(
-        	Robot.getInstance().getNavX().getHeading(),
-	        getLeftMeters(),
-	        getRightMeters()
+            Robot.getInstance().getNavX().getHeading(),
+            getLeftMeters(),
+            getRightMeters()
         );
     }
 
@@ -163,29 +165,35 @@ public class Drivebase extends SubsystemBase
     }
 
     /**
-     * @param throttle Sets the percent output of the left motors
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void setLeft(double throttle)
+    public void setLeft(ControlMode controlMode, double value)
     {
-        left.set(throttle);
+        left.set(controlMode, value);
     }
 
     /**
-     * @param throttle Sets the percent output of the right motors
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void setRight(double throttle)
+    public void setRight(ControlMode controlMode, double value)
     {
-        right.set(throttle);
+        right.set(controlMode, value);
     }
 
     /**
      * @param leftThrottle Sets the percent output of the left motors
      * @param rightThrottle Sets the percent output of the right motors
      */
-    public void set(double leftThrottle, double rightThrottle)
+    public void set(ControlMode controlMode, double leftThrottle, double rightThrottle)
     {
-        setLeft(leftThrottle);
-        setRight(rightThrottle);
+        setLeft(controlMode, leftThrottle);
+        setRight(controlMode, rightThrottle);
     }
 
     /**
@@ -193,7 +201,7 @@ public class Drivebase extends SubsystemBase
      */
     public void setLeftVolts(double volts)
     {
-        setLeft(volts / 12.0);
+        setLeft(ControlMode.Throttle, volts / 12.0);
     }
 
     /**
@@ -201,7 +209,7 @@ public class Drivebase extends SubsystemBase
      */
     public void setRightVolts(double volts)
     {
-        setRight(volts / 12.0);
+        setRight(ControlMode.Throttle, volts / 12.0);
     }
 
     /**
