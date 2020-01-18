@@ -9,7 +9,9 @@
     # Inversions for the left-side motors
     "leftMotorsInverted": [False, False, False],
     # Inversions for the right side motors
-    "rightMotorsInverted": [False, False, False],
+    # Inverted right encoder by manually going into characterization-project
+    # Added negtives to rightEncoder.getPosition() rightEncoder.getVelocity()
+    "rightMotorsInverted": [True, False, False],
     # The total gear reduction between the motor and the wheels, expressed as
     # a fraction [motor turns]/[wheel turns]
     "gearing": 232/27,
@@ -26,6 +28,9 @@
     # "" (NavX using default SPI, ADXRS450 using onboard CS0, or no gyro)
     "gyroPort": "SPI.Port.kMXP",
 }
+
+
+
 
 
 

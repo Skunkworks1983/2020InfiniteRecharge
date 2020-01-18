@@ -18,8 +18,8 @@ public class Drivebase extends SubsystemBase
 {
 	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
 	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
-    public static final double kS = 0.0, kV = 0.0, kA = 0.0; // TODO: calculate
-    public static final double kP = 0.0, kI = 0.0, kD = 0.0; // TODO: calculate
+    public static final double kS = 0.15, kV = 0.618, kA = 0.125;
+    public static final double kP = 5.75, kI = 0.0, kD = 0.0; // TODO: calculate
 
     private MotorGroup left, right;
 
