@@ -135,19 +135,25 @@ public class Drivebase extends SubsystemBase
     }
 
     /**
-     * @param throttle Sets the percent output of the left motors
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void setLeft(ControlMode controlMode, double throttle)
+    public void setLeft(ControlMode controlMode, double value)
     {
-        left.set(controlMode, throttle);
+        left.set(controlMode, value);
     }
 
     /**
-     * @param throttle Sets the percent output of the right motors
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
      */
-    public void setRight(ControlMode controlMode, double throttle)
+    public void setRight(ControlMode controlMode, double value)
     {
-        right.set(controlMode, throttle);
+        right.set(controlMode, value);
     }
 
     /**

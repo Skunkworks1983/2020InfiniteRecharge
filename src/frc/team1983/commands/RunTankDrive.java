@@ -19,7 +19,7 @@ public class RunTankDrive extends CommandBase
 
     public RunTankDrive()
     {
-        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getOi());
+        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getOI());
     }
 
     @Override

@@ -55,7 +55,7 @@ public class Robot extends TimedRobot
 	public void teleopInit()
 	{
 		CommandScheduler.getInstance().cancelAll();
-		new RunGyroDrive(drivebase, oi).schedule();
+		new RunGyroDrive().schedule();
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot
 		return navX;
 	}
 
-	public OI getOi()
+	public OI getOI()
 	{
 		return oi;
 	}

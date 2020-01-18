@@ -19,6 +19,11 @@ public class RunGyroDrive extends CommandBase
         this.oi = oi;
     }
 
+    public RunGyroDrive()
+    {
+        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getOI());
+    }
+
     @Override
     public void initialize()
     {

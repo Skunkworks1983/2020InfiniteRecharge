@@ -60,10 +60,13 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
         {
             case Throttle:
                 super.set(ControlMode.PercentOutput, reversed ? -value : value);
+                break;
             case Position:
                 super.set(ControlMode.Position, value);
+                break;
             case Velocity:
                 super.set(ControlMode.Velocity, value);
+                break;
         }
     }
 

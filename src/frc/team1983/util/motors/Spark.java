@@ -9,7 +9,6 @@ import frc.team1983.util.sensors.Encoder;
  */
 public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
 {
-    private boolean reversed;
     private double conversionRatio = 1;
     private double encoderOffset;
 
@@ -20,7 +19,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
     public Spark(int port, boolean reversed)
     {
         super(port, MotorType.kBrushless);
-        this.reversed = reversed;
+        setInverted(reversed);
     }
 
     /**
@@ -42,11 +41,14 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
         switch (controlMode)
         {
             case Throttle:
-                super.set(reversed ? -value : value);
+                super.set(value);
+                break;
             case Position:
                 super.getPIDController().setReference(value, ControlType.kPosition);
+                break;
             case Velocity:
                 super.getPIDController().setReference(value, ControlType.kVelocity);
+                break;
         }
     }
 
