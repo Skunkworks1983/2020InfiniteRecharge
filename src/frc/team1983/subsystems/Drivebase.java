@@ -1,41 +1,194 @@
 package frc.team1983.subsystems;
 
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.Constants;
+import frc.team1983.constants.RobotMap;
+import frc.team1983.util.motors.ControlMode;
+import frc.team1983.util.motors.MotorGroup;
+import frc.team1983.util.motors.Spark;
 
 public class Drivebase extends SubsystemBase
 {
-    private Motor leftMotor1, leftMotor2, leftMotor3, rightMotor1, rightMotor2, rightMotor3;
+	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
+	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
+
+    private MotorGroup left, right;
 
     public Drivebase()
     {
-        leftMotor1 = new Motor(Constants.Motor.LEFT1.getPort(), Constants.Motor.LEFT1.isReversed());
-        leftMotor2 = new Motor(Constants.Motor.LEFT2.getPort(), Constants.Motor.LEFT2.isReversed());
-        leftMotor3 = new Motor(Constants.Motor.LEFT3.getPort(), Constants.Motor.LEFT3.isReversed());
+        left = new MotorGroup(
+            new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED),
+            new Spark(RobotMap.Drivebase.LEFT_3, RobotMap.Drivebase.LEFT_3_REVERSED)
+        );
 
-        rightMotor1 = new Motor(Constants.Motor.RIGHT1.getPort(), Constants.Motor.RIGHT1.isReversed());
-        rightMotor2 = new Motor(Constants.Motor.RIGHT2.getPort(), Constants.Motor.RIGHT2.isReversed());
-        rightMotor3 = new Motor(Constants.Motor.RIGHT3.getPort(), Constants.Motor.RIGHT3.isReversed());
-
+        right = new MotorGroup(
+            new Spark(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
+            new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
+            new Spark(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
+        );
     }
 
-    public void setLeft(double value)
+    /**
+     * Reset the encoder offset so that it reads zero at its current position
+     */
+    public void zero()
     {
-        leftMotor1.set(value);
-        leftMotor2.set(value);
-        leftMotor3.set(value);
+        left.zero();
+        right.zero();
     }
 
-    public void setRight(double value)
+    /**
+     * @return rotations
+     */
+    public double getLeftPosition()
     {
-        rightMotor1.set(value);
-        rightMotor2.set(value);
-        rightMotor3.set(value);
+        return left.getPosition();
     }
 
-    public void set(double left, double right)
+    /**
+     * @return rotations
+     */
+    public double getRightPosition()
     {
-        setLeft(left);
-        setRight(right);
+        return right.getPosition();
+    }
+
+    /**
+     * @return feet
+     */
+    public double getLeftFeet()
+    {
+        return getLeftPosition() * FEET_PER_TICK;
+    }
+
+    /**
+     * @return feet
+     */
+    public double getRightFeet()
+    {
+        return getRightPosition() * FEET_PER_TICK;
+    }
+
+    /**
+     * @return meters
+     */
+    public double getLeftMeters()
+    {
+        return getLeftPosition() * METERS_PER_TICK;
+    }
+
+    /**
+     * @return meters
+     */
+    public double getRightMeters()
+    {
+        return getRightPosition() * METERS_PER_TICK;
+    }
+
+    /**
+     * @return rotations per minute (RPM)
+     */
+    public double getLeftVelocity()
+    {
+        return left.getVelocity();
+    }
+
+    /**
+     * @return rotations per minute (RPM)
+     */
+    public double getRightVelocity()
+    {
+        return left.getVelocity();
+    }
+
+    /**
+     * @return feet per second (f/s)
+     */
+    public double getLeftFeetPerSecond()
+    {
+        return getLeftVelocity() * FEET_PER_TICK / 60.0;
+    }
+
+    /**
+     * @return feet per second (f/s)
+     */
+    public double getRightFeetPerSecond()
+    {
+        return getRightVelocity() * FEET_PER_TICK / 60.0;
+    }
+
+    /**
+     * @return meters per second (m/s)
+     */
+    public double getLeftMetersPerSecond()
+    {
+        return getLeftVelocity() * METERS_PER_TICK / 60.0;
+    }
+
+    /**
+     * @return meters per second (m/s)
+     */
+    public double getRightMetersPerSecond()
+    {
+        return getRightVelocity() * METERS_PER_TICK / 60.0;
+    }
+
+    /**
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
+     */
+    public void setLeft(ControlMode controlMode, double value)
+    {
+        left.set(controlMode, value);
+    }
+
+    /**
+     * Set the motor output in a control mode
+     *
+     * @param controlMode The control mode the motor should run in
+     * @param value The setpoint at which the motor should run
+     */
+    public void setRight(ControlMode controlMode, double value)
+    {
+        right.set(controlMode, value);
+    }
+
+    /**
+     * @param leftThrottle Sets the percent output of the left motors
+     * @param rightThrottle Sets the percent output of the right motors
+     */
+    public void set(ControlMode controlMode, double leftThrottle, double rightThrottle)
+    {
+        setLeft(controlMode, leftThrottle);
+        setRight(controlMode, rightThrottle);
+    }
+
+    /**
+     * @param volts Sets the voltage output of the left motors
+     */
+    public void setLeftVolts(double volts)
+    {
+        setLeft(ControlMode.Throttle, volts / 12.0);
+    }
+
+    /**
+     * @param volts Sets the voltage output of the right motors
+     */
+    public void setRightVolts(double volts)
+    {
+        setRight(ControlMode.Throttle, volts / 12.0);
+    }
+
+    /**
+     * @param leftVolts Sets the voltage output of the left motors
+     * @param rightVolts Sets the voltage output of the right motors
+     */
+    public void setVolts(double leftVolts, double rightVolts)
+    {
+        setLeftVolts(leftVolts);
+        setRightVolts(rightVolts);
     }
 }
