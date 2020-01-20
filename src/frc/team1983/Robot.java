@@ -6,13 +6,16 @@ import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
+import frc.team1983.util.sensors.Limelight;
 import frc.team1983.util.sensors.NavX;
+import frc.team1983.commands.TargetAlignment;
 
 public class Robot extends TimedRobot
 {
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private Limelight limelight;
 	private NavX navX;
 	private OI oi;
 
@@ -22,7 +25,7 @@ public class Robot extends TimedRobot
 
 		drivebase = new Drivebase();
 		navX = new NavX();
-
+		limelight = new Limelight();
 		oi = new OI();
 		oi.initializeBindings();
 	}
@@ -43,6 +46,7 @@ public class Robot extends TimedRobot
 	public void autonomousInit()
 	{
 		CommandScheduler.getInstance().cancelAll();
+		new TargetAlignment().schedule();
 	}
 
 	@Override
@@ -80,6 +84,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public Limelight getLimelight()
+	{
+		return limelight;
 	}
 
 	public NavX getNavX()
