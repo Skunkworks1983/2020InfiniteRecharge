@@ -1,11 +1,15 @@
 package frc.team1983;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
+import frc.team1983.subsystems.Collector;
 import frc.team1983.subsystems.Drivebase;
+import frc.team1983.subsystems.Indexer;
+import frc.team1983.subsystems.Shooter;
 import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
@@ -13,6 +17,9 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private Collector collector;
+	private Indexer indexer;
+	private Shooter shooter;
 	private NavX navX;
 	private OI oi;
 
@@ -20,8 +27,16 @@ public class Robot extends TimedRobot
 	{
 		instance = this;
 
-		drivebase = new Drivebase();
 		navX = new NavX();
+		drivebase = new Drivebase();
+		collector = new Collector();
+		indexer = new Indexer();
+		shooter = new Shooter();
+
+		SmartDashboard.putNumber("Collector Throttle", 0.5);
+		SmartDashboard.putNumber("Indexer Throttle", 0.5);
+		SmartDashboard.putNumber("Accelerator Throttle", 0.5);
+		SmartDashboard.putNumber("Flywheel Throttle", 0.5);
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -80,6 +95,21 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public Collector getCollector()
+	{
+		return collector;
+	}
+
+	public Indexer getIndexer()
+	{
+		return indexer;
+	}
+
+	public Shooter getShooter()
+	{
+		return shooter;
 	}
 
 	public NavX getNavX()

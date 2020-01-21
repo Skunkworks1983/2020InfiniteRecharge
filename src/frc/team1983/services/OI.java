@@ -1,7 +1,12 @@
 package frc.team1983.services;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.team1983.commands.SetCollector;
+import frc.team1983.commands.SetIndexer;
+import frc.team1983.commands.SetShooter;
+import frc.team1983.util.motors.ControlMode;
 
 import java.util.HashMap;
 
@@ -25,6 +30,14 @@ public class OI
             return port;
         }
     }
+
+    public static final int COLLECTOR_INTAKE = 21;
+    public static final int COLLECTOR_EXPEL = 22;
+
+    public static final int INDEXER_INTAKE = 23;
+    public static final int INDEXER_EXPEL = 20;
+
+    public static final int SHOOT = 16;
 
     protected static final double JOYSTICK_DEADZONE = 0.15;
     protected static final double JOYSTICK_EXPONENT = 1.7;
@@ -89,7 +102,7 @@ public class OI
             case RIGHT:
                 joystick = right;
                 break;
-            default: // If it wasn't the other two it must be panel. Java doesn't like it if we just do case PANEL.
+            default:
                 joystick = panel;
                 break;
         }
@@ -103,6 +116,25 @@ public class OI
     }
     public void initializeBindings()
     {
+        getButton(Joysticks.PANEL, COLLECTOR_INTAKE).whileHeld(
+            new SetCollector(ControlMode.Throttle, SmartDashboard.getNumber("Collector Throttle", 0.5))
+        );
+        getButton(Joysticks.PANEL, COLLECTOR_EXPEL).whileHeld(
+            new SetCollector(ControlMode.Throttle, -SmartDashboard.getNumber("Collector Throttle", 0.5))
+        );
 
+        getButton(Joysticks.PANEL, INDEXER_INTAKE).whileHeld(
+            new SetIndexer(ControlMode.Throttle, SmartDashboard.getNumber("Indexer Throttle", 0.5))
+        );
+        getButton(Joysticks.PANEL, INDEXER_EXPEL).whileHeld(
+            new SetIndexer(ControlMode.Throttle, -SmartDashboard.getNumber("Indexer Throttle", 0.5))
+        );
+
+        getButton(Joysticks.PANEL, SHOOT).whileHeld(
+            new SetShooter(ControlMode.Throttle,
+                SmartDashboard.getNumber("Accelerator Throttle", 0.5),
+                SmartDashboard.getNumber("Flywheel Throttle", 0.5)
+            )
+        );
     }
 }
