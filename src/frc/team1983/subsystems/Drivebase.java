@@ -18,11 +18,11 @@ import frc.team1983.util.motors.Spark;
 
 public class Drivebase extends SubsystemBase
 {
-    public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
+    public static final double FEET_PER_TICK = (5.75 * Math.PI / 12.0) / (8.69);
     public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
 
-    public static final double kS = 0.15, kV = 0.618, kA = 0.125;
-    public static final double kP = 5.75, kI = 0.0, kD = 0.0; // TODO: calculate
+    public static final double kS = 0.145, kV = 2.02, kA = 0.423;
+    public static final double kP = 2.64, kI = 0.0, kD = 0.0;
 
     private MotorGroup left, right;
 
@@ -69,6 +69,8 @@ public class Drivebase extends SubsystemBase
         right.zero();
 
         pose = new Pose2d();
+
+        odometry.resetPosition(pose, pose.getRotation());
     }
 
     /**
@@ -256,5 +258,10 @@ public class Drivebase extends SubsystemBase
     public Pose2d getPose()
     {
         return pose;
+    }
+
+    public void setPose(Pose2d pose)
+    {
+        this.pose = pose;
     }
 }

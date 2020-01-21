@@ -16,7 +16,8 @@
     # a fraction [motor turns]/[wheel turns]
     "gearing": 232/27,
     # Wheel diameter (in units of your choice - will dictate units of analysis)
-    "wheelDiameter": 0.5,
+    # Meters
+    "wheelDiameter": 0.14605,
     # Your gyro type (one of "NavX", "Pigeon", "ADXRS450", "AnalogGyro", or "None")
     "gyroType": "NavX",
     # Whatever you put into the constructor of your gyro
@@ -28,6 +29,8 @@
     # "" (NavX using default SPI, ADXRS450 using onboard CS0, or no gyro)
     "gyroPort": "SPI.Port.kMXP",
 }
+
+
 
 
 

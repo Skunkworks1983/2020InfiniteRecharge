@@ -30,7 +30,8 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
      */
     public void zero()
     {
-        encoderOffset = -getEncoder().getPosition();
+//        encoderOffset = -encoder.getPosition();
+        encoder.setPosition(0.0);
     }
 
     /**

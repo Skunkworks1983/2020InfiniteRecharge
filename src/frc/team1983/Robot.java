@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.FollowTrajectory;
 import frc.team1983.commands.RunGyroDrive;
-import frc.team1983.commands.RunTankDrive;
+import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.NavX;
@@ -34,8 +34,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-		drivebase.zero();
-		navX.reset();
+		zero();
 	}
 
 	@Override
@@ -47,31 +46,30 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
-		drivebase.zero();
+		zero();
+
+		drivebase.setPose(Constants.Pose.START);
 
 		CommandScheduler.getInstance().cancelAll();
 		new FollowTrajectory(
 			new Pose2d(),
-			new Pose2d(1.0, 0.0, new Rotation2d())
+			new Pose2d(3.0, 0.0, new Rotation2d())
 		).schedule();
-
-		System.out.println("NavX: " + navX.getHeading().getDegrees());
-		System.out.println("Drivebase: " + drivebase.getLeftFeet() + ", " + drivebase.getRightFeet());
 	}
 
 	@Override
 	public void autonomousPeriodic()
 	{
-
+		System.out.println("Pose: " + drivebase.getPose());
 	}
 
 	@Override
 	public void teleopInit()
 	{
-		drivebase.zero();
+		zero();
 
 		CommandScheduler.getInstance().cancelAll();
-		new RunTankDrive().schedule();
+		new RunGyroDrive().schedule();
 	}
 
 	@Override
@@ -106,5 +104,11 @@ public class Robot extends TimedRobot
 	public OI getOI()
 	{
 		return oi;
+	}
+
+	public void zero()
+	{
+		navX.reset();
+		drivebase.zero();
 	}
 }
