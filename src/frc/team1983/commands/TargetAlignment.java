@@ -25,7 +25,7 @@ import static edu.wpi.first.wpilibj.util.ErrorMessages.requireNonNullParam;
 
 public class TargetAlignment extends PIDCommand
 {
-    private static final double kP = 0.01, kI = 0.0, kD = 0.0;
+    private static final double kP = 0.015, kI = 0.0, kD = 0.0;
     private Drivebase drivebase;
     private Limelight limelight;
 
@@ -59,6 +59,7 @@ public class TargetAlignment extends PIDCommand
     {
         super.end(interrupted);
         drivebase.set(ControlMode.Throttle, 0.0, 0.0);
+
         System.out.println("END");
     }
 
