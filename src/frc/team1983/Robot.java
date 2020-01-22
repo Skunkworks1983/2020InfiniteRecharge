@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
-import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Collector;
 import frc.team1983.subsystems.Drivebase;
@@ -33,10 +32,17 @@ public class Robot extends TimedRobot
 		indexer = new Indexer();
 		shooter = new Shooter();
 
-		SmartDashboard.putNumber("Collector Throttle", 0.5);
-		SmartDashboard.putNumber("Indexer Throttle", 0.5);
-		SmartDashboard.putNumber("Accelerator Throttle", 0.5);
+		SmartDashboard.putNumber("Collector Intake Throttle", 0.5);
+		SmartDashboard.putNumber("Collector Expel Throttle", 0.5);
+
+		SmartDashboard.putNumber("Indexer Intake Throttle", 0.5);
+		SmartDashboard.putNumber("Indexer Expel Throttle", 0.5);
+
+		SmartDashboard.putNumber("Accelerator Intake Throttle", 0.5);
+		SmartDashboard.putNumber("Accelerator Expel Throttle", 0.5);
+
 		SmartDashboard.putNumber("Flywheel Throttle", 0.5);
+
 
 		oi = new OI();
 		oi.initializeBindings();

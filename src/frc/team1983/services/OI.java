@@ -3,9 +3,7 @@ package frc.team1983.services;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.team1983.commands.SetCollector;
-import frc.team1983.commands.SetIndexer;
-import frc.team1983.commands.SetShooter;
+import frc.team1983.commands.*;
 import frc.team1983.util.motors.ControlMode;
 
 import java.util.HashMap;
@@ -31,13 +29,16 @@ public class OI
         }
     }
 
-    public static final int COLLECTOR_INTAKE = 21;
-    public static final int COLLECTOR_EXPEL = 22;
+    public static final int COLLECTOR_INTAKE = 22;
+    public static final int COLLECTOR_EXPEL = 21;
 
     public static final int INDEXER_INTAKE = 23;
     public static final int INDEXER_EXPEL = 20;
 
-    public static final int SHOOT = 16;
+    public static final int ACCELERATOR_INTAKE = 19;
+    public static final int ACCELERATOR_EXPEL = 18;
+
+    public static final int FLYWHEEL = 17;
 
     protected static final double JOYSTICK_DEADZONE = 0.15;
     protected static final double JOYSTICK_EXPONENT = 1.7;
@@ -117,24 +118,29 @@ public class OI
     public void initializeBindings()
     {
         getButton(Joysticks.PANEL, COLLECTOR_INTAKE).whileHeld(
-            new SetCollector(ControlMode.Throttle, SmartDashboard.getNumber("Collector Throttle", 0.5))
+            new SetCollector(ControlMode.Throttle, SmartDashboard.getNumber("Collector Intake Throttle", 0.5))
         );
         getButton(Joysticks.PANEL, COLLECTOR_EXPEL).whileHeld(
-            new SetCollector(ControlMode.Throttle, -SmartDashboard.getNumber("Collector Throttle", 0.5))
+            new SetCollector(ControlMode.Throttle, -SmartDashboard.getNumber("Collector Expel Throttle", 0.5))
         );
 
         getButton(Joysticks.PANEL, INDEXER_INTAKE).whileHeld(
-            new SetIndexer(ControlMode.Throttle, SmartDashboard.getNumber("Indexer Throttle", 0.5))
+            new SetIndexer(ControlMode.Throttle, SmartDashboard.getNumber("Indexer Intake Throttle", 0.5))
         );
         getButton(Joysticks.PANEL, INDEXER_EXPEL).whileHeld(
-            new SetIndexer(ControlMode.Throttle, -SmartDashboard.getNumber("Indexer Throttle", 0.5))
+            new SetIndexer(ControlMode.Throttle, -SmartDashboard.getNumber("Indexer Expel Throttle", 0.5))
         );
 
-        getButton(Joysticks.PANEL, SHOOT).whileHeld(
-            new SetShooter(ControlMode.Throttle,
-                SmartDashboard.getNumber("Accelerator Throttle", 0.5),
-                SmartDashboard.getNumber("Flywheel Throttle", 0.5)
-            )
+        getButton(Joysticks.PANEL, ACCELERATOR_INTAKE).whileHeld(
+            new SetAccelerator(ControlMode.Throttle, -SmartDashboard.getNumber("Accelerator Intake Throttle", 0.5))
+        );
+
+        getButton(Joysticks.PANEL, ACCELERATOR_EXPEL).whileHeld(
+            new SetAccelerator(ControlMode.Throttle, SmartDashboard.getNumber("Accelerator Expel Throttle", 0.5))
+        );
+
+        getButton(Joysticks.PANEL, FLYWHEEL).whileHeld(
+            new SetFlywheel(ControlMode.Throttle, SmartDashboard.getNumber("Flywheel Throttle", 0.5))
         );
     }
 }
