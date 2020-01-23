@@ -61,6 +61,9 @@ dependencies {
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
     testImplementation 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.23.0'
+    testCompile 'org.powermock:powermock-module-junit4:1.7.1'
+    testCompile 'org.powermock:powermock-api-mockito2:1.7.4'
 
     // Enable simulation gui support. Must check the box in vscode to enable support
     // upon debugging

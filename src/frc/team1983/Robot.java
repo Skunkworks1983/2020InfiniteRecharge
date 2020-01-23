@@ -52,8 +52,8 @@ public class Robot extends TimedRobot
 
 		CommandScheduler.getInstance().cancelAll();
 		new FollowTrajectory(
-			new Pose2d(),
-			new Pose2d(3.0, 0.0, new Rotation2d())
+			Constants.Pose.START,
+			Constants.Pose.TRENCH_RUN_BALL_1
 		).schedule();
 	}
 
