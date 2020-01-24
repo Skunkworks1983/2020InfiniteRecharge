@@ -68,9 +68,7 @@ public class Drivebase extends SubsystemBase
         left.zero();
         right.zero();
 
-        pose = new Pose2d();
-
-        odometry.resetPosition(pose, pose.getRotation());
+        setPose(new Pose2d());
     }
 
     /**
@@ -263,5 +261,8 @@ public class Drivebase extends SubsystemBase
     public void setPose(Pose2d pose)
     {
         this.pose = pose;
+
+        odometry.resetPosition(pose, pose.getRotation());
+        Robot.getInstance().getNavX().setHeading(pose.getRotation().getDegrees());
     }
 }

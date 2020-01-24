@@ -1,8 +1,6 @@
 package frc.team1983;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.FollowTrajectory;
 import frc.team1983.commands.RunGyroDrive;
@@ -47,13 +45,14 @@ public class Robot extends TimedRobot
 	public void autonomousInit()
 	{
 		zero();
-
+		
 		drivebase.setPose(Constants.Pose.START);
 
 		CommandScheduler.getInstance().cancelAll();
 		new FollowTrajectory(
+			true,
 			Constants.Pose.START,
-			Constants.Pose.TRENCH_RUN_BALL_1
+			Constants.Pose.RENDEZVOUS_POINT_BALL_1
 		).schedule();
 	}
 
