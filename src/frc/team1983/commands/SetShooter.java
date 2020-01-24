@@ -24,6 +24,11 @@ public class SetShooter extends CommandBase
 		this(Robot.getInstance().getShooter(), controlMode, acceleratorValue, flywheelValue);
 	}
 
+	public SetShooter(ControlMode controlMode, double value)
+	{
+		this(Robot.getInstance().getShooter(), controlMode, value, value);
+	}
+
 	@Override
 	public void execute()
 	{
