@@ -21,32 +21,24 @@ public class RobotMap
 
     public static class Collector
     {
-        public static final int MOTOR_1 = 5;
-        public static final boolean MOTOR_1_REVERSED = false;
-        public static final int MOTOR_2 = 6;
-        public static final boolean MOTOR_2_REVERSED = false;
-        public static final int MOTOR_3 = 7;
-        public static final boolean MOTOR_3_REVERSED = false;
-        public static final int MOTOR_4 = 8;
-        public static final boolean MOTOR_4_REVERSED = false;
+        public static final int MOTOR = 10;
+        public static final boolean MOTOR_REVERSED = true;
     }
 
     public static class Indexer
     {
-        public static final int MOTOR_1 = 0;
-        public static final boolean MOTOR_1_REVERSED = false;
-        public static final int MOTOR_2 = 0;
-        public static final boolean MOTOR_2_REVERSED = false;
+        public static final int MOTOR = 9;
+        public static final boolean MOTOR_REVERSED = true;
     }
 
     public static class Shooter
     {
-        public static final int ACCELERATOR_1 = 5;
+        public static final int ACCELERATOR_1 = 6;
         public static final boolean ACCELERATOR_1_REVERSED = false;
-        public static final int ACCELERATOR_2 = 6;
-        public static final boolean ACCELERATOR_2_REVERSED = false;
-        public static final int FLYWHEEL_1 = 7;
-        public static final boolean FLYWHEEL_1_REVERSED = true;
+        public static final int ACCELERATOR_2 = 7;
+        public static final boolean ACCELERATOR_2_REVERSED = true;
+        public static final int FLYWHEEL_1 = 5;
+        public static final boolean FLYWHEEL_1_REVERSED = false;
         public static final int FLYWHEEL_2 = 8;
         public static final boolean FLYWHEEL_2_REVERSED = true;
     }

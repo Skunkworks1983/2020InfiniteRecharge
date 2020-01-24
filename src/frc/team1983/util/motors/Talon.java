@@ -124,4 +124,9 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
     {
         this.conversionRatio = conversionRatio;
     }
+
+    public boolean isReversed()
+    {
+        return reversed;
+    }
 }

@@ -1,6 +1,5 @@
 package frc.team1983.subsystems;
 
-import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
@@ -14,10 +13,7 @@ public class Collector extends SubsystemBase
     public Collector()
     {
         motorGroup = new MotorGroup(
-            new Spark(RobotMap.Collector.MOTOR_1, RobotMap.Collector.MOTOR_1_REVERSED),
-            new Spark(RobotMap.Collector.MOTOR_2, RobotMap.Collector.MOTOR_2_REVERSED),
-            new Spark(RobotMap.Collector.MOTOR_3, RobotMap.Collector.MOTOR_3_REVERSED),
-            new Spark(RobotMap.Collector.MOTOR_4, RobotMap.Collector.MOTOR_4_REVERSED)
+            new Spark(RobotMap.Collector.MOTOR, RobotMap.Collector.MOTOR_REVERSED)
         );
     }
 

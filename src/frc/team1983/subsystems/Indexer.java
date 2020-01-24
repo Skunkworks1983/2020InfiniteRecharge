@@ -13,8 +13,7 @@ public class Indexer extends SubsystemBase
     public Indexer()
     {
         motorGroup = new MotorGroup(
-            new Spark(RobotMap.Indexer.MOTOR_1, RobotMap.Indexer.MOTOR_1_REVERSED),
-            new Spark(RobotMap.Indexer.MOTOR_2, RobotMap.Indexer.MOTOR_2_REVERSED)
+            new Spark(RobotMap.Indexer.MOTOR, RobotMap.Indexer.MOTOR_REVERSED)
         );
     }
 
