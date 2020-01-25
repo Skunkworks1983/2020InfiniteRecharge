@@ -22,7 +22,7 @@ public class UT_Pose
     @Test
     public void constantPosesStayConstant()
     {
-        final Pose2d pose = new Pose2d();
+        Pose2d pose = new Pose2d();
         pose.plus(new Transform2d(new Translation2d(19.0, 83.0), new Rotation2d(90)));
         Assert.assertTrue(pose.equals(new Pose2d()));
     }
