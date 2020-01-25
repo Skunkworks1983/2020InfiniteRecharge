@@ -1,16 +1,20 @@
 package frc.team1983;
 
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
-import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.util.sensors.NavX;
 import frc.team1983.commands.TargetAlignment;
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 public class Robot extends TimedRobot
 {
@@ -20,6 +24,8 @@ public class Robot extends TimedRobot
 	private Limelight limelight;
 	private NavX navX;
 	private OI oi;
+
+	private UsbCamera camera;
 
 	Robot()
 	{
@@ -35,8 +41,9 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-		CameraServer.getInstance().startAutomaticCapture(0);
-		CameraServer.getInstance().startAutomaticCapture(1);
+		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
+		camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(320, 240);
 	}
 
 	@Override
