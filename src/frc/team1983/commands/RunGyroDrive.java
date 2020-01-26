@@ -27,7 +27,7 @@ public class RunGyroDrive extends CommandBase
     @Override
     public void initialize()
     {
-        targetHeading = Robot.getInstance().getNavX().getHeading().getDegrees();
+        targetHeading = drivebase.getHeading().getDegrees();
     }
 
     @Override
@@ -35,14 +35,14 @@ public class RunGyroDrive extends CommandBase
     {
         boolean slow = !oi.getButton(OI.Joysticks.LEFT, 1).get();
 
-        double currentHeading = Robot.getInstance().getNavX().getHeading().getDegrees();
+        double currentHeading = drivebase.getHeading().getDegrees();
         double turnThrottle = 0.02 * (currentHeading - targetHeading);
         double driveThrottle = oi.getRightY() * (slow ? 0.65 : 1);
 
         if(Math.abs(oi.getLeftX()) > 0.05)
         {
             turnThrottle = oi.getLeftX() * (slow ? 0.2 : 0.4);
-            targetHeading = Robot.getInstance().getNavX().getHeading().getDegrees();
+            targetHeading = drivebase.getHeading().getDegrees();
         }
 
         drivebase.setLeft(ControlMode.Throttle, driveThrottle + turnThrottle);

@@ -13,7 +13,6 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
-	private NavX navX;
 	private OI oi;
 
 	Robot()
@@ -21,7 +20,6 @@ public class Robot extends TimedRobot
 		instance = this;
 
 		drivebase = new Drivebase();
-		navX = new NavX();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -80,11 +78,6 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
-	}
-
-	public NavX getNavX()
-	{
-		return navX;
 	}
 
 	public OI getOI()
