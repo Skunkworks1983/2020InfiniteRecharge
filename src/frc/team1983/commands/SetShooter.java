@@ -1,5 +1,6 @@
 package frc.team1983.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
 import frc.team1983.subsystems.Shooter;
@@ -33,6 +34,8 @@ public class SetShooter extends CommandBase
 	public void execute()
 	{
 		shooter.set(controlMode, acceleratorValue, flywheelValue);
+		SmartDashboard.putNumber("Accelerator Velocity", Robot.getInstance().getShooter().getAcceleratorVelocity());
+		SmartDashboard.putNumber("Flywheel Velocity", Robot.getInstance().getShooter().getFlywheelVelocity() * 30 / 18.0);
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class Constants
 
     public static final double INDEXER_THROTTLE = 0.25;
 
-    public static final double ACCELERATOR_INTAKE_THROTTLE = 0.1;
+    public static final double ACCELERATOR_INTAKE_THROTTLE = 0.15;
 
     public static final double SHOOT_THROTTLE = 0.5;
 }

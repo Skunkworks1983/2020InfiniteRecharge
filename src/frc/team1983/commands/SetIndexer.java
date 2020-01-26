@@ -27,6 +27,7 @@ public class SetIndexer extends CommandBase
 	public void execute()
 	{
 		indexer.set(controlMode, value);
+		System.out.println("Indexer: " + value);
 	}
 
 	@Override

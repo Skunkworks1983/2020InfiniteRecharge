@@ -52,4 +52,14 @@ public class Shooter extends SubsystemBase
         setAccelerator(controlMode, acceleratorValue);
         setFlywheel(controlMode, flywheelValue);
     }
+
+    public double getAcceleratorVelocity()
+    {
+        return accelerator.getVelocity();
+    }
+
+    public double getFlywheelVelocity()
+    {
+        return flywheel.getVelocity();
+    }
 }
