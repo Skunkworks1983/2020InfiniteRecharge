@@ -1,8 +1,13 @@
 package frc.team1983;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.team1983.commands.FollowTrajectory;
+import frc.team1983.autonomous.routines.DoNothing;
+import frc.team1983.autonomous.routines.RendezvousToTrench;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
@@ -17,6 +22,9 @@ public class Robot extends TimedRobot
 	private NavX navX;
 	private OI oi;
 
+	private SendableChooser<Pose2d> startingPoseChooser;
+	private SendableChooser<Command> autoChooser;
+
 	Robot()
 	{
 		instance = this;
@@ -24,6 +32,7 @@ public class Robot extends TimedRobot
 		navX = new NavX();
 		drivebase = new Drivebase();
 		drivebase.zero();
+		drivebase.setBrake(true); // TODO: remove
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -32,7 +41,15 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-		zero();
+		startingPoseChooser = new SendableChooser<>();
+		startingPoseChooser.setDefaultOption("In Front of Trench Run", Constants.Pose.START_IN_FRONT_OF_TRENCH_RUN);
+		startingPoseChooser.addOption("In Front of Power Port", Constants.Pose.START_IN_FRONT_OF_POWER_PORT);
+		SmartDashboard.putData("Starting pose chooser", startingPoseChooser);
+
+		autoChooser = new SendableChooser<>();
+		autoChooser.setDefaultOption("DO NOT RUN AUTO", new DoNothing());
+		autoChooser.addOption("Rendezvous To Trench", new RendezvousToTrench());
+		SmartDashboard.putData("Auto chooser", autoChooser);
 	}
 
 	@Override
@@ -44,29 +61,21 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
-		zero();
-		
-		drivebase.setPose(Constants.Pose.START);
+		drivebase.setPose(startingPoseChooser.getSelected());
 
 		CommandScheduler.getInstance().cancelAll();
-		new FollowTrajectory(
-			true,
-			Constants.Pose.START,
-			Constants.Pose.TRENCH_RUN_BALL_1
-		).schedule();
+		autoChooser.getSelected().schedule();
 	}
 
 	@Override
 	public void autonomousPeriodic()
 	{
-		System.out.println("Pose: " + drivebase.getPose().minus(Constants.Pose.TRENCH_RUN_BALL_1));
+
 	}
 
 	@Override
 	public void teleopInit()
 	{
-		zero();
-
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 	}
@@ -74,7 +83,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-
+		System.out.println(drivebase.getPose());
 	}
 
 	@Override
@@ -103,11 +112,5 @@ public class Robot extends TimedRobot
 	public OI getOI()
 	{
 		return oi;
-	}
-
-	public void zero()
-	{
-		navX.reset();
-		drivebase.zero();
 	}
 }
