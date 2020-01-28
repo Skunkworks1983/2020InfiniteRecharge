@@ -28,7 +28,6 @@ public class Collector extends SubsystemBase
 
     public static final double DEGREES_PER_TICK = 95.0; // TODO find value
     public static final double CLOSED_LOOP_TOLERANCE = 1.5; //TODO: find value
-    public static final double STOW_ZONE = 6.0; //TODO change value
 
     public boolean automationEnabled = true; //TODO: look at automation
     public boolean desiredState = false; //TODO: do we want a folded state???
@@ -93,5 +92,11 @@ public class Collector extends SubsystemBase
     public position getCollectorPosition()
     {
         return currentPosition;
+    }
+
+    public void zero()
+    {
+        left.zero();
+        right.zero();
     }
 }

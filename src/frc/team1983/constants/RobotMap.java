@@ -2,6 +2,8 @@ package frc.team1983.constants;
 
 public class RobotMap
 {
+    public static final int COMPRESSOR = 0; //TODO: fix fix fix fix
+
     public static class Drivebase
     {
         public static final int LEFT_1 = 12;
@@ -34,8 +36,5 @@ public class RobotMap
         public static final int PISTON_REVERSE = 1;
 
     }
-
-    public static final int COMPRESSOR = 0; //TODO: fix fix fix fix
-
 
 }
