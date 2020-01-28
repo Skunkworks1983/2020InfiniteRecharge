@@ -15,7 +15,6 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
-	private NavX navX;
 	private ColorSensor colorSensor;
 	private OI oi;
 
