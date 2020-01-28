@@ -19,7 +19,6 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
-	private NavX navX;
 	private OI oi;
 
 	private SendableChooser<Pose2d> startingPoseChooser;
@@ -29,7 +28,6 @@ public class Robot extends TimedRobot
 	{
 		instance = this;
 
-		navX = new NavX();
 		drivebase = new Drivebase();
 		drivebase.zero();
 		drivebase.setBrake(true); // TODO: remove
@@ -102,11 +100,6 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
-	}
-
-	public NavX getNavX()
-	{
-		return navX;
 	}
 
 	public OI getOI()

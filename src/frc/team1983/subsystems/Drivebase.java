@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.Robot;
 import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
+import frc.team1983.util.sensors.NavX;
 
 public class Drivebase extends SubsystemBase
 {
@@ -25,9 +25,10 @@ public class Drivebase extends SubsystemBase
     public static final double kP = 2.64, kI = 0.0, kD = 0.0;
 
     private MotorGroup left, right;
+    private NavX navX;
 
     private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.feetToMeters(Constants.TRACK_WIDTH));
-    private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(Robot.getInstance().getNavX().getHeading());
+    private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(getHeading());
 
     private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kV, kA);
 
@@ -49,12 +50,14 @@ public class Drivebase extends SubsystemBase
             new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
             new Spark(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
         );
+
+        navX = new NavX();
     }
 
     public void periodic()
     {
         pose = odometry.update(
-            Robot.getInstance().getNavX().getHeading(),
+            getHeading(),
             getLeftMeters(),
             getRightMeters()
         );
@@ -256,18 +259,37 @@ public class Drivebase extends SubsystemBase
         return pose;
     }
 
+    public void setBrake(boolean brake)
+    {
+        left.setBrake(brake);
+        right.setBrake(brake);
+    }
+
+    /**
+     * @return Current heading of the drivebase
+     */
+    public Rotation2d getHeading()
+    {
+        return navX.getHeading();
+    }
+
+    /**
+     * @param heading Heading to set the drivebase to
+     */
+    public void setHeading(double heading)
+    {
+        navX.setHeading(heading);
+    }
+
+    /**
+     * @param pose Pose to set the drivebase to
+     */
     public void setPose(Pose2d pose)
     {
         zero();
         this.pose = pose;
 
         odometry.resetPosition(pose, pose.getRotation());
-        Robot.getInstance().getNavX().setHeading(pose.getRotation().getDegrees());
-    }
-
-    public void setBrake(boolean brake)
-    {
-        left.setBrake(brake);
-        right.setBrake(brake);
+        setHeading(pose.getRotation().getDegrees());
     }
 }
