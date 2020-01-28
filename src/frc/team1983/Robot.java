@@ -33,16 +33,6 @@ public class Robot extends TimedRobot
 		indexer = new Indexer();
 		shooter = new Shooter();
 
-		SmartDashboard.putNumber("Collect Throttle", Constants.COLLECT_THROTTLE);
-		SmartDashboard.putNumber("Expel Throttle", Constants.EXPEL_THROTTLE);
-
-		SmartDashboard.putNumber("Indexer Throttle", Constants.INDEXER_THROTTLE);
-
-		SmartDashboard.putNumber("Accelerator Intake Throttle", Constants.ACCELERATOR_INTAKE_THROTTLE);
-
-		SmartDashboard.putNumber("Shoot Throttle", Constants.SHOOT_THROTTLE);
-
-
 		oi = new OI();
 		oi.initializeBindings();
 	}

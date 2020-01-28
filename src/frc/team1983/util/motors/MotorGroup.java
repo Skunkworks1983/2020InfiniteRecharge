@@ -33,7 +33,7 @@ public class MotorGroup
         this.slaves = new ArrayList<>();
         this.slaves.addAll(Arrays.asList(slaves));
         for (Motor slave : this.slaves)
-            slave.follow(master, slave.isReversed());
+            slave.follow(master);
 
         this.motors = new ArrayList<>();
         this.motors.add(master);

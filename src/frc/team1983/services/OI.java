@@ -118,38 +118,38 @@ public class OI
     {
         getButton(Joysticks.PANEL, COLLECT).whileHeld(
             new ParallelCommandGroup(
-//                new SetCollector(ControlMode.Throttle, SmartDashboard.getNumber("Collect Throttle", Constants.COLLECT_THROTTLE)),
-                new SetIndexer(ControlMode.Throttle, SmartDashboard.getNumber("Collect Throttle", Constants.COLLECT_THROTTLE)),
-                new SetAccelerator(ControlMode.Throttle, -SmartDashboard.getNumber("Accelerator Intake Throttle", Constants.ACCELERATOR_INTAKE_THROTTLE))
+//                new SetCollector(ControlMode.Throttle, Constants.COLLECT_THROTTLE),
+                new SetIndexer(ControlMode.Throttle, Constants.COLLECT_THROTTLE),
+                new SetAccelerator(ControlMode.Throttle, -Constants.COLLECT_THROTTLE)
             )
         );
 
         getButton(Joysticks.PANEL, EXPEL).whileHeld(
             new ParallelCommandGroup(
-//                new SetCollector(ControlMode.Throttle, -SmartDashboard.getNumber("Expel Throttle", Constants.EXPEL_THROTTLE)),
-                new SetIndexer(ControlMode.Throttle, -SmartDashboard.getNumber("Expel Throttle", Constants.EXPEL_THROTTLE)),
-                new SetAccelerator(ControlMode.Throttle, -SmartDashboard.getNumber("Accelerator Intake Throttle", Constants.ACCELERATOR_INTAKE_THROTTLE))
+//                new SetCollector(ControlMode.Throttle, -Constants.EXPEL_THROTTLE),
+                new SetIndexer(ControlMode.Throttle, -Constants.EXPEL_THROTTLE),
+                new SetAccelerator(ControlMode.Throttle, -Constants.EXPEL_THROTTLE)
             )
         );
 
         getButton(Joysticks.PANEL, INDEXER_INTAKE).whileHeld(
             new ParallelCommandGroup(
-                new SetIndexer(ControlMode.Throttle, SmartDashboard.getNumber("Indexer Throttle", Constants.INDEXER_THROTTLE))
-//                new SetCollector(ControlMode.Throttle, SmartDashboard.getNumber("Indexer Throttle", Constants.INDEXER_THROTTLE))
+                new SetIndexer(ControlMode.Throttle, Constants.INDEXER_THROTTLE)
+//                new SetCollector(ControlMode.Throttle, Constants.INDEXER_THROTTLE)
             )
         );
 
         getButton(Joysticks.PANEL, INDEXER_EXPEL).whileHeld(
             new ParallelCommandGroup(
-                new SetIndexer(ControlMode.Throttle, -SmartDashboard.getNumber("Indexer Throttle", Constants.INDEXER_THROTTLE))
-//                new SetCollector(ControlMode.Throttle, -SmartDashboard.getNumber("Indexer Throttle", Constants.INDEXER_THROTTLE))
+                new SetIndexer(ControlMode.Throttle, -Constants.INDEXER_THROTTLE)
+//                new SetCollector(ControlMode.Throttle, -Constants.INDEXER_THROTTLE)
             )
         );
 
         getButton(Joysticks.PANEL, SHOOT).whileHeld(
             new ParallelCommandGroup(
-                new SetAccelerator(ControlMode.Throttle, 1.0),
-                new SetShooter(ControlMode.Throttle, 0.95)
+                new SetAccelerator(ControlMode.Throttle, Constants.ACCELERATOR_THROTTLE),
+                new SetShooter(ControlMode.Throttle, Constants.FLYWHEEL_THROTTLE)
             )
         );
     }
