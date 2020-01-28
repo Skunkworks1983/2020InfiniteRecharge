@@ -1,18 +1,41 @@
 package frc.team1983.subsystems;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.team1983.Robot;
+import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
+import frc.team1983.util.sensors.NavX;
 
 public class Drivebase extends SubsystemBase
 {
-	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
-	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
+    public static final double FEET_PER_TICK = (5.75 * Math.PI / 12.0) / (8.69);
+    public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
+
+    public static final double kS = 0.145, kV = 2.02, kA = 0.423;
+    public static final double kP = 2.64, kI = 0.0, kD = 0.0;
 
     private MotorGroup left, right;
+    private NavX navX;
+
+    private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.feetToMeters(Constants.TRACK_WIDTH));
+    private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(getHeading());
+
+    private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kV, kA);
+
+    private PIDController leftPIDController = new PIDController(kP, kI, kD);
+    private PIDController rightPIDController = new PIDController(kP, kI, kD);
+
+    private Pose2d pose;
 
     public Drivebase()
     {
@@ -26,6 +49,17 @@ public class Drivebase extends SubsystemBase
             new Spark(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
             new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
             new Spark(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
+        );
+
+        navX = new NavX();
+    }
+
+    public void periodic()
+    {
+        pose = odometry.update(
+            getHeading(),
+            getLeftMeters(),
+            getRightMeters()
         );
     }
 
@@ -190,5 +224,32 @@ public class Drivebase extends SubsystemBase
     {
         setLeftVolts(leftVolts);
         setRightVolts(rightVolts);
+    }
+
+    /**
+     * @return Current heading of the drivebase
+     */
+    public Rotation2d getHeading()
+    {
+        return navX.getHeading();
+    }
+
+    /**
+     * @param heading Heading to set the drivebase to
+     */
+    public void setHeading(double heading)
+    {
+        navX.setHeading(heading);
+    }
+
+    /**
+     * @param pose Pose to set the drivebase to
+     */
+    public void setPose(Pose2d pose)
+    {
+        this.pose = pose;
+
+        odometry.resetPosition(pose, pose.getRotation());
+        setHeading(pose.getRotation().getDegrees());
     }
 }

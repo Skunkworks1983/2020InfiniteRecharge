@@ -20,14 +20,12 @@ public class Robot extends TimedRobot
 	private Collector collector;
 	private Indexer indexer;
 	private Shooter shooter;
-	private NavX navX;
 	private OI oi;
 
 	Robot()
 	{
 		instance = this;
 
-		navX = new NavX();
 		drivebase = new Drivebase();
 		collector = new Collector();
 		indexer = new Indexer();
@@ -105,11 +103,6 @@ public class Robot extends TimedRobot
 	public Shooter getShooter()
 	{
 		return shooter;
-	}
-
-	public NavX getNavX()
-	{
-		return navX;
 	}
 
 	public OI getOI()
