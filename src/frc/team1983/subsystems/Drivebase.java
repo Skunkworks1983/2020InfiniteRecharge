@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.Robot;
 import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
@@ -27,13 +26,13 @@ public class Drivebase extends SubsystemBase
     private MotorGroup left, right;
     private NavX navX;
 
-    private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.feetToMeters(Constants.TRACK_WIDTH));
-    private DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(getHeading());
+    private DifferentialDriveKinematics kinematics;
+    private DifferentialDriveOdometry odometry;
 
-    private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(kS, kV, kA);
+    private SimpleMotorFeedforward feedforward;
 
-    private PIDController leftPIDController = new PIDController(kP, kI, kD);
-    private PIDController rightPIDController = new PIDController(kP, kI, kD);
+    private PIDController leftPIDController;
+    private PIDController rightPIDController;
 
     private Pose2d pose;
 
@@ -52,6 +51,13 @@ public class Drivebase extends SubsystemBase
         );
 
         navX = new NavX();
+        kinematics = new DifferentialDriveKinematics(Units.feetToMeters(Constants.TRACK_WIDTH));
+        odometry = new DifferentialDriveOdometry(getHeading());
+
+        feedforward = new SimpleMotorFeedforward(kS, kV, kA);
+
+        leftPIDController = new PIDController(kP, kI, kD);
+        rightPIDController = new PIDController(kP, kI, kD);
     }
 
     public void periodic()
@@ -251,5 +257,14 @@ public class Drivebase extends SubsystemBase
 
         odometry.resetPosition(pose, pose.getRotation());
         setHeading(pose.getRotation().getDegrees());
+    }
+
+    /**
+     * @param brake If the drivebase should be in brake mode
+     */
+    public void setBrake(boolean brake)
+    {
+        left.setBrake(brake);
+        right.setBrake(brake);
     }
 }
