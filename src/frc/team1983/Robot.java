@@ -12,7 +12,6 @@ import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
-import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
 {
@@ -29,6 +28,7 @@ public class Robot extends TimedRobot
 		instance = this;
 
 		drivebase = new Drivebase();
+
 		drivebase.zero();
 		drivebase.setBrake(true); // TODO: remove
 
