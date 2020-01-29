@@ -37,7 +37,9 @@ public class OI
     public static final int INDEXER_INTAKE = 23;
     public static final int INDEXER_EXPEL = 20;
 
-    public static final int SHOOT = 18;
+    public static final int SHOOT_1 = 19;
+    public static final int SHOOT_2 = 18;
+    public static final int SHOOT_3 = 17;
 
     protected static final double JOYSTICK_DEADZONE = 0.15;
     protected static final double JOYSTICK_EXPONENT = 1.7;
@@ -146,10 +148,24 @@ public class OI
             )
         );
 
-        getButton(Joysticks.PANEL, SHOOT).whileHeld(
+        getButton(Joysticks.PANEL, SHOOT_1).whileHeld(
             new ParallelCommandGroup(
-                new SetAccelerator(ControlMode.Throttle, Constants.ACCELERATOR_THROTTLE),
-                new SetShooter(ControlMode.Throttle, Constants.FLYWHEEL_THROTTLE)
+                new SetAccelerator(ControlMode.Throttle, Constants.ACCELERATOR_THROTTLE_1),
+                new SetShooter(ControlMode.Throttle, Constants.FLYWHEEL_THROTTLE_1)
+            )
+        );
+
+        getButton(Joysticks.PANEL, SHOOT_2).whileHeld(
+            new ParallelCommandGroup(
+                new SetAccelerator(ControlMode.Throttle, Constants.ACCELERATOR_THROTTLE_2),
+                new SetShooter(ControlMode.Throttle, Constants.FLYWHEEL_THROTTLE_2)
+            )
+        );
+
+        getButton(Joysticks.PANEL, SHOOT_3).whileHeld(
+            new ParallelCommandGroup(
+                new SetAccelerator(ControlMode.Throttle, Constants.ACCELERATOR_THROTTLE_3),
+                new SetShooter(ControlMode.Throttle, Constants.FLYWHEEL_THROTTLE_3)
             )
         );
     }
