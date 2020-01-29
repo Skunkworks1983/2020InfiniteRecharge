@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.Robot;
 import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
@@ -258,5 +257,14 @@ public class Drivebase extends SubsystemBase
 
         odometry.resetPosition(pose, pose.getRotation());
         setHeading(pose.getRotation().getDegrees());
+    }
+
+    /**
+     * @param brake If the drivebase should be in brake mode
+     */
+    public void setBrake(boolean brake)
+    {
+        left.setBrake(brake);
+        right.setBrake(brake);
     }
 }

@@ -24,8 +24,11 @@ public class Robot extends TimedRobot
 	{
 		instance = this;
 
-		drivebase = new Drivebase();
 		limelight = new Limelight();
+
+		drivebase = new Drivebase();
+		drivebase.setBrake(false);
+
 		oi = new OI();
 		oi.initializeBindings();
 	}
