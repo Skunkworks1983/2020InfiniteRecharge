@@ -3,14 +3,17 @@ package frc.team1983;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
+import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
+import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
 {
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private NavX navX;
 	private OI oi;
 
 	Robot()
@@ -18,7 +21,7 @@ public class Robot extends TimedRobot
 		instance = this;
 
 		drivebase = new Drivebase();
-		drivebase.setBrake(false);
+		navX = new NavX();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -77,6 +80,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public NavX getNavX()
+	{
+		return navX;
 	}
 
 	public OI getOI()
