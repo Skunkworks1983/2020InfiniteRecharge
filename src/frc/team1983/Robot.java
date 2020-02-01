@@ -29,11 +29,11 @@ public class Robot extends TimedRobot
 	{
 		instance = this;
 
+		navX = new NavX();
+
 		drivebase = new Drivebase();
 		drivebase.zero();
 		drivebase.setBrake(true); // TODO: remove
-
-		navX = new NavX();
 
 		oi = new OI();
 		oi.initializeBindings();

@@ -58,6 +58,15 @@ public class Drivebase extends SubsystemBase
         rightPIDController = new PIDController(kP, kI, kD);
     }
 
+    public void periodic()
+    {
+        pose = odometry.update(
+            Robot.getInstance().getNavX().getHeading(),
+            getLeftMeters(),
+            getRightMeters()
+        );
+    }
+
     /**
      * Reset the encoder offset so that it reads zero at its current position
      */
