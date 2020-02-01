@@ -5,10 +5,12 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
+import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.commands.TargetAlignment;
+import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
 {
@@ -16,6 +18,7 @@ public class Robot extends TimedRobot
 
 	private Drivebase drivebase;
 	private Limelight limelight;
+	private NavX navX;
 	private OI oi;
 
 	private UsbCamera camera;
@@ -27,7 +30,7 @@ public class Robot extends TimedRobot
 		limelight = new Limelight();
 
 		drivebase = new Drivebase();
-		drivebase.setBrake(false);
+		navX = new NavX();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -94,6 +97,11 @@ public class Robot extends TimedRobot
 	public Limelight getLimelight()
 	{
 		return limelight;
+	}
+	
+	public NavX getNavX()
+	{
+		return navX;
 	}
 
 	public OI getOI()
