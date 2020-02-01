@@ -34,23 +34,23 @@ public class Constants
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
-        public static final Pose2d RENDEZVOUS_POINT_BALL_1 = new Pose2d(
+        public static final Pose2d RENDEZVOUS_POINT_BALL_2 = new Pose2d(
             Units.feetToMeters(250.25 / 12.0 - ROBOT_LENGTH / 2.0 * Math.sin(Units.degreesToRadians(22.5))),
             Units.feetToMeters(-114.45 / 12.0 + ROBOT_LENGTH / 2.0 * Math.cos(Units.degreesToRadians(22.5))),
             new Rotation2d(Units.degreesToRadians(112.5))
         );
-        public static final Pose2d RENDEZVOUS_POINT_BALL_2 = new Pose2d(
+        public static final Pose2d RENDEZVOUS_POINT_BALL_3 = new Pose2d(
             Units.feetToMeters(234.94 / 12.0 - ROBOT_LENGTH / 2.0 * Math.sin(Units.degreesToRadians(22.5))),
             Units.feetToMeters(-120.79 / 12.0 + ROBOT_LENGTH / 2.0 * Math.cos(Units.degreesToRadians(22.5))),
             new Rotation2d(Units.degreesToRadians(112.5))
         );
-        public static final Pose2d RENDEZVOUS_POINT_BALL_1_AND_2 = new Pose2d(
+        public static final Pose2d RENDEZVOUS_POINT_BALL_2_AND_3 = new Pose2d(
             Units.feetToMeters(242.595 / 12.0 - ROBOT_LENGTH / 2.0 * Math.sin(Units.degreesToRadians(22.5))),
             Units.feetToMeters(-117.62 / 12.0 + ROBOT_LENGTH / 2.0 * Math.cos(Units.degreesToRadians(22.5))),
             new Rotation2d(Units.degreesToRadians(112.5))
         );
         public static final Pose2d RENDEZVOUS_TRENCH_RUN_SWITCH = new Pose2d(
-            Units.feetToMeters(242.63 / 12.0 - 5.0),
+            Units.feetToMeters(242.63 / 12.0 - 6.0),
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );

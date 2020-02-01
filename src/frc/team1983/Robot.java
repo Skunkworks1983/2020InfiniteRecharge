@@ -33,7 +33,7 @@ public class Robot extends TimedRobot
 
 		drivebase = new Drivebase();
 		drivebase.zero();
-		drivebase.setBrake(true); // TODO: remove
+		drivebase.setBrake(false);
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -63,6 +63,7 @@ public class Robot extends TimedRobot
 	public void autonomousInit()
 	{
 		drivebase.setPose(startingPoseChooser.getSelected());
+		drivebase.setBrake(true);
 
 		CommandScheduler.getInstance().cancelAll();
 		autoChooser.getSelected().schedule();
@@ -77,6 +78,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopInit()
 	{
+		drivebase.setBrake(false);
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 	}
