@@ -12,12 +12,14 @@ import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
+import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
 {
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private NavX navX;
 	private OI oi;
 
 	private SendableChooser<Pose2d> startingPoseChooser;
@@ -28,9 +30,10 @@ public class Robot extends TimedRobot
 		instance = this;
 
 		drivebase = new Drivebase();
-
 		drivebase.zero();
 		drivebase.setBrake(true); // TODO: remove
+
+		navX = new NavX();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -100,6 +103,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public NavX getNavX()
+	{
+		return navX;
 	}
 
 	public OI getOI()
