@@ -7,6 +7,8 @@ import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.ColorSensor;
+import frc.team1983.util.sensors.Limelight;
+import frc.team1983.commands.TargetAlignment;
 import frc.team1983.util.sensors.NavX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,13 +17,18 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private Limelight limelight;
 	private NavX navX;
 	private ColorSensor colorSensor;
 	private OI oi;
 
+	private UsbCamera camera;
+
 	Robot()
 	{
 		instance = this;
+
+		limelight = new Limelight();
 
 		drivebase = new Drivebase();
 		navX = new NavX();
@@ -31,12 +38,17 @@ public class Robot extends TimedRobot
 
 		oi = new OI();
 		oi.initializeBindings();
+
+		drivebase.setDefaultCommand(new RunGyroDrive());
 	}
 
 	@Override
 	public void robotInit()
 	{
-
+		navX.reset();
+		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
+		camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(320, 240);
 	}
 
 	@Override
@@ -52,7 +64,9 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
+		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
+		new TargetAlignment().schedule();
 	}
 
 	@Override
@@ -64,6 +78,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopInit()
 	{
+		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 	}
@@ -90,6 +105,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public Limelight getLimelight()
+	{
+		return limelight;
 	}
 
 	public NavX getNavX()
