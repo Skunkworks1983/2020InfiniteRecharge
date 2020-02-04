@@ -8,26 +8,22 @@ import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.util.sensors.NavX;
 
-
 public class TargetAlignment extends PIDCommand
 {
     private static final double kP = 0.015, kI = 0.0, kD = 0.0;
     private Drivebase drivebase;
-    private Limelight limelight;
-    private NavX navX;
 
     public TargetAlignment(Drivebase drivebase, Limelight limelight, NavX navX)
     {
         super(
             new PIDController(kP, kI, kD),
-            navX::getDegrees,
-            limelight.getX(),
-            output -> drivebase.set(ControlMode.Throttle, -output, output)
+            () -> navX.getHeading().getDegrees(),
+            () -> navX.getHeading().getDegrees() - limelight.getX(),
+            output -> drivebase.set(ControlMode.Throttle, -output, output),
+            drivebase
         );
 
         this.drivebase = drivebase;
-        this.limelight = limelight;
-        this.navX = navX;
     }
 
     public TargetAlignment()
@@ -36,31 +32,9 @@ public class TargetAlignment extends PIDCommand
     }
 
     @Override
-    public void initialize()
-    {
-        super.initialize();
-        getController().setSetpoint(limelight.getX());
-        System.out.println("initialize, setpoint: " + getController().getSetpoint());
-    }
-
-    @Override
-    public void execute()
-    {
-        super.execute();
-        System.out.println(getController().getSetpoint() + ", " + Robot.getInstance().getNavX().getDegrees() + ", " + limelight.getX());
-    }
-
-    @Override
     public void end(boolean interrupted)
     {
         super.end(interrupted);
         drivebase.set(ControlMode.Throttle, 0.0, 0.0);
-        System.out.println("end, interrupted: " + interrupted);
-    }
-
-    @Override
-    public boolean isFinished()
-    {
-        return getController().atSetpoint();
     }
 }

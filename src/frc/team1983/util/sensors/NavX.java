@@ -22,11 +22,6 @@ public class NavX extends AHRS
         return Rotation2d.fromDegrees(getAngle() * NAVX_HEADING_SIGN + offsetHeading);
     }
 
-    public double getDegrees()
-    {
-        return getHeading().getDegrees();
-    }
-
     public float getPitch()
     {
         return super.getRoll() + (float) offsetPitch;

@@ -34,6 +34,8 @@ public class Robot extends TimedRobot
 
 		oi = new OI();
 		oi.initializeBindings();
+
+		drivebase.setDefaultCommand(new RunGyroDrive());
 	}
 
 	@Override
