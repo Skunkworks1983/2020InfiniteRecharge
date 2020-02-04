@@ -15,6 +15,7 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private NavX navX;
 	private ColorSensor colorSensor;
 	private OI oi;
 
@@ -23,6 +24,7 @@ public class Robot extends TimedRobot
 		instance = this;
 
 		drivebase = new Drivebase();
+		navX = new NavX();
 
 		colorSensor = new ColorSensor();
 		new Thread(colorSensor).start();
@@ -88,6 +90,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public NavX getNavX()
+	{
+		return navX;
 	}
 
 	public OI getOI()
