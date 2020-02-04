@@ -98,7 +98,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
 
     public void follow(Motor leader)
     {
-        super.follow((CANSparkMax) leader);
+        super.follow((CANSparkMax) leader, ((CANSparkMax) leader).getInverted() != getInverted());
     }
 
     public double getConversionRatio()

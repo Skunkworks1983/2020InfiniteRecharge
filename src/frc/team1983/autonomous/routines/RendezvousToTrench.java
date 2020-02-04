@@ -8,8 +8,8 @@ public class RendezvousToTrench extends SequentialCommandGroup
 	public RendezvousToTrench()
 	{
 		addCommands(
-			new StartInFrontOfTrenchRunToRendezvousBall2(),
-			new RendezvousBall2ToRendezvousTrenchRunSwitch(),
+			new StartInFrontOfTrenchRunToRendezvousBall5(),
+			new RendezvousBall5ToRendezvousTrenchRunSwitch(),
 			new RendezvousTrenchRunSwitchThroughTrenchRun()
 		);
 	}

@@ -1,5 +1,7 @@
 package frc.team1983;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -12,6 +14,7 @@ import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
+import frc.team1983.util.sensors.Limelight;
 import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
@@ -19,8 +22,11 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private Limelight limelight;
 	private NavX navX;
 	private OI oi;
+
+	private UsbCamera camera;
 
 	private SendableChooser<Pose2d> startingPoseChooser;
 	private SendableChooser<Command> autoChooser;
@@ -30,6 +36,7 @@ public class Robot extends TimedRobot
 		instance = this;
 
 		navX = new NavX();
+		limelight = new Limelight();
 
 		drivebase = new Drivebase();
 		drivebase.zero();
@@ -37,6 +44,8 @@ public class Robot extends TimedRobot
 
 		oi = new OI();
 		oi.initializeBindings();
+
+//		drivebase.setDefaultCommand(new RunGyroDrive());
 	}
 
 	@Override
@@ -51,6 +60,10 @@ public class Robot extends TimedRobot
 		autoChooser.setDefaultOption("DO NOT RUN AUTO", new DoNothing());
 		autoChooser.addOption("Rendezvous To Trench", new RendezvousToTrench());
 		SmartDashboard.putData("Auto chooser", autoChooser);
+
+		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
+		camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(320, 240);
 	}
 
 	@Override
@@ -79,6 +92,8 @@ public class Robot extends TimedRobot
 	public void teleopInit()
 	{
 		drivebase.setBrake(false);
+
+		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 	}
@@ -105,6 +120,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public Limelight getLimelight()
+	{
+		return limelight;
 	}
 
 	public NavX getNavX()
