@@ -21,7 +21,7 @@ public class RobotMap
         public static final boolean RIGHT_3_REVERSED = true;
     }
 
-    public static class Collector //TODO: pls fix before we do anything
+    public static class Collector //TODO: pls fix before we do anything (ports)
     {
         public static final int ROLLER = 0;
         public static final boolean ROLLER_REVERSED = false;
@@ -37,4 +37,22 @@ public class RobotMap
 
     }
 
+
+    public static class Indexer //TODO: SET CORRECT PORTS AND SETTINGS
+    {
+        public static final int BOTTOMSENSOR = 0;
+
+        public static final int MIDDLESENSOR = 0;
+
+        public static final int TOPSENSOR = 0;
+
+        public static final int COLLECTOR_TRANSFER = 0;
+        public static final boolean COLLECTOR_TRANSFER_REVERSED = false;
+
+        public static final int INTERNAL_SHUTTLE = 0;
+        public static final boolean INTERNAL_SHUTTLE_REVERSED = false;
+
+        public static final int SHOOTER_TRANSFER = 0;
+        public static final boolean SHOOTER_TRANSFER_REVERSED = false;
+    }
 }

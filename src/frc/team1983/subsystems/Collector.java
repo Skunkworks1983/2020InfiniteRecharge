@@ -52,7 +52,7 @@ public class Collector extends SubsystemBase
         // left.setBrake(false);
     }
 
-    //i dont fucking know
+    //TODO: i dont fucking know
     public void setWristBrake(boolean brake)
     {
         left.setBrake(brake);
