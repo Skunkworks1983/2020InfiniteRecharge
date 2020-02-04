@@ -17,6 +17,8 @@ public class RunGyroDrive extends CommandBase
     {
         this.drivebase = drivebase;
         this.oi = oi;
+
+        addRequirements(drivebase);
     }
 
     public RunGyroDrive()
@@ -48,11 +50,4 @@ public class RunGyroDrive extends CommandBase
         drivebase.setLeft(ControlMode.Throttle, driveThrottle + turnThrottle);
         drivebase.setRight(ControlMode.Throttle,driveThrottle - turnThrottle);
     }
-
-    @Override
-    public boolean isFinished()
-    {
-        return false;
-    }
-
 }
