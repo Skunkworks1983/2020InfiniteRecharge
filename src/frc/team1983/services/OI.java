@@ -105,6 +105,6 @@ public class OI
     }
     public void initializeBindings()
     {
-        getButton(Joysticks.LEFT, 1).whileHeld(new TargetAlignment());
+        getButton(Joysticks.LEFT, 1).whenHeld(new TargetAlignment());
     }
 }

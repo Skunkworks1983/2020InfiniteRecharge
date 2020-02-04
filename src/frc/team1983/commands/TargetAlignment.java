@@ -6,6 +6,7 @@ import frc.team1983.Robot;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.sensors.Limelight;
+import frc.team1983.util.sensors.NavX;
 
 
 public class TargetAlignment extends PIDCommand
@@ -13,30 +14,40 @@ public class TargetAlignment extends PIDCommand
     private static final double kP = 0.015, kI = 0.0, kD = 0.0;
     private Drivebase drivebase;
     private Limelight limelight;
+    private NavX navX;
 
-    public TargetAlignment(Drivebase drivebase, Limelight limelight)
+    public TargetAlignment(Drivebase drivebase, Limelight limelight, NavX navX)
     {
         super(
             new PIDController(kP, kI, kD),
-            limelight::getX,
-            0.0,
+            navX::getDegrees,
+            limelight.getX(),
             output -> drivebase.set(ControlMode.Throttle, -output, output)
         );
 
         this.drivebase = drivebase;
         this.limelight = limelight;
+        this.navX = navX;
     }
 
     public TargetAlignment()
     {
-        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getLimelight());
+        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getLimelight(), Robot.getInstance().getNavX());
+    }
+
+    @Override
+    public void initialize()
+    {
+        super.initialize();
+        getController().setSetpoint(limelight.getX());
+        System.out.println("initialize, setpoint: " + getController().getSetpoint());
     }
 
     @Override
     public void execute()
     {
         super.execute();
-        System.out.println(limelight.getX());
+        System.out.println(getController().getSetpoint() + ", " + Robot.getInstance().getNavX().getDegrees() + ", " + limelight.getX());
     }
 
     @Override
@@ -44,8 +55,7 @@ public class TargetAlignment extends PIDCommand
     {
         super.end(interrupted);
         drivebase.set(ControlMode.Throttle, 0.0, 0.0);
-
-        System.out.println("END");
+        System.out.println("end, interrupted: " + interrupted);
     }
 
     @Override

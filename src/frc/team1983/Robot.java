@@ -39,6 +39,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
+		navX.reset();
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
+		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
 		new TargetAlignment().schedule();
 	}
@@ -66,6 +68,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopInit()
 	{
+		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 	}
@@ -98,7 +101,7 @@ public class Robot extends TimedRobot
 	{
 		return limelight;
 	}
-	
+
 	public NavX getNavX()
 	{
 		return navX;
