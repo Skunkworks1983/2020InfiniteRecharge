@@ -45,8 +45,8 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(112.5))
         );
         public static final Pose2d RENDEZVOUS_POINT_BALL_4_AND_5 = new Pose2d(
-            Units.feetToMeters(242.595 / 12.0 - ROBOT_LENGTH / 2.0 * Math.sin(Units.degreesToRadians(22.5))),
-            Units.feetToMeters(-117.62 / 12.0 + ROBOT_LENGTH / 2.0 * Math.cos(Units.degreesToRadians(22.5))),
+            RENDEZVOUS_POINT_BALL_4.getTranslation().getX() + 0.75 * (RENDEZVOUS_POINT_BALL_5.getTranslation().getX() - RENDEZVOUS_POINT_BALL_4.getTranslation().getX()),
+            RENDEZVOUS_POINT_BALL_4.getTranslation().getY() + 0.75 * (RENDEZVOUS_POINT_BALL_5.getTranslation().getY() - RENDEZVOUS_POINT_BALL_4.getTranslation().getY()),
             new Rotation2d(Units.degreesToRadians(112.5))
         );
         public static final Pose2d RENDEZVOUS_TRENCH_RUN_SWITCH = new Pose2d(

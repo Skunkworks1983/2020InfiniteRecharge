@@ -45,7 +45,7 @@ public class Robot extends TimedRobot
 		oi = new OI();
 		oi.initializeBindings();
 
-//		drivebase.setDefaultCommand(new RunGyroDrive());
+		drivebase.setDefaultCommand(new RunGyroDrive());
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		System.out.println(drivebase.getPose());
+
 	}
 
 	@Override

@@ -15,9 +15,9 @@ public class UT_Pose
         System.out.println("START_IN_FRONT_OF_TRENCH_RUN: " + Constants.Pose.START_IN_FRONT_OF_TRENCH_RUN);
         System.out.println("TRENCH_RUN_BALL_1: " + Constants.Pose.TRENCH_RUN_BALL_1);
         System.out.println("TRENCH_RUN_BALL_4_AND_5: " + Constants.Pose.TRENCH_RUN_BALL_4_AND_5);
-        System.out.println("RENDEZVOUS_POINT_BALL_1: " + Constants.Pose.RENDEZVOUS_POINT_BALL_5 + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_5.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_5.getRotation().getSin());
-        System.out.println("RENDEZVOUS_POINT_BALL_2: " + Constants.Pose.RENDEZVOUS_POINT_BALL_4 + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4.getRotation().getSin());
-        System.out.println("RENDEZVOUS_POINT_BALL_1_AND_2: " + Constants.Pose.RENDEZVOUS_POINT_BALL_4_AND_5 + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4_AND_5.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4_AND_5.getRotation().getSin());
+        System.out.println("RENDEZVOUS_POINT_BALL_4: " + Constants.Pose.RENDEZVOUS_POINT_BALL_4 + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4.getRotation().getSin());
+        System.out.println("RENDEZVOUS_POINT_BALL_5: " + Constants.Pose.RENDEZVOUS_POINT_BALL_5 + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_5.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_5.getRotation().getSin());
+        System.out.println("RENDEZVOUS_POINT_BALL_4_AND_5: " + Constants.Pose.RENDEZVOUS_POINT_BALL_4_AND_5 + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4_AND_5.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_POINT_BALL_4_AND_5.getRotation().getSin());
     }
 
     @Test
