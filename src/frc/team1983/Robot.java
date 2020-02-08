@@ -2,12 +2,17 @@ package frc.team1983;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.team1983.autonomous.Auto;
+import frc.team1983.autonomous.AutoFactory;
 import frc.team1983.autonomous.routines.DoNothing;
 import frc.team1983.autonomous.routines.RendezvousToTrench;
 import frc.team1983.commands.RunGyroDrive;
@@ -29,7 +34,7 @@ public class Robot extends TimedRobot
 	private UsbCamera camera;
 
 	private SendableChooser<Pose2d> startingPoseChooser;
-	private SendableChooser<Command> autoChooser;
+	private SendableChooser<Auto> autoChooser;
 
 	Robot()
 	{
@@ -51,14 +56,16 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
+		SmartDashboard.putNumber("Wait Time", 0.0);
+
 		startingPoseChooser = new SendableChooser<>();
 		startingPoseChooser.setDefaultOption("In Front of Trench Run", Constants.Pose.START_IN_FRONT_OF_TRENCH_RUN);
 		startingPoseChooser.addOption("In Front of Power Port", Constants.Pose.START_IN_FRONT_OF_POWER_PORT);
 		SmartDashboard.putData("Starting pose chooser", startingPoseChooser);
 
 		autoChooser = new SendableChooser<>();
-		autoChooser.setDefaultOption("DO NOT RUN AUTO", new DoNothing());
-		autoChooser.addOption("Rendezvous To Trench", new RendezvousToTrench());
+		autoChooser.setDefaultOption("DO NOT RUN AUTO", Auto.DO_NOTHING);
+		autoChooser.addOption("Rendezvous To Trench", Auto.RENDEZVOUS_TO_TRENCH);
 		SmartDashboard.putData("Auto chooser", autoChooser);
 
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
@@ -79,7 +86,10 @@ public class Robot extends TimedRobot
 		drivebase.setBrake(true);
 
 		CommandScheduler.getInstance().cancelAll();
-		autoChooser.getSelected().schedule();
+		new SequentialCommandGroup(
+			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
+			AutoFactory.getAuto(autoChooser.getSelected())
+		).schedule();
 	}
 
 	@Override
