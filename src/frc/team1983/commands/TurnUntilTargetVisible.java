@@ -39,10 +39,4 @@ public class TurnUntilTargetVisible extends PIDCommand
         super.end(interrupted);
         drivebase.set(ControlMode.Throttle, 0.0, 0.0);
     }
-
-    @Override
-    public boolean isFinished()
-    {
-        return limelight.isTargetDetected();
-    }
 }

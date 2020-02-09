@@ -1,14 +1,13 @@
 package frc.team1983.util.sensors;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Limelight implements Runnable
 {
     public static final int UPDATE_RATE = 250;
 
+    public static final double FOV_X  = 54.0;
     protected static final boolean TARGET_DETECTED_DEFAULT_VALUE = false;
     protected static final double X_DEFAULT_VALUE = 0.0;
     protected static final double Y_DEFAULT_VALUE = 0.0;

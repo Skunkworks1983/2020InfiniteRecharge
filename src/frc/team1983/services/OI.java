@@ -2,7 +2,6 @@ package frc.team1983.services;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.team1983.commands.TargetAlignment;
 
 import java.util.HashMap;
@@ -105,6 +104,7 @@ public class OI
     }
     public void initializeBindings()
     {
-        getButton(Joysticks.LEFT, 1).whenHeld(new TargetAlignment());
+        getButton(Joysticks.LEFT, 1).whenHeld(new TargetAlignment(false));
+        getButton(Joysticks.RIGHT, 1).whenHeld(new TargetAlignment(true));
     }
 }

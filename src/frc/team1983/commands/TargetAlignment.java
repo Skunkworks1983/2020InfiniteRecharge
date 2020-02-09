@@ -12,23 +12,65 @@ public class TargetAlignment extends PIDCommand
 {
     private static final double kP = 0.015, kI = 0.0, kD = 0.0;
     private Drivebase drivebase;
+    private Limelight limelight;
+    private NavX navX;
 
-    public TargetAlignment(Drivebase drivebase, Limelight limelight, NavX navX)
+    private double initialOffset;
+    private double setpoint;
+
+    public TargetAlignment(Drivebase drivebase, Limelight limelight, NavX navX, boolean turnRight)
     {
         super(
             new PIDController(kP, kI, kD),
-            () -> navX.getHeading().getDegrees(),
-            () -> navX.getHeading().getDegrees() - limelight.getX(),
-            output -> drivebase.set(ControlMode.Throttle, -output, output),
+            () -> {
+                System.out.printf("input: %f    ", navX.getHeading().getDegrees());
+                return navX.getHeading().getDegrees();
+            },
+            () -> turnRight ? Limelight.FOV_X / 2.0 : -Limelight.FOV_X / 2.0,
+            output -> {
+                System.out.printf("output: %f\n", output);
+                drivebase.set(ControlMode.Throttle, -output, output);
+            },
             drivebase
         );
 
         this.drivebase = drivebase;
+        this.limelight = limelight;
+        this.navX = navX;
+        this.initialOffset = turnRight ? Limelight.FOV_X / 2.0 : -Limelight.FOV_X / 2.0;
+        this.setpoint = initialOffset;
+
+        addRequirements(drivebase);
     }
 
-    public TargetAlignment()
+    public TargetAlignment(boolean turnRight)
     {
-        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getLimelight(), Robot.getInstance().getNavX());
+        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getLimelight(), Robot.getInstance().getNavX(), turnRight);
+    }
+
+    @Override
+    public void initialize()
+    {
+        m_setpoint = () -> {
+            System.out.printf("setpoint: %f    ", setpoint);
+            return setpoint;
+        };
+        super.initialize();
+    }
+
+    @Override
+    public void execute()
+    {
+        if(limelight.isTargetDetected())
+        {
+            setpoint = navX.getHeading().getDegrees() - limelight.getX();
+        }
+        else
+        {
+            setpoint = navX.getHeading().getDegrees() - initialOffset;
+        }
+        // Must be called last because setpoint is never initialized correctly
+        super.execute();
     }
 
     @Override
