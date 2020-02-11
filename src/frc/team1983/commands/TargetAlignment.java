@@ -17,6 +17,7 @@ public class TargetAlignment extends PIDCommand
 
     private double initialOffset;
     private double setpoint;
+    private boolean targetWasDetected = false;
 
     public TargetAlignment(Drivebase drivebase, Limelight limelight, NavX navX, boolean turnRight)
     {
@@ -63,12 +64,14 @@ public class TargetAlignment extends PIDCommand
     {
         if(limelight.isTargetDetected())
         {
+            targetWasDetected = true;
             setpoint = navX.getHeading().getDegrees() - limelight.getX();
         }
-        else
+        else if(!targetWasDetected)
         {
             setpoint = navX.getHeading().getDegrees() - initialOffset;
         }
+
         // Must be called last because setpoint is never initialized correctly
         super.execute();
     }
