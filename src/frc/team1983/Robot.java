@@ -8,6 +8,7 @@ import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
+import frc.team1983.subsystems.Shooter;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.util.sensors.NavX;
@@ -17,6 +18,7 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private Shooter shooter;
 	private Limelight limelight;
 	private NavX navX;
 	private OI oi;
@@ -27,15 +29,16 @@ public class Robot extends TimedRobot
 	{
 		instance = this;
 
-		limelight = new Limelight();
-
 		drivebase = new Drivebase();
 		navX = new NavX();
 
+		shooter = new Shooter();
 		oi = new OI();
 		oi.initializeBindings();
 
 		drivebase.setDefaultCommand(new RunGyroDrive());
+
+		limelight = new Limelight();
 	}
 
 	@Override
@@ -107,6 +110,11 @@ public class Robot extends TimedRobot
 	public NavX getNavX()
 	{
 		return navX;
+	}
+
+	public Shooter getShooter()
+	{
+		return shooter;
 	}
 
 	public OI getOI()
