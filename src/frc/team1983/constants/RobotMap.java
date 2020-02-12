@@ -40,11 +40,7 @@ public class RobotMap
 
     public static class Indexer //TODO: SET CORRECT PORTS AND SETTINGS
     {
-        public static final int BOTTOMSENSOR = 0;
-
-        public static final int MIDDLESENSOR = 0;
-
-        public static final int TOPSENSOR = 0;
+        public static final int SENSOR = 0;
 
         public static final int COLLECTOR_TRANSFER = 0;
         public static final boolean COLLECTOR_TRANSFER_REVERSED = false;

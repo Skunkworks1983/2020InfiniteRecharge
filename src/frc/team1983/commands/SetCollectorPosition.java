@@ -1,16 +1,45 @@
 package frc.team1983.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team1983.Robot;
+import frc.team1983.services.OI;
 import frc.team1983.subsystems.Collector;
+import frc.team1983.util.motors.ControlMode;
 
-public class SetCollectorPosition
+
+public class SetCollectorPosition extends CommandBase
 {
-    public class SetCollector extends InstantCommand
+    private Collector collector;
+    private Collector.position position;
+
+    public SetCollectorPosition(Collector collect, Collector.position p)
     {
-        public SetCollector(Collector collector, Collector.position p)
-        {
-            collector.setCollectorPosition(p);
-        }
+        collector = collect;
+        position = p;
+    }
+
+    @Override
+    public void initialize()
+    {
+        collector.setCollectorPosition(this.position);
+    }
+
+    @Override
+    public void execute() //TODO: do not test without fixing reversed values in robotmap
+    {
+
+    }
+
+    @Override
+    public boolean isFinished()
+    {
+        return true;
+    }
+
+    @Override
+    public void end(boolean interrupted)
+    {
+
     }
 }

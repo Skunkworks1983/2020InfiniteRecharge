@@ -53,6 +53,7 @@ public class Collector extends SubsystemBase
     }
 
     //TODO: i dont fucking know
+    //TODO: take out previous comment when you can
     public void setWristBrake(boolean brake)
     {
         left.setBrake(brake);

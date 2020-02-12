@@ -7,17 +7,13 @@ import frc.team1983.util.motors.Spark;
 
 public class Indexer
 {
-    public DigitalInput bottomHasBall;
-    public DigitalInput middleHasBall;
-    public DigitalInput topHasBall;
+    public DigitalInput indexerHasBall;
 
     public Motor collectorTransfer, internal, shooterTransfer;
 
     public Indexer()
     {
-        bottomHasBall = new DigitalInput(RobotMap.Indexer.BOTTOMSENSOR);
-        middleHasBall = new DigitalInput(RobotMap.Indexer.MIDDLESENSOR);
-        topHasBall = new DigitalInput(RobotMap.Indexer.TOPSENSOR);
+        indexerHasBall = new DigitalInput(RobotMap.Indexer.SENSOR);
 
         collectorTransfer = new Spark(RobotMap.Indexer.COLLECTOR_TRANSFER, RobotMap.Indexer.COLLECTOR_TRANSFER_REVERSED);
 
