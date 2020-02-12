@@ -28,9 +28,18 @@ public class Constants
             Units.feetToMeters(-295.5 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
-
         public static final Pose2d TRENCH_RUN_BALL_1 = new Pose2d(
             Units.feetToMeters(242.63 / 12.0 /*- ROBOT_LENGTH / 2.0*/),
+            Units.feetToMeters(-27.75 / 12.0),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d TRENCH_RUN_BALL_2 = new Pose2d(
+            Units.feetToMeters(278.63 / 12.0 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(-27.75 / 12.0),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d TRENCH_RUN_BALL_3 = new Pose2d(
+            Units.feetToMeters(314.63 / 12.0 - ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
@@ -83,6 +92,12 @@ public class Constants
             Units.feetToMeters(250.35 / 12.0 - ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-295.5 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
+        );
+        private static final double COMPLAINT_SHOT_OFFSET = 3.0;
+        public static final Pose2d COMPLAINT_SHOT = new Pose2d(
+            Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(-94.66 / 12.0 - COMPLAINT_SHOT_OFFSET),
+            new Rotation2d(Units.degreesToRadians(180 - Units.radiansToDegrees(Math.tan(COMPLAINT_SHOT_OFFSET / (10.0 + ROBOT_LENGTH / 2.0)))))
         );
     }
 }

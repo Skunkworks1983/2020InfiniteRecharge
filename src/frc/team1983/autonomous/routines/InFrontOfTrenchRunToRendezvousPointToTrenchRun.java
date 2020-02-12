@@ -4,15 +4,15 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team1983.autonomous.paths.*;
 import frc.team1983.commands.TargetAlignment;
 
-public class RendezvousToTrench extends SequentialCommandGroup
+public class InFrontOfTrenchRunToRendezvousPointToTrenchRun extends SequentialCommandGroup
 {
-	public RendezvousToTrench()
+	public InFrontOfTrenchRunToRendezvousPointToTrenchRun()
 	{
 		addCommands(
 			new StartInFrontOfTrenchRunToRendezvousBall4And5(),
 			new TargetAlignment(false).withTimeout(1.0),
 			new RendezvousBall4And5ToRendezvousTrenchRunSwitch(),
-			new RendezvousTrenchRunSwitchThroughTrenchRun()
+			new RendezvousTrenchRunSwitchToTrenchRunBall4And5()
 		);
 	}
 }

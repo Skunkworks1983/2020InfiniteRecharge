@@ -3,9 +3,9 @@ package frc.team1983.autonomous.paths;
 import frc.team1983.commands.FollowTrajectory;
 import frc.team1983.constants.Constants;
 
-public class RendezvousTrenchRunSwitchThroughTrenchRun extends FollowTrajectory
+public class RendezvousTrenchRunSwitchToTrenchRunBall4And5 extends FollowTrajectory
 {
-	public RendezvousTrenchRunSwitchThroughTrenchRun()
+	public RendezvousTrenchRunSwitchToTrenchRunBall4And5()
 	{
 		super(
 			true,
