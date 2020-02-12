@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
+import frc.team1983.subsystems.ControlPanel;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.commands.TargetAlignment;
@@ -17,6 +18,7 @@ public class Robot extends TimedRobot
 	private static Robot instance;
 
 	private Drivebase drivebase;
+	private ControlPanel controlPanel;
 	private Limelight limelight;
 	private NavX navX;
 	private OI oi;
@@ -34,6 +36,8 @@ public class Robot extends TimedRobot
 
 		oi = new OI();
 		oi.initializeBindings();
+
+		controlPanel = new ControlPanel();
 
 		drivebase.setDefaultCommand(new RunGyroDrive());
 	}
@@ -97,6 +101,11 @@ public class Robot extends TimedRobot
 	public Drivebase getDrivebase()
 	{
 		return drivebase;
+	}
+
+	public ControlPanel getControlPanel()
+	{
+		return controlPanel;
 	}
 
 	public Limelight getLimelight()
