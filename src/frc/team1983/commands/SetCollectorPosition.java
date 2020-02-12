@@ -8,38 +8,49 @@ import frc.team1983.subsystems.Collector;
 import frc.team1983.util.motors.ControlMode;
 
 
-public class SetCollectorPosition extends CommandBase
+public class SetCollectorPosition extends InstantCommand
 {
-    private Collector collector;
-    private Collector.position position;
-
-    public SetCollectorPosition(Collector collect, Collector.position p)
+    public SetCollectorPosition(Collector collector, boolean extended)
     {
-        collector = collect;
-        position = p;
+        super(() -> collector.setCollectorPosition(Collector.position.extended), collector);
+    }
+    public SetCollectorPosition(boolean extended)
+    {
+        this(Robot.getInstance().getCollector(), extended);
     }
 
-    @Override
-    public void initialize()
-    {
-        collector.setCollectorPosition(this.position);
-    }
 
-    @Override
-    public void execute() //TODO: do not test without fixing reversed values in robotmap
-    {
 
-    }
-
-    @Override
-    public boolean isFinished()
-    {
-        return true;
-    }
-
-    @Override
-    public void end(boolean interrupted)
-    {
-
-    }
+//    private Collector collector;
+//    private Collector.position position;
+//
+//    public SetCollectorPosition(Collector collect, Collector.position p)
+//    {
+//        collector = collect;
+//        position = p;
+//    }
+//
+//    @Override
+//    public void initialize()
+//    {
+//        collector.setCollectorPosition(this.position);
+//    }
+//
+//    @Override
+//    public void execute() //TODO: do not test without fixing reversed values in robotmap
+//    {
+//
+//    }
+//
+//    @Override
+//    public boolean isFinished()
+//    {
+//        return true;
+//    }
+//
+//    @Override
+//    public void end(boolean interrupted)
+//    {
+//
+//    }
 }
