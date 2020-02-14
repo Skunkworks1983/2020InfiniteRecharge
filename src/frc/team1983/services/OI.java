@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.team1983.commands.SetLedMode;
+import frc.team1983.commands.SetPipelineSetting;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.util.sensors.Limelight;
 
@@ -107,6 +108,5 @@ public class OI
     }
     public void initializeBindings()
     {
-        getButton(Joysticks.LEFT,1).whenHeld(new TargetAlignment());
     }
 }

@@ -7,6 +7,36 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Limelight implements Runnable
 {
+    public enum PipelineSetting
+    {
+        PIPE_LINE_ZERO(0),
+        PIPE_LINE_ONE(1);
+
+        private int pipelineSetting;
+
+        PipelineSetting(int pipelineSetting)
+        {
+            this.pipelineSetting = pipelineSetting;
+        }
+
+        public int getPipelineSetting()
+        {
+            return pipelineSetting;
+        }
+
+        public static PipelineSetting fromDouble(double value)
+        {
+            for (PipelineSetting pipelineSetting : PipelineSetting.values())
+            {
+                if (pipelineSetting.getPipelineSetting() == value)
+                {
+                    return pipelineSetting;
+                }
+            }
+
+            return PIPE_LINE_ZERO;
+        }
+    }
     public enum LedMode
     {
         USE_PIPELINE(0),
@@ -61,6 +91,7 @@ public class Limelight implements Runnable
     private double area;
     private double skew;
     private LedMode ledMode;
+    private PipelineSetting pipelineSetting;
     private double xOffset, yOffset;
     private double pitch, yaw, roll;
 
@@ -141,6 +172,12 @@ public class Limelight implements Runnable
     {
         this.ledMode = ledMode;
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(ledMode.getLedMode());
+    }
+
+    public void setPipelineSetting(PipelineSetting pipelineSetting)
+    {
+        this.pipelineSetting = pipelineSetting;
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pipelineSetting.getPipelineSetting());
     }
 
     @Override
