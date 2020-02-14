@@ -12,7 +12,14 @@ public class SetCollectorPosition extends InstantCommand
 {
     public SetCollectorPosition(Collector collector, boolean extended)
     {
-        super(() -> collector.setCollectorPosition(Collector.position.extended), collector);
+        // basically a fancy if/else statement
+        // ? is the comparison/ if
+        // : is the then/else
+        // it takes the ?, :, and collector within the super
+            super(extended ?
+                    () -> collector.setCollectorPosition(Collector.position.extended):
+                    ()->collector.setCollectorPosition(Collector.position.retracted), collector);
+
     }
     public SetCollectorPosition(boolean extended)
     {
