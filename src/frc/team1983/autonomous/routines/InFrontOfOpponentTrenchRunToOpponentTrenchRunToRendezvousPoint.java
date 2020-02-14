@@ -11,9 +11,9 @@ public class InFrontOfOpponentTrenchRunToOpponentTrenchRunToRendezvousPoint exte
 		addCommands(
 			new StartInFrontOfOpponentTrenchRunToOpponentTrenchRunBall4And5(),
 			new OpponentTrenchRunBall4And5ToCompliantShot(),
-			new TargetAlignment(false).withTimeout(1.0),
-			new CompliantShotToRendezvousBall1And2And3(),
-			new TargetAlignment(true).withTimeout(1.0)
+//			new TargetAlignment(false).withTimeout(1.0),
+			new CompliantShotToRendezvousBall1And2And3()
+//			new TargetAlignment(true).withTimeout(1.0)
 		);
 	}
 }

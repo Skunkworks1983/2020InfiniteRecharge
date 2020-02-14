@@ -81,7 +81,7 @@ public class Robot extends TimedRobot
 	public void autonomousInit()
 	{
 		drivebase.setPose(startingPoseChooser.getSelected());
-		drivebase.setBrake(true);
+		drivebase.setBrake(false);
 
 		CommandScheduler.getInstance().cancelAll();
 		new SequentialCommandGroup(
@@ -116,6 +116,12 @@ public class Robot extends TimedRobot
 	public void testPeriodic()
 	{
 
+	}
+
+	@Override
+	public void disabledInit()
+	{
+		drivebase.setBrake(true);
 	}
 
 	public static Robot getInstance()

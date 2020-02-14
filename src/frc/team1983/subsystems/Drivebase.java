@@ -17,7 +17,7 @@ import frc.team1983.util.motors.Spark;
 
 public class Drivebase extends SubsystemBase
 {
-	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
+	public static final double FEET_PER_TICK = (5.75 * Math.PI / 12.0) / (8.69);
 	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
 
     public static final double kS = 0.145, kV = 2.02, kA = 0.423;

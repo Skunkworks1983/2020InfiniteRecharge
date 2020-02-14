@@ -23,15 +23,9 @@ public class TargetAlignment extends PIDCommand
     {
         super(
             new PIDController(kP, kI, kD),
-            () -> {
-                System.out.printf("input: %f    ", navX.getHeading().getDegrees());
-                return navX.getHeading().getDegrees();
-            },
+            () -> navX.getHeading().getDegrees(),
             () -> turnRight ? Limelight.FOV_X / 2.0 : -Limelight.FOV_X / 2.0,
-            output -> {
-                System.out.printf("output: %f\n", output);
-                drivebase.set(ControlMode.Throttle, -output, output);
-            },
+            output -> drivebase.set(ControlMode.Throttle, -output, output),
             drivebase
         );
 
@@ -52,10 +46,7 @@ public class TargetAlignment extends PIDCommand
     @Override
     public void initialize()
     {
-        m_setpoint = () -> {
-            System.out.printf("setpoint: %f    ", setpoint);
-            return setpoint;
-        };
+        m_setpoint = () -> setpoint;
         super.initialize();
     }
 
