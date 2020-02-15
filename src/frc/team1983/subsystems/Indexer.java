@@ -11,6 +11,11 @@ public class Indexer
 
     public Motor collectorTransfer, internal, shooterTransfer;
 
+    // used in indexer so that we have a constant for motor directions
+    public static double motorsForward = 1;
+    public static double motorsReversed = -1;
+    public static double motorsOff = 0;
+
     public Indexer()
     {
         indexerHasBall = new DigitalInput(RobotMap.Indexer.SENSOR);

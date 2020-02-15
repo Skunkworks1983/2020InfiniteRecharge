@@ -20,9 +20,13 @@ public class Collector extends SubsystemBase
         //TODO: figure out setpoints?
     }
 
-    private MotorGroup roller;
-    private DoubleSolenoid piston;
-    public MotorGroup left, right;
+    private DoubleSolenoid piston; //piston controls whether it is out or stowed
+    public Motor roller; //collector has one motor, just the roller
+
+   // used in collector commands so that we have a constant for motor directions
+    public static double motorsForward = 1;
+    public static double motorsReversed = -1;
+    public static double motorsOff = 0;
 
     private position currentPosition = position.retracted;
 
@@ -34,33 +38,15 @@ public class Collector extends SubsystemBase
 
     public Collector()
     {
-        Spark rollerMotor = new Spark(RobotMap.Collector.ROLLER, RobotMap.Collector.ROLLER_REVERSED);
-        Spark rightMotor = new Spark(RobotMap.Collector.RIGHT, RobotMap. Collector.RIGHT_REVERSED);
-        Spark leftMotor = new Spark(RobotMap.Collector.LEFT, RobotMap.Collector.LEFT_REVERSED);
+        roller = new Spark(RobotMap.Collector.ROLLER, RobotMap.Collector.ROLLER_REVERSED);
 
-        roller = new MotorGroup(rollerMotor, rollerMotor);
-
-        piston = new DoubleSolenoid(RobotMap.COMPRESSOR, RobotMap.Collector.PISTON_FORWARD, RobotMap.Collector.PISTON_REVERSE);
-
-        right = new MotorGroup(rightMotor, rightMotor);
-        right.setConversionRatio(DEGREES_PER_TICK);
-
-        left = new MotorGroup(leftMotor, leftMotor);
-        left.setConversionRatio(DEGREES_PER_TICK);
-
-       // right.setBrake(false);
-        // left.setBrake(false);
-    }
-
-    //TODO: i dont fucking know
-    //TODO: take out previous comment when you can
-    public void setWristBrake(boolean brake)
-    {
-        left.setBrake(brake);
-        right.setBrake(brake);
+        piston = new DoubleSolenoid(RobotMap.COMPRESSOR, RobotMap.Collector.PISTON_FORWARD,
+                RobotMap.Collector.PISTON_REVERSE);
     }
 
     //TODO: uhhh is this going to be throttale-able
+    //for now we're just using the motorsForward constant because it's a good chance
+    // we'll only have to collect at one speed
     public void setRollerThrottle(double throttle)
     {
         roller.set(ControlMode.Throttle, throttle);
@@ -95,9 +81,6 @@ public class Collector extends SubsystemBase
         return currentPosition;
     }
 
-    public void zero()
-    {
-        left.zero();
-        right.zero();
-    }
+
 }
+

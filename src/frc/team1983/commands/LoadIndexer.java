@@ -2,6 +2,7 @@ package frc.team1983.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.services.OI;
+import frc.team1983.subsystems.Collector;
 import frc.team1983.subsystems.Indexer;
 import frc.team1983.util.motors.ControlMode;
 
@@ -13,9 +14,6 @@ public class LoadIndexer extends CommandBase
 
     private Indexer indexer;
     private OI oi;
-
-    private static final double motorsOn = 1;
-    private static final double motorsOff = 0;
 
     private boolean isShooting; //this takes into account whether or not we are shooting
 
@@ -36,16 +34,16 @@ public class LoadIndexer extends CommandBase
     @Override
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
-        indexer.collectorTransfer.set(ControlMode.Throttle, motorsOn);
-        indexer.internal.set(ControlMode.Throttle, motorsOn);
+        indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
+        indexer.internal.set(ControlMode.Throttle, Indexer.motorsForward);
 
         if (!isShooting && indexer.indexerHasBall.get()) //if we aren't shooting and sensor is triggered
         {
-            indexer.shooterTransfer.set(ControlMode.Throttle, motorsOff);
+            indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
         }
         else //we are shooting and motors all are turned on
         {
-            indexer.shooterTransfer.set(ControlMode.Throttle, motorsOn);
+            indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
         }
 
     }
@@ -59,8 +57,8 @@ public class LoadIndexer extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        indexer.collectorTransfer.set(ControlMode.Throttle, motorsOff);
-        indexer.internal.set(ControlMode.Throttle, motorsOff);
-        indexer.shooterTransfer.set(ControlMode.Throttle, motorsOff);
+        indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
+        indexer.internal.set(ControlMode.Throttle, Indexer.motorsOff);
+        indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
     }
 }
