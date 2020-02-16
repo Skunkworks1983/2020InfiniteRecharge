@@ -9,6 +9,8 @@ public class CompliantShotToRendezvousBall1And2And3 extends FollowTrajectory
 	{
 		super(
 			true,
+			4.0,
+			4.0,
 			Constants.Pose.COMPLAINT_SHOT,
 			Constants.Pose.RENDEZVOUS_POINT_BALL_1_AND_2_AND_3
 		);

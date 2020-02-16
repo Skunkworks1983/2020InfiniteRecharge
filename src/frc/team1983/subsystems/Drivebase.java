@@ -1,6 +1,5 @@
 package frc.team1983.subsystems;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
@@ -11,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.Robot;
 import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
+import frc.team1983.util.control.SparkPIDController;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
@@ -20,8 +20,10 @@ public class Drivebase extends SubsystemBase
 	public static final double FEET_PER_TICK = (5.75 * Math.PI / 12.0) / (8.69);
 	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
 
-    public static final double kS = 0.145, kV = 2.02, kA = 0.423;
-    public static final double kP = 2.64, kI = 0.0, kD = 0.0;
+//    public static final double kS = 0.145, kV = 2.02, kA = 0.423;
+//    public static final double kP = 2.64, kI = 0.0, kD = 0.0;
+    public static final double kS = 0.145, kV = 2.06, kA = 0.183;
+    public static final double kP = 6.5e-5, kI = 0.0, kD = 0.0;
 
     private MotorGroup left, right;
 
@@ -30,8 +32,8 @@ public class Drivebase extends SubsystemBase
 
     private SimpleMotorFeedforward feedforward;
 
-    private PIDController leftPIDController;
-    private PIDController rightPIDController;
+    private SparkPIDController leftPIDController;
+    private SparkPIDController rightPIDController;
 
     private Pose2d pose;
 
@@ -54,8 +56,11 @@ public class Drivebase extends SubsystemBase
 
         feedforward = new SimpleMotorFeedforward(kS, kV, kA);
 
-        leftPIDController = new PIDController(kP, kI, kD);
-        rightPIDController = new PIDController(kP, kI, kD);
+        leftPIDController = new SparkPIDController((Spark) left.getMaster());
+        leftPIDController.setGains(kP, kI, kD);
+
+        rightPIDController = new SparkPIDController((Spark) right.getMaster());
+        rightPIDController.setGains(kP, kI, kD);
     }
 
     public void periodic()
@@ -248,12 +253,12 @@ public class Drivebase extends SubsystemBase
         return kinematics;
     }
 
-    public PIDController getLeftPIDController()
+    public SparkPIDController getLeftPIDController()
     {
         return leftPIDController;
     }
 
-    public PIDController getRightPIDController()
+    public SparkPIDController getRightPIDController()
     {
         return rightPIDController;
     }

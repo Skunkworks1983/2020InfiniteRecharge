@@ -4,13 +4,18 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1983.autonomous.Auto;
 import frc.team1983.autonomous.AutoFactory;
+import frc.team1983.autonomous.paths.StartInFrontOfOpponentTrenchRunToOpponentTrenchRunBall4And5;
+import frc.team1983.autonomous.paths.StartInFrontOfTrenchRunToRendezvousBall4And5;
+import frc.team1983.commands.FollowTrajectory;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
@@ -58,6 +63,7 @@ public class Robot extends TimedRobot
 		startingPoseChooser.setDefaultOption("In Front of Trench Run", Constants.Pose.START_IN_FRONT_OF_TRENCH_RUN);
 		startingPoseChooser.addOption("In Front of Power Port", Constants.Pose.START_IN_FRONT_OF_POWER_PORT);
 		startingPoseChooser.addOption("In Front of Opponent Trench Run", Constants.Pose.START_IN_FRONT_OF_OPPONENT_TRENCH_RUN);
+		startingPoseChooser.addOption("Origin", new Pose2d());
 		SmartDashboard.putData("Starting pose chooser", startingPoseChooser);
 
 		autoChooser = new SendableChooser<>();
@@ -84,10 +90,11 @@ public class Robot extends TimedRobot
 		drivebase.setBrake(false);
 
 		CommandScheduler.getInstance().cancelAll();
-		new SequentialCommandGroup(
-			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
-			AutoFactory.getAuto(autoChooser.getSelected())
-		).schedule();
+		new FollowTrajectory(new Pose2d(), new Pose2d(Units.feetToMeters(15.0), 0.0, new Rotation2d())).schedule();
+//		new SequentialCommandGroup(
+//			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
+//			AutoFactory.getAuto(autoChooser.getSelected())
+//		).schedule();
 	}
 
 	@Override
@@ -109,7 +116,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-
+		System.out.printf("Left RPM %f, Right RPM %f \n", drivebase.getLeftVelocity(), drivebase.getRightVelocity());
 	}
 
 	@Override
