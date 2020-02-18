@@ -45,8 +45,6 @@ public class RobotMap
         public static final int COLLECTOR_TRANSFER = 0;
         public static final boolean COLLECTOR_TRANSFER_REVERSED = false;
 
-        public static final int INTERNAL_SHUTTLE = 0;
-        public static final boolean INTERNAL_SHUTTLE_REVERSED = false;
 
         public static final int SHOOTER_TRANSFER = 0;
         public static final boolean SHOOTER_TRANSFER_REVERSED = false;

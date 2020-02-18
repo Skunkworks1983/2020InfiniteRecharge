@@ -35,7 +35,6 @@ public class LoadIndexer extends CommandBase
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
-        indexer.internal.set(ControlMode.Throttle, Indexer.motorsForward);
 
         if (!isShooting && indexer.indexerHasBall.get()) //if we aren't shooting and sensor is triggered
         {
@@ -58,7 +57,6 @@ public class LoadIndexer extends CommandBase
     public void end(boolean interrupted)
     {
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
-        indexer.internal.set(ControlMode.Throttle, Indexer.motorsOff);
         indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
     }
 }

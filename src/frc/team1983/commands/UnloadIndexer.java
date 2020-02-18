@@ -24,7 +24,6 @@ public class UnloadIndexer extends CommandBase
     public void initialize()
     {
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsReversed);
-        indexer.internal.set(ControlMode.Throttle, Indexer.motorsReversed);
         indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsReversed);
     }
 
@@ -44,7 +43,7 @@ public class UnloadIndexer extends CommandBase
     public void end(boolean interrupted)
     {
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
-        indexer.internal.set(ControlMode.Throttle, Indexer.motorsOff);
+
         indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
     }
 }
