@@ -25,8 +25,6 @@ public class TargetAlignment extends PIDCommand
         );
         this.drivebase = drivebase;
         this.limelight = limelight;
-
-        System.out.println("Constructor");
     }
 
     public TargetAlignment()
@@ -39,14 +37,12 @@ public class TargetAlignment extends PIDCommand
     {
         super.initialize();
         limelight.setLedMode(Limelight.LedMode.FORCE_ON);
-        System.out.println("Initialize");
     }
 
     @Override
     public void execute()
     {
         super.execute();
-        System.out.println("execute");
     }
 
     @Override

@@ -45,8 +45,7 @@ public class Robot extends TimedRobot
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
-		limelight.setLedMode(Limelight.LedMode.USE_PIPELINE);
-		limelight.setPipelineSetting(Limelight.PipelineSetting.PIPE_LINE_ZERO);
+		limelight.setLedMode(Limelight.LedMode.FORCE_ON);
 	}
 
 	@Override
