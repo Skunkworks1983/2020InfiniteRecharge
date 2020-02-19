@@ -1,4 +1,4 @@
-package frc.team1983.commands;
+package frc.team1983.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team1983.Robot;
