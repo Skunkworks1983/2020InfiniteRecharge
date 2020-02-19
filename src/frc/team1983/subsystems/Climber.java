@@ -24,14 +24,11 @@ public class Climber extends SubsystemBase
 
     public void setClimberPosition(position p)
     {
-        if (p == position.retracted)
-        {
-            piston.set(DoubleSolenoid.Value.kReverse);
-        }
-        else
-        {
+        if (p == position.extended)
             piston.set(DoubleSolenoid.Value.kForward);
-        }
+        else
+            piston.set(DoubleSolenoid.Value.kReverse);
+
 
         currentPosition = p;
     }
