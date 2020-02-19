@@ -1,4 +1,4 @@
-package frc.team1983.commands;
+package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.team1983.services.OI;
