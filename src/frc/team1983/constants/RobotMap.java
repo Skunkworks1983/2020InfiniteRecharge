@@ -5,12 +5,12 @@ public class RobotMap //TODO: all of these values have yet to be finalized
     public static final int COMPRESSOR = 0; //TODO: find the correct port
 
     //our 2020 drivebase only utilizes 4 neos
-    // 1 andd 2 are left, 13 and 14 are right
+    // 1 and 2 are left, 13 and 14 are right
     //TODO: change this once we get a final 2020 robot
     public static class Drivebase
     {
-        public static final int LEFT_1 = 12;
-        public static final boolean LEFT_1_REVERSED = false;
+    //    public static final int LEFT_1 = 12;
+    //    public static final boolean LEFT_1_REVERSED = false;
         public static final int LEFT_2 = 13;
         public static final boolean LEFT_2_REVERSED = false;
         public static final int LEFT_3 = 14;
@@ -20,8 +20,8 @@ public class RobotMap //TODO: all of these values have yet to be finalized
         public static final boolean RIGHT_1_REVERSED = true;
         public static final int RIGHT_2 = 2;
         public static final boolean RIGHT_2_REVERSED = true;
-        public static final int RIGHT_3 = 3;
-        public static final boolean RIGHT_3_REVERSED = true;
+    //    public static final int RIGHT_3 = 3;
+    //    public static final boolean RIGHT_3_REVERSED = true;
     }
 
     public static class Shooter
