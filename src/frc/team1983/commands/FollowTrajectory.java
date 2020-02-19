@@ -65,12 +65,9 @@ public class FollowTrajectory extends CommandBase
 				double curTime = timer.get();
 				double dt = curTime - prevTime;
 
-				SmartDashboard.putNumber("Left Speed Setpoint", leftSpeedSetpoint);
-				SmartDashboard.putNumber("Right Speed Setpoint", rightSpeedSetpoint);
-				System.out.printf("Left Speed Setpoint: %f, Right Speed Setpoint: %f, ", leftSpeedSetpoint, rightSpeedSetpoint);
-
 				DifferentialDriveWheelSpeeds targetWheelSpeeds = drivebase.getKinematics().toWheelSpeeds(
 					ramseteController.calculate(drivebase.getPose(), trajectory.sample(curTime)));
+
 				double leftFeedforward =
 					drivebase.getFeedforward().calculate(leftSpeedSetpoint,
 						(leftSpeedSetpoint - prevSpeeds.leftMetersPerSecond) / dt);
@@ -82,13 +79,14 @@ public class FollowTrajectory extends CommandBase
 				drivebase.getLeftPIDController().setSetpoint(ControlMode.Velocity, convertRamseteVelocityToDrivebaseVelocity(leftSpeedSetpoint), leftFeedforward);
 				drivebase.getRightPIDController().setSetpoint(ControlMode.Velocity, convertRamseteVelocityToDrivebaseVelocity(rightSpeedSetpoint), rightFeedforward);
 
+				SmartDashboard.putNumber("Left Target Speed", targetWheelSpeeds.leftMetersPerSecond);
+				SmartDashboard.putNumber("Right Target Speed", targetWheelSpeeds.rightMetersPerSecond);
+
 				SmartDashboard.putNumber("Left Meters Per Second", drivebase.getLeftMetersPerSecond());
 				SmartDashboard.putNumber("Right Meters Per Second", drivebase.getRightMetersPerSecond());
-				System.out.printf("Left Meters Per Second: %f, Right Meters Per Second: %f, ", drivebase.getLeftMetersPerSecond(), drivebase.getRightMetersPerSecond());
 
-				SmartDashboard.putNumber("Left Speed Error", leftSpeedSetpoint - drivebase.getLeftMetersPerSecond());
-				SmartDashboard.putNumber("Right Speed Error", rightSpeedSetpoint - drivebase.getRightMetersPerSecond());
-				System.out.printf("Left Speed Error: %f, Right Speed Error: %f, ", leftSpeedSetpoint - drivebase.getLeftMetersPerSecond(), rightSpeedSetpoint - drivebase.getRightMetersPerSecond());
+				SmartDashboard.putNumber("Left Error", targetWheelSpeeds.leftMetersPerSecond - drivebase.getLeftMetersPerSecond());
+				SmartDashboard.putNumber("Right Error", targetWheelSpeeds.rightMetersPerSecond - drivebase.getRightMetersPerSecond());
 
 				prevTime = curTime;
 				prevSpeeds = targetWheelSpeeds;
@@ -155,13 +153,9 @@ public class FollowTrajectory extends CommandBase
 	{
 		ramseteCommand.execute();
 		SmartDashboard.putNumber("Pose Error", drivebase.getPose().getTranslation().getDistance(lastPose.getTranslation()));
-		SmartDashboard.putNumber("X Error", drivebase.getPose().getTranslation().getX() - lastPose.getTranslation().getX());
-		SmartDashboard.putNumber("Y Error", drivebase.getPose().getTranslation().getY() - lastPose.getTranslation().getY());
-
 		System.out.printf("Pose Error: %f, ", drivebase.getPose().getTranslation().getDistance(lastPose.getTranslation()));
-		System.out.printf("X Error: %f, ", drivebase.getPose().getTranslation().getX() - lastPose.getTranslation().getX());
-		System.out.printf("Y Error: %f \n", drivebase.getPose().getTranslation().getY() - lastPose.getTranslation().getY());
-
+		System.out.printf("Pose Error X: %f, ", lastPose.getTranslation().getX() - drivebase.getPose().getTranslation().getX());
+		System.out.printf("Pose Error Y: %f\n", lastPose.getTranslation().getY() - drivebase.getPose().getTranslation().getY());
 	}
 
 	@Override
@@ -170,7 +164,6 @@ public class FollowTrajectory extends CommandBase
 		ramseteCommand.end(interrupted);
 		timer.stop();
 		drivebase.set(ControlMode.Throttle, 0.0, 0.0);
-		System.out.println("END");
 	}
 
 	@Override

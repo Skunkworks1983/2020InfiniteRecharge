@@ -22,8 +22,8 @@ public class Drivebase extends SubsystemBase
 
 //    public static final double kS = 0.145, kV = 2.02, kA = 0.423;
 //    public static final double kP = 2.64, kI = 0.0, kD = 0.0;
-    public static final double kS = 0.145, kV = 2.06, kA = 0.183;
-    public static final double kP = 6.5e-5, kI = 0.0, kD = 0.0;
+    public static final double kS = 0.120, kV = 2.08, kA = 0.0;
+    public static final double kP = 1.0e-4, kI = 0.0, kD = 0.0;
 
     private MotorGroup left, right;
 
@@ -142,7 +142,7 @@ public class Drivebase extends SubsystemBase
      */
     public double getRightVelocity()
     {
-        return left.getVelocity();
+        return right.getVelocity();
     }
 
     /**

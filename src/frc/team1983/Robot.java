@@ -13,8 +13,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1983.autonomous.Auto;
 import frc.team1983.autonomous.AutoFactory;
-import frc.team1983.autonomous.paths.StartInFrontOfOpponentTrenchRunToOpponentTrenchRunBall4And5;
-import frc.team1983.autonomous.paths.StartInFrontOfTrenchRunToRendezvousBall4And5;
 import frc.team1983.commands.FollowTrajectory;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.constants.Constants;
@@ -90,7 +88,7 @@ public class Robot extends TimedRobot
 		drivebase.setBrake(false);
 
 		CommandScheduler.getInstance().cancelAll();
-		new FollowTrajectory(new Pose2d(), new Pose2d(Units.feetToMeters(15.0), 0.0, new Rotation2d())).schedule();
+		new FollowTrajectory(new Pose2d(), new Pose2d(Units.feetToMeters(15.0), Units.feetToMeters(0.0), new Rotation2d())).schedule();
 //		new SequentialCommandGroup(
 //			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
 //			AutoFactory.getAuto(autoChooser.getSelected())
@@ -116,7 +114,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		System.out.printf("Left RPM %f, Right RPM %f \n", drivebase.getLeftVelocity(), drivebase.getRightVelocity());
+
 	}
 
 	@Override
