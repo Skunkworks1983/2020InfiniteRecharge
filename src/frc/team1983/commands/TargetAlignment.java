@@ -50,6 +50,6 @@ public class TargetAlignment extends PIDCommand
     {
         super.end(interrupted);
         drivebase.set(ControlMode.Throttle, 0.0, 0.0);
-        limelight.setLedMode(Limelight.LedMode.FORCE_OFF);
+        limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
     }
 }
