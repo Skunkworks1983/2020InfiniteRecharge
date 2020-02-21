@@ -20,8 +20,8 @@ import java.util.Arrays;
 
 public class FollowTrajectory extends CommandBase
 {
-	public static final double MAX_VELOCITY = 5.0; // f/s TODO: calculate
-	public static final double MAX_ACCELERATION = 14.0; // f/s^2 TODO: calculate
+	public static final double MAX_VELOCITY = 7.0; // f/s TODO: calculate
+	public static final double MAX_ACCELERATION = 10.0; // f/s^2 TODO: calculate
 	public static final double B = 2.0, ZETA = 0.7;
 
 	private final Timer timer = new Timer();

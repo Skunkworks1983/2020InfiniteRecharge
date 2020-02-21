@@ -4,16 +4,13 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1983.autonomous.Auto;
 import frc.team1983.autonomous.AutoFactory;
-import frc.team1983.commands.FollowTrajectory;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
@@ -88,11 +85,11 @@ public class Robot extends TimedRobot
 		drivebase.setBrake(false);
 
 		CommandScheduler.getInstance().cancelAll();
-		new FollowTrajectory(new Pose2d(), new Pose2d(Units.feetToMeters(15.0), Units.feetToMeters(0.0), new Rotation2d())).schedule();
-//		new SequentialCommandGroup(
-//			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
-//			AutoFactory.getAuto(autoChooser.getSelected())
-//		).schedule();
+//		new FollowTrajectory(new Pose2d(), new Pose2d(Units.feetToMeters(15.0), Units.feetToMeters(0.0), new Rotation2d())).schedule();
+		new SequentialCommandGroup(
+			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
+			AutoFactory.getAuto(autoChooser.getSelected())
+		).schedule();
 	}
 
 	@Override
