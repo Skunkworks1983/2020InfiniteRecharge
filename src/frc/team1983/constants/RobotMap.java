@@ -32,7 +32,5 @@ public class RobotMap
         public static final boolean FLYWHEEL_2_REVERSED = true;
         public static final int ARTICULATION_1 = 0;
         public static final boolean ARTICULATION_1_REVERSED = true;
-        public static final int ARTICULATION_2 = 0;
-        public static final boolean ARTICULATION_2_REVERSED = false;
     }
 }

@@ -25,8 +25,7 @@ public class Shooter extends SubsystemBase
         );
 
         articulation = new MotorGroup(
-            new Spark(RobotMap.Shooter.ARTICULATION_1, RobotMap.Shooter.ARTICULATION_1_REVERSED),
-            new Spark(RobotMap.Shooter.ARTICULATION_2, RobotMap.Shooter.ARTICULATION_2_REVERSED)
+            new Spark(RobotMap.Shooter.ARTICULATION_1, RobotMap.Shooter.ARTICULATION_1_REVERSED)
         );
     }
 
