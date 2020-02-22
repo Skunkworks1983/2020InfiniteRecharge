@@ -58,7 +58,7 @@ public class RobotMap //TODO: all of these values have yet to be finalized
 
     public static class Collector
     {
-        public static final int ROLLER = 6;
+        public static final int ROLLER = 6; //TODO: change when we have time
         public static final boolean ROLLER_REVERSED = false;
 
         public static final int PISTON_FORWARD = 0;
