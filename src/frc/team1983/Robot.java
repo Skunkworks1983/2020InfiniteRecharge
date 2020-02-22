@@ -55,17 +55,10 @@ public class Robot extends TimedRobot
 	{
 		SmartDashboard.putNumber("Wait Time", 0.0);
 
-		startingPoseChooser = new SendableChooser<>();
-		startingPoseChooser.setDefaultOption("In Front of Trench Run", Constants.Pose.START_IN_FRONT_OF_TRENCH_RUN);
-		startingPoseChooser.addOption("In Front of Power Port", Constants.Pose.START_IN_FRONT_OF_POWER_PORT);
-		startingPoseChooser.addOption("In Front of Opponent Trench Run", Constants.Pose.START_IN_FRONT_OF_OPPONENT_TRENCH_RUN);
-		startingPoseChooser.addOption("Origin", new Pose2d());
-		SmartDashboard.putData("Starting pose chooser", startingPoseChooser);
-
 		autoChooser = new SendableChooser<>();
 		autoChooser.setDefaultOption("DO NOT RUN AUTO", Auto.DO_NOTHING);
-		autoChooser.addOption("In Front of Trench Run to Rendezvous Point to Trench Run", Auto.IN_FRONT_OF_TRENCH_RUN_TO_RENDEZVOUS_POINT_TO_TRENCH_RUN);
-		autoChooser.addOption("In Front of Opponent Trench Run to Opponent Trench Run to Rendezvous Point", Auto.IN_FRONT_OF_OPPONENT_TRENCH_RUN_TO_OPPONENT_TRENCH_RUN_TO_RENDEZVOUS_POINT);
+		autoChooser.addOption("In Front of Trench Run -> Rendezvous Point -> Trench Run", Auto.IN_FRONT_OF_TRENCH_RUN_TO_RENDEZVOUS_POINT_TO_TRENCH_RUN);
+		autoChooser.addOption("In Front of Opponent Trench Run -> Opponent Trench Run -> Rendezvous Point", Auto.IN_FRONT_OF_OPPONENT_TRENCH_RUN_TO_OPPONENT_TRENCH_RUN_TO_RENDEZVOUS_POINT);
 		SmartDashboard.putData("Auto chooser", autoChooser);
 
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
@@ -83,7 +76,6 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
-		drivebase.setPose(startingPoseChooser.getSelected());
 		drivebase.setBrake(false);
 
 		CommandScheduler.getInstance().cancelAll();
