@@ -46,6 +46,8 @@ public class TargetAlignment extends PIDCommand
     @Override
     public void initialize()
     {
+        targetWasDetected = false;
+        limelight.setLedMode(Limelight.LedMode.FORCE_ON);
         m_setpoint = () -> setpoint;
         super.initialize();
     }
@@ -72,5 +74,6 @@ public class TargetAlignment extends PIDCommand
     {
         super.end(interrupted);
         drivebase.set(ControlMode.Throttle, 0.0, 0.0);
+        limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
     }
 }
