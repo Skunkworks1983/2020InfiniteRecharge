@@ -38,6 +38,7 @@ public class Robot extends TimedRobot
 
 		navX = new NavX();
 		limelight = new Limelight();
+		limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
 
 		drivebase = new Drivebase();
 		drivebase.zero();
@@ -86,7 +87,6 @@ public class Robot extends TimedRobot
 		drivebase.setBrake(false);
 
 		CommandScheduler.getInstance().cancelAll();
-//		new FollowTrajectory(new Pose2d(), new Pose2d(Units.feetToMeters(15.0), Units.feetToMeters(0.0), new Rotation2d())).schedule();
 		new SequentialCommandGroup(
 			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
 			AutoFactory.getAuto(autoChooser.getSelected())

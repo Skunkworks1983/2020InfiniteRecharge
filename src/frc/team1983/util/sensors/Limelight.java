@@ -90,7 +90,7 @@ public class Limelight implements Runnable
     private double x, y;
     private double area;
     private double skew;
-    private LedMode ledMode;
+    private LedMode ledMode = Limelight.DEFAULT_LED_MODE;
     private PipelineSetting pipelineSetting;
     private double xOffset, yOffset;
     private double pitch, yaw, roll;
