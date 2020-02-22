@@ -80,7 +80,7 @@ public class OI
 
     public double getLeftX()
     {
-        if(left.getX() > 0.15 || left.getX() < -0.15)
+        if(Math.abs(left.getX()) > 0.15)
         {
             return left.getX();
         }
