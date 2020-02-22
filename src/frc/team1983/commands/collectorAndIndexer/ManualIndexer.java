@@ -30,7 +30,7 @@ public class ManualIndexer extends CommandBase
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
-        
+
         indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
 
     }
