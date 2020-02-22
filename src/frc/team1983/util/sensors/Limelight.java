@@ -74,17 +74,18 @@ public class Limelight implements Runnable
 
     public static final int UPDATE_RATE = 250;
 
-    protected static final boolean TARGET_DETECTED_DEFAULT_VALUE = false;
-    protected static final double X_DEFAULT_VALUE = 0.0;
-    protected static final double Y_DEFAULT_VALUE = 0.0;
-    protected static final double AREA_DEFAULT_VALUE = 0.0;
-    protected static final double SKEW_DEFAULT_VALUE = 0.0;
-    protected static final double X_OFFSET_DEFAULT_VALUE = 0.0;
-    protected static final double Y_OFFSET_DEFAULT_VALUE = 0.0;
-    protected static final double PITCH_DEFAULT_VALUE = 0.0;
-    protected static final double YAW_DEFAULT_VALUE = 0.0;
-    protected static final double ROLL_DEFAULT_VALUE = 0.0;
-    protected static final double LED_MODE_DEFAULT_VALUE = 0.0;
+    public static final boolean TARGET_DETECTED_DEFAULT_VALUE = false;
+    public static final double X_DEFAULT_VALUE = 0.0;
+    public static final double Y_DEFAULT_VALUE = 0.0;
+    public static final double AREA_DEFAULT_VALUE = 0.0;
+    public static final double SKEW_DEFAULT_VALUE = 0.0;
+    public static final double X_OFFSET_DEFAULT_VALUE = 0.0;
+    public static final double Y_OFFSET_DEFAULT_VALUE = 0.0;
+    public static final double PITCH_DEFAULT_VALUE = 0.0;
+    public static final double YAW_DEFAULT_VALUE = 0.0;
+    public static final double ROLL_DEFAULT_VALUE = 0.0;
+    public static final double LED_MODE_DEFAULT_VALUE = 0.0;
+    public static final LedMode DEFAULT_LED_MODE = LedMode.FORCE_OFF;
 
     private boolean targetDetected;
     private double x, y;
