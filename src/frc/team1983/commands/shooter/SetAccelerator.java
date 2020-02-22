@@ -1,24 +1,24 @@
-package frc.team1983.commands;
+package frc.team1983.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
 import frc.team1983.subsystems.Shooter;
 import frc.team1983.util.motors.ControlMode;
 
-public class SetFlywheel extends CommandBase
+public class SetAccelerator extends CommandBase
 {
     private Shooter shooter;
     private ControlMode controlMode;
     private double value;
 
-    public SetFlywheel(Shooter shooter, ControlMode controlMode, double value)
+    public SetAccelerator(Shooter shooter, ControlMode controlMode, double value)
     {
         this.shooter = shooter;
         this.controlMode = controlMode;
         this.value = value;
     }
 
-    public SetFlywheel(ControlMode controlMode, double value)
+    public SetAccelerator(ControlMode controlMode, double value)
     {
         this(Robot.getInstance().getShooter(), controlMode, value);
     }
@@ -26,12 +26,12 @@ public class SetFlywheel extends CommandBase
     @Override
     public void execute()
     {
-        shooter.setFlywheel(controlMode, value);
+        shooter.setAccelerator(controlMode, value);
     }
 
     @Override
     public void end(boolean interrupted)
     {
-        shooter.setFlywheel(ControlMode.Throttle, 0.0);
+        shooter.setAccelerator(ControlMode.Throttle, 0.0);
     }
 }
