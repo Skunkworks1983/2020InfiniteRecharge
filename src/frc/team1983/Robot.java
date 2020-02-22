@@ -8,6 +8,7 @@ import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Collector;
+import frc.team1983.subsystems.Climber;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.commands.TargetAlignment;
@@ -22,6 +23,7 @@ public class Robot extends TimedRobot
 	private NavX navX;
 	private Collector collector;
 	private OI oi;
+	private Climber climber;
 
 	private UsbCamera camera;
 
@@ -34,6 +36,8 @@ public class Robot extends TimedRobot
 		drivebase = new Drivebase();
 		navX = new NavX();
 		collector = new Collector();
+
+		climber = new Climber();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -120,5 +124,10 @@ public class Robot extends TimedRobot
 	public Collector getCollector()
 	{
 		return collector;
+	}
+
+	public Climber getClimber()
+	{
+		return climber;
 	}
 }
