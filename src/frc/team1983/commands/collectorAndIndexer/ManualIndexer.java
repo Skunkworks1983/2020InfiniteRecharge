@@ -1,23 +1,32 @@
 package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.team1983.Robot;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Indexer;
 import frc.team1983.util.motors.ControlMode;
 
+import javax.naming.ldap.Control;
+
 public class ManualIndexer extends CommandBase
 {
     private Indexer indexer;
+    private ControlMode controlMode;
+    private double indexerValue;
     private OI oi;
 
     private boolean isShooting; //this takes into account whether or not we are shooting
 
-    public ManualIndexer(Indexer i, OI anOI, boolean shoot)
+    public ManualIndexer(Indexer i, ControlMode cm, double iv)
     {
         indexer = i;
-        oi = anOI;
+        controlMode = cm;
+        indexerValue = iv;
+    }
 
-        isShooting = shoot;
+    public ManualIndexer(ControlMode controlMode, double indexerValue)
+    {
+        this(Robot.getInstance().getIndexer(), controlMode, indexerValue);
     }
 
     @Override

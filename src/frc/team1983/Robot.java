@@ -7,10 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
-import frc.team1983.subsystems.Collector;
-import frc.team1983.subsystems.Climber;
-import frc.team1983.subsystems.Drivebase;
-import frc.team1983.subsystems.Shooter;
+import frc.team1983.subsystems.*;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.util.sensors.NavX;
@@ -26,6 +23,7 @@ public class Robot extends TimedRobot
 	private Collector collector;
 	private OI oi;
 	private Climber climber;
+	private Indexer indexer;
 
 	private UsbCamera camera;
 
@@ -36,6 +34,7 @@ public class Robot extends TimedRobot
 		drivebase = new Drivebase();
 		navX = new NavX();
 		collector = new Collector();
+		indexer = new Indexer();
 
 		climber = new Climber();
 
@@ -88,7 +87,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-
+		System.out.println(shooter.articulationEncoder.get());
 	}
 
 	@Override
@@ -137,5 +136,10 @@ public class Robot extends TimedRobot
 	public Climber getClimber()
 	{
 		return climber;
+	}
+
+	public Indexer getIndexer()
+	{
+		return indexer;
 	}
 }

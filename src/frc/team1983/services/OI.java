@@ -4,7 +4,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.team1983.commands.TargetAlignment;
+import frc.team1983.commands.collectorAndIndexer.ManualIndexer;
+import frc.team1983.commands.shooter.SetArticulation;
+import frc.team1983.commands.shooter.SetShooter;
+import frc.team1983.constants.RobotMap;
+import frc.team1983.subsystems.Indexer;
+import frc.team1983.util.motors.ControlMode;
 
+import javax.naming.ldap.Control;
 import java.util.HashMap;
 
 public class OI
@@ -32,6 +39,18 @@ public class OI
     protected static final double JOYSTICK_EXPONENT = 1.7;
     protected static final double LINEAR_ZONE = 0.4;
     protected static final double LINEAR_SLOPE = Math.abs(Math.pow(LINEAR_ZONE, JOYSTICK_EXPONENT) / (LINEAR_ZONE - JOYSTICK_DEADZONE));
+
+    protected static final int ARTICULATION_DOWN = 1;
+    protected static final int ARTICULATION_UP = 2;
+    protected static final int SET_SHOOTER = 9;
+
+    protected static final int MANUAL_INDEXER = 10;
+
+    private double articulationMovement = 0.05;
+    private double acceleratorValue = 0.5;
+    private double flywheelValue = 0.5;
+    private double indexerValue = 0.5;
+
 
     private Joystick left, right, panel;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
@@ -105,6 +124,16 @@ public class OI
     }
     public void initializeBindings()
     {
-        
+        getButton(Joysticks.PANEL, ARTICULATION_DOWN).whenHeld(new SetArticulation(ControlMode.Throttle,
+                - articulationMovement));
+
+        getButton(Joysticks.PANEL, ARTICULATION_UP).whenHeld(new SetArticulation(ControlMode.Throttle,
+                articulationMovement));
+
+        getButton(Joysticks.PANEL, SET_SHOOTER).whenHeld(new SetShooter(ControlMode.Throttle,
+                acceleratorValue, flywheelValue));
+
+        getButton(Joysticks.PANEL, MANUAL_INDEXER).whenHeld(new ManualIndexer(ControlMode.Throttle,
+                indexerValue));
     }
 }

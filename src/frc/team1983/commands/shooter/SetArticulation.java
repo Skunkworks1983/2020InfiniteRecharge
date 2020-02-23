@@ -27,11 +27,15 @@ public class SetArticulation extends CommandBase
     public void execute()
     {
         shooter.setArticulation(controlMode, value);
+
+        //System.out.println(shooter.articulationEncoder.get());
     }
 
     @Override
     public void end(boolean interrupted)
     {
         shooter.setArticulation(ControlMode.Throttle, 0.0);
+
+        System.out.println(shooter.articulationEncoder.get());
     }
 }

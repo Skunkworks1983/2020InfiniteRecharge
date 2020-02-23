@@ -1,5 +1,6 @@
 package frc.team1983.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
@@ -11,6 +12,7 @@ public class Shooter extends SubsystemBase
     private MotorGroup accelerator;
     private MotorGroup flywheel;
     private MotorGroup articulation;
+    public AnalogEncoder articulationEncoder;
 
     public Shooter()
     {
