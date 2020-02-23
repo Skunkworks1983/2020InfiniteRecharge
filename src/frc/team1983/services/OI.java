@@ -46,10 +46,10 @@ public class OI
 
     protected static final int MANUAL_INDEXER = 10;
 
-    private double articulationMovement = 0.05;
-    private double acceleratorValue = 0.5;
-    private double flywheelValue = 0.5;
-    private double indexerValue = 0.5;
+    private double articulationMovement = 0.1;
+    private double acceleratorValue = 1;
+    private double flywheelValue = 1;
+    private double indexerValue = 0.75;
 
 
     private Joystick left, right, panel;

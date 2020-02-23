@@ -23,10 +23,14 @@ public class SetAccelerator extends CommandBase
         this(Robot.getInstance().getShooter(), controlMode, value);
     }
 
+
+
     @Override
     public void execute()
     {
+//        shooter.setBrake(true);
         shooter.setAccelerator(controlMode, value);
+
     }
 
     @Override

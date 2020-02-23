@@ -27,16 +27,16 @@ public class RobotMap //TODO: all of these values have yet to be finalized
     public static class Shooter
     {
         public static final int ACCELERATOR_1 = 16;
-        public static final boolean ACCELERATOR_1_REVERSED = false;
+        public static final boolean ACCELERATOR_1_REVERSED = true;
 
         public static final int ACCELERATOR_2 = 15;
-        public static final boolean ACCELERATOR_2_REVERSED = true;
+        public static final boolean ACCELERATOR_2_REVERSED = false;
 
         public static final int FLYWHEEL_1 = 3;
-        public static final boolean FLYWHEEL_1_REVERSED = false;
+        public static final boolean FLYWHEEL_1_REVERSED = true;
 
         public static final int FLYWHEEL_2 = 12;
-        public static final boolean FLYWHEEL_2_REVERSED = true;
+        public static final boolean FLYWHEEL_2_REVERSED = false;
 
         public static final int ARTICULATION_1 = 4;
         public static final boolean ARTICULATION_1_REVERSED = true;
@@ -50,7 +50,7 @@ public class RobotMap //TODO: all of these values have yet to be finalized
         public static final int SENSOR = 0;
 
         public static final int COLLECTOR_TRANSFER = 5;
-        public static final boolean COLLECTOR_TRANSFER_REVERSED = false;
+        public static final boolean COLLECTOR_TRANSFER_REVERSED = true;
 
         public static final int SHOOTER_TRANSFER = 10;
         public static final boolean SHOOTER_TRANSFER_REVERSED = false;

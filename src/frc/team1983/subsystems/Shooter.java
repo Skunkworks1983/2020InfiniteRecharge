@@ -12,7 +12,7 @@ public class Shooter extends SubsystemBase
     private MotorGroup accelerator;
     private MotorGroup flywheel;
     private MotorGroup articulation;
-    public AnalogEncoder articulationEncoder;
+    //public AnalogEncoder articulationEncoder;
 
     public Shooter()
     {
@@ -27,6 +27,7 @@ public class Shooter extends SubsystemBase
         );
 
         articulation = new MotorGroup(
+           // new AnalogEncoder(1),
             new Spark(RobotMap.Shooter.ARTICULATION_1, RobotMap.Shooter.ARTICULATION_1_REVERSED)
         );
     }
@@ -58,6 +59,11 @@ public class Shooter extends SubsystemBase
     {
         setAccelerator(controlMode, acceleratorValue);
         setFlywheel(controlMode, flywheelValue);
+    }
+
+    public void setBrake(boolean brake)
+    {
+        articulation.setBrake(brake);
     }
 
     public void setArticulation(ControlMode controlMode, double value)
