@@ -8,12 +8,13 @@ import frc.team1983.subsystems.Indexer;
 public class CollectAndLoad extends ParallelCommandGroup
 {
 
-    public CollectAndLoad(Collector c, Indexer i, OI anOI, Boolean shoot)
+
+    public CollectAndLoad(Collector c, Indexer i, Double cv, Double iv)
     {
         addCommands(
-                new SetRollerThrottle(c, Collector.motorsForward),
+                new SetRollerThrottle(c, cv),
 
-                new LoadIndexer(i, anOI, shoot)
+                new LoadIndexer(iv)
         );
     }
 

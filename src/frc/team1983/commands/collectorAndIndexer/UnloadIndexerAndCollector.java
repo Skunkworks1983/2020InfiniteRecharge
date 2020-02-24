@@ -9,13 +9,13 @@ import frc.team1983.util.motors.ControlMode;
 
 public class UnloadIndexerAndCollector extends ParallelCommandGroup
 {
-    public UnloadIndexerAndCollector (Collector c, Indexer i, OI anOI)
+    public UnloadIndexerAndCollector (Collector c, Indexer i, ControlMode cm, double cv, double iv)
     {
         addCommands
                 (
-                        new UnloadIndexer(i, anOI),
+                        new UnloadIndexer(cm, iv),
 
-                        new UnloadCollector(c, anOI)
+                        new UnloadCollector(cm, cv)
                 );
     }
     

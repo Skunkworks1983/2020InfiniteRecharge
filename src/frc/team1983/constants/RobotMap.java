@@ -2,7 +2,7 @@ package frc.team1983.constants;
 
 public class RobotMap //TODO: all of these values have yet to be finalized
 {
-    public static final int COMPRESSOR = 0; //TODO: find the correct port
+    public static final int COMPRESSOR = 61; //TODO: find the correct port
 
     //our 2020 drivebase only utilizes 4 neos
     // 1 and 2 are left, 13 and 14 are right
@@ -58,11 +58,11 @@ public class RobotMap //TODO: all of these values have yet to be finalized
 
     public static class Collector
     {
-        public static final int ROLLER = 6; //TODO: change when we have time
-        public static final boolean ROLLER_REVERSED = false;
+        public static final int COLLECTOR_MOTOR = 6; //TODO: change name when we have time
+        public static final boolean COLLECTOR_MOTOR_REVERSED = false;
 
-        public static final int PISTON_FORWARD = 0;
-        public static final int PISTON_REVERSE = 1;
+        public static final int PISTON_FORWARD = 1;
+        public static final int PISTON_REVERSE = 4;
     }
 
     public static class ControlPanel
@@ -70,14 +70,14 @@ public class RobotMap //TODO: all of these values have yet to be finalized
         public static final int ROLLER = 9;
         public static final boolean ROLLER_REVERSED = false;
 
-        public static final int PISTON_FORWARD = 0;
-        public static final int PISTON_REVERSE = 1;
+        public static final int PISTON_FORWARD = 2;
+        public static final int PISTON_REVERSE = 5;
     }
 
     public static class Climber
     {
-        public static final int PISTON_FORWARD = 0;
-        public static final int PISTON_REVERSE = 1;
+        public static final int PISTON_FORWARD = 3;
+        public static final int PISTON_REVERSE = 6;
     }
 
 

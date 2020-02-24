@@ -23,7 +23,7 @@ public class Robot extends TimedRobot
 	private NavX navX;
 	private Collector collector;
 	private OI oi;
-	//private Climber climber;
+	private Climber climber;
 	private Indexer indexer;
 
 	private UsbCamera camera;
@@ -37,7 +37,7 @@ public class Robot extends TimedRobot
 		collector = new Collector();
 		indexer = new Indexer();
 
-		//climber = new Climber();
+		climber = new Climber();
 
 		shooter = new Shooter();
 		oi = new OI();
@@ -90,9 +90,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-	//	System.out.println(shooter.articulationEncoder.get());
-
-		System.out.println(RobotMap.Shooter.ARTICULATION_1);
+		System.out.println(indexer.indexerHasBall.get());
 	}
 
 	@Override
@@ -138,10 +136,10 @@ public class Robot extends TimedRobot
 		return collector;
 	}
 
-//	public Climber getClimber()
-//	{
-//		return climber;
-//	}
+	public Climber getClimber()
+	{
+		return climber;
+	}
 
 	public Indexer getIndexer()
 	{

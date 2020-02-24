@@ -2,11 +2,9 @@ package frc.team1983.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.team1983.util.motors.ControlMode;
-import frc.team1983.util.sensors.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.Motor;
-import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
 
 
@@ -21,7 +19,7 @@ public class Collector extends SubsystemBase
     }
 
     private DoubleSolenoid piston; //piston controls whether it is out or stowed
-    public Motor roller; //collector has one motor, just the roller
+    public Motor collectorMotor; //collector has one motor, just the collectorMotor
 
    // used in collector commands so that we have a constant for motor directions
     public static double motorsForward = 1;
@@ -38,7 +36,7 @@ public class Collector extends SubsystemBase
 
     public Collector()
     {
-        roller = new Spark(RobotMap.Collector.ROLLER, RobotMap.Collector.ROLLER_REVERSED);
+        collectorMotor = new Spark(RobotMap.Collector.COLLECTOR_MOTOR, RobotMap.Collector.COLLECTOR_MOTOR_REVERSED);
 
         piston = new DoubleSolenoid(RobotMap.COMPRESSOR, RobotMap.Collector.PISTON_FORWARD,
                 RobotMap.Collector.PISTON_REVERSE);
@@ -49,7 +47,7 @@ public class Collector extends SubsystemBase
     // we'll only have to collect at one speed
     public void setRollerThrottle(double throttle)
     {
-        roller.set(ControlMode.Throttle, throttle);
+        collectorMotor.set(ControlMode.Throttle, throttle);
     }
 
     //TODO: let's assume that there's only two positions? if not- CHANGE

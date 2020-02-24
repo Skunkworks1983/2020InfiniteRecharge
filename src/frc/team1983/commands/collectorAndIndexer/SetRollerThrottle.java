@@ -1,9 +1,10 @@
 package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team1983.Robot;
 import frc.team1983.subsystems.Collector;
 import frc.team1983.util.motors.ControlMode;
+
+import javax.naming.ldap.Control;
 
 public class SetRollerThrottle extends CommandBase
 {
@@ -25,8 +26,10 @@ public class SetRollerThrottle extends CommandBase
     @Override
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
-       // collector.setRollerThrottle(throttle);
-        collector.roller.set(ControlMode.Throttle, Collector.motorsForward);
+       // collector.collectorMotor.set(ControlMode.Throttle, Collector.motorsForward);
+
+        collector.collectorMotor.set(ControlMode.Throttle, throttle);
+
     }
 
     @Override
@@ -38,7 +41,7 @@ public class SetRollerThrottle extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        collector.roller.set(ControlMode.Throttle, Collector.motorsOff);
+        collector.collectorMotor.set(ControlMode.Throttle, Collector.motorsOff);
     }
 
 }

@@ -12,8 +12,8 @@ public class Indexer
     public Motor collectorTransfer, shooterTransfer;
 
     // used in indexer so that we have a constant for motor directions
-    public static double motorsForward = 1;
-    public static double motorsReversed = -1;
+    public static double motorsForward = .5;
+    public static double motorsReversed = -0.5;
     public static double motorsOff = 0;
 
     public Indexer()

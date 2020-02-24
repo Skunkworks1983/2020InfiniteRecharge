@@ -38,9 +38,13 @@ public class ManualIndexer extends CommandBase
     @Override
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
-        indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
+       // indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
 
-        indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
+       // indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
+
+        indexer.collectorTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
+
+        indexer.shooterTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
 
     }
 
