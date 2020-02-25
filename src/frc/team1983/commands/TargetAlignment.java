@@ -12,6 +12,7 @@ public class TargetAlignment extends PIDCommand
 {
     private static final double kP = 0.015, kI = 0.0, kD = 0.0;
     private Drivebase drivebase;
+    private Limelight limelight;
 
     public TargetAlignment(Drivebase drivebase, Limelight limelight, NavX navX)
     {
@@ -22,8 +23,8 @@ public class TargetAlignment extends PIDCommand
             output -> drivebase.set(ControlMode.Throttle, -output, output),
             drivebase
         );
-
         this.drivebase = drivebase;
+        this.limelight = limelight;
     }
 
     public TargetAlignment()
@@ -32,9 +33,23 @@ public class TargetAlignment extends PIDCommand
     }
 
     @Override
+    public void initialize()
+    {
+        super.initialize();
+        limelight.setLedMode(Limelight.LedMode.FORCE_ON);
+    }
+
+    @Override
+    public void execute()
+    {
+        super.execute();
+    }
+
+    @Override
     public void end(boolean interrupted)
     {
         super.end(interrupted);
         drivebase.set(ControlMode.Throttle, 0.0, 0.0);
+        limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
     }
 }
