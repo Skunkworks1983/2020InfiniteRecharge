@@ -2,6 +2,7 @@ package frc.team1983;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
@@ -12,6 +13,8 @@ import frc.team1983.subsystems.*;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.util.sensors.NavX;
+
+import java.sql.SQLOutput;
 
 public class Robot extends TimedRobot
 {
@@ -27,6 +30,7 @@ public class Robot extends TimedRobot
 	private Indexer indexer;
 
 	private UsbCamera camera;
+
 
 	Robot()
 	{
@@ -90,7 +94,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-		System.out.println(indexer.indexerHasBall.get());
+		//System.out.println(shooter.getArticulation());
 	}
 
 	@Override

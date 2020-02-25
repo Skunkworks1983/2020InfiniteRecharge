@@ -144,12 +144,6 @@ public class OI
 
         return buttons.get(joystickPort).get(button);
     }
-
-//    public boolean isShooting()
-//    {
-//        return getButton(Joysticks.PANEL, SET_SHOOTER).get();
-//    }
-
     public void initializeBindings()
     {
         getButton(Joysticks.PANEL, ARTICULATION_DOWN).whenHeld(new SetArticulation(ControlMode.Throttle,

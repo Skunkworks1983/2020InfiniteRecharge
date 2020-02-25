@@ -1,18 +1,23 @@
 package frc.team1983.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogEncoder;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
+import frc.team1983.util.control.SparkPIDController;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
+import frc.team1983.util.sensors.AnalogEncoder;
 
 public class Shooter extends SubsystemBase
 {
+    public static final double kP = 0.0, kI = 0.0, kD = 0.0, kF = 0.0;
+
     private MotorGroup accelerator;
     private MotorGroup flywheel;
     private MotorGroup articulation;
-    //public AnalogEncoder articulationEncoder;
+
+    private SparkPIDController articulationPIDController;
 
     public Shooter()
     {
@@ -27,9 +32,12 @@ public class Shooter extends SubsystemBase
         );
 
         articulation = new MotorGroup(
-           //new AnalogEncoder(),
+            //new AnalogEncoder(new AnalogInput(0)),
             new Spark(RobotMap.Shooter.ARTICULATION_1, RobotMap.Shooter.ARTICULATION_1_REVERSED)
         );
+
+        articulationPIDController = new SparkPIDController((Spark) articulation.getMaster());
+        articulationPIDController.setGains(kP, kI, kD, kF);
     }
 
     /**
@@ -69,6 +77,11 @@ public class Shooter extends SubsystemBase
     public void setArticulation(ControlMode controlMode, double value)
     {
         articulation.set(controlMode, value);
+    }
+
+    public double getArticulation()
+    {
+        return articulation.getPosition();
     }
 
     public double getAcceleratorVelocity()
