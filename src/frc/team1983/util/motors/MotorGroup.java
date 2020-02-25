@@ -1,5 +1,6 @@
 package frc.team1983.util.motors;
 
+import frc.team1983.util.sensors.AnalogEncoder;
 import frc.team1983.util.sensors.DigitalInputEncoder;
 import frc.team1983.util.sensors.Encoder;
 
@@ -62,6 +63,11 @@ public class MotorGroup
     public MotorGroup(DigitalInputEncoder digitalInputEncoder, Motor master, Motor... slaves)
     {
         this((Encoder) digitalInputEncoder, master, slaves);
+    }
+
+    public MotorGroup(AnalogEncoder AnalogEncoder, Motor master, Motor... slaves)
+    {
+        this((Encoder) AnalogEncoder, master, slaves);
     }
 
     /**

@@ -40,8 +40,8 @@ public class Collector extends SubsystemBase
     {
         roller = new Spark(RobotMap.Collector.ROLLER, RobotMap.Collector.ROLLER_REVERSED);
 
-        piston = new DoubleSolenoid(RobotMap.COMPRESSOR, RobotMap.Collector.PISTON_FORWARD,
-                RobotMap.Collector.PISTON_REVERSE);
+//        piston = new DoubleSolenoid(RobotMap.COMPRESSOR, RobotMap.Collector.PISTON_FORWARD,
+//                RobotMap.Collector.PISTON_REVERSE);
     }
 
     //TODO: uhhh is this going to be throttale-able

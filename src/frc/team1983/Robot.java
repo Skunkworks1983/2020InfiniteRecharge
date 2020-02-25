@@ -2,6 +2,7 @@ package frc.team1983;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
@@ -9,9 +10,12 @@ import frc.team1983.commands.RunTankDrive;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.*;
+import frc.team1983.util.sensors.AnalogEncoder;
 import frc.team1983.util.sensors.Limelight;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.util.sensors.NavX;
+
+import java.sql.SQLOutput;
 
 public class Robot extends TimedRobot
 {
@@ -27,6 +31,8 @@ public class Robot extends TimedRobot
 	private Indexer indexer;
 
 	private UsbCamera camera;
+
+	public AnalogInput input;
 
 	Robot()
 	{
@@ -56,6 +62,7 @@ public class Robot extends TimedRobot
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
 		limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
+		input = new AnalogInput(0);
 	}
 
 	@Override
@@ -84,15 +91,14 @@ public class Robot extends TimedRobot
 		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
-		shooter.setBrake(true);
+		//shooter.setBrake(true);
+
 	}
 
 	@Override
 	public void teleopPeriodic()
 	{
-	//	System.out.println(shooter.articulationEncoder.get());
-
-		System.out.println(RobotMap.Shooter.ARTICULATION_1);
+		//System.out.println(shooter.getArticulation());
 	}
 
 	@Override

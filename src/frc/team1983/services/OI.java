@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.commands.collectorAndIndexer.ManualIndexer;
 import frc.team1983.commands.shooter.SetArticulation;
+import frc.team1983.commands.shooter.SetArticulationPosition;
 import frc.team1983.commands.shooter.SetShooter;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.subsystems.Indexer;
@@ -42,6 +43,9 @@ public class OI
 
     protected static final int ARTICULATION_DOWN = 1;
     protected static final int ARTICULATION_UP = 2;
+
+    protected static final int ARTICULATION_POSITION = 5;
+
     protected static final int SET_SHOOTER = 9;
 
     protected static final int MANUAL_INDEXER = 10;
@@ -50,6 +54,8 @@ public class OI
     private double acceleratorValue = 1;
     private double flywheelValue = 1;
     private double indexerValue = 0.75;
+
+    private double articulationPosition = 90;
 
 
     private Joystick left, right, panel;
@@ -135,5 +141,6 @@ public class OI
 
         getButton(Joysticks.PANEL, MANUAL_INDEXER).whenHeld(new ManualIndexer(ControlMode.Throttle,
                 indexerValue));
+        getButton(Joysticks.PANEL, ARTICULATION_POSITION).whenHeld(new SetArticulation(ControlMode.Position, 90));
     }
 }
