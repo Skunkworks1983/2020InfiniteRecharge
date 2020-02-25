@@ -24,9 +24,9 @@ public class InternalIndexer extends CommandBase
         delayTime = dt;
     }
 
-    public InternalIndexer(ControlMode controlMode, double indexerValue, double delayTime)
+    public InternalIndexer(ControlMode controlMode, double internalIndexerValue, double delayTime)
     {
-        this(Robot.getInstance().getIndexer(), controlMode, indexerValue, delayTime);
+        this(Robot.getInstance().getIndexer(), controlMode, internalIndexerValue, delayTime);
     }
 
 

@@ -2,15 +2,13 @@ package frc.team1983.constants;
 
 public class RobotMap //TODO: all of these values have yet to be finalized
 {
-    public static final int COMPRESSOR = 61; //TODO: find the correct port
 
-    //our 2020 drivebase only utilizes 4 neos
-    // 1 and 2 are left, 13 and 14 are right
-    //TODO: change this once we get a final 2020 robot
+    //reversed values as of right now follow the odd/even false/true values
+
+    public static final int COMPRESSOR = 61;
+
     public static class Drivebase
     {
-    //    public static final int LEFT_1 = 12;
-    //    public static final boolean LEFT_1_REVERSED = false;
         public static final int LEFT_1 = 1;
         public static final boolean LEFT_1_REVERSED = false;
         public static final int LEFT_2 = 2;
@@ -20,8 +18,6 @@ public class RobotMap //TODO: all of these values have yet to be finalized
         public static final boolean RIGHT_1_REVERSED = true;
         public static final int RIGHT_2 = 14;
         public static final boolean RIGHT_2_REVERSED = true;
-    //    public static final int RIGHT_3 = 3;
-    //    public static final boolean RIGHT_3_REVERSED = true;
     }
 
     public static class Shooter
@@ -56,12 +52,12 @@ public class RobotMap //TODO: all of these values have yet to be finalized
         public static final boolean SHOOTER_TRANSFER_REVERSED = false;
 
         public static final int INTERNAL = 8;
-        public static final boolean INTERNAL_REVERSED = true; //if odd, true, if even, false
+        public static final boolean INTERNAL_REVERSED = false;
     }
 
     public static class Collector
     {
-        public static final int COLLECTOR_MOTOR = 6; //TODO: change name when we have time
+        public static final int COLLECTOR_MOTOR = 6;
         public static final boolean COLLECTOR_MOTOR_REVERSED = false;
 
         public static final int PISTON_FORWARD = 1;
