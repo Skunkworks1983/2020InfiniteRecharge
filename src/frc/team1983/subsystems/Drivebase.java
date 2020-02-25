@@ -1,21 +1,26 @@
 package frc.team1983.subsystems;
 
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
+import frc.team1983.util.sensors.NavX;
 
 public class Drivebase extends SubsystemBase
 {
 	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
 	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
 
+	private NavX navX;
     private MotorGroup left, right;
 
     public Drivebase()
     {
+    	navX = new NavX();
+
         left = new MotorGroup(
             new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
             new Spark(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED));
@@ -186,5 +191,20 @@ public class Drivebase extends SubsystemBase
     {
         setLeftVolts(leftVolts);
         setRightVolts(rightVolts);
+    }
+
+    public Rotation2d getHeading()
+    {
+    	return navX.getHeading();
+    }
+
+    public void setHeading(double heading)
+    {
+        navX.setHeading(heading);
+    }
+
+    public void resetHeading()
+    {
+        navX.reset();
     }
 }

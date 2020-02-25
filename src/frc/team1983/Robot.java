@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.RunTankDrive;
 import frc.team1983.constants.RobotMap;
+import frc.team1983.commands.TargetAlignment;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.*;
 import frc.team1983.util.sensors.Limelight;
-import frc.team1983.commands.TargetAlignment;
 import frc.team1983.util.sensors.NavX;
 
 import java.sql.SQLOutput;
@@ -55,7 +55,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-		navX.reset();
+		drivebase.resetHeading();
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
-		navX.reset();
+		drivebase.resetHeading();
 		CommandScheduler.getInstance().cancelAll();
 		new TargetAlignment().schedule();
 	}
@@ -85,7 +85,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopInit()
 	{
-		navX.reset();
+		drivebase.resetHeading();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 		shooter.setBrake(true);
