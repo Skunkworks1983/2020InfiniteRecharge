@@ -9,7 +9,7 @@ public class RendezvousTrenchRunSwitchToTrenchRunBall4And5 extends FollowTraject
 	{
 		super(
 			true,
-			Constants.Pose.RENDEZVOUS_TRENCH_RUN_SWITCH,
+			Constants.Pose.RENDEZVOUS_POINT_AND_TRENCH_RUN_SWITCH,
 			Constants.Pose.TRENCH_RUN_BALL_1,
 			Constants.Pose.TRENCH_RUN_BALL_4_AND_5
 		);

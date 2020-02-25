@@ -10,7 +10,7 @@ import frc.team1983.util.sensors.NavX;
 
 public class TargetAlignment extends PIDCommand
 {
-    private static final double kP = 0.015, kI = 0.0, kD = 0.0;
+    private static final double kP = 0.01, kI = 0.0, kD = 0.0, kF = 0.015;
     private Drivebase drivebase;
     private Limelight limelight;
     private NavX navX;
@@ -25,7 +25,10 @@ public class TargetAlignment extends PIDCommand
             new PIDController(kP, kI, kD),
             () -> navX.getHeading().getDegrees(),
             () -> turnRight ? Limelight.FOV_X / 2.0 : -Limelight.FOV_X / 2.0,
-            output -> drivebase.set(ControlMode.Throttle, -output, output),
+            output -> {
+                double feedforward = kF * Math.signum(output);
+                drivebase.set(ControlMode.Throttle, -output - feedforward, output + feedforward);
+            },
             drivebase
         );
 

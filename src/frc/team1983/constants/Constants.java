@@ -10,20 +10,30 @@ public class Constants
     public static final double ROBOT_LENGTH = 37.0 /12.0; // feet
     public static final double TRACK_WIDTH = 24.75 / 12.0; // feet
 
+    /**
+     * All poses are in meters
+     *
+     * IN_FRONT_OF is a starting pose on the initiation line
+     * SWITCH is an intermediate pose between two other poses, the poses are separated by AND
+     * OFFSET is an x or y offset from another pose
+     * TRENCH_RUN ball 1 is closest to the initiation line, ball 4 and 5 are furthest
+     * RENDEZVOUS_POINT ball 1 is closest to the center of the rendezvous point and increase clockwise
+     * OPPONENT_TRENCH_RUN ball 1 is closest to the opponent initiation line, ball 4 and 5 are furthest
+     */
     public static class Pose
     {
         // Front bumper touching initiation line
-        public static final Pose2d START_IN_FRONT_OF_TRENCH_RUN = new Pose2d(
+        public static final Pose2d IN_FRONT_OF_TRENCH_RUN = new Pose2d(
             Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
-        public static final Pose2d START_IN_FRONT_OF_POWER_PORT = new Pose2d(
+        public static final Pose2d IN_FRONT_OF_POWER_PORT = new Pose2d(
             Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-94.66 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
-        public static final Pose2d START_IN_FRONT_OF_OPPONENT_TRENCH_RUN = new Pose2d(
+        public static final Pose2d IN_FRONT_OF_OPPONENT_TRENCH_RUN = new Pose2d(
             Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-295.5 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
@@ -83,7 +93,7 @@ public class Constants
             RENDEZVOUS_POINT_BALL_4.getTranslation().getY() + 0.75 * (RENDEZVOUS_POINT_BALL_5.getTranslation().getY() - RENDEZVOUS_POINT_BALL_4.getTranslation().getY()),
             new Rotation2d(Units.degreesToRadians(112.5))
         );
-        public static final Pose2d RENDEZVOUS_TRENCH_RUN_SWITCH = new Pose2d(
+        public static final Pose2d RENDEZVOUS_POINT_AND_TRENCH_RUN_SWITCH = new Pose2d(
             Units.feetToMeters(242.63 / 12.0 - 6.0),
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
@@ -93,11 +103,19 @@ public class Constants
             Units.feetToMeters(-295.5 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
-        private static final double COMPLAINT_SHOT_OFFSET = 3.0;
-        public static final Pose2d COMPLAINT_SHOT = new Pose2d(
-            Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(-94.66 / 12.0 - COMPLAINT_SHOT_OFFSET),
-            new Rotation2d(Units.degreesToRadians(180 - Units.radiansToDegrees(Math.tan(COMPLAINT_SHOT_OFFSET / (10.0 + ROBOT_LENGTH / 2.0)))))
+        private static final double RENDEZVOUS_POINT_BALL_1_AND_2_AND_3_AND_RENDEZVOUS_POINT_BALL_4_AND_5_X_OFFSET = 0.0; // feet offset x from in front of power port
+        private static final double RENDEZVOUS_POINT_BALL_1_AND_2_AND_3_AND_RENDEZVOUS_POINT_BALL_4_AND_5_Y_OFFSET = -3.0; // feet offset y from in front of power port
+        public static final Pose2d RENDEZVOUS_POINT_BALL_1_AND_2_AND_3_AND_RENDEZVOUS_POINT_BALL_4_AND_5_SWITCH = new Pose2d(
+            Units.feetToMeters(10 + ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_BALL_1_AND_2_AND_3_AND_RENDEZVOUS_POINT_BALL_4_AND_5_X_OFFSET),
+            Units.feetToMeters(-94.66 / 12.0 + RENDEZVOUS_POINT_BALL_1_AND_2_AND_3_AND_RENDEZVOUS_POINT_BALL_4_AND_5_Y_OFFSET),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        private static final double OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_X_OFFSET = 0.0; // feet offset x from in front of power port
+        private static final double OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_Y_OFFSET = -3.0; // feet offset y from in front of power port
+        public static final Pose2d OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_SWITCH = new Pose2d(
+            Units.feetToMeters(10 + ROBOT_LENGTH / 2.0 + OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_X_OFFSET),
+            Units.feetToMeters(-94.66 / 12.0 + OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_Y_OFFSET),
+            new Rotation2d(Units.degreesToRadians(180 - Units.radiansToDegrees(Math.tan(-OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_Y_OFFSET / (10.0 + ROBOT_LENGTH / 2.0 + OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_X_OFFSET)))))
         );
     }
 }
