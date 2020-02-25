@@ -54,6 +54,9 @@ public class RobotMap //TODO: all of these values have yet to be finalized
 
         public static final int SHOOTER_TRANSFER = 10;
         public static final boolean SHOOTER_TRANSFER_REVERSED = false;
+
+        public static final int INTERNAL = 8;
+        public static final boolean INTERNAL_REVERSED = true; //if odd, true, if even, false
     }
 
     public static class Collector

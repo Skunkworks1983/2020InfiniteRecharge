@@ -57,6 +57,7 @@ public class OI
     public static final int MANUAL_INDEXER = 10;
     public static final int LOAD_INDEXER = 21;
     public static final int UNLOAD_INDEXER = 20;
+    public static final int INTERNAL_INDEXER_LOAD = 22;
 
     public static final int SET_COLLECTOR_DOWN = 7;
     public static final int SET_COLLECTOR_UP = 8;
@@ -71,8 +72,11 @@ public class OI
     private double articulationMovement = 0.1;
     private double collectorValue = 0.5;
     private double indexerValue = 0.8;
+    private double internalIndexerValue = 0.9;
     private double acceleratorValue = 0.9;
     private double flywheelValue = 1;
+
+    private double delaySeconds = 0.1;
 
     private Joystick left, right, panel;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
@@ -175,7 +179,8 @@ public class OI
                 -collectorValue));
 
         getButton(Joysticks.PANEL, COLLECT_AND_LOAD).whenHeld(new CollectAndLoad(Robot.getInstance().getCollector(),
-                Robot.getInstance().getIndexer(), collectorValue, indexerValue));
+                Robot.getInstance().getIndexer(), Robot.getInstance().getOI(), collectorValue, internalIndexerValue,
+                indexerValue, delaySeconds));
 
         getButton(Joysticks.PANEL, UNLOAD_INDEXER_AND_COLLECTOR).whenHeld(new UnloadIndexerAndCollector(
                 Robot.getInstance().getCollector(), Robot.getInstance().getIndexer(), ControlMode.Throttle,
@@ -184,5 +189,8 @@ public class OI
         getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
 
         getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
+
+        getButton(Joysticks.PANEL, INTERNAL_INDEXER_LOAD).whenHeld(new InternalIndexer(Robot.getInstance().getIndexer(),
+                ControlMode.Throttle, internalIndexerValue, 0));
     }
 }

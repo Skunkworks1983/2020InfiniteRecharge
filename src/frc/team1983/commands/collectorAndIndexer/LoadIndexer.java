@@ -8,6 +8,8 @@ import frc.team1983.subsystems.Collector;
 import frc.team1983.subsystems.Indexer;
 import frc.team1983.util.motors.ControlMode;
 
+import javax.naming.ldap.Control;
+
 public class LoadIndexer extends CommandBase
 {
     //command moves balls from indexer to shooter
@@ -46,6 +48,7 @@ public class LoadIndexer extends CommandBase
         boolean isShooting = oi.getButton(OI.Joysticks.PANEL, OI.SET_SHOOTER).get();
 
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsForward);
+        indexer.internal.set(ControlMode.Throttle, Indexer.internalForward);
 
         if (!isShooting && indexer.indexerHasBall.get()) //if we aren't shooting and sensor is triggered
         {
@@ -69,5 +72,6 @@ public class LoadIndexer extends CommandBase
     {
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
         indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
+        indexer.internal.set(ControlMode.Throttle, Indexer.motorsOff);
     }
 }

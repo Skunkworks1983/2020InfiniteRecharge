@@ -9,12 +9,13 @@ public class CollectAndLoad extends ParallelCommandGroup
 {
 
 
-    public CollectAndLoad(Collector c, Indexer i, Double cv, Double iv)
+    public CollectAndLoad(Collector c, Indexer i, OI anOI, double collectorPercentThrottle,
+                          double internalPercentThrottle, double externalPercentThrottle, double delaySeconds)
     {
         addCommands(
-                new SetRollerThrottle(c, cv),
+                new SetRollerThrottle(c, collectorPercentThrottle),
 
-                new LoadIndexer(iv)
+                new IndexerStartup(i, anOI, internalPercentThrottle, externalPercentThrottle, delaySeconds)
         );
     }
 
