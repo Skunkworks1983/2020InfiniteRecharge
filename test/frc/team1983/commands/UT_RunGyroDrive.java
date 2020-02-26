@@ -70,7 +70,7 @@ public class UT_RunGyroDrive
 	}
 
 	@Test
-	public void executeOnlyTurnsWhenRightJoystickIsZero()
+	public void executeDoesNotAddThrottleWhenRightJoystickIsZero()
 	{
 		when(oi.getLeftX()).thenReturn(0.5);
 
