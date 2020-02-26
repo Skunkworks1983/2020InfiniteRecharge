@@ -8,6 +8,8 @@ import frc.team1983.util.motors.ControlMode;
 
 public class RunGyroDrive extends CommandBase
 {
+    public static final double JOYSTICK_DEADZONE = 0.05;
+
     private Drivebase drivebase;
     private OI oi;
 
@@ -41,7 +43,7 @@ public class RunGyroDrive extends CommandBase
         double turnThrottle = 0.02 * (currentHeading - targetHeading);
         double driveThrottle = oi.getRightY() * (slow ? 0.65 : 1);
 
-        if(Math.abs(oi.getLeftX()) > 0.05)
+        if(Math.abs(oi.getLeftX()) > JOYSTICK_DEADZONE)
         {
             turnThrottle = oi.getLeftX() * (slow ? 0.2 : 0.4);
             targetHeading = drivebase.getHeading().getDegrees();

@@ -68,4 +68,41 @@ public class UT_RunGyroDrive
 
 		Assert.assertThat(leftOutput.getValue(), is(rightOutput.getValue()));
 	}
+
+	@Test
+	public void executeOnlyTurnsWhenRightJoystickIsZero()
+	{
+		when(oi.getLeftX()).thenReturn(0.5);
+
+		when(drivebase.getHeading().getDegrees()).thenReturn(0.0);
+
+		runGyroDrive.execute();
+
+		ArgumentCaptor<Double> leftOutput = ArgumentCaptor.forClass(Double.class);
+		ArgumentCaptor<Double> rightOutput = ArgumentCaptor.forClass(Double.class);
+
+		verify(drivebase).setLeft(eq(ControlMode.Throttle), leftOutput.capture());
+		verify(drivebase).setRight(eq(ControlMode.Throttle), rightOutput.capture());
+
+		Assert.assertThat(leftOutput.getValue(), is(-rightOutput.getValue()));
+	}
+
+	@Test
+	public void executeDoesNotTurnWhenLeftJoystickIsDeadzoned()
+	{
+		when(oi.getLeftX()).thenReturn(RunGyroDrive.JOYSTICK_DEADZONE / 2.0);
+		when(oi.getRightY()).thenReturn(0.5);
+
+		when(drivebase.getHeading().getDegrees()).thenReturn(0.0);
+
+		runGyroDrive.execute();
+
+		ArgumentCaptor<Double> leftOutput = ArgumentCaptor.forClass(Double.class);
+		ArgumentCaptor<Double> rightOutput = ArgumentCaptor.forClass(Double.class);
+
+		verify(drivebase).setLeft(eq(ControlMode.Throttle), leftOutput.capture());
+		verify(drivebase).setRight(eq(ControlMode.Throttle), rightOutput.capture());
+
+		Assert.assertThat(leftOutput.getValue(), is(rightOutput.getValue()));
+	}
 }
