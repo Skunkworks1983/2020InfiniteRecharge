@@ -54,7 +54,7 @@ public class Robot extends TimedRobot
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
 		limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
-		shooter.setBrake(false);
+		shooter.setBrake(true);
 	}
 
 	@Override

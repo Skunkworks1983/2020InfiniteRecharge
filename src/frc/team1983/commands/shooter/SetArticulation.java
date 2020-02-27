@@ -8,7 +8,6 @@ import frc.team1983.util.motors.ControlMode;
 public class SetArticulation extends CommandBase
 {
     private Shooter shooter;
-    private ControlMode controlMode;
     private double value;
 
     public SetArticulation(Shooter shooter, double value)
@@ -25,6 +24,7 @@ public class SetArticulation extends CommandBase
     @Override
     public void execute()
     {
+        //Safety code that prevents shooter hood from continuing into hard stop
         if (shooter.getArticulationPosition() <= shooter.UPPER_LIMIT && shooter.getArticulationPosition() > shooter.LOWER_LIMIT)
             shooter.setArticulation(value);
         else if (shooter.getArticulationPosition() >= shooter.UPPER_LIMIT && value < 0.0)

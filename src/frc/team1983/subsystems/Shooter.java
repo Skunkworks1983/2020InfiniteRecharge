@@ -13,12 +13,9 @@ public class Shooter extends SubsystemBase
     public double voltageRamp = 1;
     public static final double kP = 0.0, kI = 0.0, kD = 0.0, kF = 0.0;
 
-    public static final double UPPER_LIMIT = 0.3;
-    //TODO remove(for testing purposes only
-    public static final double TEST_UPPER_LIMIT = 0.214;
-    //TODO remove(for testing purposes only
-    public static final double TEST_LOWER_LIMIT = 0.07;
-    public static final double LOWER_LIMIT = -0.1;
+    //Limits based on encoder reading as of 02/26/2020
+    public static final double UPPER_LIMIT = 0.8;
+    public static final double LOWER_LIMIT = 0.54;
 
     public double desiredSpeed = 0.0;
 
@@ -47,12 +44,6 @@ public class Shooter extends SubsystemBase
 
 //        articulationPIDController = new SparkPIDController((Spark) articulation.getMaster());
 //        articulationPIDController.setGains(kP, kI, kD, kF);
-    }
-
-    @Override
-    public void periodic()
-    {
-
     }
 
     /**
@@ -103,7 +94,7 @@ public class Shooter extends SubsystemBase
 
     public double getArticulationPosition()
     {
-        return articulation.getPosition();
+        return articulation.getPositionTicks();
     }
 
     public double getAcceleratorVelocity()
