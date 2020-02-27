@@ -9,6 +9,7 @@ import frc.team1983.commands.climber.RunClimberDown;
 import frc.team1983.commands.climber.RunClimberUp;
 import frc.team1983.commands.collectorAndIndexer.*;
 import frc.team1983.commands.shooter.SetArticulation;
+import frc.team1983.commands.shooter.SetArticulationPosition;
 import frc.team1983.commands.shooter.SetShooter;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.subsystems.Climber;
@@ -68,7 +69,7 @@ public class OI
     public static final int CLIMBER_UP = 4;
     public static final int CLIMBER_DOWN = 6;
 
-    private double articulationMovement = 0.1;
+    private double articulationMovement = 0.75;
     private double collectorValue = 0.5;
     private double indexerValue = 0.8;
     private double acceleratorValue = 0.9;
@@ -146,11 +147,9 @@ public class OI
     }
     public void initializeBindings()
     {
-        getButton(Joysticks.PANEL, ARTICULATION_DOWN).whenHeld(new SetArticulation(ControlMode.Throttle,
-                - articulationMovement));
+        getButton(Joysticks.PANEL, ARTICULATION_DOWN).whenHeld(new SetArticulation(-articulationMovement));
 
-        getButton(Joysticks.PANEL, ARTICULATION_UP).whenHeld(new SetArticulation(ControlMode.Throttle,
-                articulationMovement));
+        getButton(Joysticks.PANEL, ARTICULATION_UP).whenHeld(new SetArticulation(articulationMovement));
 
         getButton(Joysticks.PANEL, SET_SHOOTER).whenHeld(new SetShooter(ControlMode.Throttle,
                 acceleratorValue, flywheelValue));

@@ -23,14 +23,16 @@ public class SetAccelerator extends CommandBase
         this(Robot.getInstance().getShooter(), controlMode, value);
     }
 
-
+    @Override
+    public void initialize()
+    {
+        shooter.setVoltageRamp(shooter.voltageRamp);
+    }
 
     @Override
     public void execute()
     {
-//        shooter.setBrake(true);
         shooter.setAccelerator(controlMode, value);
-
     }
 
     @Override

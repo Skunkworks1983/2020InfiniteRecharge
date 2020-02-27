@@ -11,29 +11,32 @@ public class SetArticulation extends CommandBase
     private ControlMode controlMode;
     private double value;
 
-    public SetArticulation(Shooter shooter, ControlMode controlMode, double value)
+    public SetArticulation(Shooter shooter, double value)
     {
         this.shooter = shooter;
-        this.controlMode = controlMode;
         this.value = value;
     }
 
-    public SetArticulation(ControlMode controlMode, double value)
+    public SetArticulation(double value)
     {
-        this(Robot.getInstance().getShooter(), controlMode, value);
+        this(Robot.getInstance().getShooter(), value);
     }
 
     @Override
     public void execute()
     {
-        shooter.setArticulation(controlMode, value);
-
-        System.out.println(shooter.getArticulation());
+        if (shooter.getArticulationPosition() <= shooter.UPPER_LIMIT && shooter.getArticulationPosition() > shooter.LOWER_LIMIT)
+            shooter.setArticulation(value);
+        else if (shooter.getArticulationPosition() >= shooter.UPPER_LIMIT && value < 0.0)
+            shooter.setArticulation(value);
+        else if (shooter.getArticulationPosition() <= shooter.LOWER_LIMIT && value > 0)
+            shooter.setArticulation(value);
+        else shooter.setArticulation(0);
     }
 
     @Override
     public void end(boolean interrupted)
     {
-        shooter.setArticulation(ControlMode.Throttle, 0.0);
+        shooter.setArticulation(0.0);
     }
 }

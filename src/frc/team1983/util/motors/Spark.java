@@ -61,6 +61,14 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
     }
 
     /**
+     * @param rate How long motor should take to accelerate from 0 percent to 100 percent
+     */
+    public  void setVoltageRamp(double rate)
+    {
+        setOpenLoopRampRate(rate);
+    }
+
+    /**
      * @return Get the current position in encoder ticks, by default the CANEncoder returns the number of rotations
      */
     public double getPositionTicks()

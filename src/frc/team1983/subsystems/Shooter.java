@@ -1,23 +1,32 @@
 package frc.team1983.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
-import frc.team1983.util.control.SparkPIDController;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
-import frc.team1983.util.sensors.AnalogEncoder;
+import frc.team1983.util.sensors.DutyCycleEncoder;
 
 public class Shooter extends SubsystemBase
 {
+
+    public double voltageRamp = 1;
     public static final double kP = 0.0, kI = 0.0, kD = 0.0, kF = 0.0;
+
+    public static final double UPPER_LIMIT = 0.3;
+    //TODO remove(for testing purposes only
+    public static final double TEST_UPPER_LIMIT = 0.214;
+    //TODO remove(for testing purposes only
+    public static final double TEST_LOWER_LIMIT = 0.07;
+    public static final double LOWER_LIMIT = -0.1;
+
+    public double desiredSpeed = 0.0;
 
     private MotorGroup accelerator;
     private MotorGroup flywheel;
     private MotorGroup articulation;
 
-    private SparkPIDController articulationPIDController;
+//    private SparkPIDController articulationPIDController;
 
     public Shooter()
     {
@@ -32,12 +41,18 @@ public class Shooter extends SubsystemBase
         );
 
         articulation = new MotorGroup(
-            //new AnalogEncoder(new AnalogInput(0)),
+            new DutyCycleEncoder(1),
             new Spark(RobotMap.Shooter.ARTICULATION_1, RobotMap.Shooter.ARTICULATION_1_REVERSED)
         );
 
-        articulationPIDController = new SparkPIDController((Spark) articulation.getMaster());
-        articulationPIDController.setGains(kP, kI, kD, kF);
+//        articulationPIDController = new SparkPIDController((Spark) articulation.getMaster());
+//        articulationPIDController.setGains(kP, kI, kD, kF);
+    }
+
+    @Override
+    public void periodic()
+    {
+
     }
 
     /**
@@ -74,12 +89,19 @@ public class Shooter extends SubsystemBase
         articulation.setBrake(brake);
     }
 
-    public void setArticulation(ControlMode controlMode, double value)
+    public void setVoltageRamp(double volts)
     {
-        articulation.set(controlMode, value);
+        accelerator.setVoltageRamp(volts);
+        flywheel.setVoltageRamp(volts);
     }
 
-    public double getArticulation()
+    public void setArticulation(double speed)
+    {
+        articulation.set(ControlMode.Throttle, speed);
+        desiredSpeed = speed;
+    }
+
+    public double getArticulationPosition()
     {
         return articulation.getPosition();
     }
