@@ -22,21 +22,22 @@ import java.util.HashMap;
 public class OI
 {
     public enum Joysticks
-    {
-        LEFT(0),
-        RIGHT(1),
-        PANEL(2);
-
-        private int port;
-
-        Joysticks(int port)
         {
-            this.port = port;
-        }
+            LEFT(0),
+            RIGHT(1),
+            PANEL(2),
+            OPERATOR(3);
 
-        public int getPort()
-        {
-            return port;
+            private int port;
+
+            Joysticks(int port)
+            {
+                this.port = port;
+            }
+
+            public int getPort()
+            {
+                return port;
         }
     }
 
@@ -75,7 +76,7 @@ public class OI
     private double acceleratorValue = 0.9;
     private double flywheelValue = 1;
 
-    private Joystick left, right, panel;
+    private Joystick left, right, panel, operator;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
 
     protected static double scale(double raw)
@@ -85,11 +86,12 @@ public class OI
         else return Math.pow(Math.abs(raw), JOYSTICK_EXPONENT) * Math.signum(raw);
     }
 
-    public OI(Joystick left, Joystick right, Joystick panel, HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons)
+    public OI(Joystick left, Joystick right, Joystick panel, Joystick operator, HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons)
     {
         this.left = left;
         this.right = right;
         this.panel = panel;
+        this.operator = operator;
         this.buttons = buttons;
     }
 
@@ -98,6 +100,7 @@ public class OI
         this(new Joystick(Joysticks.LEFT.getPort()),
                 new Joystick(Joysticks.RIGHT.getPort()),
                 new Joystick(Joysticks.PANEL.getPort()),
+                new Joystick(Joysticks.OPERATOR.getPort()),
                 new HashMap<>()
         );
     }
@@ -119,7 +122,26 @@ public class OI
 
     public double getLeftX()
     {
-        return left.getX();
+        if(Math.abs(left.getX()) > 0.15)
+        {
+            return left.getX();
+        }
+        else
+        {
+            return operator.getX();
+        }
+    }
+
+    public double getOperatorX()
+    {
+
+        return operator.getX();
+    }
+
+    public double getOperatorY()
+    {
+
+        return operator.getY();
     }
 
     public JoystickButton getButton(Joysticks joystickPort, int button)
@@ -133,6 +155,8 @@ public class OI
             case RIGHT:
                 joystick = right;
                 break;
+            case OPERATOR:
+                joystick = operator;
             default: // If it wasn't the other two it must be panel. Java doesn't like it if we just do case PANEL.
                 joystick = panel;
                 break;
