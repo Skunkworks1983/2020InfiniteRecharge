@@ -67,7 +67,7 @@ public class Limelight implements Runnable
             }
 
             System.out.println("Led Mode not found from double: " + value);
-            return USE_PIPELINE;
+            return DEFAULT_LED_MODE;
         }
 
     }
@@ -84,14 +84,13 @@ public class Limelight implements Runnable
     public static final double PITCH_DEFAULT_VALUE = 0.0;
     public static final double YAW_DEFAULT_VALUE = 0.0;
     public static final double ROLL_DEFAULT_VALUE = 0.0;
-    public static final double LED_MODE_DEFAULT_VALUE = 0.0;
     public static final LedMode DEFAULT_LED_MODE = LedMode.FORCE_OFF;
 
     private boolean targetDetected;
     private double x, y;
     private double area;
     private double skew;
-    private LedMode ledMode;
+    private LedMode ledMode = DEFAULT_LED_MODE;
     private PipelineSetting pipelineSetting;
     private double xOffset, yOffset;
     private double pitch, yaw, roll;
@@ -111,7 +110,11 @@ public class Limelight implements Runnable
         y = table.getEntry("ty").getDouble(Y_DEFAULT_VALUE);
         area = table.getEntry("ta").getDouble(AREA_DEFAULT_VALUE);
         skew = table.getEntry("ts").getDouble(SKEW_DEFAULT_VALUE);
-        ledMode = LedMode.fromDouble(table.getEntry("ledMode").getDouble(LED_MODE_DEFAULT_VALUE));
+
+        if(ledMode != LedMode.fromDouble(table.getEntry("ledMode").getDouble(DEFAULT_LED_MODE.getLedMode())))
+        {
+            setLedMode(ledMode);
+        }
     }
 
     public boolean isTargetDetected()
