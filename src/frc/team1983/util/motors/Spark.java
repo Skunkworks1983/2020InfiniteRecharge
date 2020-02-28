@@ -11,6 +11,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
 {
     private double conversionRatio = 1;
     private double encoderOffset;
+    private int port;
 
     /**
      * @param port The deviceID
@@ -20,6 +21,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
     {
         super(port, MotorType.kBrushless);
         setInverted(reversed);
+        this.port = port;
     }
 
     /**
@@ -42,6 +44,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
         {
             case Throttle:
                 super.set(value);
+                System.out.printf("Port: %d value %f\n", port,  value);
                 break;
             case Position:
                 super.getPIDController().setReference(value, ControlType.kPosition);

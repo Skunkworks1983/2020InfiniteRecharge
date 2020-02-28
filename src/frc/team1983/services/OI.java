@@ -2,21 +2,15 @@ package frc.team1983.services;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.team1983.Robot;
-import frc.team1983.commands.TargetAlignment;
 import frc.team1983.commands.climber.RunClimberDown;
 import frc.team1983.commands.climber.RunClimberUp;
 import frc.team1983.commands.collectorAndIndexer.*;
-import frc.team1983.commands.shooter.SetArticulation;
 import frc.team1983.commands.shooter.SetArticulationPosition;
 import frc.team1983.commands.shooter.SetShooter;
-import frc.team1983.constants.RobotMap;
-import frc.team1983.subsystems.Climber;
-import frc.team1983.subsystems.Indexer;
+import frc.team1983.subsystems.Shooter;
 import frc.team1983.util.motors.ControlMode;
 
-import javax.naming.ldap.Control;
 import java.util.HashMap;
 
 public class OI
@@ -141,7 +135,7 @@ public class OI
     public double getOperatorY()
     {
 
-        return operator.getY();
+        return scale(operator.getY());
     }
 
     public JoystickButton getButton(Joysticks joystickPort, int button)
@@ -157,6 +151,7 @@ public class OI
                 break;
             case OPERATOR:
                 joystick = operator;
+                break;
             default: // If it wasn't the other two it must be panel. Java doesn't like it if we just do case PANEL.
                 joystick = panel;
                 break;
@@ -171,10 +166,6 @@ public class OI
     }
     public void initializeBindings()
     {
-        getButton(Joysticks.PANEL, ARTICULATION_DOWN).whenHeld(new SetArticulation(-articulationMovement));
-
-        getButton(Joysticks.PANEL, ARTICULATION_UP).whenHeld(new SetArticulation(articulationMovement));
-
         getButton(Joysticks.PANEL, SET_SHOOTER).whenHeld(new SetShooter(ControlMode.Throttle,
                 acceleratorValue, flywheelValue));
 
@@ -207,5 +198,7 @@ public class OI
         getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
 
         getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
+
+        getButton(Joysticks.OPERATOR, 1).whenHeld(new SetArticulationPosition(Shooter.LOWER_LIMIT));
     }
 }
