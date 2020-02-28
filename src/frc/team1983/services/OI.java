@@ -3,8 +3,13 @@ package frc.team1983.services;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.team1983.Robot;
 import frc.team1983.commands.TargetAlignment;
+import frc.team1983.commands.climber.RunClimberDown;
+import frc.team1983.commands.climber.RunClimberUp;
 
+
+import javax.naming.ldap.Control;
 import java.util.HashMap;
 
 public class OI
@@ -28,10 +33,44 @@ public class OI
         }
     }
 
-    protected static final double JOYSTICK_DEADZONE = 0.15;
-    protected static final double JOYSTICK_EXPONENT = 1.7;
-    protected static final double LINEAR_ZONE = 0.4;
-    protected static final double LINEAR_SLOPE = Math.abs(Math.pow(LINEAR_ZONE, JOYSTICK_EXPONENT) / (LINEAR_ZONE - JOYSTICK_DEADZONE));
+    //driving joysticks for... well.. driving
+    public static final double JOYSTICK_DEADZONE = 0.15;
+    public static final double JOYSTICK_EXPONENT = 1.7;
+    public static final double LINEAR_ZONE = 0.4;
+    public static final double LINEAR_SLOPE = Math.abs(Math.pow(LINEAR_ZONE, JOYSTICK_EXPONENT) / (LINEAR_ZONE - JOYSTICK_DEADZONE));
+
+    //shooter buttons as of testing (no, we didn't break it yet)
+    public static final int ARTICULATION_DOWN = 1;
+    public static final int ARTICULATION_UP = 2;
+    public static final int SET_SHOOTER = 9;
+
+    //indexer and collector buttons as of testing (also has yet to break)
+    public static final int COLLECT_AND_LOAD = 16;
+    public static final int UNLOAD_INDEXER_AND_COLLECTOR = 15;
+
+    public static final int MANUAL_INDEXER = 10;
+    public static final int LOAD_INDEXER = 21;
+    public static final int UNLOAD_INDEXER = 20;
+    public static final int INTERNAL_INDEXER_LOAD = 22;
+
+    public static final int SET_COLLECTOR_DOWN = 7;
+    public static final int SET_COLLECTOR_UP = 8;
+    public static final int SET_ROLLER = 11;
+    protected static final int UNLOAD_COLLECTOR = 23;
+
+
+    //climber buttons as of testing
+    public static final int CLIMBER_UP = 4;
+    public static final int CLIMBER_DOWN = 6;
+
+    private double articulationMovement = 0.1;
+    private double collectorValue = 0.5;
+    private double indexerValue = 0.8;
+    private double internalIndexerValue = 0.9;
+    private double acceleratorValue = 0.9;
+    private double flywheelValue = 1;
+
+    private double delaySeconds = 0.1;
 
     private Joystick left, right, panel;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
@@ -105,6 +144,9 @@ public class OI
     }
     public void initializeBindings()
     {
-        
+        getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
+
+        getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
+
     }
 }
