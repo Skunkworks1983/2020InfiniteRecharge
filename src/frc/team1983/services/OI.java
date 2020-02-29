@@ -65,7 +65,6 @@ public class OI
     public static final int CLIMBER_UP = 4;
     public static final int CLIMBER_DOWN = 6;
 
-    private double articulationMovement = 0.15;
     private double collectorValue = 0.5;
     private double indexerValue = 0.8;
     private double acceleratorValue = 0.9;
@@ -202,6 +201,6 @@ public class OI
 
         getButton(Joysticks.OPERATOR, 1).whenHeld(new SetArticulationPosition(Shooter.LOWER_LIMIT));
 
-        getButton(Joysticks.OPERATOR, 1).whenHeld(new TargetAlignment());
+        getButton(Joysticks.OPERATOR, 2).whenHeld(new TargetAlignment());
     }
 }

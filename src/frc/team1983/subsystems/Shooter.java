@@ -13,11 +13,13 @@ public class Shooter extends SubsystemBase
     public double voltageRamp = 2;
     public static final double kP = 0.0, kI = 0.0, kD = 0.0, kF = 0.0;
 
-    //Limits based on encoder reading as of 02/26/2020
-    public static final double UPPER_LIMIT = 0.8;
+    //Limits based on encoder reading as of 02/28/2020
+    public static final double UPPER_LIMIT = 0.9;
     public static final double LOWER_LIMIT = 0.54;
 
-    public double desiredSpeed = 0.0;
+    //Tuned on 2/28/20 with manual loading and 90 percent throttle on accelerator and flywheel
+    public static final double INNER_FRONT_PILLAR = 0.658;
+    public static final double OUTER_BACK_PILLAR = 0.704;
 
     private MotorGroup accelerator;
     private MotorGroup flywheel;
@@ -89,7 +91,6 @@ public class Shooter extends SubsystemBase
     public void setArticulation(double speed)
     {
         articulation.set(ControlMode.Throttle, speed);
-        desiredSpeed = speed;
     }
 
     public double getArticulationPosition()

@@ -29,7 +29,6 @@ public class SetArticulation extends CommandBase
     public void initialize()
     {
         targetAngle = shooter.getArticulationPosition();
-
         shooter.setBrake(true);
     }
 
