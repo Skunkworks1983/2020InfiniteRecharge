@@ -98,6 +98,42 @@ public class Constants
             RENDEZVOUS_POINT_BALL_4.getTranslation().getY() + 0.75 * (RENDEZVOUS_POINT_BALL_5.getTranslation().getY() - RENDEZVOUS_POINT_BALL_4.getTranslation().getY()),
             new Rotation2d(Units.degreesToRadians(112.5))
         );
+        private static final double RENDEZVOUS_POINT_OFFSET_DISTANCE = 1.0; // feet offset from edge of rendezvous point
+        public static final Pose2d RENDEZVOUS_POINT_BALL_1_OFFSET = new Pose2d(
+            Units.feetToMeters(240.51 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.cos(Units.degreesToRadians(22.5))),
+            Units.feetToMeters(-175.8 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.sin(Units.degreesToRadians(22.5))),
+            new Rotation2d(Units.degreesToRadians(-157.5))
+        );
+        public static final Pose2d RENDEZVOUS_POINT_BALL_2_OFFSET = new Pose2d(
+            Units.feetToMeters(234.17 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.cos(Units.degreesToRadians(22.5))),
+            Units.feetToMeters(-160.5 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.sin(Units.degreesToRadians(22.5))),
+            new Rotation2d(Units.degreesToRadians(-157.5))
+        );
+        public static final Pose2d RENDEZVOUS_POINT_BALL_3_OFFSET = new Pose2d(
+            Units.feetToMeters(227.83 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.cos(Units.degreesToRadians(22.5))),
+            Units.feetToMeters(-145.2 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.sin(Units.degreesToRadians(22.5))),
+            new Rotation2d(Units.degreesToRadians(-157.5))
+        );
+        public static final Pose2d RENDEZVOUS_POINT_BALL_1_AND_2_AND_3_OFFSET = new Pose2d(
+            RENDEZVOUS_POINT_BALL_1_OFFSET.getTranslation().getX() + 0.25 * (RENDEZVOUS_POINT_BALL_3_OFFSET.getTranslation().getX() - RENDEZVOUS_POINT_BALL_1_OFFSET.getTranslation().getX()),
+            RENDEZVOUS_POINT_BALL_1_OFFSET.getTranslation().getY() + 0.25 * (RENDEZVOUS_POINT_BALL_3_OFFSET.getTranslation().getY() - RENDEZVOUS_POINT_BALL_1_OFFSET.getTranslation().getY()),
+            new Rotation2d(Units.degreesToRadians(-157.5))
+        );
+        public static final Pose2d RENDEZVOUS_POINT_BALL_4_OFFSET = new Pose2d(
+            Units.feetToMeters(234.94 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.sin(Units.degreesToRadians(22.5))),
+            Units.feetToMeters(-120.79 / 12.0 + (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.cos(Units.degreesToRadians(22.5))),
+            new Rotation2d(Units.degreesToRadians(112.5))
+        );
+        public static final Pose2d RENDEZVOUS_POINT_BALL_5_OFFSET = new Pose2d(
+            Units.feetToMeters(250.25 / 12.0 - (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.sin(Units.degreesToRadians(22.5))),
+            Units.feetToMeters(-114.45 / 12.0 + (ROBOT_LENGTH / 2.0 + RENDEZVOUS_POINT_OFFSET_DISTANCE) * Math.cos(Units.degreesToRadians(22.5))),
+            new Rotation2d(Units.degreesToRadians(112.5))
+        );
+        public static final Pose2d RENDEZVOUS_POINT_BALL_4_AND_5_OFFSET = new Pose2d(
+            RENDEZVOUS_POINT_BALL_4_OFFSET.getTranslation().getX() + 0.75 * (RENDEZVOUS_POINT_BALL_5_OFFSET.getTranslation().getX() - RENDEZVOUS_POINT_BALL_4_OFFSET.getTranslation().getX()),
+            RENDEZVOUS_POINT_BALL_4_OFFSET.getTranslation().getY() + 0.75 * (RENDEZVOUS_POINT_BALL_5_OFFSET.getTranslation().getY() - RENDEZVOUS_POINT_BALL_4_OFFSET.getTranslation().getY()),
+            new Rotation2d(Units.degreesToRadians(112.5))
+        );
         public static final Pose2d RENDEZVOUS_POINT_AND_TRENCH_RUN_SWITCH = new Pose2d(
             Units.feetToMeters(242.63 / 12.0 - 6.0),
             Units.feetToMeters(-27.75 / 12.0),
