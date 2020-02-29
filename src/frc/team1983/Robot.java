@@ -40,13 +40,14 @@ public class Robot extends TimedRobot
         climber = new Climber();
 
         shooter = new Shooter();
+        limelight = new Limelight();
         oi = new OI();
         oi.initializeBindings();
 
-        drivebase.setDefaultCommand(new RunTankDrive());
+        drivebase.setDefaultCommand(new RunGyroDrive());
         shooter.setDefaultCommand(new SetArticulation());
 
-        limelight = new Limelight();
+
     }
 
     @Override
@@ -63,7 +64,7 @@ public class Robot extends TimedRobot
     public void robotPeriodic()
     {
         CommandScheduler.getInstance().run();
-        //System.out.println("Articulation Position: " + shooter.getArticulationPosition());
+        System.out.println("Articulation Position: " + shooter.getArticulationPosition());
     }
 
     @Override
@@ -84,7 +85,7 @@ public class Robot extends TimedRobot
     {
         navX.reset();
         CommandScheduler.getInstance().cancelAll();
-        new RunTankDrive().schedule();
+        new RunGyroDrive().schedule();
         new SetArticulation().schedule();
     }
 

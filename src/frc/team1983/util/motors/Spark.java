@@ -44,7 +44,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
         {
             case Throttle:
                 super.set(value);
-                System.out.printf("Port: %d value %f\n", port,  value);
+//                System.out.printf("Port: %d value %f\n", port,  value);
                 break;
             case Position:
                 super.getPIDController().setReference(value, ControlType.kPosition);

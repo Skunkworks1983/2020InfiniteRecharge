@@ -3,6 +3,7 @@ package frc.team1983.services;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.team1983.Robot;
+import frc.team1983.commands.TargetAlignment;
 import frc.team1983.commands.climber.RunClimberDown;
 import frc.team1983.commands.climber.RunClimberUp;
 import frc.team1983.commands.collectorAndIndexer.*;
@@ -68,7 +69,7 @@ public class OI
     private double collectorValue = 0.5;
     private double indexerValue = 0.8;
     private double acceleratorValue = 0.9;
-    private double flywheelValue = 1;
+    private double flywheelValue = 0.9;
 
     private Joystick left, right, panel, operator;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
@@ -200,5 +201,7 @@ public class OI
         getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
 
         getButton(Joysticks.OPERATOR, 1).whenHeld(new SetArticulationPosition(Shooter.LOWER_LIMIT));
+
+        getButton(Joysticks.OPERATOR, 1).whenHeld(new TargetAlignment());
     }
 }

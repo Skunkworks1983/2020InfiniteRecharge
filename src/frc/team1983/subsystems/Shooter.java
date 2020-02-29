@@ -10,7 +10,7 @@ import frc.team1983.util.sensors.DutyCycleEncoder;
 public class Shooter extends SubsystemBase
 {
 
-    public double voltageRamp = 1;
+    public double voltageRamp = 2;
     public static final double kP = 0.0, kI = 0.0, kD = 0.0, kF = 0.0;
 
     //Limits based on encoder reading as of 02/26/2020
