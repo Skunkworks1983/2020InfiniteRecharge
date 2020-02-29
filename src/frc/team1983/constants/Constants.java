@@ -6,9 +6,14 @@ import edu.wpi.first.wpilibj.util.Units;
 
 public class Constants
 {
+    // 2019
+//    public static final double ROBOT_WIDTH = 34.0 / 12.0; // feet
+//    public static final double ROBOT_LENGTH = 37.0 /12.0; // feet
+//    public static final double TRACK_WIDTH = 24.75 / 12.0; // feet
+    // 2020
     public static final double ROBOT_WIDTH = 34.0 / 12.0; // feet
-    public static final double ROBOT_LENGTH = 37.0 /12.0; // feet
-    public static final double TRACK_WIDTH = 24.75 / 12.0; // feet
+    public static final double ROBOT_LENGTH = 38.0 /12.0; // feet
+    public static final double TRACK_WIDTH = 23.75 / 12.0; // feet
 
     /**
      * All poses are in meters

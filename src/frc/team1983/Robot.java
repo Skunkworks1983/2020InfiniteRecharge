@@ -27,7 +27,6 @@ public class Robot extends TimedRobot
 
 	private UsbCamera camera;
 
-	private SendableChooser<Pose2d> startingPoseChooser;
 	private SendableChooser<Auto> autoChooser;
 
 	Robot()
@@ -96,6 +95,8 @@ public class Robot extends TimedRobot
 	public void teleopInit()
 	{
 		drivebase.setBrake(false);
+		drivebase.zero();
+		drivebase.setPose(new Pose2d());
 
 		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
@@ -105,7 +106,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopPeriodic()
 	{
-
+		
 	}
 
 	@Override

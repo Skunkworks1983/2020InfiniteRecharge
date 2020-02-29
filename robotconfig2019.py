@@ -1,23 +1,23 @@
 {
     # Ports for the left-side motors
-    "leftMotorPorts": [1, 2],
+    "leftMotorPorts": [12, 13, 14],
     # Ports for the right-side motors
-    "rightMotorPorts": [13, 14],
+    "rightMotorPorts": [1, 2, 3],
     # NOTE: Inversions of the slaves (i.e. any motor *after* the first on
     # each side of the drive) are *with respect to their master*.  This is
     # different from the other poject types!
     # Inversions for the left-side motors
-    "leftMotorsInverted": [False, False],
+    "leftMotorsInverted": [False, False, False],
     # Inversions for the right side motors
     # Inverted right encoder by manually going into characterization-project
     # Added negtives to rightEncoder.getPosition() rightEncoder.getVelocity()
-    "rightMotorsInverted": [True, False],
+    "rightMotorsInverted": [True, False, False],
     # The total gear reduction between the motor and the wheels, expressed as
     # a fraction [motor turns]/[wheel turns]
-    "gearing": 496.0/55.0,
+    "gearing": 232/27,
     # Wheel diameter (in units of your choice - will dictate units of analysis)
     # Meters
-    "wheelDiameter": 0.1524,
+    "wheelDiameter": 0.14605,
     # Your gyro type (one of "NavX", "Pigeon", "ADXRS450", "AnalogGyro", or "None")
     "gyroType": "NavX",
     # Whatever you put into the constructor of your gyro
