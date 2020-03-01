@@ -39,9 +39,9 @@ public class UnloadIndexer extends CommandBase
     @Override
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
-        indexer.collectorTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
-        indexer.shooterTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
-        indexer.internal.set(controlMode, internalIndexerValue);
+        indexer.setShooterTransfer(Indexer.motorsReversed);
+        indexer.setInternal(Indexer.internalReversed);
+        indexer.setCollectorTransfer(Indexer.motorsReversed);
     }
 
     @Override
@@ -53,8 +53,8 @@ public class UnloadIndexer extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
-
-        indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
+        indexer.setShooterTransfer(Indexer.motorsOff);
+        indexer.setInternal(Indexer.motorsOff);
+        indexer.setCollectorTransfer(Indexer.motorsOff);
     }
 }

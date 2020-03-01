@@ -10,16 +10,8 @@ import frc.team1983.util.motors.Spark;
 
 public class Collector extends SubsystemBase
 {
-
-    public static class Setpoints
-    {
-        private static double STOW = 0;
-        private static double COLLECT = 100;
-        //TODO: figure out setpoints?
-    }
-
     private DoubleSolenoid piston; //piston controls whether it is out or stowed
-    public Motor collectorMotor; //collector has one motor, just the collectorMotor
+    private Motor collectorMotor; //collector has one motor, just the collectorMotor
 
    // used in collector commands so that we have a constant for motor directions
     public static double motorsForward = 1;
@@ -28,11 +20,6 @@ public class Collector extends SubsystemBase
 
     private position currentPosition = position.retracted;
 
-    public static final double DEGREES_PER_TICK = 95.0; // TODO find value
-    public static final double CLOSED_LOOP_TOLERANCE = 1.5; //TODO: find value
-
-    public boolean automationEnabled = true; //TODO: look at automation
-    public boolean desiredState = false; //TODO: do we want a folded state???
 
     public Collector()
     {
@@ -77,6 +64,11 @@ public class Collector extends SubsystemBase
     public position getCollectorPosition()
     {
         return currentPosition;
+    }
+
+    public void setCollectorMotor(double speed)
+    {
+        collectorMotor.set(ControlMode.Throttle, speed);
     }
 
 

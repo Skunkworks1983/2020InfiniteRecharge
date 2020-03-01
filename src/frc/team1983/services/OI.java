@@ -176,7 +176,7 @@ public class OI
         getButton(Joysticks.PANEL, MANUAL_INDEXER).whenHeld(new ManualIndexer(ControlMode.Throttle,
                 indexerValue, internalIndexerValue));
 
-        getButton(Joysticks.PANEL, LOAD_INDEXER).whenHeld(new LoadIndexer(Robot.getInstance().getIndexer(),
+        getButton(Joysticks.PANEL, LOAD_INDEXER).whenHeld(new LoadIndexerTele(Robot.getInstance().getIndexer(),
                 Robot.getInstance().getOI(), indexerValue));
 
         getButton(Joysticks.PANEL, UNLOAD_INDEXER).whenHeld(new UnloadIndexer(ControlMode.Throttle,
@@ -192,7 +192,7 @@ public class OI
         getButton(Joysticks.PANEL, UNLOAD_COLLECTOR).whenHeld(new UnloadCollector(ControlMode.Throttle,
                 -collectorValue));
 
-        getButton(Joysticks.PANEL, COLLECT_AND_LOAD).whenHeld(new CollectAndLoad(Robot.getInstance().getCollector(),
+        getButton(Joysticks.PANEL, COLLECT_AND_LOAD).whenHeld(new CollectAndLoadTele(Robot.getInstance().getCollector(),
                 Robot.getInstance().getIndexer(), Robot.getInstance().getOI(), collectorValue, internalIndexerValue,
                 indexerValue, delaySeconds));
 
@@ -209,6 +209,6 @@ public class OI
         getButton(Joysticks.OPERATOR, 2).whenHeld(new TargetAlignment());
 
         getButton(Joysticks.PANEL, INTERNAL_INDEXER_LOAD).whenHeld(new InternalIndexer(Robot.getInstance().getIndexer(),
-                ControlMode.Throttle, internalIndexerValue, 0));
+                ControlMode.Throttle, internalIndexerValue));
     }
 }

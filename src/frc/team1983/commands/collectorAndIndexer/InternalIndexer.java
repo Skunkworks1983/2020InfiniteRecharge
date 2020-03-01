@@ -12,60 +12,41 @@ public class InternalIndexer extends CommandBase
     private Indexer indexer;
     private ControlMode controlMode;
     private double internalValue;
-    private OI oi;
-    private double delayTime;
-    private double startTime;
 
-    public InternalIndexer(Indexer i, ControlMode cm, double iiv, double dt)
+    public InternalIndexer(Indexer i, ControlMode cm, double iiv)
     {
         indexer = i;
         controlMode = cm;
         internalValue = iiv;
-        delayTime = dt;
     }
 
-    public InternalIndexer(ControlMode controlMode, double internalIndexerValue, double delayTime)
+    public InternalIndexer(ControlMode controlMode, double internalIndexerValue)
     {
-        this(Robot.getInstance().getIndexer(), controlMode, internalIndexerValue, delayTime);
+        this(Robot.getInstance().getIndexer(), controlMode, internalIndexerValue);
     }
 
 
     @Override
     public void initialize()
     {
-        startTime = Timer.getFPGATimestamp();
-
         indexer.setVoltageRamp(indexer.voltageRamp);
     }
 
     @Override
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
-        //indexer.internal.set(ControlMode.Throttle, Indexer.internalForward);
-
-        indexer.internal.set(controlMode, internalValue);
-
+       indexer.setInternal(Indexer.internalForward);
     }
 
     @Override
     public boolean isFinished()
     {
-        if (delayTime == 0)
-        {
-            return false;
-        }
-
-        if (Timer.getFPGATimestamp() - startTime >= delayTime)
-        {
-            return true;
-        }
-
         return false;
     }
 
     @Override
     public void end(boolean interrupted)
     {
-        indexer.internal.set(ControlMode.Throttle, Indexer.motorsOff);
+        indexer.setInternal(Indexer.motorsOff);
     }
 }

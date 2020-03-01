@@ -2,8 +2,11 @@ package frc.team1983.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.team1983.constants.RobotMap;
+import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.Motor;
 import frc.team1983.util.motors.Spark;
+
+import javax.naming.ldap.Control;
 
 public class Indexer
 {
@@ -11,7 +14,7 @@ public class Indexer
 
     public double voltageRamp = 1;
 
-    public Motor collectorTransfer, shooterTransfer, internal;
+    private Motor collectorTransfer, shooterTransfer, internal;
 
     // used in indexer so that we have a constant for motor directions
     public static double motorsForward = .5;
@@ -37,4 +40,18 @@ public class Indexer
         internal.setVoltageRamp(volts);
     }
 
+    public void setCollectorTransfer(double speed)
+    {
+        collectorTransfer.set(ControlMode.Throttle, speed);
+    }
+
+    public void setShooterTransfer(double speed)
+    {
+        shooterTransfer.set(ControlMode.Throttle, speed);
+    }
+
+    public void setInternal(double speed)
+    {
+        internal.set(ControlMode.Throttle, speed);
+    }
 }

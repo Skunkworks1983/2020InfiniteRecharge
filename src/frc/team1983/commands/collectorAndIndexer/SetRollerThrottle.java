@@ -26,9 +26,7 @@ public class SetRollerThrottle extends CommandBase
     @Override
     public void execute() //TODO: do not test without fixing reversed values in robotmap
     {
-       // collector.collectorMotor.set(ControlMode.Throttle, Collector.motorsForward);
-
-        collector.collectorMotor.set(ControlMode.Throttle, throttle);
+        collector.setCollectorMotor(Collector.motorsForward);
 
     }
 
@@ -41,7 +39,7 @@ public class SetRollerThrottle extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        collector.collectorMotor.set(ControlMode.Throttle, Collector.motorsOff);
+        collector.setCollectorMotor(Collector.motorsOff);
     }
 
 }

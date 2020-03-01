@@ -28,9 +28,7 @@ public class UnloadCollector extends CommandBase
     @Override //when we have motors reversed, then they're always in initialize
     public void initialize()
     {
-        //collector.collectorMotor.set(ControlMode.Throttle, Collector.motorsReversed);
-
-        collector.collectorMotor.set(controlMode, collectorValue); //TODO: revert to original
+        collector.setCollectorMotor(Collector.motorsReversed);
     }
 
     @Override
@@ -48,6 +46,6 @@ public class UnloadCollector extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        collector.collectorMotor.set(ControlMode.Throttle, Collector.motorsOff);
+        collector.setCollectorMotor(Collector.motorsOff);
     }
 }
