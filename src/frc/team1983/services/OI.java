@@ -206,7 +206,7 @@ public class OI
 
         getButton(Joysticks.OPERATOR, 1).whenHeld(new SetArticulationPosition(Shooter.LOWER_LIMIT));
 
-        getButton(Joysticks.OPERATOR, 2).whenHeld(new TargetAlignment());
+        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR));
 
         getButton(Joysticks.PANEL, INTERNAL_INDEXER_LOAD).whenHeld(new InternalIndexer(Robot.getInstance().getIndexer(),
                 ControlMode.Throttle, internalIndexerValue, 0));
