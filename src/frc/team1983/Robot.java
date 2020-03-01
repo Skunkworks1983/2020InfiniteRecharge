@@ -3,7 +3,6 @@ package frc.team1983;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -14,7 +13,6 @@ import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.sensors.Limelight;
-import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
 {
@@ -22,7 +20,6 @@ public class Robot extends TimedRobot
 
 	private Drivebase drivebase;
 	private Limelight limelight;
-	private NavX navX;
 	private OI oi;
 
 	private UsbCamera camera;
@@ -33,7 +30,6 @@ public class Robot extends TimedRobot
 	{
 		instance = this;
 
-		navX = new NavX();
 		limelight = new Limelight();
 		limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
 
@@ -60,6 +56,8 @@ public class Robot extends TimedRobot
 		autoChooser.addOption("In Front of Opponent Trench Run -> Opponent Trench Run -> Rendezvous Point", Auto.IN_FRONT_OF_OPPONENT_TRENCH_RUN_TO_OPPONENT_TRENCH_RUN_TO_RENDEZVOUS_POINT);
 		autoChooser.addOption("In Front of Trench Run -> Trench Run", Auto.IN_FRONT_OF_TRENCH_RUN_TO_TRENCH_RUN);
 		SmartDashboard.putData("Auto chooser", autoChooser);
+
+		drivebase.resetHeading();
 
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
 		camera = CameraServer.getInstance().startAutomaticCapture();
@@ -95,10 +93,7 @@ public class Robot extends TimedRobot
 	public void teleopInit()
 	{
 		drivebase.setBrake(false);
-		drivebase.zero();
-		drivebase.setPose(new Pose2d());
 
-		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 	}
@@ -136,11 +131,6 @@ public class Robot extends TimedRobot
 	public Limelight getLimelight()
 	{
 		return limelight;
-	}
-
-	public NavX getNavX()
-	{
-		return navX;
 	}
 
 	public OI getOI()

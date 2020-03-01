@@ -6,24 +6,22 @@ import frc.team1983.Robot;
 import frc.team1983.subsystems.Drivebase;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.sensors.Limelight;
-import frc.team1983.util.sensors.NavX;
 
 public class TargetAlignment extends PIDCommand
 {
     private static final double kP = 0.01, kI = 0.0, kD = 0.0, kF = 0.015;
     private Drivebase drivebase;
     private Limelight limelight;
-    private NavX navX;
 
     private double initialOffset;
     private double setpoint;
     private boolean targetWasDetected = false;
 
-    public TargetAlignment(Drivebase drivebase, Limelight limelight, NavX navX, boolean turnRight)
+    public TargetAlignment(Drivebase drivebase, Limelight limelight, boolean turnRight)
     {
         super(
             new PIDController(kP, kI, kD),
-            () -> navX.getHeading().getDegrees(),
+            () -> drivebase.getHeading().getDegrees(),
             () -> turnRight ? Limelight.FOV_X / 2.0 : -Limelight.FOV_X / 2.0,
             output -> {
                 double feedforward = kF * Math.signum(output);
@@ -34,7 +32,6 @@ public class TargetAlignment extends PIDCommand
 
         this.drivebase = drivebase;
         this.limelight = limelight;
-        this.navX = navX;
         this.initialOffset = turnRight ? Limelight.FOV_X / 2.0 : -Limelight.FOV_X / 2.0;
         this.setpoint = initialOffset;
 
@@ -43,7 +40,7 @@ public class TargetAlignment extends PIDCommand
 
     public TargetAlignment(boolean turnRight)
     {
-        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getLimelight(), Robot.getInstance().getNavX(), turnRight);
+        this(Robot.getInstance().getDrivebase(), Robot.getInstance().getLimelight(), turnRight);
     }
 
     @Override
@@ -61,11 +58,11 @@ public class TargetAlignment extends PIDCommand
         if(limelight.isTargetDetected())
         {
             targetWasDetected = true;
-            setpoint = navX.getHeading().getDegrees() - limelight.getX();
+            setpoint = drivebase.getHeading().getDegrees() - limelight.getX();
         }
         else if(!targetWasDetected)
         {
-            setpoint = navX.getHeading().getDegrees() - initialOffset;
+            setpoint = drivebase.getHeading().getDegrees() - initialOffset;
         }
 
         // Must be called last because setpoint is never initialized correctly

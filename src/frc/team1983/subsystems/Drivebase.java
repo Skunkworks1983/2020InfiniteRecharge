@@ -5,15 +5,16 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.Robot;
 import frc.team1983.constants.Constants;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.control.SparkPIDController;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
 import frc.team1983.util.motors.Spark;
+import frc.team1983.util.sensors.NavX;
 
 public class Drivebase extends SubsystemBase
 {
@@ -30,6 +31,7 @@ public class Drivebase extends SubsystemBase
     public static final double kS = 0.015, kV = 2.38, kA = 0.0;
     public static final double kP = 1.0e-4, kI = 0.0, kD = 0.0;
 
+	private NavX navX;
     private MotorGroup left, right;
 
     private DifferentialDriveKinematics kinematics;
@@ -44,6 +46,7 @@ public class Drivebase extends SubsystemBase
 
     public Drivebase()
     {
+        navX = new NavX();
         // 2019
 //        left = new MotorGroup(
 //            new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
@@ -68,7 +71,7 @@ public class Drivebase extends SubsystemBase
         );
 
         kinematics = new DifferentialDriveKinematics(Units.feetToMeters(Constants.TRACK_WIDTH));
-        odometry = new DifferentialDriveOdometry(Robot.getInstance().getNavX().getHeading());
+        odometry = new DifferentialDriveOdometry(getHeading());
 
         feedforward = new SimpleMotorFeedforward(kS, kV, kA);
 
@@ -82,7 +85,7 @@ public class Drivebase extends SubsystemBase
     public void periodic()
     {
         pose = odometry.update(
-            Robot.getInstance().getNavX().getHeading(),
+            getHeading(),
             getLeftMeters(),
             getRightMeters()
         );
@@ -293,7 +296,7 @@ public class Drivebase extends SubsystemBase
         this.pose = pose;
 
         odometry.resetPosition(pose, pose.getRotation());
-        Robot.getInstance().getNavX().setHeading(pose.getRotation().getDegrees());
+        setHeading(pose.getRotation().getDegrees());
     }
 
     /**
@@ -303,5 +306,20 @@ public class Drivebase extends SubsystemBase
     {
         left.setBrake(brake);
         right.setBrake(brake);
+    }
+
+    public Rotation2d getHeading()
+    {
+    	return navX.getHeading();
+    }
+
+    public void setHeading(double heading)
+    {
+        navX.setHeading(heading);
+    }
+
+    public void resetHeading()
+    {
+        navX.reset();
     }
 }
