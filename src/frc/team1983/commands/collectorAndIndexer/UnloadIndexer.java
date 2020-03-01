@@ -14,18 +14,20 @@ public class UnloadIndexer extends CommandBase
     private Indexer indexer;
     private ControlMode controlMode;
     private double indexerValue;
+    private double internalIndexerValue;
     private OI oi;
 
-    public UnloadIndexer(Indexer i, ControlMode cm, double iv)
+    public UnloadIndexer(Indexer i, ControlMode cm, double iv, double iiv)
     {
         indexer = i;
         controlMode = cm;
         indexerValue = iv;
+        internalIndexerValue = iiv;
     }
 
-    public UnloadIndexer(ControlMode controlMode, double indexerValue)
+    public UnloadIndexer(ControlMode controlMode, double indexerValue, double internalIndexerValue)
     {
-        this(Robot.getInstance().getIndexer(), controlMode, indexerValue);
+        this(Robot.getInstance().getIndexer(), controlMode, indexerValue, internalIndexerValue);
     }
 
     @Override
@@ -39,6 +41,7 @@ public class UnloadIndexer extends CommandBase
     {
         indexer.collectorTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
         indexer.shooterTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
+        indexer.internal.set(controlMode, internalIndexerValue);
     }
 
     @Override

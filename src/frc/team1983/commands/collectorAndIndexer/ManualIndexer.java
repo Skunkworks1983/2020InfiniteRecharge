@@ -13,20 +13,22 @@ public class ManualIndexer extends CommandBase
     private Indexer indexer;
     private ControlMode controlMode;
     private double indexerValue;
+    private double internalIndexerValue;
     private OI oi;
 
     private boolean isShooting; //this takes into account whether or not we are shooting
 
-    public ManualIndexer(Indexer i, ControlMode cm, double iv)
+    public ManualIndexer(Indexer i, ControlMode cm, double iv, double iiv)
     {
         indexer = i;
         controlMode = cm;
         indexerValue = iv;
+        internalIndexerValue = iiv;
     }
 
-    public ManualIndexer(ControlMode controlMode, double indexerValue)
+    public ManualIndexer(ControlMode controlMode, double indexerValue, double internalIndexerValue)
     {
-        this(Robot.getInstance().getIndexer(), controlMode, indexerValue);
+        this(Robot.getInstance().getIndexer(), controlMode, indexerValue, internalIndexerValue);
     }
 
     @Override
@@ -45,6 +47,8 @@ public class ManualIndexer extends CommandBase
         indexer.collectorTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
 
         indexer.shooterTransfer.set(controlMode, indexerValue); //TODO: revert to original once tuned
+
+        indexer.internal.set(controlMode, internalIndexerValue);
 
     }
 

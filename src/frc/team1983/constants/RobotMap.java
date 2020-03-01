@@ -52,13 +52,13 @@ public class RobotMap //TODO: all of these values have yet to be finalized
         public static final boolean SHOOTER_TRANSFER_REVERSED = false;
 
         public static final int INTERNAL = 8;
-        public static final boolean INTERNAL_REVERSED = false;
+        public static final boolean INTERNAL_REVERSED = true;
     }
 
     public static class Collector
     {
         public static final int COLLECTOR_MOTOR = 6;
-        public static final boolean COLLECTOR_MOTOR_REVERSED = false;
+        public static final boolean COLLECTOR_MOTOR_REVERSED = true;
 
         public static final int PISTON_FORWARD = 1;
         public static final int PISTON_REVERSE = 4;

@@ -9,6 +9,8 @@ public class Indexer
 {
     public DigitalInput indexerHasBall;
 
+    public double voltageRamp = 1;
+
     public Motor collectorTransfer, shooterTransfer, internal;
 
     // used in indexer so that we have a constant for motor directions
@@ -30,5 +32,9 @@ public class Indexer
         internal = new Spark(RobotMap.Indexer.INTERNAL, RobotMap.Indexer.INTERNAL_REVERSED);
     }
 
+    public void setVoltageRamp(double volts)
+    {
+        internal.setVoltageRamp(volts);
+    }
 
 }

@@ -10,8 +10,9 @@ public class IndexerStartup extends SequentialCommandGroup
     public IndexerStartup(Indexer i, OI anOI, double internalPercentThrottle, double outsidePercentThrottle,
                           double delaySeconds)
     {
-        addCommands(new InternalIndexer(i, ControlMode.Throttle, internalPercentThrottle, delaySeconds));
-
-        andThen(new LoadIndexer(i, anOI, outsidePercentThrottle));
+        addCommands(
+                new InternalIndexer(i, ControlMode.Throttle, internalPercentThrottle, delaySeconds),
+                new LoadIndexer(i, anOI, outsidePercentThrottle)
+        );
     }
 }

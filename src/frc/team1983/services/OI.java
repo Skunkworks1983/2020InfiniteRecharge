@@ -68,7 +68,7 @@ public class OI
 
     private double collectorValue = 0.5;
     private double indexerValue = 0.8;
-    private double internalIndexerValue = 0.9;
+    private double internalIndexerValue = 0.5;
     private double acceleratorValue = 0.9;
     private double flywheelValue = 0.9;
 
@@ -174,13 +174,13 @@ public class OI
                 acceleratorValue, flywheelValue));
 
         getButton(Joysticks.PANEL, MANUAL_INDEXER).whenHeld(new ManualIndexer(ControlMode.Throttle,
-                indexerValue));
+                indexerValue, internalIndexerValue));
 
         getButton(Joysticks.PANEL, LOAD_INDEXER).whenHeld(new LoadIndexer(Robot.getInstance().getIndexer(),
                 Robot.getInstance().getOI(), indexerValue));
 
         getButton(Joysticks.PANEL, UNLOAD_INDEXER).whenHeld(new UnloadIndexer(ControlMode.Throttle,
-                -indexerValue));
+                -indexerValue, -internalIndexerValue));
 
         getButton(Joysticks.PANEL, SET_COLLECTOR_DOWN).whenPressed(new SetCollectorPosition(false));
 
@@ -198,7 +198,7 @@ public class OI
 
         getButton(Joysticks.PANEL, UNLOAD_INDEXER_AND_COLLECTOR).whenHeld(new UnloadIndexerAndCollector(
                 Robot.getInstance().getCollector(), Robot.getInstance().getIndexer(), ControlMode.Throttle,
-                -collectorValue, -indexerValue));
+                -collectorValue, -indexerValue, -internalIndexerValue));
 
         getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
 

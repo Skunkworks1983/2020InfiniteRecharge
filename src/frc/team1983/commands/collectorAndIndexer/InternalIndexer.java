@@ -34,6 +34,8 @@ public class InternalIndexer extends CommandBase
     public void initialize()
     {
         startTime = Timer.getFPGATimestamp();
+
+        indexer.setVoltageRamp(indexer.voltageRamp);
     }
 
     @Override
