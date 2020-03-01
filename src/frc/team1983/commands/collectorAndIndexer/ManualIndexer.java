@@ -63,5 +63,6 @@ public class ManualIndexer extends CommandBase
     {
         indexer.collectorTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
         indexer.shooterTransfer.set(ControlMode.Throttle, Indexer.motorsOff);
+        indexer.internal.set(ControlMode.Throttle, Indexer.motorsOff);
     }
 }
