@@ -2,38 +2,64 @@ package frc.team1983.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
+import frc.team1983.services.OI;
 import frc.team1983.subsystems.Shooter;
-import frc.team1983.util.motors.ControlMode;
 
 public class SetArticulation extends CommandBase
 {
     private Shooter shooter;
-    private ControlMode controlMode;
-    private double value;
+    private OI oi;
 
-    public SetArticulation(Shooter shooter, ControlMode controlMode, double value)
+    private double targetAngle = 0;
+
+    public SetArticulation(Shooter shooter, OI oi)
     {
         this.shooter = shooter;
-        this.controlMode = controlMode;
-        this.value = value;
+        this.oi = oi;
+
+        addRequirements(shooter);
     }
 
-    public SetArticulation(ControlMode controlMode, double value)
+    public SetArticulation()
     {
-        this(Robot.getInstance().getShooter(), controlMode, value);
+        this(Robot.getInstance().getShooter(), Robot.getInstance().getOI());
+    }
+
+    @Override
+    public void initialize()
+    {
+        targetAngle = shooter.getArticulationPosition();
+        shooter.setBrake(true);
     }
 
     @Override
     public void execute()
     {
-        shooter.setArticulation(controlMode, value);
+        double currentAngle = shooter.getArticulationPosition();
+        //Tuned on 02/27/2020
+        double throttle = 65.0 * -(currentAngle - targetAngle);
 
-        System.out.println(shooter.getArticulation());
+        if(Math.abs(oi.getOperatorY()) > 0.05)
+        {
+            throttle = oi.getOperatorY();
+            targetAngle = shooter.getArticulationPosition();
+        }
+
+        //Safety code that prevents shooter hood from continuing into hard stop
+        if (shooter.getArticulationPosition() <= shooter.UPPER_LIMIT && shooter.getArticulationPosition() > shooter.LOWER_LIMIT)
+            shooter.setArticulation(throttle);
+        else if (shooter.getArticulationPosition() >= shooter.UPPER_LIMIT && throttle < 0)
+            shooter.setArticulation(throttle);
+        else if (shooter.getArticulationPosition() <= shooter.LOWER_LIMIT && throttle > 0)
+            shooter.setArticulation(throttle);
+        else shooter.setArticulation(0);
+
+//        System.out.println("Throttle: " + throttle);
     }
 
-    @Override
-    public void end(boolean interrupted)
-    {
-        shooter.setArticulation(ControlMode.Throttle, 0.0);
-    }
+//    @Override
+//    public void end(boolean interrupted)
+//    {
+//        shooter.setArticulation(0.0);
+//    }
 }

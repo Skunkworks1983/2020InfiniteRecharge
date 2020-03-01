@@ -31,6 +31,12 @@ public class SetShooter extends CommandBase
     }
 
     @Override
+    public void initialize()
+    {
+        shooter.setVoltageRamp(shooter.voltageRamp);
+    }
+
+    @Override
     public void execute()
     {
         shooter.set(controlMode, acceleratorValue, flywheelValue);
