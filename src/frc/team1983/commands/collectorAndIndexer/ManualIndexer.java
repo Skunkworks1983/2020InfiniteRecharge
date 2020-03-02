@@ -11,24 +11,13 @@ import javax.naming.ldap.Control;
 public class ManualIndexer extends CommandBase
 {
     private Indexer indexer;
-    private ControlMode controlMode;
-    private double indexerValue;
-    private double internalIndexerValue;
-    private OI oi;
 
     private boolean isShooting; //this takes into account whether or not we are shooting
 
-    public ManualIndexer(Indexer i, ControlMode cm, double iv, double iiv)
+    public ManualIndexer(Indexer indexer)
     {
-        indexer = i;
-        controlMode = cm;
-        indexerValue = iv;
-        internalIndexerValue = iiv;
-    }
+        this.indexer = indexer;
 
-    public ManualIndexer(ControlMode controlMode, double indexerValue, double internalIndexerValue)
-    {
-        this(Robot.getInstance().getIndexer(), controlMode, indexerValue, internalIndexerValue);
     }
 
     @Override
@@ -38,12 +27,11 @@ public class ManualIndexer extends CommandBase
     }
 
     @Override
-    public void execute() //TODO: do not test without fixing reversed values in robotmap
+    public void execute()
     {
         indexer.setCollectorTransfer(Indexer.motorsForward);
         indexer.setShooterTransfer(Indexer.motorsForward);
         indexer.setInternal(Indexer.internalForward);
-
     }
 
     @Override

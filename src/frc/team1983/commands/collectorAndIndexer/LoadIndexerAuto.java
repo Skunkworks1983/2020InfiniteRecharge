@@ -15,16 +15,15 @@ public class LoadIndexerAuto extends CommandBase
 
     private boolean isShooting; //this takes into account whether or not we are shooting
 
-    public LoadIndexerAuto(Indexer i, double indexerPercentThrottle, boolean isShooting)
+    public LoadIndexerAuto(Indexer i, boolean isShooting)
     {
         indexer = i;
-        indexerValue = indexerPercentThrottle;
         this.isShooting = isShooting;
     }
 
-    public LoadIndexerAuto(double indexerPercentThrottle, boolean isShooting)
+    public LoadIndexerAuto(boolean isShooting)
     {
-        this(Robot.getInstance().getIndexer(), indexerPercentThrottle, isShooting);
+        this(Robot.getInstance().getIndexer(), isShooting);
     }
 
 
@@ -35,21 +34,25 @@ public class LoadIndexerAuto extends CommandBase
     }
 
     @Override
-    public void execute() //TODO: do not test without fixing reversed values in robotmap
+    public void execute()
     {
 
         indexer.setCollectorTransfer(Indexer.motorsForward);
         indexer.setInternal(Indexer.internalForward);
 
-        if (!isShooting && indexer.indexerHasBall.get()) //if we aren't shooting and sensor is triggered
+        //if shooting
+        if (isShooting)
+        {
+            indexer.setShooterTransfer(0.75);
+        }
+        else if (indexer.SHOOTER_TRANSFER_HAS_BALL.get()) //if we aren't shooting and sensor is triggered
         {
             indexer.setShooterTransfer(Indexer.motorsOff);
         }
-        else //we are shooting and motors all are turned on
+        else //if indexing and no ball detected
         {
-            indexer.setShooterTransfer(Indexer.motorsForward);
+            indexer.setShooterTransfer(0.5);
         }
-
     }
 
     @Override

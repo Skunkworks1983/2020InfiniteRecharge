@@ -41,18 +41,23 @@ public class LoadIndexerTele extends CommandBase
     {
        // isShooting = oi.isShooting();
 
-        boolean isShooting = oi.getButton(OI.Joysticks.PANEL, OI.SET_SHOOTER).get();
+        boolean isShooting = oi.getButton(OI.Joysticks.OPERATOR, 1).get();
 
         indexer.setInternal(Indexer.internalForward);
         indexer.setCollectorTransfer(Indexer.motorsForward);
 
-        if (!isShooting && indexer.indexerHasBall.get()) //if we aren't shooting and sensor is triggered
+        //if shooting
+        if (isShooting)
+        {
+            indexer.setShooterTransfer(0.75);
+        }
+        else if (indexer.SHOOTER_TRANSFER_HAS_BALL.get()) //if we aren't shooting and sensor is triggered
         {
            indexer.setShooterTransfer(Indexer.motorsOff);
         }
-        else //we are shooting and motors all are turned on
+        else //if indexing and no ball detected
         {
-            indexer.setShooterTransfer(Indexer.motorsForward);
+            indexer.setShooterTransfer(0.5);
         }
 
     }

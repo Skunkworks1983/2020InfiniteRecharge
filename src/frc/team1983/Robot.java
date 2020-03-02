@@ -62,7 +62,8 @@ public class Robot extends TimedRobot
     public void robotPeriodic()
     {
         CommandScheduler.getInstance().run();
-        System.out.println("Articulation Position: " + shooter.getArticulationPosition());
+//        System.out.println("Articulation Position: " + shooter.getArticulationPosition());
+//        System.out.println(indexer.indexerHasBall.get());
     }
 
     @Override

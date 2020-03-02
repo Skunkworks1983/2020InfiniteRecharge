@@ -6,11 +6,9 @@ import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.Motor;
 import frc.team1983.util.motors.Spark;
 
-import javax.naming.ldap.Control;
-
 public class Indexer
 {
-    public DigitalInput indexerHasBall;
+    public DigitalInput SHOOTER_TRANSFER_HAS_BALL, INTERNAL_INDEXER_HAS_BALL;
 
     public double voltageRamp = 1;
 
@@ -25,7 +23,8 @@ public class Indexer
 
     public Indexer()
     {
-        indexerHasBall = new DigitalInput(RobotMap.Indexer.SENSOR);
+        SHOOTER_TRANSFER_HAS_BALL = new DigitalInput(RobotMap.Indexer.SHOOTER_TRANSFER_SENSOR);
+        INTERNAL_INDEXER_HAS_BALL = new DigitalInput(RobotMap.Indexer.INTERNAL_INDEXER_SENSOR);
 
         collectorTransfer = new Spark(RobotMap.Indexer.COLLECTOR_TRANSFER,
                 RobotMap.Indexer.COLLECTOR_TRANSFER_REVERSED);

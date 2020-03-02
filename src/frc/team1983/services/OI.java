@@ -42,37 +42,31 @@ public class OI
     public static final double LINEAR_ZONE = 0.4;
     public static final double LINEAR_SLOPE = Math.abs(Math.pow(LINEAR_ZONE, JOYSTICK_EXPONENT) / (LINEAR_ZONE - JOYSTICK_DEADZONE));
 
-    //shooter buttons as of testing (no, we didn't break it yet)
-    public static final int ARTICULATION_DOWN = 1;
-    public static final int ARTICULATION_UP = 2;
-    public static final int SET_SHOOTER = 9;
+    public static final int COLLECT_AND_LOAD = 15;
+//    public static final int UNLOAD_INDEXER_AND_COLLECTOR = 15;
 
-    //indexer and collector buttons as of testing (also has yet to break)
-    public static final int COLLECT_AND_LOAD = 16;
-    public static final int UNLOAD_INDEXER_AND_COLLECTOR = 15;
+//    public static final int MANUAL_INDEXER = 10;
+//    public static final int LOAD_INDEXER = 15;
+    public static final int UNLOAD_INDEXER = 14;
+    public static final int INTERNAL_INDEXER_LOAD = 10;
 
-    public static final int MANUAL_INDEXER = 10;
-    public static final int LOAD_INDEXER = 21;
-    public static final int UNLOAD_INDEXER = 20;
-    public static final int INTERNAL_INDEXER_LOAD = 22;
-
-    public static final int SET_COLLECTOR_DOWN = 7;
-    public static final int SET_COLLECTOR_UP = 8;
-    public static final int SET_ROLLER = 11;
-    protected static final int UNLOAD_COLLECTOR = 23;
+    public static final int SET_COLLECTOR_DOWN = 12;
+    public static final int SET_COLLECTOR_UP = 12;
+    public static final int SET_ROLLER = 13;
+//    protected static final int UNLOAD_COLLECTOR = 23;
 
 
     //climber buttons as of testing
-    public static final int CLIMBER_UP = 4;
-    public static final int CLIMBER_DOWN = 6;
+    public static final int CLIMBER_UP = 6;
+    public static final int CLIMBER_DOWN = 7;
 
-    private double collectorValue = 0.5;
+    private double collectorValue = 0.6;
     private double indexerValue = 0.8;
-    private double internalIndexerValue = 0.5;
-    private double acceleratorValue = 0.9;
-    private double flywheelValue = 0.9;
+    private double internalIndexerValue = 0.75;
+    private double acceleratorValue = 0.1;
+    private double flywheelValue = 0.1;
 
-    private double delaySeconds = 0.1;
+    private double delaySeconds = 1;
 
     private Joystick left, right, panel, operator;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
@@ -170,14 +164,14 @@ public class OI
     }
     public void initializeBindings()
     {
-        getButton(Joysticks.PANEL, SET_SHOOTER).whenHeld(new SetShooter(ControlMode.Throttle,
+        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(ControlMode.Throttle,
                 acceleratorValue, flywheelValue));
 
-        getButton(Joysticks.PANEL, MANUAL_INDEXER).whenHeld(new ManualIndexer(ControlMode.Throttle,
-                indexerValue, internalIndexerValue));
-
-        getButton(Joysticks.PANEL, LOAD_INDEXER).whenHeld(new LoadIndexerTele(Robot.getInstance().getIndexer(),
-                Robot.getInstance().getOI(), indexerValue));
+//        getButton(Joysticks.PANEL, MANUAL_INDEXER).whenHeld(new ManualIndexer(ControlMode.Throttle,
+//                indexerValue, internalIndexerValue));
+//
+//        getButton(Joysticks.PANEL, LOAD_INDEXER).whenHeld(new LoadIndexerTele(Robot.getInstance().getIndexer(),
+//                Robot.getInstance().getOI(), indexerValue));
 
         getButton(Joysticks.PANEL, UNLOAD_INDEXER).whenHeld(new UnloadIndexer(ControlMode.Throttle,
                 -indexerValue, -internalIndexerValue));
@@ -189,26 +183,28 @@ public class OI
         getButton(Joysticks.PANEL, SET_ROLLER).whenHeld(new SetRollerThrottle(Robot.getInstance().getCollector(),
                 collectorValue));
 
-        getButton(Joysticks.PANEL, UNLOAD_COLLECTOR).whenHeld(new UnloadCollector(ControlMode.Throttle,
-                -collectorValue));
+//        getButton(Joysticks.PANEL, UNLOAD_COLLECTOR).whenHeld(new UnloadCollector(ControlMode.Throttle,
+//                -collectorValue));
 
         getButton(Joysticks.PANEL, COLLECT_AND_LOAD).whenHeld(new CollectAndLoadTele(Robot.getInstance().getCollector(),
                 Robot.getInstance().getIndexer(), Robot.getInstance().getOI(), collectorValue, internalIndexerValue,
                 indexerValue, delaySeconds));
-
-        getButton(Joysticks.PANEL, UNLOAD_INDEXER_AND_COLLECTOR).whenHeld(new UnloadIndexerAndCollector(
-                Robot.getInstance().getCollector(), Robot.getInstance().getIndexer(), ControlMode.Throttle,
-                -collectorValue, -indexerValue, -internalIndexerValue));
+//
+//        getButton(Joysticks.PANEL, UNLOAD_INDEXER_AND_COLLECTOR).whenHeld(new UnloadIndexerAndCollector(
+//                Robot.getInstance().getCollector(), Robot.getInstance().getIndexer(), ControlMode.Throttle,
+//                -collectorValue, -indexerValue, -internalIndexerValue));
 
         getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
 
         getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
 
-        getButton(Joysticks.OPERATOR, 1).whenHeld(new SetArticulationPosition(Shooter.LOWER_LIMIT));
+        getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.LOWER_LIMIT));
 
-        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR));
+        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR));
 
         getButton(Joysticks.PANEL, INTERNAL_INDEXER_LOAD).whenHeld(new InternalIndexer(Robot.getInstance().getIndexer(),
                 ControlMode.Throttle, internalIndexerValue));
+
+        getButton(Joysticks.PANEL, 9).whenHeld(new ManualIndexer(Robot.getInstance().getIndexer()));
     }
 }

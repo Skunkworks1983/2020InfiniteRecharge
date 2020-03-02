@@ -43,7 +43,8 @@ public class RobotMap //TODO: all of these values have yet to be finalized
 
     public static class Indexer
     {
-        public static final int SENSOR = 0;
+        public static final int SHOOTER_TRANSFER_SENSOR = 0;
+        public static final int INTERNAL_INDEXER_SENSOR = 2;
 
         public static final int COLLECTOR_TRANSFER = 5;
         public static final boolean COLLECTOR_TRANSFER_REVERSED = true;
