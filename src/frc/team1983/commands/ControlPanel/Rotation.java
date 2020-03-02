@@ -8,26 +8,24 @@ import frc.team1983.util.motors.ControlMode;
 public class Rotation extends CommandBase
 {
     private ControlPanel controlPanel;
-    private ControlMode controlMode;
-    private double value;
 
-    public Rotation(ControlPanel controlPanel, ControlMode controlMode, double value)
+    public Rotation(ControlPanel controlPanel)
     {
         this.controlPanel = controlPanel;
-        this.controlMode = controlMode;
-        this.value = value;
     }
 
-    public Rotation(ControlMode controlMode, double value)
+    public Rotation()
     {
-        this(Robot.getInstance().getControlPanel(), controlMode, value);
+        this(Robot.getInstance().getControlPanel());
     }
 
     @Override
     public void execute()
     {
-        //TODO find actual position value
-        controlPanel.setRoller(ControlMode.Position, 254);
+        if(controlPanel.getPosition() < ControlPanel.targetDistance)
+            controlPanel.setRoller(ControlMode.Throttle, ControlPanel.controlPanelForward);
+        else
+            end(true);
     }
 
     @Override

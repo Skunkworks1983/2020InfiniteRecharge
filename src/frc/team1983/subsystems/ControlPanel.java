@@ -12,7 +12,11 @@ import frc.team1983.util.motors.Spark;
 
 public class ControlPanel extends SubsystemBase
 {
-    public boolean desiredFoldedState = false;
+    //TODO find targetDistance
+    public static double targetDistance = 254;
+    public static  double controlPanelForward = 0.5;
+    public static double controlPanelReverse = -0.5;
+
     private MotorGroup roller;
     private DoubleSolenoid extender;
 

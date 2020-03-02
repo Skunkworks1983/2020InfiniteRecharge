@@ -124,6 +124,11 @@ public class Robot extends TimedRobot
 		return limelight;
 	}
 
+	public ColorSensor getColorSensor()
+	{
+		return colorSensor;
+	}
+
 	public NavX getNavX()
 	{
 		return navX;

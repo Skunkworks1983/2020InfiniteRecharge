@@ -4,29 +4,27 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
 import frc.team1983.subsystems.ControlPanel;
 import frc.team1983.util.motors.ControlMode;
-import frc.team1983.util.sensors.ColorSensor;
 
-public class Position extends CommandBase
+public class ManualRotation extends CommandBase
 {
     private ControlPanel controlPanel;
-    private ColorSensor colorSensor;
+    private double throttle;
 
-    public Position(ControlPanel controlPanel, ColorSensor colorSensor)
+    public ManualRotation(ControlPanel controlPanel, double throttle)
     {
         this.controlPanel = controlPanel;
-        this.colorSensor = colorSensor;
+        this.throttle = throttle;
     }
 
-    public Position()
+    public ManualRotation(double throttle)
     {
-        this(Robot.getInstance().getControlPanel(), Robot.getInstance().getColorSensor());
+        this(Robot.getInstance().getControlPanel(), throttle);
     }
 
     @Override
     public void execute()
     {
-        //TODO Figure out how to do position
-
+        controlPanel.setRoller(ControlMode.Throttle, throttle);
     }
 
     @Override

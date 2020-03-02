@@ -21,10 +21,9 @@ public class RobotMap
 
     public static class ControlPanel
     {
-        //TODO add ports
-        public static final int ROLLER = 0;
+        public static final int ROLLER = 9;
         public static final boolean ROLLER_REVERSED = false;
-        public static final int PISTON_FORWARD = 0;
-        public static final int PISTON_REVERSE = 1;
+        public static final int PISTON_FORWARD = 2;
+        public static final int PISTON_REVERSE = 5;
     }
 }
