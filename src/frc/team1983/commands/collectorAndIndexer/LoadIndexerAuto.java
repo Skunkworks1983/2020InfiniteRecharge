@@ -38,7 +38,6 @@ public class LoadIndexerAuto extends CommandBase
     {
 
         indexer.setCollectorTransfer(Indexer.motorsForward);
-        indexer.setInternal(Indexer.internalForward);
 
         //if shooting
         if (isShooting)
@@ -52,6 +51,19 @@ public class LoadIndexerAuto extends CommandBase
         else //if indexing and no ball detected
         {
             indexer.setShooterTransfer(0.5);
+        }
+
+        if(isShooting)
+        {
+            indexer.setInternal(0.65);
+        }
+        else if(indexer.INTERNAL_INDEXER_HAS_BALL.get())
+        {
+            indexer.setInternal(Indexer.motorsOff);
+        }
+        else
+        {
+            indexer.setInternal(0.4);
         }
     }
 
