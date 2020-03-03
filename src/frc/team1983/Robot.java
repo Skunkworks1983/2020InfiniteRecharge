@@ -3,15 +3,15 @@ package frc.team1983;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.controlpanel.PollFMS;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.ControlPanel;
 import frc.team1983.subsystems.Drivebase;
+import frc.team1983.util.sensors.ColorSensor;
 import frc.team1983.util.sensors.Limelight;
-import frc.team1983.commands.TargetAlignment;
-import frc.team1983.util.sensors.NavX;
 
 public class Robot extends TimedRobot
 {
@@ -20,7 +20,7 @@ public class Robot extends TimedRobot
 	private Drivebase drivebase;
 	private ControlPanel controlPanel;
 	private Limelight limelight;
-	private NavX navX;
+	private ColorSensor colorSensor;
 	private OI oi;
 
 	private UsbCamera camera;
@@ -32,7 +32,9 @@ public class Robot extends TimedRobot
 		limelight = new Limelight();
 
 		drivebase = new Drivebase();
-		navX = new NavX();
+
+		colorSensor = new ColorSensor();
+		new Thread(colorSensor).start();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -45,24 +47,29 @@ public class Robot extends TimedRobot
 	@Override
 	public void robotInit()
 	{
-		navX.reset();
+		drivebase.resetHeading();
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(320, 240);
+		limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
 	}
 
 	@Override
 	public void robotPeriodic()
 	{
 		CommandScheduler.getInstance().run();
+		SmartDashboard.putNumber("Red", colorSensor.getRed());
+		SmartDashboard.putNumber("Green", colorSensor.getGreen());
+		SmartDashboard.putNumber("Blue", colorSensor.getBlue());
+		SmartDashboard.putNumber("Confidence", colorSensor.getConfidence());
+		SmartDashboard.putString("Detected Color", colorSensor.getColor());
 	}
 
 	@Override
 	public void autonomousInit()
 	{
-		navX.reset();
+		drivebase.resetHeading();
 		CommandScheduler.getInstance().cancelAll();
-		new TargetAlignment().schedule();
 	}
 
 	@Override
@@ -74,7 +81,7 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopInit()
 	{
-		navX.reset();
+		drivebase.resetHeading();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
 		
@@ -118,9 +125,9 @@ public class Robot extends TimedRobot
 		return limelight;
 	}
 
-	public NavX getNavX()
+	public ColorSensor getColorSensor()
 	{
-		return navX;
+		return colorSensor;
 	}
 
 	public OI getOI()

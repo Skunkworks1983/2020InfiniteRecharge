@@ -15,6 +15,12 @@ public class ControlPanel extends SubsystemBase
     public static final double ROTATIONS_PER_TICK = 42;
     
     public boolean desiredFoldedState = false;
+
+    //TODO find targetDistance
+    public static double targetDistance = 254;
+    public static  double controlPanelForward = 0.5;
+    public static double controlPanelReverse = -0.5;
+
     private MotorGroup roller;
     private DoubleSolenoid extender;
     private ColorSensor colorSensor;
