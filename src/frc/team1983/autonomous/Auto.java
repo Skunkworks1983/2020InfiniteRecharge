@@ -13,6 +13,8 @@ import java.util.function.Supplier;
 public enum Auto
 {
 	DO_NOTHING(DoNothing::new),
+	DRIVE_FORWARD(() -> new DriveStraight(0.5, 0.25).withTimeout(1.5)),
+	DRIVE_BACKWARD(() -> new DriveStraight(-0.5, 0.25).withTimeout(1.5)),
 	IN_FRONT_OF_OPPONENT_TRENCH_RUN_TO_OPPONENT_TRENCH_RUN_TO_RENDEZVOUS_POINT(InFrontOfOpponentTrenchRunToOpponentTrenchRunToRendezvousPoint::new),
 	IN_FRONT_OF_POWER_PORT_TO_RENDEZVOUS_POINT(InFrontOfPowerPortToRendezvousPoint::new),
 	IN_FRONT_OF_POWER_PORT_TO_RENDEZVOUS_POINT_TO_TRENCH_RUN(InFrontOfPowerPortToRendezvousPointToTrenchRun::new),

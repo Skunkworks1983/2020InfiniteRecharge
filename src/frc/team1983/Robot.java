@@ -25,6 +25,7 @@ public class Robot extends TimedRobot
 	private UsbCamera camera;
 
 	private SendableChooser<Auto> autoChooser;
+	private SendableChooser<Auto> driveBeforeAutoChooser;
 
 	Robot()
 	{
@@ -57,6 +58,12 @@ public class Robot extends TimedRobot
 		autoChooser.addOption("In Front of Trench Run -> Trench Run", Auto.IN_FRONT_OF_TRENCH_RUN_TO_TRENCH_RUN);
 		SmartDashboard.putData("Auto chooser", autoChooser);
 
+		driveBeforeAutoChooser = new SendableChooser<>();
+		driveBeforeAutoChooser.setDefaultOption("DO NOT DRIVE BEFORE AUTO", Auto.DO_NOTHING);
+		driveBeforeAutoChooser.addOption("Drive Forward", Auto.DRIVE_FORWARD);
+		driveBeforeAutoChooser.addOption("Drive Backward", Auto.DRIVE_BACKWARD);
+		SmartDashboard.putData("Drive before auto chooser", driveBeforeAutoChooser);
+
 		drivebase.resetHeading();
 
 		// On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
@@ -79,6 +86,7 @@ public class Robot extends TimedRobot
 		CommandScheduler.getInstance().cancelAll();
 		new SequentialCommandGroup(
 			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
+			driveBeforeAutoChooser.getSelected().getAuto(),
 			autoChooser.getSelected().getAuto()
 		).schedule();
 	}
