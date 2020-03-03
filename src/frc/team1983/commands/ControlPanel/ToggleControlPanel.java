@@ -6,13 +6,13 @@ import frc.team1983.subsystems.ControlPanel;
 
 public class ToggleControlPanel extends InstantCommand
 {
-    public ToggleControlPanel(ControlPanel controlPanel, boolean extended)
+    public ToggleControlPanel(ControlPanel controlPanel)
     {
-        super(() -> controlPanel.setExtended(extended), controlPanel);
+        super(() -> controlPanel.setExtended(!controlPanel.getFolded()), controlPanel);
     }
 
-    public ToggleControlPanel(boolean extended)
+    public ToggleControlPanel()
     {
-        this(Robot.getInstance().getControlPanel(), extended);
+        this(Robot.getInstance().getControlPanel());
     }
 }

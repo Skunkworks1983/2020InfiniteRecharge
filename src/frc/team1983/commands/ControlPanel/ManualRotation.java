@@ -3,7 +3,6 @@ package frc.team1983.commands.ControlPanel;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
 import frc.team1983.subsystems.ControlPanel;
-import frc.team1983.util.motors.ControlMode;
 
 public class ManualRotation extends CommandBase
 {
@@ -24,12 +23,12 @@ public class ManualRotation extends CommandBase
     @Override
     public void execute()
     {
-        controlPanel.setRoller(ControlMode.Throttle, throttle);
+        controlPanel.setRoller(throttle);
     }
 
     @Override
     public void end(boolean interrupted)
     {
-        controlPanel.setRoller(ControlMode.Throttle, 0.0);
+        controlPanel.setRoller(0.0);
     }
 }

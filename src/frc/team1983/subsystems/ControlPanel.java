@@ -13,9 +13,9 @@ import frc.team1983.util.motors.Spark;
 public class ControlPanel extends SubsystemBase
 {
     //TODO find targetDistance
-    public static double targetDistance = 254;
-    public static  double controlPanelForward = 0.5;
-    public static double controlPanelReverse = -0.5;
+    public static final double targetDistance = 254;
+    public static final double rotationControlSpeed = 0.5;
+    public static final double positionControlSpeed = 0.5;
 
     private MotorGroup roller;
     private DoubleSolenoid extender;
@@ -29,9 +29,14 @@ public class ControlPanel extends SubsystemBase
         extender = new DoubleSolenoid(RobotMap.ControlPanel.PISTON_FORWARD, RobotMap.ControlPanel.PISTON_REVERSE);
     }
 
-    public void setRoller(ControlMode controlMode, double value)
+    public void zero()
     {
-        roller.set(controlMode, value);
+        roller.zero();
+    }
+
+    public void setRoller(double value)
+    {
+        roller.set(ControlMode.Throttle, value);
     }
 
     public void setExtended(boolean shouldExtend)
@@ -39,7 +44,7 @@ public class ControlPanel extends SubsystemBase
         extender.set(shouldExtend ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
     }
 
-    public boolean isFolded()
+    public boolean getFolded()
     {
         return extender.get() == DoubleSolenoid.Value.kReverse;
     }
