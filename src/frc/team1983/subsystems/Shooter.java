@@ -11,7 +11,6 @@ public class Shooter extends SubsystemBase
 {
 
     public double voltageRamp = 2;
-    public static final double kP = 0.0, kI = 0.0, kD = 0.0, kF = 0.0;
 
     //Limits based on encoder reading as of 02/28/2020
     public static final double UPPER_LIMIT = 0.9;
@@ -24,8 +23,6 @@ public class Shooter extends SubsystemBase
     private MotorGroup accelerator;
     private MotorGroup flywheel;
     private MotorGroup articulation;
-
-//    private SparkPIDController articulationPIDController;
 
     public Shooter()
     {
@@ -43,9 +40,6 @@ public class Shooter extends SubsystemBase
             new DutyCycleEncoder(1),
             new Spark(RobotMap.Shooter.ARTICULATION_1, RobotMap.Shooter.ARTICULATION_1_REVERSED)
         );
-
-//        articulationPIDController = new SparkPIDController((Spark) articulation.getMaster());
-//        articulationPIDController.setGains(kP, kI, kD, kF);
     }
 
     /**

@@ -3,25 +3,24 @@ package frc.team1983.commands.shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
+import frc.team1983.services.OI;
 import frc.team1983.subsystems.Shooter;
 import frc.team1983.util.motors.ControlMode;
 
-public class SetShooter extends CommandBase
+public class ManualShooter extends CommandBase
 {
     private Shooter shooter;
-    private ControlMode controlMode;
-    private double acceleratorValue, flywheelValue;
+    private OI oi;
 
-    public SetShooter(Shooter shooter, double acceleratorValue, double flywheelValue)
+    public ManualShooter(Shooter shooter, OI oi)
     {
         this.shooter = shooter;
-        this.acceleratorValue = acceleratorValue;
-        this.flywheelValue = flywheelValue;
+        this.oi = oi;
     }
 
-    public SetShooter(double acceleratorValue, double flywheelValue)
+    public ManualShooter()
     {
-        this(Robot.getInstance().getShooter(), acceleratorValue, flywheelValue);
+        this(Robot.getInstance().getShooter(), Robot.getInstance().getOI());
     }
 
     @Override
@@ -33,14 +32,9 @@ public class SetShooter extends CommandBase
     @Override
     public void execute()
     {
-        shooter.set(ControlMode.Throttle, acceleratorValue, flywheelValue);
+        double throttle = oi.getPanelY();
+        shooter.set(ControlMode.Throttle, throttle, throttle);
         SmartDashboard.putNumber("Accelerator Velocity", Robot.getInstance().getShooter().getAcceleratorVelocity() * 30 / 18.0);
         SmartDashboard.putNumber("Flywheel Velocity", Robot.getInstance().getShooter().getFlywheelVelocity() * 30 / 18.0);
-    }
-
-    @Override
-    public void end(boolean interrupted)
-    {
-        shooter.set(ControlMode.Throttle, 0.0, 0.0);
     }
 }

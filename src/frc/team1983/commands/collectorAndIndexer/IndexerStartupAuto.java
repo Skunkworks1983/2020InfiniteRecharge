@@ -10,8 +10,8 @@ public class IndexerStartupAuto extends SequentialCommandGroup
                               boolean isShooting, double delaySeconds)
     {
         addCommands(
-                new InternalIndexer(i, ControlMode.Throttle, internalPercentThrottle).withTimeout(delaySeconds),
-                new LoadIndexerAuto(i, outsidePercentThrottle, isShooting)
+                new InternalIndexer(i, internalPercentThrottle).withTimeout(delaySeconds),
+                new LoadIndexerAuto(i, isShooting)
         );
     }
 }

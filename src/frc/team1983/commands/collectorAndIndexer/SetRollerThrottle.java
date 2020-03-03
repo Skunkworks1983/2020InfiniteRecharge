@@ -11,10 +11,10 @@ public class SetRollerThrottle extends CommandBase
     private Collector collector;
     private double throttle;
 
-    public SetRollerThrottle(Collector c, double t)
+    public SetRollerThrottle(Collector c, double throttle)
     {
-        collector = c;
-        throttle = t;
+        this.collector = c;
+        this.throttle = throttle;
     }
 
     @Override
@@ -24,10 +24,9 @@ public class SetRollerThrottle extends CommandBase
     }
 
     @Override
-    public void execute() //TODO: do not test without fixing reversed values in robotmap
+    public void execute()
     {
-        collector.setCollectorMotor(Collector.motorsForward);
-
+        collector.setCollectorMotor(throttle);
     }
 
     @Override

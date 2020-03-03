@@ -5,6 +5,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
+import frc.team1983.commands.shooter.ManualShooter;
 import frc.team1983.commands.shooter.SetArticulation;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.*;
@@ -64,6 +65,8 @@ public class Robot extends TimedRobot
         CommandScheduler.getInstance().run();
 //        System.out.println("Articulation Position: " + shooter.getArticulationPosition());
 //        System.out.println(indexer.indexerHasBall.get());
+        //System.out.println(oi.getPanelY());
+//        System.out.println(indexer.SHOOTER_TRANSFER_HAS_BALL.get());
     }
 
     @Override

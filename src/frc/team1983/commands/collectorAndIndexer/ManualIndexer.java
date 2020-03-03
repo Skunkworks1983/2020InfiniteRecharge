@@ -8,11 +8,21 @@ import frc.team1983.util.motors.ControlMode;
 public class ManualIndexer extends CommandBase
 {
     private Indexer indexer;
+    private double collectorTransferSpeed;
+    private double internalIndexerSpeed;
+    private double shooterTransferSpeed;
 
-    public ManualIndexer(Indexer indexer)
+    public ManualIndexer(Indexer indexer, double collectorTransferSpeed, double internalIndexerSpeed, double shooterTransferSpeed)
     {
         this.indexer = indexer;
+        this.collectorTransferSpeed = collectorTransferSpeed;
+        this.internalIndexerSpeed = internalIndexerSpeed;
+        this.shooterTransferSpeed = shooterTransferSpeed;
+    }
 
+    public ManualIndexer(double collectorTransferSpeed, double internalIndexerSpeed, double shooterTransferSpeed)
+    {
+        this(Robot.getInstance().getIndexer(), collectorTransferSpeed, internalIndexerSpeed, shooterTransferSpeed);
     }
 
     @Override
@@ -24,9 +34,11 @@ public class ManualIndexer extends CommandBase
     @Override
     public void execute()
     {
-        indexer.setCollectorTransfer(Indexer.motorsForward);
-        indexer.setShooterTransfer(Indexer.motorsForward);
-        indexer.setInternal(Indexer.internalForward);
+        System.out.println("ManualIndexer running");
+
+        indexer.setCollectorTransfer(collectorTransferSpeed);
+        indexer.setInternal(internalIndexerSpeed);
+        indexer.setShooterTransfer(shooterTransferSpeed);
     }
 
     @Override

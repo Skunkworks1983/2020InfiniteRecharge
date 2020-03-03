@@ -10,20 +10,20 @@ import frc.team1983.util.motors.ControlMode;
 
 public class SetCollectorPosition extends InstantCommand
 {
-    public SetCollectorPosition(Collector collector, boolean extended)
+    public SetCollectorPosition(Collector collector)
     {
         // basically a fancy if/else statement
         // ? is the comparison/ if
         // : is the then/else
         // it takes the ?, :, and collector within the super
-            super(extended ?
+            super(collector.getCollectorStatus() ?
                     () -> collector.setCollectorPosition(Collector.position.extended):
-                    ()->collector.setCollectorPosition(Collector.position.retracted), collector);
+                    ()-> collector.setCollectorPosition(Collector.position.retracted), collector);
 
     }
-    public SetCollectorPosition(boolean extended)
+    public SetCollectorPosition()
     {
-        this(Robot.getInstance().getCollector(), extended);
+        this(Robot.getInstance().getCollector());
     }
 
 

@@ -10,21 +10,18 @@ import frc.team1983.util.motors.ControlMode;
 public class InternalIndexer extends CommandBase
 {
     private Indexer indexer;
-    private ControlMode controlMode;
-    private double internalValue;
+    private double throttle;
 
-    public InternalIndexer(Indexer i, ControlMode cm, double iiv)
+    public InternalIndexer(Indexer i,  double throttle)
     {
-        indexer = i;
-        controlMode = cm;
-        internalValue = iiv;
+        this.indexer = i;
+        this.throttle = throttle;
     }
 
-    public InternalIndexer(ControlMode controlMode, double internalIndexerValue)
+    public InternalIndexer( double throttle)
     {
-        this(Robot.getInstance().getIndexer(), controlMode, internalIndexerValue);
+        this(Robot.getInstance().getIndexer(), throttle);
     }
-
 
     @Override
     public void initialize()
@@ -33,9 +30,10 @@ public class InternalIndexer extends CommandBase
     }
 
     @Override
-    public void execute() //TODO: do not test without fixing reversed values in robotmap
+    public void execute()
     {
-       indexer.setInternal(Indexer.internalForward);
+        System.out.println("InternalIndexer running");
+       indexer.setInternal(throttle);
     }
 
     @Override

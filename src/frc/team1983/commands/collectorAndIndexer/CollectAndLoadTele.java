@@ -9,12 +9,12 @@ public class CollectAndLoadTele extends ParallelCommandGroup
 {
 
     public CollectAndLoadTele(Collector c, Indexer i, OI anOI, double collectorPercentThrottle,
-                              double internalPercentThrottle, double externalPercentThrottle, double delaySeconds)
+                              double internalPercentThrottle, double delaySeconds)
     {
         addCommands(
                 new SetRollerThrottle(c, collectorPercentThrottle),
 
-                new IndexerStartupTele(i, anOI, internalPercentThrottle, externalPercentThrottle, delaySeconds)
+                new IndexerStartupTele(i, anOI, internalPercentThrottle, delaySeconds)
         );
     }
 

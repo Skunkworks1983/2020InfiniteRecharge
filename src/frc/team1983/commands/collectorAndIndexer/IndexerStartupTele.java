@@ -7,12 +7,12 @@ import frc.team1983.util.motors.ControlMode;
 
 public class IndexerStartupTele extends SequentialCommandGroup
 {
-    public IndexerStartupTele(Indexer i, OI anOI, double internalPercentThrottle, double outsidePercentThrottle,
+    public IndexerStartupTele(Indexer i, OI anOI, double internalPercentThrottle,
                               double delaySeconds)
     {
         addCommands(
-                new InternalIndexer(i, ControlMode.Throttle, internalPercentThrottle).withTimeout(delaySeconds),
-                new LoadIndexerTele(i, anOI, outsidePercentThrottle)
+                new InternalIndexer(i, internalPercentThrottle).withTimeout(delaySeconds),
+                new LoadIndexerTele(i, null, null)
         );
     }
 }

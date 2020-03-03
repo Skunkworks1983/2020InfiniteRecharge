@@ -66,6 +66,12 @@ public class Collector extends SubsystemBase
         return currentPosition;
     }
 
+    public boolean getCollectorStatus()
+    {
+        return piston.get() == DoubleSolenoid.Value.kReverse;
+    }
+
+
     public void setCollectorMotor(double speed)
     {
         collectorMotor.set(ControlMode.Throttle, speed);
