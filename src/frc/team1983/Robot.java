@@ -4,8 +4,8 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.team1983.commands.controlpanel.PollFMS;
 import frc.team1983.commands.RunGyroDrive;
-import frc.team1983.commands.RunTankDrive;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.ControlPanel;
 import frc.team1983.subsystems.Drivebase;
@@ -77,12 +77,17 @@ public class Robot extends TimedRobot
 		navX.reset();
 		CommandScheduler.getInstance().cancelAll();
 		new RunGyroDrive().schedule();
+		
+		
 	}
 
 	@Override
 	public void teleopPeriodic()
 	{
-
+		if (!controlPanel.isAlreadyPolled())
+		{
+			new PollFMS().schedule();
+		}
 	}
 
 	@Override
