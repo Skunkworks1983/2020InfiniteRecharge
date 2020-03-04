@@ -39,7 +39,7 @@ public class SetArticulation extends CommandBase
         //Tuned on 02/27/2020
         double throttle = 65.0 * -(currentAngle - targetAngle);
 
-        if(Math.abs(oi.getOperatorY()) > 0.05)
+        if (Math.abs(oi.getOperatorY()) > 0.05)
         {
             throttle = oi.getOperatorY();
             targetAngle = shooter.getArticulationPosition();
@@ -53,13 +53,5 @@ public class SetArticulation extends CommandBase
         else if (shooter.getArticulationPosition() <= shooter.LOWER_LIMIT && throttle > 0)
             shooter.setArticulation(throttle);
         else shooter.setArticulation(0);
-
-//        System.out.println("Throttle: " + throttle);
     }
-
-//    @Override
-//    public void end(boolean interrupted)
-//    {
-//        shooter.setArticulation(0.0);
-//    }
 }

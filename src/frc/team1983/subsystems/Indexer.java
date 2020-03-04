@@ -8,7 +8,7 @@ import frc.team1983.util.motors.Spark;
 
 public class Indexer
 {
-    public DigitalInput SHOOTER_TRANSFER_HAS_BALL, INTERNAL_INDEXER_HAS_BALL;
+    public DigitalInput ShooterTransferHasBall, InternalIndexerHasBall;
 
     public double voltageRamp = 1;
 
@@ -23,8 +23,8 @@ public class Indexer
 
     public Indexer()
     {
-        SHOOTER_TRANSFER_HAS_BALL = new DigitalInput(RobotMap.Indexer.SHOOTER_TRANSFER_SENSOR);
-        INTERNAL_INDEXER_HAS_BALL = new DigitalInput(RobotMap.Indexer.INTERNAL_INDEXER_SENSOR);
+        ShooterTransferHasBall = new DigitalInput(RobotMap.Indexer.SHOOTER_TRANSFER_SENSOR);
+        InternalIndexerHasBall = new DigitalInput(RobotMap.Indexer.INTERNAL_INDEXER_SENSOR);
 
         collectorTransfer = new Spark(RobotMap.Indexer.COLLECTOR_TRANSFER,
                 RobotMap.Indexer.COLLECTOR_TRANSFER_REVERSED);

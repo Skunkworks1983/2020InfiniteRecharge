@@ -16,48 +16,10 @@ public class SetCollectorPosition extends InstantCommand
         // ? is the comparison/ if
         // : is the then/else
         // it takes the ?, :, and collector within the super
-            super(collector.getCollectorStatus() ?
-                    () -> collector.setCollectorPosition(Collector.position.extended):
-                    ()-> collector.setCollectorPosition(Collector.position.retracted), collector);
-
+        super(() -> collector.setCollectorPosition(!collector.getCollectorStatus()), collector);
     }
     public SetCollectorPosition()
     {
         this(Robot.getInstance().getCollector());
     }
-
-
-
-//    private Collector collector;
-//    private Collector.position position;
-//
-//    public SetCollectorPosition(Collector collect, Collector.position p)
-//    {
-//        collector = collect;
-//        position = p;
-//    }
-//
-//    @Override
-//    public void initialize()
-//    {
-//        collector.setCollectorPosition(this.position);
-//    }
-//
-//    @Override
-//    public void execute() //TODO: do not test without fixing reversed values in robotmap
-//    {
-//
-//    }
-//
-//    @Override
-//    public boolean isFinished()
-//    {
-//        return true;
-//    }
-//
-//    @Override
-//    public void end(boolean interrupted)
-//    {
-//
-//    }
 }

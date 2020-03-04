@@ -9,7 +9,6 @@ import frc.team1983.util.motors.ControlMode;
 public class SetShooter extends CommandBase
 {
     private Shooter shooter;
-    private ControlMode controlMode;
     private double acceleratorValue, flywheelValue;
 
     public SetShooter(Shooter shooter, double acceleratorValue, double flywheelValue)

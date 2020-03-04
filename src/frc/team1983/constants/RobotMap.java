@@ -1,10 +1,7 @@
 package frc.team1983.constants;
 
-public class RobotMap //TODO: all of these values have yet to be finalized
+public class RobotMap
 {
-
-    //reversed values as of right now follow the odd/even false/true values
-
     public static final int COMPRESSOR = 61;
 
     public static class Drivebase
@@ -36,9 +33,6 @@ public class RobotMap //TODO: all of these values have yet to be finalized
 
         public static final int ARTICULATION_1 = 4;
         public static final boolean ARTICULATION_1_REVERSED = true;
-
-        //public static final int ARTICULATION_2 = 11;
-        //public static final boolean ARTICULATION_2_REVERSED = false;
     }
 
     public static class Indexer

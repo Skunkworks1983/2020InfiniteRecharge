@@ -11,9 +11,9 @@ public class SetRollerThrottle extends CommandBase
     private Collector collector;
     private double throttle;
 
-    public SetRollerThrottle(Collector c, double throttle)
+    public SetRollerThrottle(Collector collector, double throttle)
     {
-        this.collector = c;
+        this.collector = collector;
         this.throttle = throttle;
     }
 

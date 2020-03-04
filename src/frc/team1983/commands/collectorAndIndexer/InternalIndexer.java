@@ -12,9 +12,9 @@ public class InternalIndexer extends CommandBase
     private Indexer indexer;
     private double throttle;
 
-    public InternalIndexer(Indexer i,  double throttle)
+    public InternalIndexer(Indexer indexer,  double throttle)
     {
-        this.indexer = i;
+        this.indexer = indexer;
         this.throttle = throttle;
     }
 
@@ -32,7 +32,6 @@ public class InternalIndexer extends CommandBase
     @Override
     public void execute()
     {
-        System.out.println("InternalIndexer running");
        indexer.setInternal(throttle);
     }
 

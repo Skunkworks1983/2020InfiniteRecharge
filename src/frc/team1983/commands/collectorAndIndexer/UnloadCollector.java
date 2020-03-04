@@ -9,32 +9,27 @@ import frc.team1983.util.motors.ControlMode;
 public class UnloadCollector extends CommandBase
 {
     private Collector collector;
-    private OI oi;
-    private ControlMode controlMode;
-    private double collectorValue;
 
-    public UnloadCollector(Collector c, ControlMode cm, double v)
+    public UnloadCollector(Collector collector)
     {
-        collector = c;
-        collectorValue = v;
-        controlMode = cm;
+        this.collector = collector;
     }
 
-    public UnloadCollector(ControlMode controlMode, double collectorValue)
+    public UnloadCollector()
     {
-        this(Robot.getInstance().getCollector(), controlMode, collectorValue);
-    }
-
-    @Override //when we have motors reversed, then they're always in initialize
-    public void initialize()
-    {
-        collector.setCollectorMotor(Collector.motorsReversed);
+        this(Robot.getInstance().getCollector());
     }
 
     @Override
-    public void execute() //TODO: do not test without fixing reversed values in robotmap
+    public void initialize()
     {
 
+    }
+
+    @Override
+    public void execute()
+    {
+        collector.setCollectorMotor(Collector.motorsReversed);
     }
 
     @Override

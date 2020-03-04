@@ -32,9 +32,4 @@ public class Climber extends SubsystemBase
 
         currentPosition = p;
     }
-
-    public position getClimberPosition()
-    {
-        return currentPosition;
-    }
 }

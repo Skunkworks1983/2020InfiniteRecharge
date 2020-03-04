@@ -80,7 +80,7 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
 //TODO Fix to work correctly with Talon
     public void setVoltageRamp(double value)
     {
-        setVoltageRamp(value);
+
     }
 
     /**

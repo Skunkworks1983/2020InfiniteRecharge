@@ -29,7 +29,6 @@ public class Collector extends SubsystemBase
                 RobotMap.Collector.PISTON_REVERSE);
     }
 
-    //TODO: uhhh is this going to be throttale-able
     //for now we're just using the motorsForward constant because it's a good chance
     // we'll only have to collect at one speed
     public void setRollerThrottle(double throttle)
@@ -37,7 +36,6 @@ public class Collector extends SubsystemBase
         collectorMotor.set(ControlMode.Throttle, throttle);
     }
 
-    //TODO: let's assume that there's only two positions? if not- CHANGE
     //this simply tells us what positions are allowed
     public enum position
     {
@@ -46,18 +44,19 @@ public class Collector extends SubsystemBase
     }
 
     //sets collector position
-    public void setCollectorPosition(position p)
+    public void setCollectorPosition(boolean p)
     {
-        if (p == position.retracted)
-        {
-            piston.set(DoubleSolenoid.Value.kReverse);
-        }
-        else
-        {
-            piston.set(DoubleSolenoid.Value.kForward);
-        }
-
-        currentPosition = p;
+        piston.set(p ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
+//        if (p == position.retracted)
+//        {
+//            piston.set(DoubleSolenoid.Value.kReverse);
+//        }
+//        else if(p== position.extended)
+//        {
+//            piston.set(DoubleSolenoid.Value.kForward);
+//        }
+//
+//        currentPosition = p;
     }
 
     //gets collector position, there's really only two options right now

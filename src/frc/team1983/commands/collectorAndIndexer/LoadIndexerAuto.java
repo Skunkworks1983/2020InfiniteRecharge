@@ -2,28 +2,28 @@ package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
+import frc.team1983.subsystems.Collector;
 import frc.team1983.subsystems.Indexer;
-import frc.team1983.util.motors.ControlMode;
 
 //this class is to be used in auto
 //in order for it to actually end, it must be passed a timeout in the auto command
 public class LoadIndexerAuto extends CommandBase
 {
     private Indexer indexer;
-    private double indexerValue;
-    private ControlMode controlMode;
+    public Collector collector;
 
     private boolean isShooting; //this takes into account whether or not we are shooting
 
-    public LoadIndexerAuto(Indexer i, boolean isShooting)
+    public LoadIndexerAuto(Indexer indexer, Collector collector, boolean isShooting)
     {
-        indexer = i;
+        this.indexer = indexer;
+        this.collector = collector;
         this.isShooting = isShooting;
     }
 
     public LoadIndexerAuto(boolean isShooting)
     {
-        this(Robot.getInstance().getIndexer(), isShooting);
+        this(Robot.getInstance().getIndexer(), Robot.getInstance().getCollector(), isShooting);
     }
 
 
@@ -36,34 +36,34 @@ public class LoadIndexerAuto extends CommandBase
     @Override
     public void execute()
     {
-
-        indexer.setCollectorTransfer(Indexer.motorsForward);
-
         //if shooting
         if (isShooting)
         {
             indexer.setShooterTransfer(0.75);
+            indexer.setInternal(0.5);
         }
-        else if (indexer.SHOOTER_TRANSFER_HAS_BALL.get()) //if we aren't shooting and sensor is triggered
+        else if (indexer.ShooterTransferHasBall.get()) //if we aren't shooting and sensor is triggered
         {
             indexer.setShooterTransfer(Indexer.motorsOff);
-        }
-        else //if indexing and no ball detected
-        {
-            indexer.setShooterTransfer(0.5);
-        }
-
-        if(isShooting)
-        {
-            indexer.setInternal(0.65);
-        }
-        else if(indexer.INTERNAL_INDEXER_HAS_BALL.get())
-        {
-            indexer.setInternal(Indexer.motorsOff);
+            if (indexer.InternalIndexerHasBall.get())
+            {
+                indexer.setInternal(Indexer.motorsOff);
+                indexer.setCollectorTransfer(0.3);
+                collector.setCollectorMotor(0.3);
+            }
+            else
+            {
+                indexer.setInternal(0.6);
+                indexer.setCollectorTransfer(0.3);
+                collector.setCollectorMotor(0.3);
+            }
         }
         else
         {
-            indexer.setInternal(0.4);
+            indexer.setShooterTransfer(0.5);
+            indexer.setInternal(0.6);
+            indexer.setCollectorTransfer(0.2);
+            collector.setCollectorMotor(0.2);
         }
     }
 

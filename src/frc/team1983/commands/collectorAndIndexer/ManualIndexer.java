@@ -34,8 +34,6 @@ public class ManualIndexer extends CommandBase
     @Override
     public void execute()
     {
-        System.out.println("ManualIndexer running");
-
         indexer.setCollectorTransfer(collectorTransferSpeed);
         indexer.setInternal(internalIndexerSpeed);
         indexer.setShooterTransfer(shooterTransferSpeed);

@@ -23,7 +23,7 @@ public class DutyCycleEncoder extends edu.wpi.first.wpilibj.DutyCycleEncoder imp
      */
     public void zero()
     {
-//        encoderOffset = -get();
+
     }
 
     /**

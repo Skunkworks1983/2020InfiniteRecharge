@@ -40,41 +40,45 @@ public class LoadIndexerTele extends CommandBase
     }
 
     @Override
-    public void execute() //TODO: do not test without fixing reversed values in robotmap
+    public void execute()
     {
 
        // isShooting = oi.isShooting();
 
         boolean isShooting = oi.getButton(OI.Joysticks.OPERATOR, 1).get();
 
-        indexer.setCollectorTransfer(Indexer.motorsForward);
+
 
         //if shooting
         if (isShooting)
         {
             indexer.setShooterTransfer(0.75);
-            indexer.setInternal(0.65);
+            indexer.setInternal(0.5);
         }
-        else if (indexer.SHOOTER_TRANSFER_HAS_BALL.get()) //if we aren't shooting and sensor is triggered
+        else if (indexer.ShooterTransferHasBall.get()) //if we aren't shooting and sensor is triggered
         {
-            System.out.println("shooter has ball");
            indexer.setShooterTransfer(Indexer.motorsOff);
-           if (indexer.INTERNAL_INDEXER_HAS_BALL.get())
+           if (indexer.InternalIndexerHasBall.get())
            {
                indexer.setInternal(Indexer.motorsOff);
+               indexer.setCollectorTransfer(0.3);
+               collector.setCollectorMotor(0.3);
            }
            else
            {
                indexer.setInternal(0.6);
+               indexer.setCollectorTransfer(0.3);
+               collector.setCollectorMotor(0.3);
            }
         }
         else
         {
-            System.out.println("running transfer");
-            indexer.setShooterTransfer(0.65);
+            indexer.setShooterTransfer(0.5);
             indexer.setInternal(0.6);
+            indexer.setCollectorTransfer(0.2);
+            collector.setCollectorMotor(0.2);
         }
-        collector.setCollectorMotor(0.5);
+
     }
 
     @Override
@@ -86,9 +90,17 @@ public class LoadIndexerTele extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        indexer.setShooterTransfer(Indexer.motorsOff);
-        indexer.setInternal(Indexer.motorsOff);
-        indexer.setCollectorTransfer(Indexer.motorsOff);
-        collector.setCollectorMotor(0);
+        if(oi.getButton(OI.Joysticks.OPERATOR, 1).get())
+        {
+            indexer.setShooterTransfer(0.75);
+            indexer.setInternal(0.65);
+        }
+        else
+        {
+            indexer.setShooterTransfer(Indexer.motorsOff);
+            indexer.setInternal(Indexer.motorsOff);
+            indexer.setCollectorTransfer(Indexer.motorsOff);
+            collector.setCollectorMotor(0);
+        }
     }
 }

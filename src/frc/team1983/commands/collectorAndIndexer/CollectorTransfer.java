@@ -2,25 +2,24 @@ package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
-import frc.team1983.services.OI;
-import frc.team1983.subsystems.Collector;
 import frc.team1983.subsystems.Indexer;
 import frc.team1983.util.motors.ControlMode;
 
-import javax.naming.ldap.Control;
-
-public class UnloadIndexer extends CommandBase
+public class CollectorTransfer extends CommandBase
 {
     private Indexer indexer;
+    private double throttle;
 
-    public UnloadIndexer(Indexer indexer)
+    public CollectorTransfer(Indexer indexer, double throttle)
     {
         this.indexer = indexer;
+        this.throttle = throttle;
+
     }
 
-    public UnloadIndexer()
+    public CollectorTransfer(double collectorTransferSpeed)
     {
-        this(Robot.getInstance().getIndexer());
+        this(Robot.getInstance().getIndexer(), collectorTransferSpeed);
     }
 
     @Override
@@ -32,9 +31,7 @@ public class UnloadIndexer extends CommandBase
     @Override
     public void execute()
     {
-        indexer.setShooterTransfer(Indexer.motorsReversed);
-        indexer.setInternal(Indexer.internalReversed);
-        indexer.setCollectorTransfer(Indexer.motorsReversed);
+        indexer.setCollectorTransfer(throttle);
     }
 
     @Override
@@ -46,8 +43,6 @@ public class UnloadIndexer extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        indexer.setShooterTransfer(Indexer.motorsOff);
-        indexer.setInternal(Indexer.motorsOff);
         indexer.setCollectorTransfer(Indexer.motorsOff);
     }
 }

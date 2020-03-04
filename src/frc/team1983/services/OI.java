@@ -56,9 +56,6 @@ public class OI
     public static final int CLIMBER_DOWN = 7;
 
     private double collectorValue = 0.6;
-    private double internalIndexerValue = 0.75;
-
-    private double delaySeconds = 1;
 
     private Joystick left, right, panel, operator;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
@@ -172,17 +169,20 @@ public class OI
         //Full collection and loading
         getButton(Joysticks.PANEL, COLLECT_AND_LOAD).whenHeld(new LoadIndexerTele());
 
+        getButton(Joysticks.OPERATOR, 1).whenHeld(new IndexerStartupTele(9));
+
         //Toggle collector
         getButton(Joysticks.PANEL, SET_COLLECTOR_POSITION).whenPressed(new SetCollectorPosition());
 
         //Run collector transfer in reverse
-        getButton(Joysticks.PANEL, COLLECTOR_TRANSFER_REVERSE).whenHeld(new ManualIndexer(0,0, 0.25));
+        getButton(Joysticks.PANEL, COLLECTOR_TRANSFER_REVERSE).whenHeld(new ManualIndexer(-0.25,0,
+            0));
 
         //Run internal indexer in reverse
-        getButton(Joysticks.PANEL, INTERNAL_INDEXER_REVERSE).whenHeld(new ManualIndexer(0,0.25,0));
+        getButton(Joysticks.PANEL, INTERNAL_INDEXER_REVERSE).whenHeld(new ManualIndexer(0,-0.25,0));
 
         //Run shooter transfer in reverse
-        getButton(Joysticks.PANEL, SHOOTER_TRANSFER_REVERSE).whenHeld(new ManualIndexer(0,0,0.25));
+        getButton(Joysticks.PANEL, SHOOTER_TRANSFER_REVERSE).whenHeld(new ManualIndexer(0,0,-0.25));
 
         //Climber up
         getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
@@ -194,6 +194,6 @@ public class OI
 
         getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR));
 
-        getButton(Joysticks.OPERATOR, 5).whenHeld(new SetShooter(0.1, 0.1));
+        getButton(Joysticks.OPERATOR, 5).whenHeld(new SetShooter(0.9, 0.9));
     }
 }
