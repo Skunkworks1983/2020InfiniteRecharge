@@ -1,5 +1,6 @@
 package frc.team1983.autonomous.routines;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team1983.autonomous.paths.InFrontOfTrenchRunToRendezvousBall4And5;
 import frc.team1983.autonomous.paths.RendezvousBall4And5OffsetToRendezvousPointAndTrenchRunSwitch;
@@ -15,11 +16,17 @@ public class InFrontOfTrenchRunToRendezvousPointToTrenchRun extends SequentialCo
 	{
 		addCommands(
 			new SetPose(Constants.Pose.IN_FRONT_OF_TRENCH_RUN),
-			new InFrontOfTrenchRunToRendezvousBall4And5(),
+			new ParallelCommandGroup(
+				new InFrontOfTrenchRunToRendezvousBall4And5(),
+				new DoNothing() // TODO: collect
+			),
 			new RendezvousBall4And5ToRendezvousBall4And5Offset(),
 			new TargetAlignment(false).withTimeout(1.0),
 			new RendezvousBall4And5OffsetToRendezvousPointAndTrenchRunSwitch(),
-			new RendezvousTrenchRunSwitchToTrenchRunBall4And5()
+			new ParallelCommandGroup(
+				new RendezvousTrenchRunSwitchToTrenchRunBall4And5(),
+				new DoNothing() // TODO: collect
+			)
 		);
 	}
 }
