@@ -29,17 +29,17 @@ public class Constants
     {
         // Front bumper touching initiation line
         public static final Pose2d IN_FRONT_OF_TRENCH_RUN = new Pose2d(
-            Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters((10 + 1.0 / 12.0) + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d IN_FRONT_OF_POWER_PORT = new Pose2d(
-            Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters((10 + 1.0 / 12.0) + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-94.66 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d IN_FRONT_OF_OPPONENT_TRENCH_RUN = new Pose2d(
-            Units.feetToMeters(10 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters((10 + 1.0 / 12.0) + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-295.5 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );

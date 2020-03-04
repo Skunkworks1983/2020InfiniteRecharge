@@ -164,6 +164,10 @@ public class FollowTrajectory extends CommandBase
 		ramseteCommand.end(interrupted);
 		timer.stop();
 		drivebase.set(ControlMode.Throttle, 0.0, 0.0);
+		if(interrupted)
+		{
+			drivebase.setBrake(true);
+		}
 	}
 
 	@Override

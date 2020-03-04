@@ -121,8 +121,9 @@ public class Robot extends TimedRobot
 	@Override
 	public void disabledInit()
 	{
-		drivebase.setBrake(true);
+
 	}
+
 
 	public static Robot getInstance()
 	{
