@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team1983.Robot;
 import frc.team1983.subsystems.ControlPanel;
 import frc.team1983.util.HSVColor;
+import frc.team1983.util.sensors.ColorSensor;
 
 public class PollFMS extends InstantCommand
 {
@@ -24,14 +25,12 @@ public class PollFMS extends InstantCommand
     @Override
     public void initialize()
     {
-        if(controlPanel.isAlreadyPolled())
-        {
-            if (getAssignedColor() != HSVColor.Color.UNIDENTIFIED)
+        if (getAssignedColorChar() != ColorSensor.UNKNOWN)
             {
-                controlPanel.setAssignedColor(getAssignedColor());
+//                controlPanel.setAssignedColor(getAssignedColor());
+                controlPanel.setAssignedColor(getAssignedColorChar());
                 controlPanel.setAlreadyPolled(true);
             }
-        }
     }
     
     public static char getAssignedColorChar()
@@ -39,28 +38,28 @@ public class PollFMS extends InstantCommand
         return DriverStation.getInstance().getGameSpecificMessage().charAt(0);
     }
     
-    public static HSVColor.Color getAssignedColor()
-    {
-        char assignedColorChar = getAssignedColorChar();
-        if(assignedColorChar == 'R')
-        {
-            return HSVColor.Color.RED;
-        }
-        else if(assignedColorChar == 'G')
-        {
-            return HSVColor.Color.GREEN;
-        }
-        else if(assignedColorChar == 'B')
-        {
-            return HSVColor.Color.BLUE;
-        }
-        else if(assignedColorChar == 'Y')
-        {
-            return HSVColor.Color.YELLOW;
-        }
-        else
-        {
-            return HSVColor.Color.UNIDENTIFIED;
-        }
-    }
+//    public static HSVColor.Color getAssignedColor()
+//    {
+//        char assignedColorChar = getAssignedColorChar();
+//        if(assignedColorChar == 'R')
+//        {
+//            return HSVColor.Color.RED;
+//        }
+//        else if(assignedColorChar == 'G')
+//        {
+//            return HSVColor.Color.GREEN;
+//        }
+//        else if(assignedColorChar == 'B')
+//        {
+//            return HSVColor.Color.BLUE;
+//        }
+//        else if(assignedColorChar == 'Y')
+//        {
+//            return HSVColor.Color.YELLOW;
+//        }
+//        else
+//        {
+//            return HSVColor.Color.UNIDENTIFIED;
+//        }
+//    }
 }

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.controlpanel.PollFMS;
 import frc.team1983.commands.RunGyroDrive;
+import frc.team1983.commands.controlpanel.RotationControl;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.ControlPanel;
 import frc.team1983.subsystems.Drivebase;
@@ -22,7 +23,16 @@ public class Robot extends TimedRobot
 	private Limelight limelight;
 	private ColorSensor colorSensor;
 	private OI oi;
-
+	
+	double minHue = 360;
+	double maxHue = 0;
+	
+	double minSaturation = 20;
+	double maxSaturation = 0;
+	
+	double minValue = 20;
+	double maxValue = 0;
+	
 	private UsbCamera camera;
 
 	Robot()
@@ -34,7 +44,6 @@ public class Robot extends TimedRobot
 		drivebase = new Drivebase();
 
 		colorSensor = new ColorSensor();
-		new Thread(colorSensor).start();
 
 		oi = new OI();
 		oi.initializeBindings();
@@ -58,11 +67,6 @@ public class Robot extends TimedRobot
 	public void robotPeriodic()
 	{
 		CommandScheduler.getInstance().run();
-		SmartDashboard.putNumber("Red", colorSensor.getRed());
-		SmartDashboard.putNumber("Green", colorSensor.getGreen());
-		SmartDashboard.putNumber("Blue", colorSensor.getBlue());
-		SmartDashboard.putNumber("Confidence", colorSensor.getConfidence());
-		SmartDashboard.putString("Detected Color", colorSensor.getColor());
 	}
 
 	@Override
@@ -96,13 +100,14 @@ public class Robot extends TimedRobot
 			new PollFMS().schedule();
 		}
 	}
-
+	
 	@Override
-	public void testPeriodic()
+	public void testInit()
 	{
-
+		CommandScheduler.getInstance().cancelAll();
+		new RotationControl().schedule();
 	}
-
+	
 	public static Robot getInstance()
 	{
 		if (instance == null)
