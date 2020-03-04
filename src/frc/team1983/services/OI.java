@@ -3,14 +3,12 @@ package frc.team1983.services;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.team1983.Robot;
-import frc.team1983.commands.TargetAlignment;
 import frc.team1983.commands.climber.RunClimberDown;
 import frc.team1983.commands.climber.RunClimberUp;
 import frc.team1983.commands.collectorAndIndexer.*;
 import frc.team1983.commands.shooter.SetArticulationPosition;
 import frc.team1983.commands.shooter.SetShooter;
 import frc.team1983.subsystems.Shooter;
-import frc.team1983.util.motors.ControlMode;
 
 import java.util.HashMap;
 
@@ -169,7 +167,7 @@ public class OI
         //Full collection and loading
         getButton(Joysticks.PANEL, COLLECT_AND_LOAD).whenHeld(new LoadIndexerTele());
 
-        getButton(Joysticks.OPERATOR, 1).whenHeld(new IndexerStartupTele(9));
+        getButton(Joysticks.OPERATOR, 1).whenHeld(new IndexerStartupTele());
 
         //Toggle collector
         getButton(Joysticks.PANEL, SET_COLLECTOR_POSITION).whenPressed(new SetCollectorPosition());

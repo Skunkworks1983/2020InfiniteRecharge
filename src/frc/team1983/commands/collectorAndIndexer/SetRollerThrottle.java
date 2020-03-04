@@ -2,9 +2,6 @@ package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.subsystems.Collector;
-import frc.team1983.util.motors.ControlMode;
-
-import javax.naming.ldap.Control;
 
 public class SetRollerThrottle extends CommandBase
 {

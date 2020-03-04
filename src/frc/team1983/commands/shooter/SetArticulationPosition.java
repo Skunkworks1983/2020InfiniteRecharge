@@ -2,7 +2,6 @@ package frc.team1983.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
-import frc.team1983.services.OI;
 import frc.team1983.subsystems.Shooter;
 
 public class SetArticulationPosition extends CommandBase

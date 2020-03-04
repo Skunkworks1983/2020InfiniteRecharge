@@ -79,5 +79,6 @@ public class LoadIndexerAuto extends CommandBase
         indexer.setShooterTransfer(Indexer.motorsOff);
         indexer.setInternal(Indexer.motorsOff);
         indexer.setCollectorTransfer(Indexer.motorsOff);
+        collector.setRollerThrottle(Collector.motorsOff);
     }
 }

@@ -90,17 +90,9 @@ public class LoadIndexerTele extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        if(oi.getButton(OI.Joysticks.OPERATOR, 1).get())
-        {
-            indexer.setShooterTransfer(0.75);
-            indexer.setInternal(0.65);
-        }
-        else
-        {
             indexer.setShooterTransfer(Indexer.motorsOff);
             indexer.setInternal(Indexer.motorsOff);
             indexer.setCollectorTransfer(Indexer.motorsOff);
-            collector.setCollectorMotor(0);
-        }
+            collector.setCollectorMotor(Collector.motorsOff);
     }
 }

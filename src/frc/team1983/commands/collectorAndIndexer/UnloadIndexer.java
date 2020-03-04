@@ -2,12 +2,7 @@ package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
-import frc.team1983.services.OI;
-import frc.team1983.subsystems.Collector;
 import frc.team1983.subsystems.Indexer;
-import frc.team1983.util.motors.ControlMode;
-
-import javax.naming.ldap.Control;
 
 public class UnloadIndexer extends CommandBase
 {

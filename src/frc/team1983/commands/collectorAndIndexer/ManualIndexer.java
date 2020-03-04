@@ -3,7 +3,6 @@ package frc.team1983.commands.collectorAndIndexer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
 import frc.team1983.subsystems.Indexer;
-import frc.team1983.util.motors.ControlMode;
 
 public class ManualIndexer extends CommandBase
 {
