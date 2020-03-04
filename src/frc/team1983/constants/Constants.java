@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.util.Units;
 public class Constants
 {
     // 2019
-//    public static final double ROBOT_WIDTH = 34.0 / 12.0; // feet
-//    public static final double ROBOT_LENGTH = 37.0 /12.0; // feet
-//    public static final double TRACK_WIDTH = 24.75 / 12.0; // feet
-    // 2020
     public static final double ROBOT_WIDTH = 34.0 / 12.0; // feet
-    public static final double ROBOT_LENGTH = 38.0 /12.0; // feet
-    public static final double TRACK_WIDTH = 23.75 / 12.0; // feet
+    public static final double ROBOT_LENGTH = 37.0 /12.0; // feet
+    public static final double TRACK_WIDTH = 24.75 / 12.0; // feet
+    // 2020
+//    public static final double ROBOT_WIDTH = 34.0 / 12.0; // feet
+//    public static final double ROBOT_LENGTH = 38.0 /12.0; // feet
+//    public static final double TRACK_WIDTH = 23.75 / 12.0; // feet
 
     /**
      * All poses are in meters
@@ -157,6 +157,12 @@ public class Constants
             Units.feetToMeters(10 + ROBOT_LENGTH / 2.0 + OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_X_OFFSET),
             Units.feetToMeters(-94.66 / 12.0 + OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_Y_OFFSET),
             new Rotation2d(Units.degreesToRadians(180 - Units.radiansToDegrees(Math.tan(-OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_Y_OFFSET / (10.0 + ROBOT_LENGTH / 2.0 + OPPONENT_TRENCH_RUN_AND_RENDEZVOUS_POINT_X_OFFSET)))))
+        );
+        private static final double SHOOT_IN_FRONT_OF_POWER_PORT_OFFSET = 8.5; // feet offset from initiation line
+        public static final Pose2d SHOOT_IN_FRONT_OF_POWER_PORT = new Pose2d(
+            Units.feetToMeters((SHOOT_IN_FRONT_OF_POWER_PORT_OFFSET + 10 + 1.0 / 12.0) + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(-94.66 / 12.0),
+            new Rotation2d(Units.degreesToRadians(180))
         );
     }
 }

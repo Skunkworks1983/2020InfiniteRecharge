@@ -5,6 +5,7 @@ import frc.team1983.autonomous.routines.DoNothing;
 import frc.team1983.autonomous.routines.InFrontOfOpponentTrenchRunToOpponentTrenchRunToRendezvousPoint;
 import frc.team1983.autonomous.routines.InFrontOfPowerPortToRendezvousPoint;
 import frc.team1983.autonomous.routines.InFrontOfPowerPortToRendezvousPointToTrenchRun;
+import frc.team1983.autonomous.routines.InFrontOfPowerPortToShootInFrontOfPowerPortToTrenchRun;
 import frc.team1983.autonomous.routines.InFrontOfTrenchRunToRendezvousPointToTrenchRun;
 import frc.team1983.autonomous.routines.InFrontOfTrenchRunToTrenchRun;
 
@@ -19,7 +20,8 @@ public enum Auto
 	IN_FRONT_OF_POWER_PORT_TO_RENDEZVOUS_POINT(InFrontOfPowerPortToRendezvousPoint::new),
 	IN_FRONT_OF_POWER_PORT_TO_RENDEZVOUS_POINT_TO_TRENCH_RUN(InFrontOfPowerPortToRendezvousPointToTrenchRun::new),
 	IN_FRONT_OF_TRENCH_RUN_TO_RENDEZVOUS_POINT_TO_TRENCH_RUN(InFrontOfTrenchRunToRendezvousPointToTrenchRun::new),
-	IN_FRONT_OF_TRENCH_RUN_TO_TRENCH_RUN(InFrontOfTrenchRunToTrenchRun::new);
+	IN_FRONT_OF_TRENCH_RUN_TO_TRENCH_RUN(InFrontOfTrenchRunToTrenchRun::new),
+	IN_FRONT_OF_POWER_PORT_TO_SHOOT_IN_FRONT_OF_POWER_PORT_TO_TRENCH_RUN(InFrontOfPowerPortToShootInFrontOfPowerPortToTrenchRun::new);
 
 	private Supplier<Command> auto;
 
