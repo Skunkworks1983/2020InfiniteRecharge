@@ -39,8 +39,7 @@ public class LoadIndexerAuto extends CommandBase
         //if shooting
         if (isShooting)
         {
-            indexer.setShooterTransfer(0.75);
-            indexer.setInternal(0.5);
+            indexer.setShooterTransfer(0.8);
         }
         else if (indexer.ShooterTransferHasBall.get()) //if we aren't shooting and sensor is triggered
         {

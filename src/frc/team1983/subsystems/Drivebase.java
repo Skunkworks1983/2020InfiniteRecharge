@@ -11,7 +11,7 @@ import frc.team1983.util.sensors.NavX;
 
 public class Drivebase extends SubsystemBase
 {
-	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
+    public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (496.0 / 55.0);
 	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
 
 	private NavX navX;

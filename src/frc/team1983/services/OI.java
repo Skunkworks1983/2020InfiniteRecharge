@@ -1,8 +1,10 @@
 package frc.team1983.services;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.team1983.Robot;
+import frc.team1983.autonomous.DriveStraight;
 import frc.team1983.commands.climber.RunClimberDown;
 import frc.team1983.commands.climber.RunClimberUp;
 import frc.team1983.commands.collectorAndIndexer.*;
@@ -36,6 +38,8 @@ public class OI
 
     //driving joysticks for... well.. driving
     public static final double JOYSTICK_DEADZONE = 0.15;
+    public static final double POT_LOWER_DEADZONE = 0.8;
+    public static final double POT_UPPER_DEADZONE = -0.1;
     public static final double JOYSTICK_EXPONENT = 1.7;
     public static final double LINEAR_ZONE = 0.4;
     public static final double LINEAR_SLOPE = Math.abs(Math.pow(LINEAR_ZONE, JOYSTICK_EXPONENT) / (LINEAR_ZONE - JOYSTICK_DEADZONE));
@@ -46,7 +50,8 @@ public class OI
     public static final int COLLECTOR_REVERSE = 13;
     public static final int COLLECTOR_TRANSFER_REVERSE = 11;
     public static final int INTERNAL_INDEXER_REVERSE = 10;
-    public static final int SHOOTER_TRANSFER_REVERSE = 9;
+//    public static final int SHOOTER_TRANSFER_REVERSE = 9;
+    public static final int REVERSE_ALL = 9;
 
     public static final int SET_COLLECTOR_POSITION = 12;
 
@@ -63,6 +68,15 @@ public class OI
         if(Math.abs(raw) < JOYSTICK_DEADZONE) return 0;
         if(Math.abs(raw) < LINEAR_ZONE) return (LINEAR_SLOPE * raw) - (Math.signum(raw) * JOYSTICK_DEADZONE);
         else return Math.pow(Math.abs(raw), JOYSTICK_EXPONENT) * Math.signum(raw);
+    }
+
+    protected static double PotScale(double raw)
+    {
+        if(raw > POT_LOWER_DEADZONE)
+            return 0;
+        if(raw < POT_UPPER_DEADZONE)
+            return 1;
+        else return (Math.abs(raw) + 1) / 2;
     }
 
     public OI(Joystick left, Joystick right, Joystick panel, Joystick operator, HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons)
@@ -103,11 +117,11 @@ public class OI
     {
         if(Math.abs(left.getX()) > 0.15)
         {
-            return left.getX();
+            return scale(left.getX());
         }
         else
         {
-            return operator.getX();
+            return scale(operator.getX());
         }
     }
 
@@ -125,7 +139,7 @@ public class OI
 
     public double getPanelY()
     {
-        return scale(panel.getY());
+        return PotScale(panel.getY());
     }
 
     public JoystickButton getButton(Joysticks joystickPort, int button)
@@ -173,14 +187,14 @@ public class OI
         getButton(Joysticks.PANEL, SET_COLLECTOR_POSITION).whenPressed(new SetCollectorPosition());
 
         //Run collector transfer in reverse
-        getButton(Joysticks.PANEL, COLLECTOR_TRANSFER_REVERSE).whenHeld(new ManualIndexer(-0.25,0,
+        getButton(Joysticks.PANEL, COLLECTOR_TRANSFER_REVERSE).whenHeld(new ManualIndexer(-0.15,0,
             0));
 
         //Run internal indexer in reverse
-        getButton(Joysticks.PANEL, INTERNAL_INDEXER_REVERSE).whenHeld(new ManualIndexer(0,-0.25,0));
+        getButton(Joysticks.PANEL, INTERNAL_INDEXER_REVERSE).whenHeld(new ManualIndexer(0,-0.15,0));
 
-        //Run shooter transfer in reverse
-        getButton(Joysticks.PANEL, SHOOTER_TRANSFER_REVERSE).whenHeld(new ManualIndexer(0,0,-0.25));
+        //All of indexer in reverse
+        getButton(Joysticks.PANEL, REVERSE_ALL).whenHeld(new ManualIndexer(-0.15,-0.15,-0.15));
 
         //Climber up
         getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
@@ -188,10 +202,16 @@ public class OI
         //Climber down
         getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
 
-        getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.LOWER_LIMIT));
+        //Hood setpoint for shooting from trench
+        getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.TRENCH));
 
-        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR));
+        //Hood setpoint for shooting from protected zone in front of port
+        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.UPPER_LIMIT));
 
-        getButton(Joysticks.OPERATOR, 5).whenHeld(new SetShooter(0.9, 0.9));
+        //Set shooter speed
+        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(0.9, 0.9));
+
+        //Drive back from power port
+        getButton(Joysticks.RIGHT, 1).whenHeld(new DriveStraight(-0.75, Units.feetToMeters(2.0)));
     }
 }

@@ -5,7 +5,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1983.commands.RunGyroDrive;
-import frc.team1983.commands.shooter.ManualShooter;
 import frc.team1983.commands.shooter.SetArticulation;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.*;
@@ -23,7 +22,7 @@ public class Robot extends TimedRobot
     private Climber climber;
     private Indexer indexer;
 
-    private UsbCamera camera;
+    private UsbCamera cameraAim, cameraCollect;
 
     Robot()
     {
@@ -50,8 +49,10 @@ public class Robot extends TimedRobot
     public void robotInit()
     {
         // On GRIP, connect to http://roborio-1983-frc.local:1181/?action=stream
-        camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(320, 240);
+        cameraAim = CameraServer.getInstance().startAutomaticCapture();
+        cameraCollect = CameraServer.getInstance().startAutomaticCapture();
+        cameraAim.setResolution(320, 240);
+        cameraCollect.setResolution(320, 240);
         limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
     }
 
