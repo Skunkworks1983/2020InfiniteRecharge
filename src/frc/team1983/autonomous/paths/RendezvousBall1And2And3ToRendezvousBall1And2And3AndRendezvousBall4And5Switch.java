@@ -8,8 +8,8 @@ public class RendezvousBall1And2And3ToRendezvousBall1And2And3AndRendezvousBall4A
 	public RendezvousBall1And2And3ToRendezvousBall1And2And3AndRendezvousBall4And5Switch()
 	{
 		super(
-			Constants.Pose.RENDEZVOUS_POINT_BALL_1_AND_2_AND_3,
-			Constants.Pose.RENDEZVOUS_POINT_BALL_1_AND_2_AND_3_AND_RENDEZVOUS_POINT_BALL_4_AND_5_SWITCH
+			Constants.Pose.RENDEZVOUS_BALL_1_AND_2_AND_3,
+			Constants.Pose.RENDEZVOUS_BALL_1_AND_2_AND_3_AND_RENDEZVOUS_BALL_4_AND_5_SWITCH
 		);
 	}
 }

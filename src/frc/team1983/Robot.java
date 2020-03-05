@@ -51,12 +51,12 @@ public class Robot extends TimedRobot
 
 		autoChooser = new SendableChooser<>();
 		autoChooser.setDefaultOption("DO NOT RUN AUTO", Auto.DO_NOTHING);
-		autoChooser.addOption("In Front of Trench Run -> Rendezvous Point -> Trench Run", Auto.IN_FRONT_OF_TRENCH_RUN_TO_RENDEZVOUS_POINT_TO_TRENCH_RUN);
-		autoChooser.addOption("In Front of Power Port -> Rendezvous Point -> Trench Run", Auto.IN_FRONT_OF_POWER_PORT_TO_RENDEZVOUS_POINT_TO_TRENCH_RUN);
-		autoChooser.addOption("In Front of Power Port -> Rendezvous Point", Auto.IN_FRONT_OF_POWER_PORT_TO_RENDEZVOUS_POINT);
-		autoChooser.addOption("In Front of Opponent Trench Run -> Opponent Trench Run -> Rendezvous Point", Auto.IN_FRONT_OF_OPPONENT_TRENCH_RUN_TO_OPPONENT_TRENCH_RUN_TO_RENDEZVOUS_POINT);
-		autoChooser.addOption("In Front of Trench Run -> Trench Run", Auto.IN_FRONT_OF_TRENCH_RUN_TO_TRENCH_RUN);
-		autoChooser.addOption("In Front of Power Port -> Shoot in Front of Power Port -> Trench Run", Auto.IN_FRONT_OF_POWER_PORT_TO_SHOOT_IN_FRONT_OF_POWER_PORT_TO_TRENCH_RUN);
+		autoChooser.addOption("In Front of Trench -> Rendezvous -> Trench", Auto.IN_FRONT_OF_TRENCH_TO_RENDEZVOUS_TO_TRENCH);
+		autoChooser.addOption("In Front of Port -> Rendezvous -> Trench", Auto.IN_FRONT_OF_PORT_TO_RENDEZVOUS_TO_TRENCH);
+		autoChooser.addOption("In Front of Port -> Rendezvous Point", Auto.IN_FRONT_OF_PORT_TO_RENDEZVOUS);
+		autoChooser.addOption("In Front of Opponent Trench -> Opponent Trench -> Rendezvous", Auto.IN_FRONT_OF_OPPONENT_TRENCH_TO_OPPONENT_TRENCH_TO_RENDEZVOUS);
+		autoChooser.addOption("In Front of Trench -> Trench", Auto.IN_FRONT_OF_TRENCH_TO_TRENCH);
+		autoChooser.addOption("In Front of Port -> Shoot in Front of Port -> Trench", Auto.IN_FRONT_OF_PORT_TO_SHOOT_IN_FRONT_OF_PORT_TO_TRENCH);
 		SmartDashboard.putData("Auto chooser", autoChooser);
 
 		driveBeforeAutoChooser = new SendableChooser<>();

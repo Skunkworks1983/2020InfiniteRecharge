@@ -3,13 +3,13 @@ package frc.team1983.autonomous.paths;
 import frc.team1983.commands.FollowTrajectory;
 import frc.team1983.constants.Constants;
 
-public class RendezvousBall4And5ToRendezvousBall4And5Offset extends FollowTrajectory
+public class RendezvousBall4And5ToRendezvousAndTrenchSwitch extends FollowTrajectory
 {
-	public RendezvousBall4And5ToRendezvousBall4And5Offset()
+	public RendezvousBall4And5ToRendezvousAndTrenchSwitch()
 	{
 		super(
 			Constants.Pose.RENDEZVOUS_BALL_4_AND_5,
-			Constants.Pose.RENDEZVOUS_BALL_4_AND_5_OFFSET
+			Constants.Pose.RENDEZVOUS_AND_TRENCH_SWITCH
 		);
 	}
 }

@@ -2,29 +2,29 @@ package frc.team1983.autonomous.routines;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.team1983.autonomous.paths.InFrontOfTrenchRunToRendezvousBall4And5;
-import frc.team1983.autonomous.paths.RendezvousBall4And5OffsetToRendezvousPointAndTrenchRunSwitch;
+import frc.team1983.autonomous.paths.InFrontOfTrenchToRendezvousBall4And5;
+import frc.team1983.autonomous.paths.RendezvousBall4And5OffsetToRendezvousAndTrenchSwitch;
 import frc.team1983.autonomous.paths.RendezvousBall4And5ToRendezvousBall4And5Offset;
-import frc.team1983.autonomous.paths.RendezvousTrenchRunSwitchToTrenchRunBall4And5;
+import frc.team1983.autonomous.paths.RendezvousTrenchSwitchToTrenchBall4And5;
 import frc.team1983.commands.SetPose;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.constants.Constants;
 
-public class InFrontOfTrenchRunToRendezvousPointToTrenchRun extends SequentialCommandGroup
+public class InFrontOfTrenchToRendezvousToTrench extends SequentialCommandGroup
 {
-	public InFrontOfTrenchRunToRendezvousPointToTrenchRun()
+	public InFrontOfTrenchToRendezvousToTrench()
 	{
 		addCommands(
-			new SetPose(Constants.Pose.IN_FRONT_OF_TRENCH_RUN),
+			new SetPose(Constants.Pose.IN_FRONT_OF_TRENCH),
 			new ParallelCommandGroup(
-				new InFrontOfTrenchRunToRendezvousBall4And5(),
+				new InFrontOfTrenchToRendezvousBall4And5(),
 				new DoNothing() // TODO: collect
 			),
 			new RendezvousBall4And5ToRendezvousBall4And5Offset(),
 			new TargetAlignment(false).withTimeout(1.0),
-			new RendezvousBall4And5OffsetToRendezvousPointAndTrenchRunSwitch(),
+			new RendezvousBall4And5OffsetToRendezvousAndTrenchSwitch(),
 			new ParallelCommandGroup(
-				new RendezvousTrenchRunSwitchToTrenchRunBall4And5(),
+				new RendezvousTrenchSwitchToTrenchBall4And5(),
 				new DoNothing() // TODO: collect
 			)
 		);
