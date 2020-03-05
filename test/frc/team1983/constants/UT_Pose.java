@@ -15,7 +15,7 @@ public class UT_Pose
         System.out.println("START_IN_FRONT_OF_TRENCH_RUN: " + Constants.Pose.IN_FRONT_OF_TRENCH);
         System.out.println("START_IN_FRONT_OF_POWER_PORT: " + Constants.Pose.IN_FRONT_OF_PORT);
         System.out.println("START_IN_FRONT_OF_OPPONENT_TRENCH_RUN: " + Constants.Pose.IN_FRONT_OF_OPPONENT_TRENCH);
-        System.out.println("TRENCH_RUN_BALL_1: " + Constants.Pose.TRENCH_BALL_1);
+        System.out.println("TRENCH_RUN_BALL_2: " + Constants.Pose.TRENCH_BALL_1);
         System.out.println("TRENCH_RUN_BALL_4_AND_5: " + Constants.Pose.TRENCH_BALL_4_AND_5);
         System.out.println("RENDEZVOUS_POINT_BALL_1: " + Constants.Pose.RENDEZVOUS_BALL_1 + ", " + Constants.Pose.RENDEZVOUS_BALL_1.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_BALL_1.getRotation().getSin());
         System.out.println("RENDEZVOUS_POINT_BALL_2: " + Constants.Pose.RENDEZVOUS_BALL_2 + ", " + Constants.Pose.RENDEZVOUS_BALL_2.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_BALL_2.getRotation().getSin());

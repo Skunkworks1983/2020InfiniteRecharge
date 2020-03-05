@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -79,15 +78,6 @@ public class FollowTrajectory extends CommandBase
 				drivebase.getLeftPIDController().setSetpoint(ControlMode.Velocity, convertRamseteVelocityToDrivebaseVelocity(leftSpeedSetpoint), leftFeedforward);
 				drivebase.getRightPIDController().setSetpoint(ControlMode.Velocity, convertRamseteVelocityToDrivebaseVelocity(rightSpeedSetpoint), rightFeedforward);
 
-				SmartDashboard.putNumber("Left Target Speed", targetWheelSpeeds.leftMetersPerSecond);
-				SmartDashboard.putNumber("Right Target Speed", targetWheelSpeeds.rightMetersPerSecond);
-
-				SmartDashboard.putNumber("Left Meters Per Second", drivebase.getLeftMetersPerSecond());
-				SmartDashboard.putNumber("Right Meters Per Second", drivebase.getRightMetersPerSecond());
-
-				SmartDashboard.putNumber("Left Error", targetWheelSpeeds.leftMetersPerSecond - drivebase.getLeftMetersPerSecond());
-				SmartDashboard.putNumber("Right Error", targetWheelSpeeds.rightMetersPerSecond - drivebase.getRightMetersPerSecond());
-
 				prevTime = curTime;
 				prevSpeeds = targetWheelSpeeds;
 			},
@@ -152,10 +142,6 @@ public class FollowTrajectory extends CommandBase
 	public void execute()
 	{
 		ramseteCommand.execute();
-		SmartDashboard.putNumber("Pose Error", drivebase.getPose().getTranslation().getDistance(lastPose.getTranslation()));
-		System.out.printf("Pose Error: %f, ", drivebase.getPose().getTranslation().getDistance(lastPose.getTranslation()));
-		System.out.printf("Pose Error X: %f, ", lastPose.getTranslation().getX() - drivebase.getPose().getTranslation().getX());
-		System.out.printf("Pose Error Y: %f\n", lastPose.getTranslation().getY() - drivebase.getPose().getTranslation().getY());
 	}
 
 	@Override

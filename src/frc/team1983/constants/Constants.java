@@ -27,6 +27,12 @@ public class Constants
      */
     public static class Pose
     {
+        // Pose for the port target faces into alliance wall
+        public static final Pose2d PORT_TARGET = new Pose2d(
+            0.0,
+            Units.feetToMeters(-94.66 / 12.0),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
         // Front bumper touching initiation line
         public static final Pose2d IN_FRONT_OF_TRENCH = new Pose2d(
             Units.feetToMeters((10 + 1.0 / 12.0) + ROBOT_LENGTH / 2.0),
@@ -134,8 +140,9 @@ public class Constants
             RENDEZVOUS_BALL_4_OFFSET.getTranslation().getY() + 0.75 * (RENDEZVOUS_BALL_5_OFFSET.getTranslation().getY() - RENDEZVOUS_BALL_4_OFFSET.getTranslation().getY()),
             new Rotation2d(Units.degreesToRadians(112.5))
         );
+        private static final double RENDEZVOUS_AND_TRENCH_SWITCH_OFFSET = 6.0; // feet offset from trench ball 1
         public static final Pose2d RENDEZVOUS_AND_TRENCH_SWITCH = new Pose2d(
-            Units.feetToMeters(242.63 / 12.0 - 6.0),
+            Units.feetToMeters(242.63 / 12.0 - RENDEZVOUS_AND_TRENCH_SWITCH_OFFSET),
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
@@ -158,7 +165,7 @@ public class Constants
             Units.feetToMeters(-94.66 / 12.0 + OPPONENT_TRENCH_AND_RENDEZVOUS_Y_OFFSET),
             new Rotation2d(Units.degreesToRadians(180 - Units.radiansToDegrees(Math.tan(-OPPONENT_TRENCH_AND_RENDEZVOUS_Y_OFFSET / (10.0 + ROBOT_LENGTH / 2.0 + OPPONENT_TRENCH_AND_RENDEZVOUS_X_OFFSET)))))
         );
-        private static final double SHOOT_IN_FRONT_OF_PORT_OFFSET = 8.5; // feet offset from initiation line
+        private static final double SHOOT_IN_FRONT_OF_PORT_OFFSET = 5.0; // feet offset from initiation line
         public static final Pose2d SHOOT_IN_FRONT_OF_PORT = new Pose2d(
             Units.feetToMeters((SHOOT_IN_FRONT_OF_PORT_OFFSET + 10 + 1.0 / 12.0) + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-94.66 / 12.0),

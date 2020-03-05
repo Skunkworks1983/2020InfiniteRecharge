@@ -3,8 +3,8 @@ package frc.team1983.autonomous.routines;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team1983.autonomous.paths.InFrontOfPortToShootInFrontOfPort;
-import frc.team1983.autonomous.paths.RendezvousTrenchSwitchToTrenchBall3;
-import frc.team1983.autonomous.paths.ShootInFrontOfPortToRendezvousAndTrenchSwitch;
+import frc.team1983.autonomous.paths.InFrontOfPortToTrenchBall3;
+import frc.team1983.autonomous.paths.ShootInFrontOfPortToInFrontOfPort;
 import frc.team1983.commands.SetPose;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.constants.Constants;
@@ -19,13 +19,13 @@ public class InFrontOfPortToShootInFrontOfPortToTrench extends SequentialCommand
 				new InFrontOfPortToShootInFrontOfPort(),
 				new DoNothing() // TODO: collect
 			),
-			new TargetAlignment(false).withTimeout(1.0),
-			new ShootInFrontOfPortToRendezvousAndTrenchSwitch(),
+			new TargetAlignment(Constants.Pose.SHOOT_IN_FRONT_OF_PORT).withTimeout(1.0),
+			new ShootInFrontOfPortToInFrontOfPort(),
 			new ParallelCommandGroup(
-				new RendezvousTrenchSwitchToTrenchBall3(),
+				new InFrontOfPortToTrenchBall3(),
 				new DoNothing() // TODO: collect
 			),
-			new TargetAlignment(true).withTimeout(1.0)
+			new TargetAlignment(Constants.Pose.TRENCH_BALL_3).withTimeout(1.0)
 		);
 	}
 }
