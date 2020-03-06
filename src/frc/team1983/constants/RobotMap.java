@@ -55,8 +55,8 @@ public class RobotMap
         public static final int COLLECTOR_MOTOR = 6;
         public static final boolean COLLECTOR_MOTOR_REVERSED = true;
 
-        public static final int PISTON_FORWARD = 1;
-        public static final int PISTON_REVERSE = 4;
+        public static final int PISTON_FORWARD = 2;
+        public static final int PISTON_REVERSE = 5;
     }
 
     public static class ControlPanel
@@ -64,8 +64,8 @@ public class RobotMap
         public static final int ROLLER = 9;
         public static final boolean ROLLER_REVERSED = false;
 
-        public static final int PISTON_FORWARD = 2;
-        public static final int PISTON_REVERSE = 5;
+        public static final int PISTON_FORWARD = 1;
+        public static final int PISTON_REVERSE = 4;
     }
 
     public static class Climber

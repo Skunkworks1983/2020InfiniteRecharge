@@ -12,11 +12,15 @@ public class IndexerStartupAuto extends ParallelCommandGroup
         addCommands(
             new LoadIndexerAuto(Robot.getInstance().getIndexer(), Robot.getInstance().getCollector(), isShooting),
             new SequentialCommandGroup(
+                new WaitCommand(0.5),
+                new InternalIndexer(0.5)
+            ),
+            new SequentialCommandGroup(
                 new WaitCommand(0.75),
                 new CollectorTransfer(0.4)
             ),
             new SequentialCommandGroup(
-                new WaitCommand(1),
+                new WaitCommand(1.15),
                 new SetRollerThrottle(Robot.getInstance().getCollector(), 0.3)
             )
         );
