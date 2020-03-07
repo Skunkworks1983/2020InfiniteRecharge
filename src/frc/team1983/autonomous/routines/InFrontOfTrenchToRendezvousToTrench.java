@@ -21,7 +21,7 @@ public class InFrontOfTrenchToRendezvousToTrench extends SequentialCommandGroup
 				new DoNothing() // TODO: collect
 			),
 			new RendezvousBall4And5ToRendezvousBall4And5Offset(),
-			new TargetAlignment(Constants.Pose.RENDEZVOUS_BALL_4_AND_5_OFFSET).withTimeout(1.0),
+			new TargetAlignment(false).withTimeout(1.0),
 			new RendezvousBall4And5OffsetToRendezvousAndTrenchSwitch(),
 			new ParallelCommandGroup(
 				new RendezvousTrenchSwitchToTrenchBall4And5(),

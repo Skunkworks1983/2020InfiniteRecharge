@@ -19,13 +19,13 @@ public class InFrontOfPortToShootInFrontOfPortToTrench extends SequentialCommand
 				new InFrontOfPortToShootInFrontOfPort(),
 				new DoNothing() // TODO: collect
 			),
-			new TargetAlignment(Constants.Pose.SHOOT_IN_FRONT_OF_PORT).withTimeout(1.0),
+			new TargetAlignment(false).withTimeout(1.0),
 			new ShootInFrontOfPortToInFrontOfPort(),
 			new ParallelCommandGroup(
 				new InFrontOfPortToTrenchBall3(),
 				new DoNothing() // TODO: collect
 			),
-			new TargetAlignment(Constants.Pose.TRENCH_BALL_3).withTimeout(1.0)
+			new TargetAlignment(false).withTimeout(1.0)
 		);
 	}
 }

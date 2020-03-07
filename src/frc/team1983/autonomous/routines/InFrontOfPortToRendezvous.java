@@ -22,14 +22,14 @@ public class InFrontOfPortToRendezvous extends SequentialCommandGroup
 				new DoNothing() // TODO: collect
 			),
 			new RendezvousBall4And5ToRendezvousBall4And5Offset(),
-			new TargetAlignment(Constants.Pose.RENDEZVOUS_BALL_4_AND_5_OFFSET).withTimeout(1.0),
+			new TargetAlignment(false).withTimeout(1.0),
 			new RendezvousBall4And5OffsetToRendezvousBall1And2And3AndRendezvousBall4And5Switch(),
 			new ParallelCommandGroup(
 				new RendezvousBall1And2And3AndRendezvousBall4And5SwitchToRendezvousBall1And2And3(),
 				new DoNothing() // TODO: collect
 			),
 			new RendezvousBall1And2And3ToRendezvousBall1And2And3Offset(),
-			new TargetAlignment(Constants.Pose.RENDEZVOUS_BALL_1_AND_2_AND_3_OFFSET).withTimeout(1.0)
+			new TargetAlignment(true).withTimeout(1.0)
 		);
 	}
 }
