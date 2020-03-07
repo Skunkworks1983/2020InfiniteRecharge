@@ -25,10 +25,9 @@ public class PollFMS extends InstantCommand
     @Override
     public void initialize()
     {
-        if (getAssignedColorChar() != ColorSensor.UNKNOWN)
+        if (getAssignedColor() != ColorSensor.ColorEnum.UNKNOWN)
             {
-//                controlPanel.setAssignedColor(getAssignedColor());
-                controlPanel.setAssignedColor(getAssignedColorChar());
+                controlPanel.setAssignedColor(getAssignedColor());
                 controlPanel.setAlreadyPolled(true);
             }
     }
@@ -38,28 +37,28 @@ public class PollFMS extends InstantCommand
         return DriverStation.getInstance().getGameSpecificMessage().charAt(0);
     }
     
-//    public static HSVColor.Color getAssignedColor()
-//    {
-//        char assignedColorChar = getAssignedColorChar();
-//        if(assignedColorChar == 'R')
-//        {
-//            return HSVColor.Color.RED;
-//        }
-//        else if(assignedColorChar == 'G')
-//        {
-//            return HSVColor.Color.GREEN;
-//        }
-//        else if(assignedColorChar == 'B')
-//        {
-//            return HSVColor.Color.BLUE;
-//        }
-//        else if(assignedColorChar == 'Y')
-//        {
-//            return HSVColor.Color.YELLOW;
-//        }
-//        else
-//        {
-//            return HSVColor.Color.UNIDENTIFIED;
-//        }
-//    }
+    private static ColorSensor.ColorEnum getAssignedColor()
+        {
+            char assignedColorChar = getAssignedColorChar();
+            if(assignedColorChar == 'R')
+            {
+                return ColorSensor.ColorEnum.RED;
+            }
+            else if(assignedColorChar == 'G')
+            {
+                return ColorSensor.ColorEnum.GREEN;
+            }
+            else if(assignedColorChar == 'B')
+            {
+                return ColorSensor.ColorEnum.BLUE;
+            }
+            else if(assignedColorChar == 'Y')
+            {
+                return ColorSensor.ColorEnum.YELLOW;
+            }
+            else
+            {
+                return ColorSensor.ColorEnum.UNKNOWN;
+            }
+        }
 }

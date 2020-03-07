@@ -2,7 +2,12 @@ package frc.team1983.services;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.team1983.commands.controlpanel.PositionControl;
+import frc.team1983.commands.controlpanel.RotationControl;
+import frc.team1983.commands.controlpanel.ToggleControlPanel;
+import frc.team1983.util.sensors.ColorSensor;
 
+import java.awt.*;
 import java.util.HashMap;
 
 public class OI
@@ -30,7 +35,10 @@ public class OI
     protected static final double JOYSTICK_EXPONENT = 1.7;
     protected static final double LINEAR_ZONE = 0.4;
     protected static final double LINEAR_SLOPE = Math.abs(Math.pow(LINEAR_ZONE, JOYSTICK_EXPONENT) / (LINEAR_ZONE - JOYSTICK_DEADZONE));
-
+    public static final int RAISE_CONTROL_PANEL = 0;
+    public static final int LOWER_CONTROL_PANEL = 0;
+    public static final int INITIALIZE_ROTATION_CONTROL = 0;
+    public static final int INITIALIZE_POSITION_CONTROL = 0;
     private Joystick left, right, panel;
     private HashMap<Joysticks, HashMap<Integer, JoystickButton>> buttons;
 
@@ -103,6 +111,9 @@ public class OI
     }
     public void initializeBindings()
     {
-
+        getButton(Joysticks.PANEL, RAISE_CONTROL_PANEL).whenPressed(new ToggleControlPanel(true));
+        getButton(Joysticks.PANEL, LOWER_CONTROL_PANEL).whenPressed(new ToggleControlPanel(false));
+        getButton(Joysticks.PANEL, INITIALIZE_ROTATION_CONTROL).whenPressed(new RotationControl());
+        getButton(Joysticks.PANEL, INITIALIZE_POSITION_CONTROL).whenPressed(new PositionControl(ColorSensor.ColorEnum.RED));
     }
 }

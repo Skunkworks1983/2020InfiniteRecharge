@@ -2,7 +2,6 @@ package frc.team1983.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.team1983.commands.controlpanel.PollFMS;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.motors.MotorGroup;
@@ -26,8 +25,7 @@ public class ControlPanel extends SubsystemBase
     private DoubleSolenoid extender;
     private ColorSensor colorSensor;
     private boolean alreadyPolled;
-    private HSVColor.Color assignedColor;
-    private char assignedColorChar;
+    private ColorSensor.ColorEnum assignedColor;
     
     public ControlPanel()
     {
@@ -70,7 +68,7 @@ public class ControlPanel extends SubsystemBase
         return roller.getVelocity();
     }
     
-    public char getColorMatch() { return colorSensor.getColorMatch(); }
+    public ColorSensor.ColorEnum getColorMatch() { return colorSensor.getColorMatch(); }
     
     public HSVColor getHSVColor()
     {
@@ -89,14 +87,14 @@ public class ControlPanel extends SubsystemBase
         return alreadyPolled;
     }
     
-    public void setAssignedColor(char assignedColorChar)
+    public void setAssignedColor(ColorSensor.ColorEnum assignedColor)
     {
-        this.assignedColorChar = assignedColorChar;
+        this.assignedColor = assignedColor;
     }
     
-    public char getAssignedColor()
+    public ColorSensor.ColorEnum getAssignedColor()
     {
-        return assignedColorChar;
+        return assignedColor;
     }
 }
 

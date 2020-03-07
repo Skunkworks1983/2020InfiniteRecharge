@@ -24,15 +24,6 @@ public class Robot extends TimedRobot
 	private ColorSensor colorSensor;
 	private OI oi;
 	
-	double minHue = 360;
-	double maxHue = 0;
-	
-	double minSaturation = 20;
-	double maxSaturation = 0;
-	
-	double minValue = 20;
-	double maxValue = 0;
-	
 	private UsbCamera camera;
 
 	Robot()

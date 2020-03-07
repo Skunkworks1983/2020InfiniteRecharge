@@ -14,8 +14,8 @@ public class RotationControl extends CommandBase
     private static final double WEDGES_PER_ROTATION = 8;
     
     private ControlPanel controlPanel;
-    private char previousColor;
-    private char currentColor;
+    private ColorSensor.ColorEnum previousColor;
+    private ColorSensor.ColorEnum currentColor;
     private double totalWedges;
     
     public RotationControl(ControlPanel controlPanel)
@@ -41,12 +41,11 @@ public class RotationControl extends CommandBase
     {
         controlPanel.setRoller(ControlMode.Throttle, 0.5);
         currentColor = controlPanel.getColorMatch();
-        if(currentColor != previousColor && currentColor != ColorSensor.UNKNOWN && previousColor != ColorSensor.UNKNOWN)
+        if(currentColor != previousColor && currentColor != ColorSensor.ColorEnum.UNKNOWN && previousColor != ColorSensor.ColorEnum.UNKNOWN)
         {
             totalWedges++;
             
         }
-        SmartDashboard.putNumber("Num Wedges", totalWedges);
         System.out.println(totalWedges);
         previousColor = currentColor;
     }
@@ -55,7 +54,7 @@ public class RotationControl extends CommandBase
     public void end(boolean interrupted)
     {
         controlPanel.setRoller(ControlMode.Throttle, 0.0);
-        System.out.println("disabling 'ROTATION_CONTROL");
+        System.out.println("disabling 'ROTATION_CONTROL'");
     }
     
     @Override
