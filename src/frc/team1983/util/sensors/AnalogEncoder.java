@@ -1,6 +1,8 @@
 package frc.team1983.util.sensors;
 
-public class DigitalInputEncoder extends edu.wpi.first.wpilibj.Encoder implements Encoder, Runnable
+import edu.wpi.first.wpilibj.AnalogInput;
+
+public class AnalogEncoder extends edu.wpi.first.wpilibj.AnalogEncoder implements Encoder, Runnable
 {
     private static final int UPDATE_RATE = 250;
 
@@ -12,15 +14,10 @@ public class DigitalInputEncoder extends edu.wpi.first.wpilibj.Encoder implement
     private double prevPos;
     private long prevTime;
 
-    public DigitalInputEncoder(int channelA, int channelB)
+    public AnalogEncoder(AnalogInput input)
     {
-        super(channelA, channelB);
+        super(input);
         new Thread(this).start();
-    }
-
-    public DigitalInputEncoder(int channelA)
-    {
-        this(channelA, channelA + 1);
     }
 
     /**
@@ -28,7 +25,7 @@ public class DigitalInputEncoder extends edu.wpi.first.wpilibj.Encoder implement
      */
     public void zero()
     {
-//        encoderOffset = -get();
+        encoderOffset = -get();
     }
 
     /**
