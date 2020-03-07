@@ -1,6 +1,8 @@
 package frc.team1983.util.motors;
 
+import frc.team1983.util.sensors.AnalogEncoder;
 import frc.team1983.util.sensors.DigitalInputEncoder;
+import frc.team1983.util.sensors.DutyCycleEncoder;
 import frc.team1983.util.sensors.Encoder;
 
 import java.util.ArrayList;
@@ -64,6 +66,16 @@ public class MotorGroup
         this((Encoder) digitalInputEncoder, master, slaves);
     }
 
+    public MotorGroup(AnalogEncoder analogEncoder, Motor master, Motor... slaves)
+    {
+        this((Encoder) analogEncoder, master, slaves);
+    }
+
+    public MotorGroup(DutyCycleEncoder dutyCycleEncoder, Motor master, Motor... slaves)
+    {
+        this((Encoder) dutyCycleEncoder, master, slaves);
+    }
+
     /**
      * Reset the encoder offset so that it reads zero at its current position
      */
@@ -90,6 +102,12 @@ public class MotorGroup
     {
         for (Motor motor : motors)
             motor.setBrake(brake);
+    }
+
+    public void setVoltageRamp(double value)
+    {
+        for (Motor motor : motors)
+            motor.setVoltageRamp(value);
     }
 
     /**

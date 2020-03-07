@@ -11,7 +11,7 @@ import frc.team1983.util.sensors.NavX;
 
 public class Drivebase extends SubsystemBase
 {
-	public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (8.69);
+    public static final double FEET_PER_TICK = (6.0 * Math.PI / 12.0) / (496.0 / 55.0);
 	public static final double METERS_PER_TICK = Units.feetToMeters(FEET_PER_TICK);
 
 	private NavX navX;
@@ -23,15 +23,11 @@ public class Drivebase extends SubsystemBase
 
         left = new MotorGroup(
             new Spark(RobotMap.Drivebase.LEFT_1, RobotMap.Drivebase.LEFT_1_REVERSED),
-            new Spark(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED),
-            new Spark(RobotMap.Drivebase.LEFT_3, RobotMap.Drivebase.LEFT_3_REVERSED)
-        );
+            new Spark(RobotMap.Drivebase.LEFT_2, RobotMap.Drivebase.LEFT_2_REVERSED));
 
         right = new MotorGroup(
             new Spark(RobotMap.Drivebase.RIGHT_1, RobotMap.Drivebase.RIGHT_1_REVERSED),
-            new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED),
-            new Spark(RobotMap.Drivebase.RIGHT_3, RobotMap.Drivebase.RIGHT_3_REVERSED)
-        );
+            new Spark(RobotMap.Drivebase.RIGHT_2, RobotMap.Drivebase.RIGHT_2_REVERSED));
     }
 
     /**
