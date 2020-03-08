@@ -60,6 +60,7 @@ public class Robot extends TimedRobot
     public void robotPeriodic()
     {
         CommandScheduler.getInstance().run();
+        System.out.println(shooter.getArticulationPosition());
     }
 
 	@Override
