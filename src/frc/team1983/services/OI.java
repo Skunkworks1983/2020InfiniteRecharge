@@ -137,9 +137,14 @@ public class OI
         return scale(operator.getY());
     }
 
+    public double getOperatorSlider()
+    {
+        return operator.getThrottle();
+    }
+
     public double getPanelY()
     {
-        return PotScale(panel.getY());
+        return panel.getY();
     }
 
     public JoystickButton getButton(Joysticks joystickPort, int button)
@@ -208,8 +213,10 @@ public class OI
         //Hood setpoint for shooting from protected zone in front of port
         getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.UPPER_LIMIT));
 
+        getButton(Joysticks.OPERATOR, 14).whenHeld(new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR));
+
         //Set shooter speed
-        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(0.9, 0.9));
+        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(0.9, 4800));
 
         //Drive back from power port
         getButton(Joysticks.RIGHT, 1).whenHeld(new DriveStraight(-0.75, Units.feetToMeters(2.0)));

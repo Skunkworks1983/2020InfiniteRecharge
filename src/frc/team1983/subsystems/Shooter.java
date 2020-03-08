@@ -13,14 +13,19 @@ public class Shooter extends SubsystemBase
     public double voltageRamp = 2;
 
     //Limits based on encoder reading as of 02/28/2020
-    public static final double UPPER_LIMIT = 0.9;
-    public static final double LOWER_LIMIT = 0.54;
+//    public static final double UPPER_LIMIT = 0.9;
+    public static final double UPPER_LIMIT = 0.746;
+
+//    public static final double LOWER_LIMIT = 0.54;
+    public static final double LOWER_LIMIT = 0.329;
     //Tuned on 03/04/2020 with full indexing and shooting at 90 percent throttle on accelerator and flywheel
-    public static final double TRENCH = 0.667;
+//    public static final double TRENCH = 0.667;
+    public static final double TRENCH = UPPER_LIMIT - 0.233;
 
     //Tuned on 02/28/2020 with manual loading and 90 percent throttle on accelerator and flywheel
-    public static final double INNER_FRONT_PILLAR = 0.658;
-    public static final double OUTER_BACK_PILLAR = 0.704;
+//    0.713
+    public static final double INNER_FRONT_PILLAR = UPPER_LIMIT - 0.187;
+//    public static final double OUTER_BACK_PILLAR = 0.704;
 
     private MotorGroup accelerator;
     private MotorGroup flywheel;
