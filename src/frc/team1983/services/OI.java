@@ -175,50 +175,55 @@ public class OI
     }
     public void initializeBindings()
     {
-        //Just collector Forward
+        // Collector Forward
         getButton(Joysticks.PANEL, COLLECTOR_FORWARD).whenHeld(new SetRollerThrottle(Robot.getInstance().getCollector(),
             collectorValue));
 
-        //Just collector Reverse
+        // Collector Reverse
         getButton(Joysticks.PANEL, COLLECTOR_REVERSE).whenHeld(new SetRollerThrottle(Robot.getInstance().getCollector(),
                 -collectorValue));
 
-        //Full collection and loading
+        // Full collection and indexing
         getButton(Joysticks.PANEL, COLLECT_AND_LOAD).whenHeld(new LoadIndexerTele());
 
+        // Feed balls to shooter
         getButton(Joysticks.OPERATOR, 1).whenHeld(new IndexerStartupTele());
 
-        //Toggle collector
+        // Toggle collector
         getButton(Joysticks.PANEL, SET_COLLECTOR_POSITION).whenPressed(new SetCollectorPosition());
 
-        //Run collector transfer in reverse
+        // Run collector transfer in reverse
         getButton(Joysticks.PANEL, COLLECTOR_TRANSFER_REVERSE).whenHeld(new ManualIndexer(-0.15,0,
             0));
 
-        //Run internal indexer in reverse
+        // Run internal indexer in reverse
         getButton(Joysticks.PANEL, INTERNAL_INDEXER_REVERSE).whenHeld(new ManualIndexer(0,-0.15,0));
 
-        //All of indexer in reverse
+        // All of indexer in reverse
         getButton(Joysticks.PANEL, REVERSE_ALL).whenHeld(new ManualIndexer(-0.15,-0.15,-0.15));
 
-        //Climber up
+        // Climber up
         getButton(Joysticks.PANEL, CLIMBER_UP).whenPressed(new RunClimberUp());
 
-        //Climber down
+        // Climber down
         getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
 
-        //Hood setpoint for shooting from trench
-        getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.TRENCH));
+        // Hood setpoint for shooting from protected zone in front of port
+        getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.UPPER_SAFETY_LIMIT));
 
-        //Hood setpoint for shooting from protected zone in front of port
-        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.UPPER_LIMIT));
+        // Hood setpoint for shooting from trench
+        getButton(Joysticks.OPERATOR, 9).whenHeld(new SetArticulationPosition(Shooter.TRENCH));
 
-        getButton(Joysticks.OPERATOR, 14).whenHeld(new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR));
+        // Hood setpoint for shooting from in front of port at the pillar closest to the port
+        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.IN_FRONT_OF_PORT_CLOSE_PILLAR));
 
-        //Set shooter speed
-        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(0.9, 4800));
+        // Hood setpoint for shooting cross field
+        getButton(Joysticks.OPERATOR, 5).whenHeld(new SetArticulationPosition(Shooter.CROSS_FIELD));
 
-        //Drive back from power port
+        // Set shooter speed to 90 percent
+        getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(0.9, 0.9));
+
+        // Drive back from power port
         getButton(Joysticks.RIGHT, 1).whenHeld(new DriveStraight(-0.75, Units.feetToMeters(2.0)));
     }
 }

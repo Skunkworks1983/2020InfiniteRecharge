@@ -41,8 +41,6 @@ public class Robot extends TimedRobot
 
         drivebase.setDefaultCommand(new RunGyroDrive());
         shooter.setDefaultCommand(new SetArticulation());
-
-
     }
 
     @Override
@@ -60,7 +58,6 @@ public class Robot extends TimedRobot
     public void robotPeriodic()
     {
         CommandScheduler.getInstance().run();
-        System.out.println(oi.getOperatorSlider());
     }
 
 	@Override
@@ -81,7 +78,6 @@ public class Robot extends TimedRobot
     {
         CommandScheduler.getInstance().cancelAll();
         new RunGyroDrive().schedule();
-        new SetArticulation().schedule();
     }
 
     @Override

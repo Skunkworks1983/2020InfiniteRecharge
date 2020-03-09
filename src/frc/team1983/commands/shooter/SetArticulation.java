@@ -10,7 +10,7 @@ public class SetArticulation extends CommandBase
     private Shooter shooter;
     private OI oi;
 
-    private double targetAngle = 0;
+    private double targetAngle;
 
     public SetArticulation(Shooter shooter, OI oi)
     {
@@ -36,8 +36,9 @@ public class SetArticulation extends CommandBase
     public void execute()
     {
         double currentAngle = shooter.getArticulationPosition();
-        //Tuned on 02/27/2020
-        double throttle = 65.0 * -(currentAngle - targetAngle);
+
+        double error = -(currentAngle - targetAngle);
+        double throttle = Shooter.KP * error + Shooter.KF;
 
         if (Math.abs(oi.getOperatorY()) > 0.05)
         {
@@ -46,11 +47,11 @@ public class SetArticulation extends CommandBase
         }
 
         //Safety code that prevents shooter hood from continuing into hard stop
-        if (shooter.getArticulationPosition() <= shooter.UPPER_LIMIT && shooter.getArticulationPosition() > shooter.LOWER_LIMIT)
+        if (shooter.getArticulationPosition() <= Shooter.UPPER_SAFETY_LIMIT && shooter.getArticulationPosition() > Shooter.LOWER_SAFETY_LIMIT)
             shooter.setArticulation(throttle);
-        else if (shooter.getArticulationPosition() >= shooter.UPPER_LIMIT && throttle < 0)
+        else if (shooter.getArticulationPosition() >= Shooter.UPPER_SAFETY_LIMIT && throttle < 0)
             shooter.setArticulation(throttle);
-        else if (shooter.getArticulationPosition() <= shooter.LOWER_LIMIT && throttle > 0)
+        else if (shooter.getArticulationPosition() <= Shooter.LOWER_SAFETY_LIMIT && throttle > 0)
             shooter.setArticulation(throttle);
         else shooter.setArticulation(0);
     }

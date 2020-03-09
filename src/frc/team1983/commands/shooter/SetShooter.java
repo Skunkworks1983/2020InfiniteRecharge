@@ -3,34 +3,34 @@ package frc.team1983.commands.shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1983.Robot;
-import frc.team1983.services.OI;
 import frc.team1983.subsystems.Shooter;
 import frc.team1983.util.motors.ControlMode;
 
 public class SetShooter extends CommandBase
 {
     private Shooter shooter;
-    private OI oi;
-    private double acceleratorValue;
-    private double flywheelVelocity;
 
-    private static double KP = 0, KF = 0.9 / (8000 * (18/30));
-    private static double maximumDeceleration = 0.05;
+    private double acceleratorThrottle;
+    private double flywheelThrottle;
 
-    private double lastOutput;
+    private static final double KP = 0.1 / 125, KF = 0.9 / (8000. * (18./30));
+    private static final double CONVERSION = 0.9 / 4800;
+    private static final double MAXIMUM_DECELERATION = 0.05;
+
+    private double lastFlywheelOutput;
+    private double lastAcceleratorOutput;
 
 
-    public SetShooter(Shooter shooter, OI oi, double acceleratorValue, double flywheelVelocity)
+    public SetShooter(Shooter shooter, double acceleratorThrottle, double flywheelThrottle)
     {
         this.shooter = shooter;
-        this.oi = oi;
-        this.acceleratorValue = acceleratorValue;
-        this.flywheelVelocity = flywheelVelocity;
+        this.acceleratorThrottle = acceleratorThrottle;
+        this.flywheelThrottle = flywheelThrottle;
     }
 
-    public SetShooter(double acceleratorValue, double flywheelVelocity)
+    public SetShooter(double acceleratorThrottle, double flywheelVelocity)
     {
-        this(Robot.getInstance().getShooter(), Robot.getInstance().getOI(), acceleratorValue, flywheelVelocity);
+        this(Robot.getInstance().getShooter(),  acceleratorThrottle, flywheelVelocity);
     }
 
     @Override
@@ -42,16 +42,25 @@ public class SetShooter extends CommandBase
     @Override
     public void execute()
     {
-        double error = flywheelVelocity - shooter.getFlywheelVelocity();
-        double flyWheelValue = KP * error + KF * flywheelVelocity;
+        double acceleratorError = (acceleratorThrottle / CONVERSION) - shooter.getAcceleratorVelocity();
+        double acceleratorValue = KP * acceleratorError + KF * (acceleratorThrottle / CONVERSION);
 
-        if (flyWheelValue < lastOutput && Math.abs(flyWheelValue - lastOutput) > maximumDeceleration)
+        double FlywheelError = (flywheelThrottle / CONVERSION) - shooter.getFlywheelVelocity();
+        double flywheelValue = KP * FlywheelError + KF * (flywheelThrottle / CONVERSION);
+
+        if (acceleratorValue < lastAcceleratorOutput && Math.abs(acceleratorValue - lastAcceleratorOutput) > MAXIMUM_DECELERATION)
         {
-            flyWheelValue = lastOutput - maximumDeceleration;
+            acceleratorValue = lastAcceleratorOutput - MAXIMUM_DECELERATION;
         }
-        lastOutput = flyWheelValue;
+        lastAcceleratorOutput = acceleratorValue;
 
-        shooter.set(ControlMode.Throttle, acceleratorValue, flyWheelValue + oi.getPanelY());
+        if (flywheelValue < lastFlywheelOutput && Math.abs(flywheelValue - lastFlywheelOutput) > MAXIMUM_DECELERATION)
+        {
+            flywheelValue = lastFlywheelOutput - MAXIMUM_DECELERATION;
+        }
+        lastFlywheelOutput = flywheelValue;
+
+        shooter.set(ControlMode.Throttle, acceleratorValue, flywheelValue);
         SmartDashboard.putNumber("Accelerator Velocity", Robot.getInstance().getShooter().getAcceleratorVelocity() * 30 / 18.0);
         SmartDashboard.putNumber("Flywheel Velocity", Robot.getInstance().getShooter().getFlywheelVelocity() * 30 / 18.0);
     }
