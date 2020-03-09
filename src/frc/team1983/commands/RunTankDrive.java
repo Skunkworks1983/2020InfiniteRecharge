@@ -15,6 +15,8 @@ public class RunTankDrive extends CommandBase
     {
         this.drivebase = drivebase;
         this.oi = oi;
+
+        addRequirements(drivebase);
     }
 
     public RunTankDrive()

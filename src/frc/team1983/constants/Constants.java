@@ -165,10 +165,16 @@ public class Constants
             Units.feetToMeters(-94.66 / 12.0 + OPPONENT_TRENCH_AND_RENDEZVOUS_Y_OFFSET),
             new Rotation2d(Units.degreesToRadians(180 - Units.radiansToDegrees(Math.tan(-OPPONENT_TRENCH_AND_RENDEZVOUS_Y_OFFSET / (10.0 + ROBOT_LENGTH / 2.0 + OPPONENT_TRENCH_AND_RENDEZVOUS_X_OFFSET)))))
         );
-        private static final double SHOOT_IN_FRONT_OF_PORT_OFFSET = 5.0; // feet offset from initiation line
+        private static final double SHOOT_IN_FRONT_OF_PORT_OFFSET = 4.0; // feet offset from initiation line
         public static final Pose2d SHOOT_IN_FRONT_OF_PORT = new Pose2d(
             Units.feetToMeters((SHOOT_IN_FRONT_OF_PORT_OFFSET + 10 + 1.0 / 12.0) + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-94.66 / 12.0),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        private static final double IN_FRONT_OF_PORT_AND_TRENCH_SWITCH_OFFSET = 2.0; // feet offset from trench ball 1
+        public static final Pose2d IN_FRONT_OF_PORT_AND_TRENCH_SWITCH = new Pose2d(
+            Units.feetToMeters(242.63 / 12.0 - IN_FRONT_OF_PORT_AND_TRENCH_SWITCH_OFFSET),
+            Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
     }

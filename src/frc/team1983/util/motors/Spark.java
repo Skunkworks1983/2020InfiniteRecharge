@@ -10,7 +10,6 @@ import frc.team1983.util.sensors.Encoder;
  */
 public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
 {
-    private int port;
     private double conversionRatio = 1;
     private double encoderOffset;
     private CANEncoder encoder;
@@ -22,7 +21,6 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
     public Spark(int port, boolean reversed)
     {
         super(port, MotorType.kBrushless);
-        this.port = port;
         setInverted(reversed);
 	    encoder = getEncoder();
     }
@@ -32,8 +30,7 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
      */
     public void zero()
     {
-//        encoderOffset = -encoder.getPosition();
-        encoder.setPosition(0.0);
+        encoderOffset = -encoder.getPosition();
     }
 
     /**
@@ -47,7 +44,6 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
         switch (controlMode)
         {
             case Throttle:
-                System.out.printf("Port %d, Value %f\n", port, value);
                 super.set(value);
                 break;
             case Position:
@@ -65,6 +61,14 @@ public class Spark extends com.revrobotics.CANSparkMax implements Motor, Encoder
     public void setBrake(boolean brake)
     {
         setIdleMode(brake ? IdleMode.kBrake : IdleMode.kCoast);
+    }
+
+    /**
+     * @param rate How long motor should take to accelerate from 0 percent to 100 percent
+     */
+    public  void setVoltageRamp(double rate)
+    {
+        setOpenLoopRampRate(rate);
     }
 
     /**

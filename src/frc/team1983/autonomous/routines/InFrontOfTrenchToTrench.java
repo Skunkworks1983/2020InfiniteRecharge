@@ -18,7 +18,7 @@ public class InFrontOfTrenchToTrench extends SequentialCommandGroup
 				new InFrontOfTrenchToTrenchBall2(),
 				new DoNothing() // TODO: collect
 			),
-			new TargetAlignment(false).withTimeout(1.0),
+			new TargetAlignment(Constants.Pose.TRENCH_BALL_2).withTimeout(1.0),
 			new TrenchBall2ToTrenchBall4And5()
 		);
 	}
