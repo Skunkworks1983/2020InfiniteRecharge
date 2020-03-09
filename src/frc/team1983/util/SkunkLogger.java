@@ -7,17 +7,21 @@ import java.time.format.DateTimeFormatter;
 public class SkunkLogger
 {
     private String className;
+    private DateTimeFormatter formatter;
 
     public SkunkLogger (Object object)
     {
         this.className = object.getClass().getSimpleName();
+        this.formatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
     }
 
     public synchronized void logMessage (String message)
     {
-        String now = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").
-                withZone(ZoneId.systemDefault()).format(Instant.now());
+        String now = formatter.format(Instant.now());
 
         System.out.println(now + " " + className + " " + message);
+
+
+
     }
 }
