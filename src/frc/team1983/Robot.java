@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1983.autonomous.Auto;
 import frc.team1983.commands.RunGyroDrive;
+import frc.team1983.commands.shooter.SetArticulation;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Climber;
 import frc.team1983.subsystems.Collector;
@@ -59,7 +60,8 @@ public class Robot extends TimedRobot
 		oi = new OI();
 		oi.initializeBindings();
 
-		drivebase.setDefaultCommand(new RunGyroDrive());
+        drivebase.setDefaultCommand(new RunGyroDrive());
+        shooter.setDefaultCommand(new SetArticulation());
 	}
 
 	@Override
