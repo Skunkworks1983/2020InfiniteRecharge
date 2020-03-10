@@ -32,18 +32,16 @@ public class SetArticulationPosition extends CommandBase
     public void execute()
     {
         double currentAngle = shooter.getArticulationPosition();
-        //Tuned on 02/27/2020
-        double throttle = 65.0 * -(currentAngle - setPoint);
+        double error = -(currentAngle - setPoint);
+        double throttle = Shooter.KP * error + Shooter.KF;
 
         //Safety code that prevents shooter hood from continuing into hard stop
-        if (shooter.getArticulationPosition() <= shooter.UPPER_LIMIT && shooter.getArticulationPosition() > shooter.LOWER_LIMIT)
+        if (shooter.getArticulationPosition() <= Shooter.UPPER_SAFETY_LIMIT && shooter.getArticulationPosition() > Shooter.LOWER_SAFETY_LIMIT)
             shooter.setArticulation(throttle);
-        else if (shooter.getArticulationPosition() >= shooter.UPPER_LIMIT && throttle < 0)
+        else if (shooter.getArticulationPosition() >= Shooter.UPPER_SAFETY_LIMIT && throttle < 0)
             shooter.setArticulation(throttle);
-        else if (shooter.getArticulationPosition() <= shooter.LOWER_LIMIT && throttle > 0)
+        else if (shooter.getArticulationPosition() <= Shooter.LOWER_SAFETY_LIMIT && throttle > 0)
             shooter.setArticulation(throttle);
         else shooter.setArticulation(0);
-
-        System.out.println("Throttle: " + throttle);
     }
 }

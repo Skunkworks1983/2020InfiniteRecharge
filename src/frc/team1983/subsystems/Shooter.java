@@ -10,23 +10,24 @@ import frc.team1983.util.sensors.DutyCycleEncoder;
 public class Shooter extends SubsystemBase
 {
 
-    public double voltageRamp = 2;
+    public static final double KP = 58, KF = 0.01;
+    public double voltageRamp = 2.5;
 
-    //Limits based on encoder reading as of 02/28/2020
-//    public static final double UPPER_LIMIT = 0.9;
-    public static final double UPPER_LIMIT = 0.746;
+    //Actual limits should ot be used for anything else than calculating setpoints
+    //Actual limits are used to create safety limits and all other setpoints
+    //Tuned on 03/08/2020
+    private static final double UPPER_LIMIT = 0.636;
+    private static final double LOWER_LIMIT = 0.215;
 
-    //    public static final double LOWER_LIMIT = 0.54;
-    public static final double LOWER_LIMIT = 0.329;
-    //Tuned on 03/04/2020 with full indexing and shooting at 90 percent throttle on accelerator and flywheel
-//    public static final double TRENCH = 0.667;
-    public static final double TRENCH = UPPER_LIMIT - 0.233;
+    public static final double UPPER_SAFETY_LIMIT = UPPER_LIMIT - 0.01;
+    public static final double LOWER_SAFETY_LIMIT = LOWER_LIMIT + 0.01;
 
-    //Tuned on 02/28/2020 with manual loading and 90 percent throttle on accelerator and flywheel
-//    0.713
-    public static final double INNER_FRONT_PILLAR = UPPER_LIMIT - 0.187;
-//    public static final double OUTER_BACK_PILLAR = 0.704;
-
+    //Tuned on 03/08/2020 at 90 percent throttle
+    public static final double TRENCH = UPPER_LIMIT - 0.264;
+    //Tuned on 03/08/2020 at 90 percent throttle
+    public static final double IN_FRONT_OF_PORT_CLOSE_PILLAR = UPPER_LIMIT - 0.187;
+    //Tuned on 03/08/2020 at 90 percent throttle
+    public static final double CROSS_FIELD = UPPER_LIMIT - 0.21;
 
     private MotorGroup accelerator;
     private MotorGroup flywheel;
