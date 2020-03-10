@@ -47,10 +47,12 @@ public class OI
     public static final double JOYSTICK_EXPONENT = 1.7;
     public static final double LINEAR_ZONE = 0.4;
     public static final double LINEAR_SLOPE = Math.abs(Math.pow(LINEAR_ZONE, JOYSTICK_EXPONENT) / (LINEAR_ZONE - JOYSTICK_DEADZONE));
-    public static final int RAISE_CONTROL_PANEL = 0;
-    public static final int LOWER_CONTROL_PANEL = 0;
-    public static final int INITIALIZE_ROTATION_CONTROL = 0;
-    public static final int INITIALIZE_POSITION_CONTROL = 0;
+ 
+    public static final int RAISE_CONTROL_PANEL = 4;
+    public static final int LOWER_CONTROL_PANEL = 5;
+
+    public static final int INITIALIZE_ROTATION_CONTROL = 1;
+    public static final int INITIALIZE_POSITION_CONTROL = 2;
     
     public static final int COLLECT_AND_LOAD = 15;
     public static final int COLLECTOR_FORWARD = 14;
@@ -178,10 +180,11 @@ public class OI
     }
     public void initializeBindings()
     {
-        getButton(Joysticks.PANEL, RAISE_CONTROL_PANEL).whenPressed(new ToggleControlPanel(true));
-        getButton(Joysticks.PANEL, LOWER_CONTROL_PANEL).whenPressed(new ToggleControlPanel(false));
-        getButton(Joysticks.PANEL, INITIALIZE_ROTATION_CONTROL).whenPressed(new RotationControl());
-        getButton(Joysticks.PANEL, INITIALIZE_POSITION_CONTROL).whenPressed(new PositionControl(ColorSensor.ColorEnum.RED));
+        getButton(Joysticks.RIGHT, RAISE_CONTROL_PANEL).whenPressed(new ToggleControlPanel(true));
+        getButton(Joysticks.RIGHT, LOWER_CONTROL_PANEL).whenPressed(new ToggleControlPanel(false));
+        getButton(Joysticks.RIGHT, INITIALIZE_ROTATION_CONTROL).whenPressed(new RotationControl());
+        getButton(Joysticks.RIGHT, INITIALIZE_POSITION_CONTROL).whenPressed(new PositionControl(ColorSensor.ColorEnum.RED));
+        
         //Just collector Forward
         getButton(Joysticks.PANEL, COLLECTOR_FORWARD).whenHeld(new SetRollerThrottle(Robot.getInstance().getCollector(),
             collectorValue));

@@ -25,7 +25,7 @@ public class ControlPanel extends SubsystemBase
     private DoubleSolenoid extender;
     private ColorSensor colorSensor;
     private boolean alreadyPolled;
-    private ColorSensor.ColorEnum assignedColor;
+    private ColorSensor.ColorEnum assignedColor = ColorSensor.ColorEnum.UNKNOWN;
     
     public ControlPanel()
     {
@@ -33,7 +33,7 @@ public class ControlPanel extends SubsystemBase
             new Spark(RobotMap.ControlPanel.ROLLER, RobotMap.ControlPanel.ROLLER_REVERSED)
         );
 
-        extender = new DoubleSolenoid(RobotMap.ControlPanel.PISTON_FORWARD, RobotMap.ControlPanel.PISTON_REVERSE);
+        extender = new DoubleSolenoid(RobotMap.COMPRESSOR, RobotMap.ControlPanel.PISTON_FORWARD, RobotMap.ControlPanel.PISTON_REVERSE);
         
         colorSensor= new ColorSensor();
     }

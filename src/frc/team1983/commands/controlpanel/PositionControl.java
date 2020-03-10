@@ -38,6 +38,7 @@ public class PositionControl extends CommandBase
     @Override
     public void initialize()
     {
+        System.out.println("Initializing 'PositionControl'");
         targetColor = COLORS[(Arrays.binarySearch(COLORS, controlPanel.getAssignedColor()) + 2) % NUM_COLORS];
         wedgeCount = (NUM_COLORS + Arrays.binarySearch(COLORS, targetColor) - Arrays.binarySearch(COLORS, controlPanel.getColorMatch())) % NUM_COLORS;
         isReversed = wedgeCount > 2;
@@ -53,6 +54,7 @@ public class PositionControl extends CommandBase
     public void end(boolean interrupted)
     {
         controlPanel.setRoller(ControlMode.Throttle, 0.0);
+        System.out.println("Ending 'PositionControl'");
     }
     
     @Override

@@ -45,11 +45,11 @@ public class Robot extends TimedRobot
 		climber = new Climber();
 
 		colorSensor = new ColorSensor();
-
+    
+        controlPanel = new ControlPanel();
+        
 		oi = new OI();
 		oi.initializeBindings();
-
-		controlPanel = new ControlPanel();
 	
 		limelight = new Limelight();
 		

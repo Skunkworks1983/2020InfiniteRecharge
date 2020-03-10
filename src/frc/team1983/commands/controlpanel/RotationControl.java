@@ -8,15 +8,20 @@ import frc.team1983.util.motors.ControlMode;
 import frc.team1983.util.HSVColor;
 import frc.team1983.util.sensors.ColorSensor;
 
+import javax.naming.ldap.Control;
+import java.util.Arrays;
+
 public class RotationControl extends CommandBase
 {
-    private static final double NUM_ROTATIONS = 3.5;
+    private static final double NUM_ROTATIONS = 1;
     private static final double WEDGES_PER_ROTATION = 8;
+    private static final double ROLLER_SPEED = 0.25;
     
     private ControlPanel controlPanel;
     private ColorSensor.ColorEnum previousColor;
-    private ColorSensor.ColorEnum currentColor;
+    private ColorSensor.ColorEnum nextColor;
     private double totalWedges;
+    private static final ColorSensor.ColorEnum[] COLORS = {ColorSensor.ColorEnum.YELLOW, ColorSensor.ColorEnum.RED, ColorSensor.ColorEnum.GREEN, ColorSensor.ColorEnum.BLUE};
     
     public RotationControl(ControlPanel controlPanel)
     {
@@ -39,15 +44,14 @@ public class RotationControl extends CommandBase
     @Override
     public void execute()
     {
-        controlPanel.setRoller(ControlMode.Throttle, 0.5);
-        currentColor = controlPanel.getColorMatch();
-        if(currentColor != previousColor && currentColor != ColorSensor.ColorEnum.UNKNOWN && previousColor != ColorSensor.ColorEnum.UNKNOWN)
+        controlPanel.setRoller(ControlMode.Throttle, ROLLER_SPEED);
+        nextColor = COLORS[(Arrays.binarySearch(COLORS, previousColor) + 1) % 4];
+        if(controlPanel.getColorMatch() == nextColor)
         {
             totalWedges++;
-            
+            previousColor = nextColor;
+            System.out.println(nextColor.name());
         }
-        System.out.println(totalWedges);
-        previousColor = currentColor;
     }
     
     @Override
