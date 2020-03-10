@@ -1,6 +1,6 @@
 package frc.team1983.util.sensors;
 
-public class DigitalInputEncoder extends edu.wpi.first.wpilibj.Encoder implements Encoder, Runnable
+public class DutyCycleEncoder extends edu.wpi.first.wpilibj.DutyCycleEncoder implements Encoder, Runnable
 {
     private static final int UPDATE_RATE = 250;
 
@@ -12,15 +12,10 @@ public class DigitalInputEncoder extends edu.wpi.first.wpilibj.Encoder implement
     private double prevPos;
     private long prevTime;
 
-    public DigitalInputEncoder(int channelA, int channelB)
+    public DutyCycleEncoder(int channel)
     {
-        super(channelA, channelB);
+        super(channel);
         new Thread(this).start();
-    }
-
-    public DigitalInputEncoder(int channelA)
-    {
-        this(channelA, channelA + 1);
     }
 
     /**
@@ -28,7 +23,7 @@ public class DigitalInputEncoder extends edu.wpi.first.wpilibj.Encoder implement
      */
     public void zero()
     {
-//        encoderOffset = -get();
+
     }
 
     /**

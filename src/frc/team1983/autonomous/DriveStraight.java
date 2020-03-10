@@ -61,6 +61,12 @@ public class DriveStraight extends PIDCommand
 	}
 
 	@Override
+	public void execute()
+	{
+		System.out.println(getController().getPositionError());
+	}
+
+	@Override
 	public void end(boolean interrupted)
 	{
 		super.end(interrupted);

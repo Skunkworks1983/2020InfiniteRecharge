@@ -77,6 +77,11 @@ public class Talon extends com.ctre.phoenix.motorcontrol.can.TalonSRX implements
     {
         setNeutralMode(brake ? NeutralMode.Brake : NeutralMode.Coast);
     }
+//TODO Fix to work correctly with Talon
+    public void setVoltageRamp(double value)
+    {
+
+    }
 
     /**
      * @return Get the current position in encoder ticks
