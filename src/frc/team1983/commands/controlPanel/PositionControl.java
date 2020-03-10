@@ -1,4 +1,4 @@
-package frc.team1983.commands.ControlPanel;
+package frc.team1983.commands.controlPanel;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -70,5 +70,6 @@ public class PositionControl extends CommandBase
     public void end(boolean interrupted)
     {
         controlPanel.setRoller(0.0);
+        controlPanel.setBrake(true);
     }
 }

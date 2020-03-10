@@ -1,4 +1,4 @@
-package frc.team1983.commands.ControlPanel;
+package frc.team1983.commands.controlPanel;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.team1983.Robot;

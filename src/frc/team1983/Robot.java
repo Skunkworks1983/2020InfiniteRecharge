@@ -72,10 +72,6 @@ public class Robot extends TimedRobot
 	public void robotPeriodic()
 	{
 		CommandScheduler.getInstance().run();
-		SmartDashboard.putNumber("Red", colorSensor.getRed());
-		SmartDashboard.putNumber("Green", colorSensor.getGreen());
-		SmartDashboard.putNumber("Blue", colorSensor.getBlue());
-		SmartDashboard.putNumber("Confidence", colorSensor.getConfidence());
 		SmartDashboard.putString("Detected Color", colorSensor.getColor());
 	}
 
