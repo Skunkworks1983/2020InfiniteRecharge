@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1983.autonomous.Auto;
 import frc.team1983.commands.RunGyroDrive;
+import frc.team1983.commands.collectorAndIndexer.SetCollectorPosition;
 import frc.team1983.commands.shooter.SetArticulation;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Climber;
@@ -76,7 +77,6 @@ public class Robot extends TimedRobot
 		autoChooser.addOption("In Front of Port -> Rendezvous Point", Auto.IN_FRONT_OF_PORT_TO_RENDEZVOUS);
 		autoChooser.addOption("In Front of Opponent Trench -> Opponent Trench -> Rendezvous", Auto.IN_FRONT_OF_OPPONENT_TRENCH_TO_OPPONENT_TRENCH_TO_RENDEZVOUS);
 		autoChooser.addOption("In Front of Trench -> Trench", Auto.IN_FRONT_OF_TRENCH_TO_TRENCH);
-		autoChooser.addOption("In Front of Port -> Shoot in Front of Port -> Trench", Auto.IN_FRONT_OF_PORT_TO_SHOOT_IN_FRONT_OF_PORT_TO_TRENCH);
 		autoChooser.addOption("In Front of Port -> Shoot in Front of Port -> Trench -> Shoot in Front of Port", Auto.IN_FRONT_OF_PORT_TO_SHOOT_IN_FRONT_OF_PORT_TO_TRENCH_TO_SHOOT_IN_FRONT_OF_TRENCH);
 		SmartDashboard.putData("Auto chooser", autoChooser);
 
@@ -111,6 +111,7 @@ public class Robot extends TimedRobot
 		new SequentialCommandGroup(
 			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
 			driveBeforeAutoChooser.getSelected().getAuto(),
+			new SetCollectorPosition(true),
 			autoChooser.getSelected().getAuto()
 		).schedule();
 	}

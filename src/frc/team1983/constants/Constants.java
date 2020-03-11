@@ -50,7 +50,7 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d TRENCH_BALL_1 = new Pose2d(
-            Units.feetToMeters(242.63 / 12.0 /*- ROBOT_LENGTH / 2.0*/),
+            Units.feetToMeters(242.63 / 12.0 - ROBOT_LENGTH / 2.0),
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
@@ -171,11 +171,16 @@ public class Constants
             Units.feetToMeters(-94.66 / 12.0),
             new Rotation2d(Units.degreesToRadians(180))
         );
-        private static final double IN_FRONT_OF_PORT_AND_TRENCH_SWITCH_OFFSET = 2.0; // feet offset from trench ball 1
-        public static final Pose2d IN_FRONT_OF_PORT_AND_TRENCH_SWITCH = new Pose2d(
-            Units.feetToMeters(242.63 / 12.0 - IN_FRONT_OF_PORT_AND_TRENCH_SWITCH_OFFSET),
+        public static final double SHOOT_IN_FRONT_OF_PORT_TOWARD_TRENCH_BALL_1_HEADING = -135.0;
+        public static final Pose2d SHOOT_IN_FRONT_OF_PORT_TOWARD_TRENCH_BALL_1 = new Pose2d(
+        	SHOOT_IN_FRONT_OF_PORT.getTranslation(),
+            new Rotation2d(Units.degreesToRadians(SHOOT_IN_FRONT_OF_PORT_TOWARD_TRENCH_BALL_1_HEADING))
+        );
+        public static final double TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT_HEADING = -135.0;
+        public static final Pose2d TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT = new Pose2d(
+            Units.feetToMeters(242.63 / 12.0),
             Units.feetToMeters(-27.75 / 12.0),
-            new Rotation2d(Units.degreesToRadians(180))
+            new Rotation2d(Units.degreesToRadians(TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT_HEADING))
         );
     }
 }

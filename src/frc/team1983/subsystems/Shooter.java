@@ -1,5 +1,6 @@
 package frc.team1983.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.RobotMap;
 import frc.team1983.util.motors.ControlMode;
@@ -78,6 +79,8 @@ public class Shooter extends SubsystemBase
     {
         setAccelerator(controlMode, acceleratorValue);
         setFlywheel(controlMode, flywheelValue);
+        SmartDashboard.putNumber("Accelerator Value", acceleratorValue);
+        SmartDashboard.putNumber("Flywheel Value", flywheelValue);
     }
 
     public void setBrake(boolean brake)

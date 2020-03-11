@@ -112,6 +112,13 @@ public class TargetAlignment extends PIDCommand
         limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
     }
 
+    // TODO: add atSetpoint to isFinished when there is a command that checks if the shooter is up to speed
+//    @Override
+//    public boolean isFinished()
+//    {
+//        return getController().atSetpoint();
+//    }
+
     private static double getHeadingToTargetFromPose(Pose2d pose)
     {
     	double x = pose.getTranslation().getX() - Constants.Pose.PORT_TARGET.getTranslation().getX();

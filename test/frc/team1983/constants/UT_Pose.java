@@ -26,6 +26,7 @@ public class UT_Pose
         System.out.println("RENDEZVOUS_POINT_BALL_4_AND_5: " + Constants.Pose.RENDEZVOUS_BALL_4_AND_5 + ", " + Constants.Pose.RENDEZVOUS_BALL_4_AND_5.getRotation().getCos() + ", " + Constants.Pose.RENDEZVOUS_BALL_4_AND_5.getRotation().getSin());
         System.out.println("OPPONENT_TRENCH_RUN_BALL_4_AND_5: " + Constants.Pose.OPPONENT_TRENCH_BALL_4_AND_5);
         System.out.println("OPPONENT_TRENCH_RUN_RENDEZVOUS_SWITCH: " + Constants.Pose.OPPONENT_TRENCH_AND_RENDEZVOUS_SWITCH + ", " + Constants.Pose.OPPONENT_TRENCH_AND_RENDEZVOUS_SWITCH.getRotation().getCos() + ", " + Constants.Pose.OPPONENT_TRENCH_AND_RENDEZVOUS_SWITCH.getRotation().getSin());
+        System.out.println("TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT: " + Constants.Pose.TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT + ", " + Constants.Pose.TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT.getRotation().getCos() + ", " + Constants.Pose.TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT.getRotation().getSin());
     }
 
     @Test
