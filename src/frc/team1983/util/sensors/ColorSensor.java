@@ -70,4 +70,8 @@ public class ColorSensor extends ColorSensorV3
             return ColorEnum.UNKNOWN;
         }
     }
+    public double getColorMatchConfidence()
+    {
+        return colorMatch.matchClosestColor(getRGBColor()).confidence;
+    }
 }

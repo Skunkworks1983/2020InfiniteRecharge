@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class RotationControl extends CommandBase
 {
-    private static final double NUM_ROTATIONS = 1;
+    private static final double NUM_ROTATIONS = 3.5;
     private static final double WEDGES_PER_ROTATION = 8;
     private static final double ROLLER_SPEED = 0.25;
     
@@ -37,7 +37,10 @@ public class RotationControl extends CommandBase
     @Override
     public void initialize()
     {
+        totalWedges = 0;
+        for(double confidence = 0.0; confidence >= ControlPanel.CONFIDENCE_LEVEL; confidence = controlPanel.getColorMatchConfidence()) {}
         previousColor = controlPanel.getColorMatch();
+        nextColor = COLORS[(Arrays.binarySearch(COLORS, previousColor) + 1) % 4];
         System.out.println("initializing 'ROTATION_CONTROL'");
     }
     
@@ -45,19 +48,21 @@ public class RotationControl extends CommandBase
     public void execute()
     {
         controlPanel.setRoller(ControlMode.Throttle, ROLLER_SPEED);
-        nextColor = COLORS[(Arrays.binarySearch(COLORS, previousColor) + 1) % 4];
-        if(controlPanel.getColorMatch() == nextColor)
+        if(controlPanel.getColorMatch() == nextColor && controlPanel.getColorMatchConfidence() >= controlPanel.CONFIDENCE_LEVEL)
         {
             totalWedges++;
             previousColor = nextColor;
-            System.out.println(nextColor.name());
+            nextColor = COLORS[(Arrays.binarySearch(COLORS, previousColor) + 1) % 4];
+            System.out.println(nextColor.name() + ", " + totalWedges);
         }
+        System.out.println(controlPanel.getColorMatch() + ", " + controlPanel.getColorMatchConfidence());
     }
     
     @Override
     public void end(boolean interrupted)
     {
         controlPanel.setRoller(ControlMode.Throttle, 0.0);
+        controlPanel.setBrakeMode(true);
         System.out.println("disabling 'ROTATION_CONTROL'");
     }
     

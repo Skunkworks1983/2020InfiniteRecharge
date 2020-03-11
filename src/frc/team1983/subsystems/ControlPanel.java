@@ -13,6 +13,8 @@ import frc.team1983.util.sensors.ColorSensor;
 public class ControlPanel extends SubsystemBase
 {
     public static final double ROTATIONS_PER_TICK = 42;
+    public static final double CONFIDENCE_LEVEL = 0.8;
+    
     
     public boolean desiredFoldedState = false;
 
@@ -53,6 +55,10 @@ public class ControlPanel extends SubsystemBase
         extender.set(shouldExtend ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
     }
 
+    public void setBrakeMode(boolean inBrakeMode)
+    {
+        roller.setBrake(inBrakeMode);
+    }
     public boolean isFolded()
     {
         return extender.get() == DoubleSolenoid.Value.kReverse;
@@ -69,6 +75,11 @@ public class ControlPanel extends SubsystemBase
     }
     
     public ColorSensor.ColorEnum getColorMatch() { return colorSensor.getColorMatch(); }
+    
+    public double getColorMatchConfidence()
+    {
+        return colorSensor.getColorMatchConfidence();
+    }
     
     public HSVColor getHSVColor()
     {

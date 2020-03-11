@@ -8,10 +8,11 @@ import frc.team1983.util.sensors.ColorSensor;
 
 import java.util.Arrays;
 
+
 public class PositionControl extends CommandBase
 {
     private static int NUM_COLORS = 4;
-    private static double ROLLER_SPEED = 0.5;
+    private static double ROLLER_SPEED = 0.15;
     private ControlPanel controlPanel;
     private ColorSensor.ColorEnum targetColor;
     private int wedgeCount; //measured in wedges
@@ -51,15 +52,16 @@ public class PositionControl extends CommandBase
     }
     
     @Override
-    public void end(boolean interrupted)
+    public boolean isFinished()
     {
-        controlPanel.setRoller(ControlMode.Throttle, 0.0);
-        System.out.println("Ending 'PositionControl'");
+        return controlPanel.getAssignedColor() == ColorSensor.ColorEnum.UNKNOWN || controlPanel.getColorMatch() == targetColor;
     }
     
     @Override
-    public boolean isFinished()
+    public void end(boolean interrupted)
     {
-        return controlPanel.getAssignedColor() == ColorSensor.ColorEnum.UNKNOWN || controlPanel.getAssignedColor() == targetColor;
+        controlPanel.setRoller(ControlMode.Throttle, 0.0);
+        controlPanel.setBrakeMode(true);
+        System.out.println("Ending 'PositionControl'");
     }
 }
