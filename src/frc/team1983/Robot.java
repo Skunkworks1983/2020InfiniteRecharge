@@ -124,6 +124,8 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit()
     {
+	    drivebase.setBrake(false);
+
         CommandScheduler.getInstance().cancelAll();
         drivebase.setPose(new Pose2d(0, 0, new Rotation2d(Units.degreesToRadians(180))));
         new RunGyroDrive().schedule();

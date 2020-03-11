@@ -6,16 +6,12 @@ import frc.team1983.subsystems.Collector;
 
 public class SetCollectorPosition extends InstantCommand
 {
-    public SetCollectorPosition(Collector collector)
+    public SetCollectorPosition(Collector collector, boolean collectorDown)
     {
-        // basically a fancy if/else statement
-        // ? is the comparison/ if
-        // : is the then/else
-        // it takes the ?, :, and collector within the super
-        super(() -> collector.setCollectorPosition(!collector.getCollectorStatus()), collector);
+        super(() -> collector.setCollectorPosition(collectorDown), collector);
     }
-    public SetCollectorPosition()
+    public SetCollectorPosition(boolean collectorDown)
     {
-        this(Robot.getInstance().getCollector());
+        this(Robot.getInstance().getCollector(), collectorDown);
     }
 }

@@ -31,7 +31,6 @@ public class TargetAlignment extends PIDCommand
             () -> targetAngle,
             output -> {
                 double feedforward = kF * Math.signum(output);
-                System.out.printf("Output: %f\n", output + feedforward);
                 drivebase.set(ControlMode.Throttle,
                     MathUtil.clamp(-output - feedforward, -MAX_OUTPUT, MAX_OUTPUT),
                     MathUtil.clamp(output + feedforward, -MAX_OUTPUT, MAX_OUTPUT)
@@ -100,8 +99,6 @@ public class TargetAlignment extends PIDCommand
         {
             getController().setI(kI);
         }
-
-        System.out.printf("Error %f, ", getController().getPositionError());
 
         super.execute();
         previousError = getController().getPositionError();

@@ -10,10 +10,10 @@ import frc.team1983.util.motors.Spark;
 
 public class Collector extends SubsystemBase
 {
-    private DoubleSolenoid piston; //piston controls whether it is out or stowed
-    private Motor collectorMotor; //collector has one motor, just the collectorMotor
+    private DoubleSolenoid piston; // Piston controls whether it is out or stowed
+    private Motor collectorMotor; // Collector has one motor, just the collectorMotor
 
-   // used in collector commands so that we have a constant for motor directions
+   // Used in collector commands so that we have a constant for motor directions
     public static double motorsForward = 1;
     public static double motorsReversed = -1;
     public static double motorsOff = 0;
@@ -29,53 +29,34 @@ public class Collector extends SubsystemBase
                 RobotMap.Collector.PISTON_REVERSE);
     }
 
-    //for now we're just using the motorsForward constant because it's a good chance
-    // we'll only have to collect at one speed
+    // For now we're just using the motorsForward constant because it's a good chance
+    // We'll only have to collect at one speed
     public void setRollerThrottle(double throttle)
     {
         collectorMotor.set(ControlMode.Throttle, throttle);
     }
 
-    //this simply tells us what positions are allowed
+    // This simply tells us what positions are allowed
     public enum position
     {
         extended,
         retracted
     }
 
-    //sets collector position
-    public void setCollectorPosition(boolean p)
+    // Sets collector position
+    public void setCollectorPosition(boolean down)
     {
-        piston.set(p ? DoubleSolenoid.Value.kReverse : DoubleSolenoid.Value.kForward);
-//        if (p == position.retracted)
-//        {
-//            piston.set(DoubleSolenoid.Value.kReverse);
-//        }
-//        else if(p== position.extended)
-//        {
-//            piston.set(DoubleSolenoid.Value.kForward);
-//        }
-//
-//        currentPosition = p;
+        piston.set(down ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse);
     }
 
-    //gets collector position, there's really only two options right now
-    public position getCollectorPosition()
+    public boolean isCollectorDown()
     {
-        return currentPosition;
+        return piston.get() == DoubleSolenoid.Value.kForward;
     }
-
-    public boolean getCollectorStatus()
-    {
-        return piston.get() == DoubleSolenoid.Value.kReverse;
-    }
-
 
     public void setCollectorMotor(double speed)
     {
         collectorMotor.set(ControlMode.Throttle, speed);
     }
-
-
 }
 

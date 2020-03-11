@@ -10,8 +10,12 @@ import frc.team1983.commands.SetPose;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.commands.collectorAndIndexer.IndexerStartupAuto;
 import frc.team1983.commands.collectorAndIndexer.LoadIndexerAuto;
+import frc.team1983.commands.collectorAndIndexer.ManualIndexer;
+import frc.team1983.commands.collectorAndIndexer.SetCollectorPosition;
+import frc.team1983.commands.shooter.SetArticulationPosition;
 import frc.team1983.commands.shooter.SetShooter;
 import frc.team1983.constants.Constants;
+import frc.team1983.subsystems.Shooter;
 
 public class InFrontOfPortToShootInFrontOfPortToTrenchToShootInFrontOfPort extends SequentialCommandGroup
 {
@@ -19,13 +23,14 @@ public class InFrontOfPortToShootInFrontOfPortToTrenchToShootInFrontOfPort exten
 	{
 		addCommands(
 			new SetPose(Constants.Pose.IN_FRONT_OF_PORT),
+			new SetCollectorPosition(true),
 			new ParallelRaceGroup(
 				new SequentialCommandGroup(
 					new InFrontOfPortToShootInFrontOfPort(),
 					new TargetAlignment(180).withTimeout(2.0),
 					new IndexerStartupAuto(true).withTimeout(2.0)
 				),
-//				new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR),
+				new SetArticulationPosition(Shooter.IN_FRONT_OF_PORT_CLOSE_PILLAR),
 				new SetShooter(0.9, 0.9)
 			),
 			new ShootInFrontOfPortToInFrontOfPort(),
@@ -39,8 +44,10 @@ public class InFrontOfPortToShootInFrontOfPortToTrenchToShootInFrontOfPort exten
 					 new TargetAlignment(180).withTimeout(2.0),
 					 new IndexerStartupAuto(true).withTimeout(5.0)
 				),
-	//				new SetArticulationPosition(Shooter.INNER_FRONT_PILLAR),
-				new SetShooter(0.9, 0.9)
+				new SetArticulationPosition(Shooter.IN_FRONT_OF_PORT_CLOSE_PILLAR),
+				new ManualIndexer(-0.15,-0.15,-0.15).withTimeout(0.1).andThen(
+					new SetShooter(0.9, 0.9)
+				)
 			)
 		);
 	}

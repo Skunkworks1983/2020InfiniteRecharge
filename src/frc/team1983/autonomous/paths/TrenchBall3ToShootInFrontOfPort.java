@@ -11,6 +11,7 @@ public class TrenchBall3ToShootInFrontOfPort extends FollowTrajectory
 	public TrenchBall3ToShootInFrontOfPort()
 	{
 		super(
+			6.0,
 			Constants.Pose.TRENCH_BALL_3,
 			new Pose2d(Constants.Pose.SHOOT_IN_FRONT_OF_PORT.getTranslation(), new Rotation2d(Units.degreesToRadians(-135)))
 		);

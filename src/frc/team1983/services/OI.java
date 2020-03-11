@@ -13,9 +13,9 @@ import frc.team1983.commands.collectorAndIndexer.LoadIndexerTele;
 import frc.team1983.commands.collectorAndIndexer.ManualIndexer;
 import frc.team1983.commands.collectorAndIndexer.SetCollectorPosition;
 import frc.team1983.commands.collectorAndIndexer.SetRollerThrottle;
+import frc.team1983.commands.collectorAndIndexer.ToggleCollectorPosition;
 import frc.team1983.commands.shooter.SetArticulationPosition;
 import frc.team1983.commands.shooter.SetShooter;
-import frc.team1983.constants.Constants;
 import frc.team1983.subsystems.Shooter;
 
 import java.util.HashMap;
@@ -196,7 +196,7 @@ public class OI
         getButton(Joysticks.OPERATOR, 1).whenHeld(new IndexerStartupTele());
 
         // Toggle collector
-        getButton(Joysticks.PANEL, SET_COLLECTOR_POSITION).whenPressed(new SetCollectorPosition());
+        getButton(Joysticks.PANEL, SET_COLLECTOR_POSITION).whenPressed(new ToggleCollectorPosition());
 
         // Run collector transfer in reverse
         getButton(Joysticks.PANEL, COLLECTOR_TRANSFER_REVERSE).whenHeld(new ManualIndexer(-0.15,0,
@@ -231,5 +231,8 @@ public class OI
 
         // Drive back from power port
         getButton(Joysticks.RIGHT, 1).whenHeld(new DriveStraight(-0.75, Units.feetToMeters(2.0)));
+
+        // Target Alignment
+        getButton(Joysticks.LEFT, 1).whenHeld(new TargetAlignment(180));
     }
 }

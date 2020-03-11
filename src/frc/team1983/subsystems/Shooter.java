@@ -23,9 +23,9 @@ public class Shooter extends SubsystemBase
     public static final double LOWER_SAFETY_LIMIT = LOWER_LIMIT + 0.01;
 
     //Tuned on 03/08/2020 at 90 percent throttle
-    public static final double TRENCH = UPPER_LIMIT - 0.264;
+    public static final double TRENCH = UPPER_LIMIT - 0.187;
     //Tuned on 03/08/2020 at 90 percent throttle
-    public static final double IN_FRONT_OF_PORT_CLOSE_PILLAR = UPPER_LIMIT - 0.187;
+    public static final double IN_FRONT_OF_PORT_CLOSE_PILLAR = UPPER_LIMIT - 0.264;
     //Tuned on 03/08/2020 at 90 percent throttle
     public static final double CROSS_FIELD = UPPER_LIMIT - 0.21;
 
