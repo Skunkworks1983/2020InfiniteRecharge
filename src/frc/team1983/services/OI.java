@@ -23,22 +23,22 @@ import java.util.HashMap;
 public class OI
 {
     public enum Joysticks
+    {
+        LEFT(0),
+        RIGHT(1),
+        PANEL(2),
+        OPERATOR(3);
+
+        private int port;
+
+        Joysticks(int port)
         {
-            LEFT(0),
-            RIGHT(1),
-            PANEL(2),
-            OPERATOR(3);
+            this.port = port;
+        }
 
-            private int port;
-
-            Joysticks(int port)
-            {
-                this.port = port;
-            }
-
-            public int getPort()
-            {
-                return port;
+        public int getPort()
+        {
+            return port;
         }
     }
 

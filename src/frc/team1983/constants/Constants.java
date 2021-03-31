@@ -182,5 +182,65 @@ public class Constants
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT_HEADING))
         );
+        public static final Pose2d BARREL_RACING_START_ZONE = new Pose2d(
+            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(7.5),
+            new Rotation2d(0)
+        );
+        public static final Pose2d BARREL_RACING_FINISH_ZONE = new Pose2d(
+            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d SLALOM_START_ZONE = new Pose2d(
+            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(2.5),
+            new Rotation2d(0)
+        );
+        public static final Pose2d SLALOM_FINISH_ZONE = new Pose2d(
+            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d BOUNCE_START_ZONE = new Pose2d(
+            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(7.5),
+            new Rotation2d(0)
+        );
+        public static final Pose2d BOUNCE_A3 = new Pose2d(
+            Units.feetToMeters(7.5 - 0.5),
+            Units.feetToMeters(12.5 - 1),
+            new Rotation2d(Units.degreesToRadians(90))
+        );
+        public static final Pose2d BOUNCE_A3_E5_WAYPOINT = new Pose2d(
+            Units.feetToMeters(8.5),
+            Units.feetToMeters(6.5),
+            new Rotation2d(Units.degreesToRadians(115))
+        );
+        public static final Pose2d BOUNCE_E5 = new Pose2d(
+            Units.feetToMeters(12.5),
+            Units.feetToMeters(2.5 + 0.5),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d BOUNCE_A6 = new Pose2d(
+            Units.feetToMeters(15 - 0.5),
+            Units.feetToMeters(12.5 - 1),
+            new Rotation2d(Units.degreesToRadians(-90))
+        );
+        public static final Pose2d BOUNCE_E7 = new Pose2d(
+            Units.feetToMeters(18.5 - 0.5),
+            Units.feetToMeters(2.5 + 0.5),
+            new Rotation2d(0)
+        );
+        public static final Pose2d BOUNCE_A9 = new Pose2d(
+            Units.feetToMeters(22.5 - 0.5),
+            Units.feetToMeters(12.5 - 1),
+            new Rotation2d(Units.degreesToRadians(90))
+        );
+        public static final Pose2d BOUNCE_FINISH_ZONE = new Pose2d(
+            Units.feetToMeters(25 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(7.5 + 1),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
     }
 }

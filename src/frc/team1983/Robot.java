@@ -78,6 +78,8 @@ public class Robot extends TimedRobot
 		autoChooser.addOption("In Front of Opponent Trench -> Opponent Trench -> Rendezvous", Auto.IN_FRONT_OF_OPPONENT_TRENCH_TO_OPPONENT_TRENCH_TO_RENDEZVOUS);
 		autoChooser.addOption("In Front of Trench -> Trench", Auto.IN_FRONT_OF_TRENCH_TO_TRENCH);
 		autoChooser.addOption("In Front of Port -> Shoot in Front of Port -> Trench -> Shoot in Front of Port", Auto.IN_FRONT_OF_PORT_TO_SHOOT_IN_FRONT_OF_PORT_TO_TRENCH_TO_SHOOT_IN_FRONT_OF_TRENCH);
+		autoChooser.addOption("Barrel Racing", Auto.BARREL_RACING);
+		autoChooser.addOption("Bounce", Auto.BOUNCE);
 		SmartDashboard.putData("Auto chooser", autoChooser);
 
 		driveBeforeAutoChooser = new SendableChooser<>();
@@ -119,7 +121,11 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousPeriodic()
     {
-
+        Pose2d pose = getDrivebase().getPose();
+        System.out.println(
+            Units.metersToFeet(pose.getTranslation().getX()) + ", " +
+            Units.metersToFeet(pose.getTranslation().getY())
+        );
     }
 
     @Override
