@@ -2,6 +2,8 @@ build/
 .gradle/
 out/
 .idea/
+.vscode/
+.project
 classes/
 .vim/
 *.iws
