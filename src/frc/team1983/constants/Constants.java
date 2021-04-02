@@ -282,9 +282,9 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d SLALOM_D8_WAYPOINT_1 = new Pose2d(
-            Units.feetToMeters(22.5 - 0.5),
+            Units.feetToMeters(22.5 - 1.0),
             Units.feetToMeters(5),
-            new Rotation2d(Units.degreesToRadians(-45 - 0))
+            new Rotation2d(Units.degreesToRadians(-45 - 10))
         );
         public static final Pose2d SLALOM_D10_WAYPOINT_1 = new Pose2d(
             Units.feetToMeters(25),
@@ -304,11 +304,11 @@ public class Constants
         public static final Pose2d SLALOM_D8_WAYPOINT_2 = new Pose2d(
             Units.feetToMeters(22.5 + 2),
             Units.feetToMeters(5 + 1),
-            new Rotation2d(Units.degreesToRadians(-135 + 40))
+            new Rotation2d(Units.degreesToRadians(-135 + 20))
         );
         public static final Pose2d SLALOM_D6_WAYPOINT_2 = new Pose2d(
             Units.feetToMeters(15),
-            Units.feetToMeters(5 - 2.5),
+            Units.feetToMeters(5 - 1.5),
             new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d SLALOM_D4_WAYPOINT_2 = new Pose2d(
@@ -318,7 +318,7 @@ public class Constants
         );
         public static final Pose2d SLALOM_FINISH_ZONE = new Pose2d(
             Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(7.5),
+            Units.feetToMeters(7.5 + 1),
             new Rotation2d(Units.degreesToRadians(180))
         );
 
