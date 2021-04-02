@@ -8,6 +8,7 @@ public class BounceStartToA3 extends FollowTrajectory
 	public BounceStartToA3()
 	{
 		super(
+			10,
 			Constants.Pose.BOUNCE_START_ZONE,
 			Constants.Pose.BOUNCE_A3
 		);

@@ -17,7 +17,12 @@ public enum Auto
 	IN_FRONT_OF_TRENCH_TO_TRENCH(InFrontOfTrenchToTrench::new),
 	IN_FRONT_OF_PORT_TO_SHOOT_IN_FRONT_OF_PORT_TO_TRENCH_TO_SHOOT_IN_FRONT_OF_TRENCH(InFrontOfPortToShootInFrontOfPortToTrenchToShootInFrontOfPort::new),
 	BARREL_RACING(BarrelRacing::new),
-	BOUNCE(Bounce::new);
+	SLALOM(Slalom::new),
+	BOUNCE(Bounce::new),
+	GALACTIC_SEARCH_PATH_A_RED(GalacticSearchPathARed::new),
+	GALACTIC_SEARCH_PATH_A_BLUE(GalacticSearchPathABlue::new),
+	GALACTIC_SEARCH_PATH_B_RED(GalacticSearchPathBRed::new),
+	GALACTIC_SEARCH_PATH_B_BLUE(GalacticSearchPathBBlue::new);
 
 	private Supplier<Command> auto;
 

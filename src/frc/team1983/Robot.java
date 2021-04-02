@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot
 
     private UsbCamera cameraAim, cameraCollect;
 
+	private Command auto;
 	private SendableChooser<Auto> autoChooser;
 	private SendableChooser<Auto> driveBeforeAutoChooser;
 
@@ -79,7 +81,12 @@ public class Robot extends TimedRobot
 		autoChooser.addOption("In Front of Trench -> Trench", Auto.IN_FRONT_OF_TRENCH_TO_TRENCH);
 		autoChooser.addOption("In Front of Port -> Shoot in Front of Port -> Trench -> Shoot in Front of Port", Auto.IN_FRONT_OF_PORT_TO_SHOOT_IN_FRONT_OF_PORT_TO_TRENCH_TO_SHOOT_IN_FRONT_OF_TRENCH);
 		autoChooser.addOption("Barrel Racing", Auto.BARREL_RACING);
+		autoChooser.addOption("Slalom", Auto.SLALOM);
 		autoChooser.addOption("Bounce", Auto.BOUNCE);
+		autoChooser.addOption("Galactic Search Path A Red", Auto.GALACTIC_SEARCH_PATH_A_RED);
+		autoChooser.addOption("Galactic Search Path A Blue", Auto.GALACTIC_SEARCH_PATH_A_BLUE);
+		autoChooser.addOption("Galactic Search Path B Red", Auto.GALACTIC_SEARCH_PATH_B_RED);
+		autoChooser.addOption("Galactic Search Path B Blue", Auto.GALACTIC_SEARCH_PATH_B_BLUE);
 		SmartDashboard.putData("Auto chooser", autoChooser);
 
 		driveBeforeAutoChooser = new SendableChooser<>();
@@ -96,6 +103,13 @@ public class Robot extends TimedRobot
 		cameraAim.setResolution(320, 240);
 		cameraCollect.setResolution(320, 240);
 		limelight.setLedMode(Limelight.DEFAULT_LED_MODE);
+
+		drivebase.setBrake(false);
+
+		CommandScheduler.getInstance().cancelAll();
+		auto = new SequentialCommandGroup(
+			Auto.SLALOM.getAuto()
+		);
 	}
 
     @Override
@@ -107,25 +121,26 @@ public class Robot extends TimedRobot
 	@Override
 	public void autonomousInit()
 	{
-		drivebase.setBrake(false);
+		// drivebase.setBrake(false);
 
-		CommandScheduler.getInstance().cancelAll();
-		new SequentialCommandGroup(
-			new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
-			driveBeforeAutoChooser.getSelected().getAuto(),
-			new SetCollectorPosition(true),
-			autoChooser.getSelected().getAuto()
-		).schedule();
+		// CommandScheduler.getInstance().cancelAll();
+		// new SequentialCommandGroup(
+		// 	new WaitCommand(SmartDashboard.getNumber("Wait Time", 0.0)),
+		// 	driveBeforeAutoChooser.getSelected().getAuto(),
+		// 	new SetCollectorPosition(true),
+		// 	autoChooser.getSelected().getAuto()
+		// ).schedule();
+		auto.schedule();
 	}
 
     @Override
     public void autonomousPeriodic()
     {
-        Pose2d pose = getDrivebase().getPose();
-        System.out.println(
-            Units.metersToFeet(pose.getTranslation().getX()) + ", " +
-            Units.metersToFeet(pose.getTranslation().getY())
-        );
+        // Pose2d pose = getDrivebase().getPose();
+        // System.out.println(
+        //     Units.metersToFeet(pose.getTranslation().getX()) + ", " +
+        //     Units.metersToFeet(pose.getTranslation().getY())
+        // );
     }
 
     @Override

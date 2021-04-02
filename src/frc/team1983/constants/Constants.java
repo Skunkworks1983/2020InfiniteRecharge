@@ -16,7 +16,7 @@ public class Constants
     public static final double TRACK_WIDTH = 23.75 / 12.0; // feet
 
     /**
-     * All poses are in meters
+     * All poses are in meters and radians
      *
      * IN_FRONT_OF is a starting pose on the initiation line
      * SWITCH is an intermediate pose between two other poses, the poses are separated by AND
@@ -182,30 +182,151 @@ public class Constants
             Units.feetToMeters(-27.75 / 12.0),
             new Rotation2d(Units.degreesToRadians(TRENCH_BALL_1_FROM_SHOOT_IN_FRONT_OF_PORT_HEADING))
         );
+
+        // Barrel racing path
         public static final Pose2d BARREL_RACING_START_ZONE = new Pose2d(
             Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
             Units.feetToMeters(7.5),
-            new Rotation2d(0)
+            new Rotation2d(Units.degreesToRadians(0))
         );
-        public static final Pose2d BARREL_RACING_FINISH_ZONE = new Pose2d(
-            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
+        public static final Pose2d BARREL_RACING_D5_WAYPOINT_1 = new Pose2d(
+            Units.feetToMeters(12.5),
             Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d BARREL_RACING_D5_WAYPOINT_2 = new Pose2d(
+            Units.feetToMeters(12.5 + 3),
+            Units.feetToMeters(5 - 1),
+            new Rotation2d(Units.degreesToRadians(-90))
+        );
+        public static final Pose2d BARREL_RACING_D5_WAYPOINT_3 = new Pose2d(
+            Units.feetToMeters(12.5),
+            Units.feetToMeters(5 + 3),
             new Rotation2d(Units.degreesToRadians(180))
         );
+        public static final Pose2d BARREL_RACING_D5_WAYPOINT_4 = new Pose2d(
+            Units.feetToMeters(12.5 - 4),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(90))
+        );
+        public static final Pose2d BARREL_RACING_D5_B8_WAYPOINT = new Pose2d(
+            Units.feetToMeters(15),
+            Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d BARREL_RACING_B8_WAYPOINT_1 = new Pose2d(
+            Units.feetToMeters(20),
+            Units.feetToMeters(10 - 2),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d BARREL_RACING_B8_WAYPOINT_2 = new Pose2d(
+            Units.feetToMeters(20 + 1),
+            Units.feetToMeters(10 + 1),
+            new Rotation2d(Units.degreesToRadians(90))
+        );
+        public static final Pose2d BARREL_RACING_B8_WAYPOINT_3 = new Pose2d(
+            Units.feetToMeters(20),
+            Units.feetToMeters(10 + 2),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d BARREL_RACING_B8_WAYPOINT_4 = new Pose2d(
+            Units.feetToMeters(20 - 5),
+            Units.feetToMeters(10 - 1),
+            new Rotation2d(Units.degreesToRadians(-90))
+        );
+        public static final Pose2d BARREL_RACING_B8_D10_WAYPOINT = new Pose2d(
+            Units.feetToMeters(21),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(-55))
+        );
+        public static final Pose2d BARREL_RACING_D10_WAYPOINT_1 = new Pose2d(
+            Units.feetToMeters(25),
+            Units.feetToMeters(5 - 2),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d BARREL_RACING_D10_WAYPOINT_2 = new Pose2d(
+            Units.feetToMeters(25 + 1),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(100))
+        );
+        public static final Pose2d BARREL_RACING_D10_WAYPOINT_3 = new Pose2d(
+            Units.feetToMeters(25),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d BARREL_RACING_D10_FINISH_ZONE_WAYPOINT = new Pose2d(
+            Units.feetToMeters(22.5 - 4),
+            Units.feetToMeters(7.5 + 2),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d BARREL_RACING_FINISH_ZONE = new Pose2d(
+            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0 - 5),
+            Units.feetToMeters(7.5 + 2.5),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+
+        // Slalom path
         public static final Pose2d SLALOM_START_ZONE = new Pose2d(
             Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
             Units.feetToMeters(2.5),
-            new Rotation2d(0)
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d SLALOM_D4_WAYPOINT_1 = new Pose2d(
+            Units.feetToMeters(7.5 - 0.5),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(45 + 5))
+        );
+        public static final Pose2d SLALOM_D6_WAYPOINT_1 = new Pose2d(
+            Units.feetToMeters(15),
+            Units.feetToMeters(5 + 4),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d SLALOM_D8_WAYPOINT_1 = new Pose2d(
+            Units.feetToMeters(22.5 - 0.5),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(-45 - 0))
+        );
+        public static final Pose2d SLALOM_D10_WAYPOINT_1 = new Pose2d(
+            Units.feetToMeters(25),
+            Units.feetToMeters(5 - 3),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d SLALOM_D10_WAYPOINT_2 = new Pose2d(
+            Units.feetToMeters(25 + 5),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(90))
+        );
+        public static final Pose2d SLALOM_D10_WAYPOINT_3 = new Pose2d(
+            Units.feetToMeters(25),
+            Units.feetToMeters(5 + 3),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d SLALOM_D8_WAYPOINT_2 = new Pose2d(
+            Units.feetToMeters(22.5 + 2),
+            Units.feetToMeters(5 + 1),
+            new Rotation2d(Units.degreesToRadians(-135 + 40))
+        );
+        public static final Pose2d SLALOM_D6_WAYPOINT_2 = new Pose2d(
+            Units.feetToMeters(15),
+            Units.feetToMeters(5 - 2.5),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
+        public static final Pose2d SLALOM_D4_WAYPOINT_2 = new Pose2d(
+            Units.feetToMeters(7.5 + 2),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(135 - 30))
         );
         public static final Pose2d SLALOM_FINISH_ZONE = new Pose2d(
             Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
             Units.feetToMeters(7.5),
             new Rotation2d(Units.degreesToRadians(180))
         );
+
+        // Bounce path
         public static final Pose2d BOUNCE_START_ZONE = new Pose2d(
             Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
             Units.feetToMeters(7.5),
-            new Rotation2d(0)
+            new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d BOUNCE_A3 = new Pose2d(
             Units.feetToMeters(7.5 - 0.5),
@@ -214,11 +335,11 @@ public class Constants
         );
         public static final Pose2d BOUNCE_A3_E5_WAYPOINT = new Pose2d(
             Units.feetToMeters(8.5),
-            Units.feetToMeters(6.5),
+            Units.feetToMeters(7),
             new Rotation2d(Units.degreesToRadians(115))
         );
         public static final Pose2d BOUNCE_E5 = new Pose2d(
-            Units.feetToMeters(12.5),
+            Units.feetToMeters(12.5 - 1),
             Units.feetToMeters(2.5 + 0.5),
             new Rotation2d(Units.degreesToRadians(180))
         );
@@ -228,19 +349,123 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(-90))
         );
         public static final Pose2d BOUNCE_E7 = new Pose2d(
-            Units.feetToMeters(18.5 - 0.5),
+            Units.feetToMeters(17.5 + 1.5),
             Units.feetToMeters(2.5 + 0.5),
-            new Rotation2d(0)
+            new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d BOUNCE_A9 = new Pose2d(
-            Units.feetToMeters(22.5 - 0.5),
-            Units.feetToMeters(12.5 - 1),
+            Units.feetToMeters(22.5),
+            Units.feetToMeters(12.5 - 0),
             new Rotation2d(Units.degreesToRadians(90))
         );
         public static final Pose2d BOUNCE_FINISH_ZONE = new Pose2d(
             Units.feetToMeters(25 + ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(7.5 + 1),
+            Units.feetToMeters(7.5 + 2),
             new Rotation2d(Units.degreesToRadians(180))
+        );
+
+        // Galactic Search Path A
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_RED_START = new Pose2d(
+            Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_BLUE_START = new Pose2d(
+            Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(2.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_C3 = new Pose2d(
+            Units.feetToMeters(7.5),
+            Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_D5 = new Pose2d(
+            Units.feetToMeters(1.5),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_A6 = new Pose2d(
+            Units.feetToMeters(15),
+            Units.feetToMeters(12.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_E6 = new Pose2d(
+            Units.feetToMeters(15),
+            Units.feetToMeters(2.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_B7 = new Pose2d(
+            Units.feetToMeters(17.5),
+            Units.feetToMeters(10),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_C9 = new Pose2d(
+            Units.feetToMeters(22.5),
+            Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_RED_FINISH = new Pose2d(
+            Units.feetToMeters(27.5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(12.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_BLUE_FINISH = new Pose2d(
+            Units.feetToMeters(27.5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(7.5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+
+        // Galactic Search Path B
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_RED_START = new Pose2d(
+            Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(10),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_BLUE_START = new Pose2d(
+            Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_B3 = new Pose2d(
+            Units.feetToMeters(7.5),
+            Units.feetToMeters(10),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_D5 = new Pose2d(
+            Units.feetToMeters(1.5),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_B7 = new Pose2d(
+            Units.feetToMeters(17.5),
+            Units.feetToMeters(10),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_D6 = new Pose2d(
+            Units.feetToMeters(15),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_B8 = new Pose2d(
+            Units.feetToMeters(20),
+            Units.feetToMeters(10),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_D10 = new Pose2d(
+            Units.feetToMeters(25),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_RED_FINISH = new Pose2d(
+            Units.feetToMeters(27.5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(10),
+            new Rotation2d(Units.degreesToRadians(0))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_B_BLUE_FINISH = new Pose2d(
+            Units.feetToMeters(27.5 - ROBOT_LENGTH / 2.0),
+            Units.feetToMeters(5),
+            new Rotation2d(Units.degreesToRadians(0))
         );
     }
 }
