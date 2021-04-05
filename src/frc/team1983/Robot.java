@@ -108,7 +108,7 @@ public class Robot extends TimedRobot
 
 		CommandScheduler.getInstance().cancelAll();
 		auto = new SequentialCommandGroup(
-			Auto.SLALOM.getAuto()
+			Auto.BOUNCE.getAuto()
 		);
 	}
 

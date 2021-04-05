@@ -14,9 +14,9 @@ public class Bounce extends SequentialCommandGroup
 	{
 		addCommands(
 			new SetPose(Constants.Pose.BOUNCE_START_ZONE),
-			new BounceStartToA3(),
-			new BounceA3ToA6(),
-			new BounceA6ToA9(),
+			new BounceStartToA3().withTimeout(1.35),
+			new BounceA3ToA6().withTimeout(2.8),
+			new BounceA6ToA9().withTimeout(3.2),
 			new BounceA9ToFinish()
 		);
 	}

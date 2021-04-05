@@ -335,7 +335,7 @@ public class Constants
         );
         public static final Pose2d BOUNCE_A3 = new Pose2d(
             Units.feetToMeters(7.5 - 0.5),
-            Units.feetToMeters(12.5 - 1),
+            Units.feetToMeters(12.5 - 0),
             new Rotation2d(Units.degreesToRadians(90))
         );
         public static final Pose2d BOUNCE_A3_E5_WAYPOINT = new Pose2d(
@@ -345,22 +345,22 @@ public class Constants
         );
         public static final Pose2d BOUNCE_E5 = new Pose2d(
             Units.feetToMeters(12.5 - 1),
-            Units.feetToMeters(2.5 + 0.5),
+            Units.feetToMeters(2.5 + 1.5),
             new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d BOUNCE_A6 = new Pose2d(
-            Units.feetToMeters(15 - 0.5),
-            Units.feetToMeters(12.5 - 1),
+            Units.feetToMeters(15 - 0.25),
+            Units.feetToMeters(12.5 + 2),
             new Rotation2d(Units.degreesToRadians(-90))
         );
         public static final Pose2d BOUNCE_E7 = new Pose2d(
-            Units.feetToMeters(17.5 + 1.5),
-            Units.feetToMeters(2.5 + 0.5),
+            Units.feetToMeters(17.5 + 1.375),
+            Units.feetToMeters(2.5 + 1.5),
             new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d BOUNCE_A9 = new Pose2d(
-            Units.feetToMeters(22.5),
-            Units.feetToMeters(12.5 - 0),
+            Units.feetToMeters(22.5 + 0.75),
+            Units.feetToMeters(12.5 + 2.5),
             new Rotation2d(Units.degreesToRadians(90))
         );
         public static final Pose2d BOUNCE_FINISH_ZONE = new Pose2d(

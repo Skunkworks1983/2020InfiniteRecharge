@@ -9,7 +9,7 @@ public class BounceA9ToFinish extends FollowTrajectory
 	{
 		super(
 			true,
-			10,
+			14,
 			Constants.Pose.BOUNCE_A9,
 			Constants.Pose.BOUNCE_FINISH_ZONE
 		);

@@ -9,8 +9,7 @@ public class BounceA3ToA6 extends FollowTrajectory
 	{
 		super(
 			true,
-			9,
-			7,
+			12,
 			Constants.Pose.BOUNCE_A3,
 			Constants.Pose.BOUNCE_A3_E5_WAYPOINT,
 			Constants.Pose.BOUNCE_E5,
