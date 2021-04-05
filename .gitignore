@@ -4,6 +4,7 @@ out/
 .idea/
 .vscode/
 classes/
+bin/
 .vim/
 *.iws
 *.iml

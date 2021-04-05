@@ -302,25 +302,30 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d SLALOM_D8_WAYPOINT_2 = new Pose2d(
-            Units.feetToMeters(22.5 + 2),
+            Units.feetToMeters(22.5 + 2.0),
             Units.feetToMeters(5 + 1),
-            new Rotation2d(Units.degreesToRadians(-135 + 20))
+            new Rotation2d(Units.degreesToRadians(-135 + 40))
         );
         public static final Pose2d SLALOM_D6_WAYPOINT_2 = new Pose2d(
             Units.feetToMeters(15),
-            Units.feetToMeters(5 - 1.5),
+            Units.feetToMeters(5 - 0.5),
             new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d SLALOM_D4_WAYPOINT_2 = new Pose2d(
-            Units.feetToMeters(7.5 + 2),
+            Units.feetToMeters(7.5 + 1.5),
             Units.feetToMeters(5),
-            new Rotation2d(Units.degreesToRadians(135 - 30))
+            new Rotation2d(Units.degreesToRadians(135))
         );
         public static final Pose2d SLALOM_FINISH_ZONE = new Pose2d(
-            Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(7.5 + 1),
-            new Rotation2d(Units.degreesToRadians(180))
+            Units.feetToMeters(2.5),
+            Units.feetToMeters(10),
+            new Rotation2d(Units.degreesToRadians(135))
         );
+        // public static final Pose2d SLALOM_FINISH_ZONE = new Pose2d(
+            // Units.feetToMeters(5 - ROBOT_LENGTH / 2.0),
+            // Units.feetToMeters(7.5 + 1),
+            // new Rotation2d(Units.degreesToRadians(180))
+        // );
 
         // Bounce path
         public static final Pose2d BOUNCE_START_ZONE = new Pose2d(
