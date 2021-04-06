@@ -1,6 +1,7 @@
 package frc.team1983.commands.collectorAndIndexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.team1983.Robot;
 import frc.team1983.subsystems.Collector;
 
 public class SetRollerThrottle extends CommandBase
@@ -12,6 +13,10 @@ public class SetRollerThrottle extends CommandBase
     {
         this.collector = collector;
         this.throttle = throttle;
+    }
+
+    public SetRollerThrottle(double throttle) {
+        this(Robot.getInstance().getCollector(), throttle);
     }
 
     @Override

@@ -8,10 +8,12 @@ public class GalacticSearchPathBRedStartToFinish extends FollowTrajectory
 	public GalacticSearchPathBRedStartToFinish()
 	{
 		super(
-			5,
+			true,
+			14,
+			12,
 			Constants.Pose.GALACTIC_SEARCH_PATH_B_RED_START,
 			Constants.Pose.GALACTIC_SEARCH_PATH_B_B3,
-			Constants.Pose.GALACTIC_SEARCH_PATH_B_D5,
+			// Constants.Pose.GALACTIC_SEARCH_PATH_B_D5,
 			Constants.Pose.GALACTIC_SEARCH_PATH_B_B7,
 			Constants.Pose.GALACTIC_SEARCH_PATH_B_RED_FINISH
 		);

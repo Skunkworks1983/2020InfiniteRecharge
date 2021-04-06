@@ -370,11 +370,19 @@ public class Constants
         );
 
         // Galactic Search Path A
+        // public static final Pose2d GALACTIC_SEARCH_PATH_A_RED_START = new Pose2d(
+        //     Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
+        //     Units.feetToMeters(7.5),
+        //     new Rotation2d(Units.degreesToRadians(0))
+        // );
         public static final Pose2d GALACTIC_SEARCH_PATH_A_RED_START = new Pose2d(
-            Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(7.5),
-            new Rotation2d(Units.degreesToRadians(0))
+            Units.feetToMeters(4.15),
+            Units.feetToMeters(9.33),
+            new Rotation2d(Units.degreesToRadians(153.43))
         );
+        // 4.058249184800581, 9.240466756200773, 154.43000030517578
+        // 4.151754902643897, 9.446115314298309, 153.07999992370608
+        // 4.2302495741045325, 9.28514990043272, 153.20000123977660
         public static final Pose2d GALACTIC_SEARCH_PATH_A_BLUE_START = new Pose2d(
             Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
             Units.feetToMeters(2.5),
@@ -383,17 +391,22 @@ public class Constants
         public static final Pose2d GALACTIC_SEARCH_PATH_A_C3 = new Pose2d(
             Units.feetToMeters(7.5),
             Units.feetToMeters(7.5),
-            new Rotation2d(Units.degreesToRadians(0))
+            new Rotation2d(Units.degreesToRadians(153.43))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_A_D5 = new Pose2d(
-            Units.feetToMeters(1.5),
-            Units.feetToMeters(5),
-            new Rotation2d(Units.degreesToRadians(0))
+            Units.feetToMeters(8.75),
+            Units.feetToMeters(7.03),
+            new Rotation2d(Units.degreesToRadians(153.43))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_A_A6 = new Pose2d(
-            Units.feetToMeters(15),
-            Units.feetToMeters(12.5),
-            new Rotation2d(Units.degreesToRadians(0))
+            Units.feetToMeters(15 - 2),
+            Units.feetToMeters(12.5 + 2),
+            new Rotation2d(Units.degreesToRadians(-90))
+        );
+        public static final Pose2d GALACTIC_SEARCH_PATH_A_A6_FINISH_WAYPOINT = new Pose2d(
+            Units.feetToMeters(15 - 2),
+            Units.feetToMeters(12.5 + 2),
+            new Rotation2d(Units.degreesToRadians(-45))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_A_E6 = new Pose2d(
             Units.feetToMeters(15),
@@ -411,8 +424,8 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_A_RED_FINISH = new Pose2d(
-            Units.feetToMeters(27.5 - ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(12.5),
+            Units.feetToMeters(35),
+            Units.feetToMeters(15),
             new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_A_BLUE_FINISH = new Pose2d(
@@ -423,9 +436,9 @@ public class Constants
 
         // Galactic Search Path B
         public static final Pose2d GALACTIC_SEARCH_PATH_B_RED_START = new Pose2d(
-            Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(10),
-            new Rotation2d(Units.degreesToRadians(0))
+            Units.feetToMeters(2.5 + ((17.5 / 12.0) + ROBOT_LENGTH / 2.0) * Math.cos(Units.degreesToRadians(45))),
+            Units.feetToMeters(15 - ((17.5 / 12.0) + ROBOT_LENGTH / 2.0) * Math.sin(Units.degreesToRadians(45))),
+            new Rotation2d(Units.degreesToRadians(135))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_B_BLUE_START = new Pose2d(
             Units.feetToMeters(2.5 + ROBOT_LENGTH / 2.0),
@@ -433,19 +446,19 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_B_B3 = new Pose2d(
-            Units.feetToMeters(7.5),
-            Units.feetToMeters(10),
-            new Rotation2d(Units.degreesToRadians(0))
+            Units.feetToMeters(7.5 + 2.5),
+            Units.feetToMeters(10 - 2.5),
+            new Rotation2d(Units.degreesToRadians(135))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_B_D5 = new Pose2d(
-            Units.feetToMeters(1.5),
+            Units.feetToMeters(12.5),
             Units.feetToMeters(5),
-            new Rotation2d(Units.degreesToRadians(0))
+            new Rotation2d(Units.degreesToRadians(135))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_B_B7 = new Pose2d(
             Units.feetToMeters(17.5),
             Units.feetToMeters(10),
-            new Rotation2d(Units.degreesToRadians(0))
+            new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_B_D6 = new Pose2d(
             Units.feetToMeters(15),
@@ -463,9 +476,9 @@ public class Constants
             new Rotation2d(Units.degreesToRadians(0))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_B_RED_FINISH = new Pose2d(
-            Units.feetToMeters(27.5 - ROBOT_LENGTH / 2.0),
-            Units.feetToMeters(10),
-            new Rotation2d(Units.degreesToRadians(0))
+            Units.feetToMeters(35),
+            Units.feetToMeters(8),
+            new Rotation2d(Units.degreesToRadians(180))
         );
         public static final Pose2d GALACTIC_SEARCH_PATH_B_BLUE_FINISH = new Pose2d(
             Units.feetToMeters(27.5 - ROBOT_LENGTH / 2.0),

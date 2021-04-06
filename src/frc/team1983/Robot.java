@@ -16,6 +16,7 @@ import frc.team1983.autonomous.Auto;
 import frc.team1983.commands.RunGyroDrive;
 import frc.team1983.commands.collectorAndIndexer.SetCollectorPosition;
 import frc.team1983.commands.shooter.SetArticulation;
+import frc.team1983.constants.Constants;
 import frc.team1983.services.OI;
 import frc.team1983.subsystems.Climber;
 import frc.team1983.subsystems.Collector;
@@ -108,7 +109,7 @@ public class Robot extends TimedRobot
 
 		CommandScheduler.getInstance().cancelAll();
 		auto = new SequentialCommandGroup(
-			Auto.BOUNCE.getAuto()
+			Auto.GALACTIC_SEARCH_PATH_B_RED.getAuto()
 		);
 	}
 
@@ -116,6 +117,13 @@ public class Robot extends TimedRobot
     public void robotPeriodic()
     {
         CommandScheduler.getInstance().run();
+
+		Pose2d pose = getDrivebase().getPose();
+		System.out.println(
+			Units.metersToFeet(pose.getTranslation().getX()) + ", " +
+			Units.metersToFeet(pose.getTranslation().getY()) + ", " +
+			pose.getRotation().getDegrees()
+		);
     }
 
 	@Override
@@ -149,7 +157,8 @@ public class Robot extends TimedRobot
 	    drivebase.setBrake(false);
 
         CommandScheduler.getInstance().cancelAll();
-        drivebase.setPose(new Pose2d(0, 0, new Rotation2d(Units.degreesToRadians(180))));
+        // drivebase.setPose(new Pose2d(0, 0, new Rotation2d(Units.degreesToRadians(180))));
+        drivebase.setPose(Constants.Pose.GALACTIC_SEARCH_PATH_B_RED_START);
         new RunGyroDrive().schedule();
     }
 
