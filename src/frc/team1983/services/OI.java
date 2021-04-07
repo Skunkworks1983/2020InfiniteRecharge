@@ -1,17 +1,22 @@
 package frc.team1983.services;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.team1983.Robot;
-import frc.team1983.autonomous.DriveStraight;
+import frc.team1983.autonomous.paths.PowerPortReintroductionToScoring;
+import frc.team1983.autonomous.paths.PowerPortScoringToReintroduction;
+import frc.team1983.commands.SetPose;
+import frc.team1983.commands.SetTranslation;
 import frc.team1983.commands.TargetAlignment;
 import frc.team1983.commands.climber.RunClimberDown;
 import frc.team1983.commands.climber.RunClimberUp;
 import frc.team1983.commands.collectorAndIndexer.IndexerStartupTele;
 import frc.team1983.commands.collectorAndIndexer.LoadIndexerTele;
 import frc.team1983.commands.collectorAndIndexer.ManualIndexer;
-import frc.team1983.commands.collectorAndIndexer.SetCollectorPosition;
 import frc.team1983.commands.collectorAndIndexer.SetRollerThrottle;
 import frc.team1983.commands.collectorAndIndexer.ToggleCollectorPosition;
 import frc.team1983.commands.shooter.SetArticulationPosition;
@@ -215,7 +220,7 @@ public class OI
         getButton(Joysticks.PANEL, CLIMBER_DOWN).whenPressed(new RunClimberDown());
 
         // Hood setpoint for shooting from protected zone in front of port
-        getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.UPPER_SAFETY_LIMIT));
+        // getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.UPPER_SAFETY_LIMIT));
 
         // Hood setpoint for shooting from trench
         getButton(Joysticks.OPERATOR, 9).whenHeld(new SetArticulationPosition(Shooter.TRENCH));
@@ -230,9 +235,26 @@ public class OI
         getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(0.9, 0.9));
 
         // Drive back from power port
-        getButton(Joysticks.RIGHT, 1).whenHeld(new DriveStraight(-0.75, Units.feetToMeters(2.0)));
+        // getButton(Joysticks.RIGHT, 1).whenHeld(new DriveStraight(-0.75, Units.feetToMeters(2.0)));
 
         // Target Alignment
         getButton(Joysticks.LEFT, 1).whenHeld(new TargetAlignment(180));
+
+        // Reset pose
+        getButton(Joysticks.LEFT, 2).whenHeld(new SetTranslation(
+            new Translation2d(
+                Units.feetToMeters(15.478),
+                Units.feetToMeters(3.100)
+            )
+        ));
+
+        // Reintroduction Zone -> Scoring Zone
+        getButton(Joysticks.RIGHT, 1).whenHeld(new PowerPortReintroductionToScoring());
+
+        // Scoring Zone -> Reintroduction Zone
+        getButton(Joysticks.RIGHT, 2).whenHeld(new PowerPortScoringToReintroduction());
+
+        // Shooting from Scoring Zone
+        getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(0.525));
     }
 }

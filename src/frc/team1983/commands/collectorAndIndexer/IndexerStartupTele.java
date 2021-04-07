@@ -12,12 +12,12 @@ public class IndexerStartupTele extends ParallelCommandGroup
         addCommands(
             new LoadIndexerTele(Robot.getInstance().getIndexer(), Robot.getInstance().getCollector(), Robot.getInstance().getOI()),
             new SequentialCommandGroup(
-                new WaitCommand(0.5),
+                new WaitCommand(0.5 - 0.35),
                 new InternalIndexer(0.5)
             ),
             new SequentialCommandGroup(
                 new WaitCommand(0.75),
-                new CollectorTransfer(0.4)
+                new CollectorTransfer(0.4 + 0.1)
             ),
             new SequentialCommandGroup(
                 new WaitCommand(1.15),

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1983.constants.Constants;
@@ -278,6 +279,19 @@ public class Drivebase extends SubsystemBase
 
         odometry.resetPosition(pose, pose.getRotation());
         setHeading(pose.getRotation().getDegrees());
+    }
+
+    /**
+     * @param translation Translation to set the drivebase to
+     */
+    public void setTranslation(Translation2d translation)
+    {
+        setPose(
+            new Pose2d(
+                translation,
+                pose.getRotation()
+            )
+        );
     }
 
     /**

@@ -118,12 +118,14 @@ public class Robot extends TimedRobot
     {
         CommandScheduler.getInstance().run();
 
-		Pose2d pose = getDrivebase().getPose();
-		System.out.println(
-			Units.metersToFeet(pose.getTranslation().getX()) + ", " +
-			Units.metersToFeet(pose.getTranslation().getY()) + ", " +
-			pose.getRotation().getDegrees()
-		);
+		// Pose2d pose = getDrivebase().getPose();
+		// Pose2d target = Constants.Pose.POWER_PORT_SCORING_ZONE;
+		// System.out.println(
+		// 	Units.metersToFeet(target.getTranslation().getX() - pose.getTranslation().getX()) + ", " +
+		// 	Units.metersToFeet(target.getTranslation().getY() - pose.getTranslation().getY()) + ", " +
+		// 	(target.getRotation().getDegrees() - pose.getRotation().getDegrees())
+		// );
+		System.out.println("Shooter Angle: " + getShooter().getArticulationPosition());
     }
 
 	@Override
@@ -157,8 +159,7 @@ public class Robot extends TimedRobot
 	    drivebase.setBrake(false);
 
         CommandScheduler.getInstance().cancelAll();
-        // drivebase.setPose(new Pose2d(0, 0, new Rotation2d(Units.degreesToRadians(180))));
-        drivebase.setPose(Constants.Pose.GALACTIC_SEARCH_PATH_B_RED_START);
+        drivebase.setPose(Constants.Pose.POWER_PORT_SCORING_ZONE);
         new RunGyroDrive().schedule();
     }
 

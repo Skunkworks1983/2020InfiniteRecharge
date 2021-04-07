@@ -60,22 +60,22 @@ public class LoadIndexerTele extends CommandBase
            if (indexer.InternalIndexerHasBall.get())
            {
                indexer.setInternal(Indexer.motorsOff);
-               indexer.setCollectorTransfer(0.3);
-               collector.setCollectorMotor(0.3);
+               indexer.setCollectorTransfer(0.4);
+               collector.setCollectorMotor(0.5);
            }
            else
            {
                indexer.setInternal(0.6);
-               indexer.setCollectorTransfer(0.3);
-               collector.setCollectorMotor(0.3);
+               indexer.setCollectorTransfer(0.4);
+               collector.setCollectorMotor(0.5);
            }
         }
         else
         {
             indexer.setShooterTransfer(0.5);
             indexer.setInternal(0.6);
-            indexer.setCollectorTransfer(0.2);
-            collector.setCollectorMotor(0.2);
+            indexer.setCollectorTransfer(0.3);
+            collector.setCollectorMotor(0.4);
         }
 
     }

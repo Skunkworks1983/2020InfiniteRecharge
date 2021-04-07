@@ -485,5 +485,17 @@ public class Constants
             Units.feetToMeters(5),
             new Rotation2d(Units.degreesToRadians(0))
         );
+
+        // Power Port Challenge
+        public static final Pose2d POWER_PORT_SCORING_ZONE = new Pose2d(
+            Units.feetToMeters(15.478),
+            Units.feetToMeters(3.100),
+            new Rotation2d(Units.degreesToRadians(158.60))
+        );
+        public static final Pose2d POWER_PORT_REINTRODUCTION_ZONE = new Pose2d(
+            Units.feetToMeters(25),
+            Units.feetToMeters(2.5),
+            new Rotation2d(Units.degreesToRadians(180))
+        );
     }
 }

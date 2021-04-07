@@ -17,7 +17,8 @@ public class Shooter extends SubsystemBase
     //Actual limits should ot be used for anything else than calculating setpoints
     //Actual limits are used to create safety limits and all other setpoints
     //Tuned on 03/08/2020
-    private static final double UPPER_LIMIT = 0.636;
+    // private static final double UPPER_LIMIT = 0.636;
+    private static final double UPPER_LIMIT = 0.733;
     private static final double LOWER_LIMIT = 0.215;
 
     public static final double UPPER_SAFETY_LIMIT = UPPER_LIMIT - 0.01;
