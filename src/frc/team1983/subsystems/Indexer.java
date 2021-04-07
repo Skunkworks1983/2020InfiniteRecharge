@@ -53,4 +53,9 @@ public class Indexer
     {
         internal.set(ControlMode.Throttle, speed);
     }
+
+    public void setShooterTransferBrake(boolean brake)
+    {
+        shooterTransfer.setBrake(brake);
+    }
 }

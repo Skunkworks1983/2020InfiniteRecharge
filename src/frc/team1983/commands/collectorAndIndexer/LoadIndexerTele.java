@@ -36,6 +36,7 @@ public class LoadIndexerTele extends CommandBase
     @Override
     public void initialize()
     {
+        indexer.setShooterTransferBrake(true);
 
     }
 
@@ -72,10 +73,10 @@ public class LoadIndexerTele extends CommandBase
         }
         else
         {
-            indexer.setShooterTransfer(0.5);
+            indexer.setShooterTransfer(0.5 - 0.2);
             indexer.setInternal(0.6);
-            indexer.setCollectorTransfer(0.3);
-            collector.setCollectorMotor(0.4);
+            indexer.setCollectorTransfer(0.4);
+            collector.setCollectorMotor(0.5);
         }
 
     }
