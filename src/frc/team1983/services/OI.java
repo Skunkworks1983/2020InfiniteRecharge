@@ -222,14 +222,14 @@ public class OI
         // Hood setpoint for shooting from protected zone in front of port
         // getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(Shooter.UPPER_SAFETY_LIMIT));
 
-        // Hood setpoint for shooting from trench
-        getButton(Joysticks.OPERATOR, 9).whenHeld(new SetArticulationPosition(Shooter.TRENCH));
-
-        // Hood setpoint for shooting from in front of port at the pillar closest to the port
-        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.IN_FRONT_OF_PORT_CLOSE_PILLAR));
-
-        // Hood setpoint for shooting cross field
-        getButton(Joysticks.OPERATOR, 5).whenHeld(new SetArticulationPosition(Shooter.CROSS_FIELD));
+//        // Hood setpoint for shooting from trench
+//        getButton(Joysticks.OPERATOR, 9).whenHeld(new SetArticulationPosition(Shooter.TRENCH));
+//
+//        // Hood setpoint for shooting from in front of port at the pillar closest to the port
+//        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(Shooter.IN_FRONT_OF_PORT_CLOSE_PILLAR));
+//
+//        // Hood setpoint for shooting cross field
+//        getButton(Joysticks.OPERATOR, 5).whenHeld(new SetArticulationPosition(Shooter.CROSS_FIELD));
 
         // Set shooter speed to 90 percent
         getButton(Joysticks.OPERATOR, 2).whenHeld(new SetShooter(0.9, 0.9));
@@ -256,5 +256,17 @@ public class OI
 
         // Shooting from Scoring Zone
         getButton(Joysticks.OPERATOR, 8).whenHeld(new SetArticulationPosition(0.525));
+
+        // Green zone
+        getButton(Joysticks.OPERATOR, 5).whenHeld(new SetArticulationPosition(0.676));
+
+        // Yellow zone
+        getButton(Joysticks.OPERATOR, 6).whenHeld(new SetArticulationPosition(0.559));
+
+        // Blue zone
+        getButton(Joysticks.OPERATOR, 7).whenHeld(new SetArticulationPosition(0.502));
+
+        // Red zone
+        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(0.471));
     }
 }
