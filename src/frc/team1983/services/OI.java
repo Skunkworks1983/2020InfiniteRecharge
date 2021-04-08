@@ -261,12 +261,12 @@ public class OI
         getButton(Joysticks.OPERATOR, 5).whenHeld(new SetArticulationPosition(0.676));
 
         // Yellow zone
-        getButton(Joysticks.OPERATOR, 6).whenHeld(new SetArticulationPosition(0.559));
+        getButton(Joysticks.OPERATOR, 6).whenHeld(new SetArticulationPosition(0.550));
 
         // Blue zone
-        getButton(Joysticks.OPERATOR, 7).whenHeld(new SetArticulationPosition(0.502));
+        getButton(Joysticks.OPERATOR, 7).whenHeld(new SetArticulationPosition(0.486));
 
         // Red zone
-        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(0.471));
+        getButton(Joysticks.OPERATOR, 10).whenHeld(new SetArticulationPosition(0.45));
     }
 }
